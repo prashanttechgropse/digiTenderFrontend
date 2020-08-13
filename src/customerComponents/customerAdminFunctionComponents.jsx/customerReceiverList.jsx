@@ -16,7 +16,7 @@ class CustomerReceiverlist extends Component {
           <div className="d-flex my-xl-auto right-content">
             <div className="pr-1 mb-3 mb-xl-0">
               <a
-                href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/create-receiver"
+                onClick={() => this.props.onClick("createReceiver")}
                 type="button"
                 className="btn btn-primary "
               >

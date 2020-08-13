@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import MainContentHeaderBar from "../../macroComponents/mainContentHeaderBar";
 class CustomerDashboardMainContent extends Component {
   state = {};
   render() {

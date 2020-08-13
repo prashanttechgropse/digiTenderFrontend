@@ -1,14 +1,21 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./App";
+import CustomerApp from "./customerApp";
 import * as serviceWorker from "./serviceWorker";
 import GlobalLoader from "./microComponents/globalLoader";
+import SupplierApp from "./supplierApp";
+
+let stake = "supplier";
+const stakeRender = () => {
+  if (stake == "customer") return <CustomerApp />;
+  if (stake == "supplier") return <SupplierApp />;
+};
 
 ReactDOM.render(
   <React.StrictMode>
     <GlobalLoader />
-    <App />
+    {stakeRender()}
   </React.StrictMode>,
   document.getElementById("root")
 );

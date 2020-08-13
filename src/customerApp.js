@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 //import "./App.css";
-import Sidebar from "./macroComponents/sidebar";
+import CustomerSidebar from "./customerComponents/customersidebar";
 import Footer from "./macroComponents/footer";
 import MainContentHeaderBar from "./macroComponents/mainContentHeaderBar";
 import CustomerDashboardMainContent from "./customerComponents/customerDashboardComponents/customerDashboardMainConent";
@@ -10,8 +10,14 @@ import TermsConditions from "./macroComponents/termsConditions";
 import MyProfile from "./macroComponents/myProfile";
 import EditProfile from "./macroComponents/editProfile";
 import ChangePassword from "./macroComponents/changePassword";
+import CustomerTenderList from "./customerComponents/customerTenderManagementComponents/customerTenderList";
+import CustomerSaveForLater from "./customerComponents/customerTenderManagementComponents/customerSaveForLater";
+import CustomerTransactionList from "./customerComponents/customerTenderManagementComponents/customerTransactionList";
+import CustomerCreateTender from "./customerComponents/customerTenderManagementComponents/customerCreateTender";
+import CustomerReceiverlist from "./customerComponents/customerAdminFunctionComponents.jsx/customerReceiverList";
+import CustomerCreateReceiver from "./customerComponents/customerAdminFunctionComponents.jsx/customerCreateReceiver";
 
-class app extends Component {
+class CustomerApp extends Component {
   state = { mainRenderedContent: "dashboard" };
 
   setMainRenderedContent = (key) => {
@@ -22,24 +28,34 @@ class app extends Component {
     switch (this.state.mainRenderedContent) {
       case "deliveryNotes":
         return <CustomerDeliveryNoteMainContent />;
-        break;
+      case "createTender":
+        return <CustomerCreateTender />;
+      case "tenderList":
+        return <CustomerTenderList />;
+      case "saveForLater":
+        return <CustomerSaveForLater />;
+      case "transactionList":
+        return <CustomerTransactionList />;
+      case "customerReceiverList":
+        return (
+          <CustomerReceiverlist
+            onClick={(key) => this.setMainRenderedContent(key)}
+          />
+        );
+      case "createReceiver":
+        return <CustomerCreateReceiver />;
       case "helpSupport":
         return <HelpSupport />;
-        break;
       case "termsConditions":
         return <TermsConditions />;
-        break;
       case "profile":
         return (
           <MyProfile onClick={(key) => this.setMainRenderedContent(key)} />
         );
-        break;
       case "editProfile":
         return <EditProfile />;
-        break;
       case "changePassword":
         return <ChangePassword />;
-        break;
       default:
         return <CustomerDashboardMainContent />;
     }
@@ -54,7 +70,9 @@ class app extends Component {
             className="app-sidebar__overlay active"
             data-toggle="sidebar"
           ></div>
-          <Sidebar onClick={(key) => this.setMainRenderedContent(key)} />
+          <CustomerSidebar
+            onClick={(key) => this.setMainRenderedContent(key)}
+          />
           <div className="main-content app-content">
             <MainContentHeaderBar
               onClick={(key) => this.setMainRenderedContent(key)}
@@ -68,4 +86,4 @@ class app extends Component {
   }
 }
 
-export default app;
+export default CustomerApp;

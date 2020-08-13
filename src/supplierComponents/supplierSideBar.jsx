@@ -1,6 +1,71 @@
 import React, { Component } from "react";
-class Sidebar extends Component {
-  state = {};
+class SupplierSideBar extends Component {
+  state = {
+    toggleTenderManagement: 0,
+    toggleAdminFunctions: 0,
+  };
+
+  toggleTenderManagement = () => {
+    let temp = this.state.toggleTenderManagement;
+    temp == 0 ? (temp = 1) : (temp = 0);
+    this.setState({ toggleTenderManagement: temp });
+  };
+  toggleAdminFunctions = () => {
+    let temp = this.state.toggleAdminFunctions;
+    temp == 0 ? (temp = 1) : (temp = 0);
+    this.setState({ toggleAdminFunctions: temp });
+  };
+  renderAdminFunctions = () => {
+    if (this.state.toggleAdminFunctions == 1) {
+      return (
+        <ul>
+          <li className="slide-item side-menu__item">
+            <a onClick={() => this.props.onClick("supplierEmployeeList")}>
+              Supplier Employee List
+            </a>
+          </li>
+          <li className="slide-item side-menu__item">
+            <a onClick={() => this.props.onClick("createSubUser")}>
+              Create Subuser
+            </a>
+          </li>
+          <li className="slide-item side-menu__item">
+            <a onClick={() => this.props.onClick("changePassword")}>
+              Change Password
+            </a>
+          </li>
+          <li className="slide-item side-menu__item">
+            <a onClick={() => this.props.onClick("profile")}>Profile</a>
+          </li>
+        </ul>
+      );
+    } else return;
+  };
+  renderTenderManagement = () => {
+    if (this.state.toggleTenderManagement == 1) {
+      return (
+        <ul>
+          <li className="slide-item side-menu__item">
+            <a onClick={() => this.props.onClick("tenderList")}>Tender List</a>
+          </li>
+          <li className="slide-item side-menu__item">
+            <a onClick={() => this.props.onClick("saveForLater")}>
+              Save for Later
+            </a>
+          </li>
+          <li className="slide-item side-menu__item">
+            <a onClick={() => this.props.onClick("transactionManagement")}>
+              Transaction Management
+            </a>
+          </li>
+          <li className="slide-item side-menu__item">
+            <a onClick={() => this.props.onClick("history")}>History</a>
+          </li>
+        </ul>
+      );
+    } else return;
+  };
+
   render() {
     return (
       <aside className="app-sidebar sidebar-scroll">
@@ -10,9 +75,7 @@ class Sidebar extends Component {
             onClick={() => this.props.onClick("dashboard")}
           >
             <img
-              src={
-                "https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/common/img/logo/logo.png"
-              }
+              src="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/supplier/common/img/logo/logo.png"
               className="main-logo"
               alt="logo"
             />
@@ -22,9 +85,7 @@ class Sidebar extends Component {
             onClick={() => this.props.onClick("dashboard")}
           >
             <img
-              src={
-                "https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/common/img/logo/logo.png"
-              }
+              src="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/supplier/common/img/logo/logo.png"
               className="main-logo dark-theme"
               alt="logo"
             />
@@ -34,9 +95,7 @@ class Sidebar extends Component {
             onClick={() => this.props.onClick("dashboard")}
           >
             <img
-              src={
-                "https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/common/img/logo/favicon.png"
-              }
+              src="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/supplier/common/img/logo/favicon.png"
               className="logo-icon"
               alt="logo"
             />
@@ -46,9 +105,7 @@ class Sidebar extends Component {
             onClick={() => this.props.onClick("dashboard")}
           >
             <img
-              src={
-                "https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/common/img/logo/favicon.png"
-              }
+              src="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/supplier/common/img/logo/favicon.png"
               className="logo-icon dark-theme"
               alt="logo"
             />
@@ -67,9 +124,7 @@ class Sidebar extends Component {
                     <img
                       alt="user-img"
                       className="avatar avatar-xl brround mCS_img_loaded"
-                      src={
-                        "https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/common/img/customer/01.jpg"
-                      }
+                      src="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/supplier/common/img/customer/01.jpg"
                     />
                     <span className="avatar-status profile-status bg-green"></span>
                   </div>
@@ -77,7 +132,7 @@ class Sidebar extends Component {
                     <h4 className="font-weight-semibold mt-3 mb-0">
                       Al Hamid Saif
                     </h4>
-                    <span className="mb-0 text-muted">Customer</span>
+                    <span className="mb-0 text-muted">Supplier</span>
                   </div>
                 </div>
               </div>
@@ -88,49 +143,21 @@ class Sidebar extends Component {
                     onClick={() => this.props.onClick("dashboard")}
                   >
                     <i className="fa fa-home"></i>
-                    <span className="side-menu__label">Dashboard</span>
+                    <span className="side-menu__label">Dashborad</span>
                   </a>
                 </li>
                 <li className="slide">
-                  <a className="side-menu__item" data-toggle="slide">
+                  <a
+                    className="side-menu__item active"
+                    data-toggle="slide"
+                    href="#"
+                    onClick={this.toggleTenderManagement}
+                  >
                     <i className="fa fa-address-book"></i>
                     <span className="side-menu__label">Tender Management</span>
                     <i className="angle fa fa-angle-down"></i>
                   </a>
-                  <ul className="slide-menu">
-                    <li>
-                      <a
-                        className="slide-item"
-                        onClick={() => this.props.onClick("createTender")}
-                      >
-                        Create Tender
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        className="slide-item"
-                        onClick={() => this.props.onClick("tenderList")}
-                      >
-                        Tender List
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        className="slide-item"
-                        onClick={() => this.props.onClick("saveForLater")}
-                      >
-                        Save for Later
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        className="slide-item"
-                        onClick={() => this.props.onClick("transactionList")}
-                      >
-                        Transaction List
-                      </a>
-                    </li>
-                  </ul>
+                  {this.renderTenderManagement()}
                 </li>
                 <li className="slide">
                   <a
@@ -142,52 +169,24 @@ class Sidebar extends Component {
                   </a>
                 </li>
                 <li className="slide">
-                  <a className="side-menu__item" data-toggle="slide">
+                  <a
+                    className="side-menu__item"
+                    data-toggle="slide"
+                    href="#"
+                    onClick={this.toggleAdminFunctions}
+                  >
                     <i className="fa fa-cog"></i>
                     <span className="side-menu__label">Admin Functions</span>
                     <i className="angle fa fa-angle-down"></i>
                   </a>
-                  <ul className="slide-menu">
-                    <li>
-                      <a
-                        className="slide-item"
-                        onClick={() => this.props.onClick("receiverList")}
-                      >
-                        Receiver List
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        className="slide-item"
-                        onClick={() => this.props.onClick("createReceiver")}
-                      >
-                        Create Receiver
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        className="slide-item"
-                        onClick={() => this.props.onClick("changePassword")}
-                      >
-                        Change Password
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        className="slide-item"
-                        onClick={() => this.props.onClick("profile")}
-                      >
-                        Profile
-                      </a>
-                    </li>
-                  </ul>
+                  {this.renderAdminFunctions()}
                 </li>
                 <li className="slide">
                   <a
                     className="side-menu__item"
                     onClick={() => this.props.onClick("helpSupport")}
                   >
-                    <i className="fa fa-support"></i>
+                    <i className="fa fa-question-circle"></i>
                     <span className="side-menu__label">Help & Support</span>
                   </a>
                 </li>
@@ -211,4 +210,4 @@ class Sidebar extends Component {
   }
 }
 
-export default Sidebar;
+export default SupplierSideBar;
