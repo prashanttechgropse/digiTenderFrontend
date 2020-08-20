@@ -5,11 +5,13 @@ import CustomerApp from "./customerApp";
 import * as serviceWorker from "./serviceWorker";
 import GlobalLoader from "./microComponents/globalLoader";
 import SupplierApp from "./supplierApp";
+import AdminApp from "./AdminApp";
 
-let stake = "supplier";
+const stake = "customer";
 const stakeRender = () => {
   if (stake == "customer") return <CustomerApp />;
   if (stake == "supplier") return <SupplierApp />;
+  if (stake == "admin") return <AdminApp />;
 };
 
 ReactDOM.render(

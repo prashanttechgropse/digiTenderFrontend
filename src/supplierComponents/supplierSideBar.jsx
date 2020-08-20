@@ -19,7 +19,7 @@ class SupplierSideBar extends Component {
     if (this.state.toggleAdminFunctions == 1) {
       return (
         <ul>
-          <li className="slide-item side-menu__item">
+          <li className="side-menu__item slide-item">
             <a onClick={() => this.props.onClick("supplierEmployeeList")}>
               Supplier Employee List
             </a>
