@@ -10,32 +10,32 @@ class AdminSideBar extends Component {
 
   toggleCustomerManagement = () => {
     let temp = this.state.toggleCustomerManagement;
-    temp == 0 ? (temp = 1) : (temp = 0);
+    temp === 0 ? (temp = 1) : (temp = 0);
     this.setState({ toggleCustomerManagement: temp });
   };
   toggleSupplierManagement = () => {
     let temp = this.state.toggleSupplierManagement;
-    temp == 0 ? (temp = 1) : (temp = 0);
+    temp === 0 ? (temp = 1) : (temp = 0);
     this.setState({ toggleSupplierManagement: temp });
   };
   toggleDeliveryNoteManagement = () => {
     let temp = this.state.toggleDeliveryNoteManagement;
-    temp == 0 ? (temp = 1) : (temp = 0);
+    temp === 0 ? (temp = 1) : (temp = 0);
     this.setState({ toggleDeliveryNoteManagement: temp });
   };
   togglePaymentManagement = () => {
     let temp = this.state.togglePaymentManagement;
-    temp == 0 ? (temp = 1) : (temp = 0);
+    temp === 0 ? (temp = 1) : (temp = 0);
     this.setState({ togglePaymentManagement: temp });
   };
   toggleAdmin = () => {
     let temp = this.state.toggleAdmin;
-    temp == 0 ? (temp = 1) : (temp = 0);
+    temp === 0 ? (temp = 1) : (temp = 0);
     this.setState({ toggleAdmin: temp });
   };
 
   renderCustomerManagement = () => {
-    if (this.state.toggleCustomerManagement == 1) {
+    if (this.state.toggleCustomerManagement === 1) {
       return (
         <ul>
           <li className="slide-item side-menu__item">
@@ -48,7 +48,7 @@ class AdminSideBar extends Component {
     } else return;
   };
   renderSupplierManagement = () => {
-    if (this.state.toggleSupplierManagement == 1) {
+    if (this.state.toggleSupplierManagement === 1) {
       return (
         <ul>
           <li className="slide-item side-menu__item">
@@ -61,7 +61,7 @@ class AdminSideBar extends Component {
     } else return;
   };
   renderDeliveryNoteManagement = () => {
-    if (this.state.toggleDeliveryNoteManagement == 1) {
+    if (this.state.toggleDeliveryNoteManagement === 1) {
       return (
         <ul>
           <li className="slide-item side-menu__item">
@@ -74,7 +74,7 @@ class AdminSideBar extends Component {
     } else return;
   };
   renderPaymentManagement = () => {
-    if (this.state.togglePaymentManagement == 1) {
+    if (this.state.togglePaymentManagement === 1) {
       return (
         <ul>
           <li className="slide-item side-menu__item">
@@ -87,7 +87,7 @@ class AdminSideBar extends Component {
     } else return;
   };
   renderAdmin = () => {
-    if (this.state.toggleAdmin == 1) {
+    if (this.state.toggleAdmin === 1) {
       return (
         <ul>
           <li className="slide-item side-menu__item">

@@ -140,7 +140,7 @@ class CustomerSidebar extends Component {
                   </div>
                   <div className="user-info">
                     <h4 className="font-weight-semibold mt-3 mb-0">
-                      Al Hamid Saif
+                      {this.props.profile.name}
                     </h4>
                     <span className="mb-0 text-muted">Customer</span>
                   </div>

@@ -1,23 +1,19 @@
+import { BrowserRouter } from "react-router-dom";
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import CustomerApp from "./customerApp";
 import * as serviceWorker from "./serviceWorker";
 import GlobalLoader from "./microComponents/globalLoader";
-import SupplierApp from "./supplierApp";
-import AdminApp from "./AdminApp";
 
-const stake = "customer";
-const stakeRender = () => {
-  if (stake == "customer") return <CustomerApp />;
-  if (stake == "supplier") return <SupplierApp />;
-  if (stake == "admin") return <AdminApp />;
-};
+import App from "./app";
+import { BrowserRouer } from "react-router-dom";
 
 ReactDOM.render(
   <React.StrictMode>
     <GlobalLoader />
-    {stakeRender()}
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
 );

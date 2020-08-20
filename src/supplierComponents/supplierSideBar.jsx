@@ -7,16 +7,16 @@ class SupplierSideBar extends Component {
 
   toggleTenderManagement = () => {
     let temp = this.state.toggleTenderManagement;
-    temp == 0 ? (temp = 1) : (temp = 0);
+    temp === 0 ? (temp = 1) : (temp = 0);
     this.setState({ toggleTenderManagement: temp });
   };
   toggleAdminFunctions = () => {
     let temp = this.state.toggleAdminFunctions;
-    temp == 0 ? (temp = 1) : (temp = 0);
+    temp === 0 ? (temp = 1) : (temp = 0);
     this.setState({ toggleAdminFunctions: temp });
   };
   renderAdminFunctions = () => {
-    if (this.state.toggleAdminFunctions == 1) {
+    if (this.state.toggleAdminFunctions === 1) {
       return (
         <ul>
           <li className="side-menu__item slide-item">
@@ -42,7 +42,7 @@ class SupplierSideBar extends Component {
     } else return;
   };
   renderTenderManagement = () => {
-    if (this.state.toggleTenderManagement == 1) {
+    if (this.state.toggleTenderManagement === 1) {
       return (
         <ul>
           <li className="slide-item side-menu__item">

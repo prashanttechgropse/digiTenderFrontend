@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from "axios";
 //import "./App.css";
 import CustomerSidebar from "./customerComponents/customersidebar";
 import Footer from "./macroComponents/footer";
@@ -18,11 +19,17 @@ import CustomerReceiverlist from "./customerComponents/customerAdminFunctionComp
 import CustomerCreateReceiver from "./customerComponents/customerAdminFunctionComponents.jsx/customerCreateReceiver";
 
 class CustomerApp extends Component {
-  state = { mainRenderedContent: "dashboard" };
+  state = { customer: {}, mainRenderedContent: "dashboard" };
 
   setMainRenderedContent = (key) => {
     this.setState({ mainRenderedContent: key });
   };
+  async componentDidMount() {
+    const { data: customer } = await axios.get(
+      "http://localhost:3001/api/customers/createCustomer/"
+    );
+    await this.setState({ customer });
+  }
 
   renderMainComponent() {
     switch (this.state.mainRenderedContent) {
@@ -71,6 +78,7 @@ class CustomerApp extends Component {
             data-toggle="sidebar"
           ></div>
           <CustomerSidebar
+            profile={this.state.customer}
             onClick={(key) => this.setMainRenderedContent(key)}
           />
           <div className="main-content app-content">
