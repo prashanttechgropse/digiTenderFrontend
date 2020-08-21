@@ -6,16 +6,19 @@ import AdminApp from "../../digiTenderFrontend/src/AdminApp";
 import NotFound from "./notfound";
 import LoginForm from "./loginForm";
 import CreateAccount from "./createAccount";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
     <React.Fragment>
+      <ToastContainer />
       <Switch>
         <Route path="/customer" exact component={CustomerApp} />
         <Route path="/supplier" exact component={SupplierApp} />
         <Route path="/admin" exact component={AdminApp} />
         <Route path="/login" exact component={LoginForm} />
-        <Route path="/createAccount" exact component={CreateAccount} />
+        <Route path="/register" exact component={CreateAccount} />
         <Route path="/not-found" exact component={NotFound} />
         <Redirect to="/not-found" />
       </Switch>

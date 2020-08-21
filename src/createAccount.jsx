@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import Form from "./macroComponents/form/form";
 import Joi from "joi-browser";
+import http from "./services/httpService";
+import config from "./config.json";
+import { toast } from "react-toastify";
 
 class CreateAccount extends Form {
   state = {
@@ -72,6 +75,17 @@ class CreateAccount extends Form {
     this.doSubmit();
   };
 
+  doSubmit = async () => {
+    try {
+      await http.post(`${config.apiendpoint}/register`, this.state.formData);
+      await http.post(`${config.apiendpoint}/otpGeneration`, {
+        email: this.state.formData.email,
+      });
+    } catch (ex) {
+      if (ex.response) toast.error(ex.response.data);
+    }
+  };
+
   render() {
     return (
       <div className="page">
@@ -122,7 +136,7 @@ class CreateAccount extends Form {
                                 "password"
                               )}
 
-                              {this.renderButton("Sign Up")}
+                              {this.renderButton("Sign Up", this.handleSubmit)}
 
                               <div className="row row-xs">
                                 <div className="col-sm-6">

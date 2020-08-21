@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+
 import axios from "axios";
 //import "./App.css";
 import CustomerSidebar from "./customerComponents/customersidebar";
@@ -17,6 +18,7 @@ import CustomerTransactionList from "./customerComponents/customerTenderManageme
 import CustomerCreateTender from "./customerComponents/customerTenderManagementComponents/customerCreateTender";
 import CustomerReceiverlist from "./customerComponents/customerAdminFunctionComponents.jsx/customerReceiverList";
 import CustomerCreateReceiver from "./customerComponents/customerAdminFunctionComponents.jsx/customerCreateReceiver";
+import config from "./config.json";
 
 class CustomerApp extends Component {
   state = { customer: {}, mainRenderedContent: "dashboard" };
@@ -26,7 +28,7 @@ class CustomerApp extends Component {
   };
   async componentDidMount() {
     const { data: customer } = await axios.get(
-      "http://localhost:3001/api/customers/createCustomer/"
+      `${config.apiendpoint}/customers`
     );
     await this.setState({ customer });
   }
