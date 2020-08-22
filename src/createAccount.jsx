@@ -1,10 +1,12 @@
 import React, { Component } from "react";
+import { Route, Switch } from "react-router-dom";
 import Form from "./macroComponents/form/form";
 import Joi from "joi-browser";
 import http from "./services/httpService";
 import config from "./config.json";
 import { toast } from "react-toastify";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+import OtpVerificationForm from "./macroComponents/otpVerification";
 
 class CreateAccount extends Form {
   state = {
@@ -79,76 +81,81 @@ class CreateAccount extends Form {
 
   render() {
     return (
-      <div className="page">
-        <div className="container-fluid">
-          <div className="row no-gutter">
-            <div className="col-md-6 col-lg-6 col-xl-7 d-none d-md-flex bg-primary-transparent">
-              <div className="row wd-100p mx-auto text-center">
-                <div className="col-md-12 col-lg-12 col-xl-12 my-auto mx-auto wd-100p">
-                  <img
-                    src="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/common/img/backgrounds/login.png"
-                    className="my-auto ht-xl-80p wd-md-100p wd-xl-80p mx-auto"
-                    alt="logo"
-                  />
+      <React.Fragment>
+        <div className="page">
+          <div className="container-fluid">
+            <div className="row no-gutter">
+              <div className="col-md-6 col-lg-6 col-xl-7 d-none d-md-flex bg-primary-transparent">
+                <div className="row wd-100p mx-auto text-center">
+                  <div className="col-md-12 col-lg-12 col-xl-12 my-auto mx-auto wd-100p">
+                    <img
+                      src="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/common/img/backgrounds/login.png"
+                      className="my-auto ht-xl-80p wd-md-100p wd-xl-80p mx-auto"
+                      alt="logo"
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="col-md-6 col-lg-6 col-xl-5 bg-white">
-              <div className="login d-flex align-items-center py-2">
-                <div className="container p-0">
-                  <div className="row">
-                    <div className="col-md-10 col-lg-10 col-xl-9 mx-auto">
-                      <div className="card-sigin">
-                        <div className="mb-2 d-flex">
-                          <Link href="#">
-                            <img
-                              src="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/common/img/logo/logo.png"
-                              className="sign-favicon"
-                              alt="logo"
-                            />
-                          </Link>
-                        </div>
+              <div className="col-md-6 col-lg-6 col-xl-5 bg-white">
+                <div className="login d-flex align-items-center py-2">
+                  <div className="container p-0">
+                    <div className="row">
+                      <div className="col-md-10 col-lg-10 col-xl-9 mx-auto">
                         <div className="card-sigin">
-                          <div className="main-signup-header">
-                            <h2>Get Started</h2>
-                            <h5 className="font-weight-semibold mb-4">
-                              It's free to signup and only takes a minute.
-                            </h5>
-                            <form>
-                              {this.renderInput("email", "Email")}
-                              {this.renderInput(
-                                "password",
-                                "Password",
-                                "password"
-                              )}
-                              {this.renderInput(
-                                "confirmPassword",
-                                "Confirm Password",
-                                "password"
-                              )}
+                          <div className="mb-2 d-flex">
+                            <Link to="#">
+                              <img
+                                src="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/common/img/logo/logo.png"
+                                className="sign-favicon"
+                                alt="logo"
+                              />
+                            </Link>
+                          </div>
+                          <div className="card-sigin">
+                            <div className="main-signup-header">
+                              <h2>Get Started</h2>
+                              <h5 className="font-weight-semibold mb-4">
+                                It's free to signup and only takes a minute.
+                              </h5>
+                              <form>
+                                {this.renderInput("email", "Email")}
+                                {this.renderInput(
+                                  "password",
+                                  "Password",
+                                  "password"
+                                )}
+                                {this.renderInput(
+                                  "confirmPassword",
+                                  "Confirm Password",
+                                  "password"
+                                )}
 
-                              {this.renderButton("Sign Up", this.handleSubmit)}
+                                {this.renderButton(
+                                  "Sign Up",
+                                  this.handleSubmit
+                                )}
 
-                              <div className="row row-xs">
-                                <div className="col-sm-6">
-                                  <button className="btn btn-block">
-                                    <i className="fa fa-facebook"></i> Signup
-                                    with Facebook
-                                  </button>
+                                <div className="row row-xs">
+                                  <div className="col-sm-6">
+                                    <button className="btn btn-block">
+                                      <i className="fa fa-facebook"></i> Signup
+                                      with Facebook
+                                    </button>
+                                  </div>
+                                  <div className="col-sm-6 mg-t-10 mg-sm-t-0">
+                                    <button className="btn btn-danger btn-block">
+                                      <i className="fa fa-google"></i> Signup
+                                      with Google
+                                    </button>
+                                  </div>
                                 </div>
-                                <div className="col-sm-6 mg-t-10 mg-sm-t-0">
-                                  <button className="btn btn-danger btn-block">
-                                    <i className="fa fa-google"></i> Signup with
-                                    Google
-                                  </button>
-                                </div>
+                              </form>
+                              <div className="main-signin-footer mt-5">
+                                <p>
+                                  Already have an account?{" "}
+                                  <Link to="/login">Sign In</Link>
+                                </p>
                               </div>
-                            </form>
-                            <div className="main-signin-footer mt-5">
-                              <p>
-                                Already have an account?{" "}
-                                <Link to="/login">Sign In</Link>
-                              </p>
                             </div>
                           </div>
                         </div>
@@ -160,7 +167,7 @@ class CreateAccount extends Form {
             </div>
           </div>
         </div>
-      </div>
+      </React.Fragment>
     );
   }
 }

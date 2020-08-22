@@ -8,20 +8,23 @@ import { Link } from "react-router-dom";
 
 class OtpVerificationForm extends Form {
   state = {
-    formData: { otp: "" },
+    formData: { otp: "", email: "" },
     errors: {},
   };
 
   schema = {
     otp: Joi.string().required(),
   };
-
+  constructor(props) {
+    super(props);
+    this.state.formData.email = props.email;
+  }
   doSubmit = async () => {
     try {
-      await http.post(`${config.apiendpoint}/otpVerification`, {
-        email: this.props.email,
-        otp: this.state.formData.otp,
-      });
+      await http.post(
+        `${config.apiendpoint}/otpVerification`,
+        this.state.formData
+      );
     } catch (ex) {
       if (ex.response) toast.error(ex.response.data);
     }
@@ -60,7 +63,7 @@ class OtpVerificationForm extends Form {
                     <div className="col-md-10 col-lg-10 col-xl-9 mx-auto">
                       <div className="card-sigin">
                         <div className="mb-2 d-flex">
-                          <Link href="#">
+                          <Link to="#">
                             <img
                               src="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/common/img/logo/logo.png"
                               className="sign-favicon"

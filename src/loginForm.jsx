@@ -57,7 +57,7 @@ class LoginForm extends Form {
                     <div className="col-md-10 col-lg-10 col-xl-9 mx-auto">
                       <div className="card-sigin">
                         <div className="mb-2 d-flex">
-                          <Link href="#">
+                          <Link to="#">
                             <img
                               src="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/common/img/logo/logo.png"
                               className="sign-favicon "
