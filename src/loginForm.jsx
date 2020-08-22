@@ -1,6 +1,12 @@
 import React, { Component } from "react";
 import Form from "./macroComponents/form/form";
+import { Link } from "react-router-dom";
+import http from "./services/httpService";
+import config from "./config.json";
+import { toast } from "react-toastify";
+
 const Joi = require("joi-browser");
+
 class LoginForm extends Form {
   state = {
     formData: {
@@ -17,9 +23,15 @@ class LoginForm extends Form {
     password: Joi.string().required().min(8),
   };
 
-  doSubmit = () => {
-    //call the server
-    console.log("submitted");
+  doSubmit = async () => {
+    try {
+      await http.post(`${config.apiendpoint}/login`, {
+        email: this.state.formData.email,
+        password: this.state.formData.password,
+      });
+    } catch (ex) {
+      if (ex.response) toast.error(ex.response.data);
+    }
   };
 
   render() {
@@ -45,13 +57,13 @@ class LoginForm extends Form {
                     <div className="col-md-10 col-lg-10 col-xl-9 mx-auto">
                       <div className="card-sigin">
                         <div className="mb-2 d-flex">
-                          <a href="#">
+                          <Link href="#">
                             <img
                               src="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/common/img/logo/logo.png"
                               className="sign-favicon "
                               alt="logo"
                             />
-                          </a>
+                          </Link>
                         </div>
                         <div className="card-sigin">
                           <div className="main-signup-header">
@@ -69,7 +81,7 @@ class LoginForm extends Form {
                                 "Password",
                                 "password"
                               )}
-                              {this.renderButton("Sign In")}
+                              {this.renderButton("Sign In", this.handleSubmit)}
                               <div className="row row-xs">
                                 <div className="col-sm-6">
                                   <button className="btn btn-block">
@@ -87,11 +99,15 @@ class LoginForm extends Form {
                             </form>
                             <div className="main-signin-footer mt-5">
                               <p>
-                                <a href="#">Forgot password?</a>
+                                <Link to="/forgotPassword">
+                                  Forgot password?
+                                </Link>
                               </p>
                               <p>
-                                Don't have an account?{" "}
-                                <a href="#">Create an Account</a>
+                                Don't have an account?
+                                <Link to="/createAccount">
+                                  Create an Account
+                                </Link>
                               </p>
                             </div>
                           </div>

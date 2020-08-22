@@ -4,6 +4,7 @@ import Joi from "joi-browser";
 import http from "./services/httpService";
 import config from "./config.json";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 class CreateAccount extends Form {
   state = {
@@ -65,16 +66,6 @@ class CreateAccount extends Form {
     }
   };
 
-  handleSubmit = async (e) => {
-    e.preventDefault();
-    const errors = this.validateOnSubmit();
-    await this.setState({ errors: errors || {} });
-
-    if (errors) return;
-
-    this.doSubmit();
-  };
-
   doSubmit = async () => {
     try {
       await http.post(`${config.apiendpoint}/register`, this.state.formData);
@@ -109,13 +100,13 @@ class CreateAccount extends Form {
                     <div className="col-md-10 col-lg-10 col-xl-9 mx-auto">
                       <div className="card-sigin">
                         <div className="mb-2 d-flex">
-                          <a href="#">
+                          <Link href="#">
                             <img
                               src="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/common/img/logo/logo.png"
                               className="sign-favicon"
                               alt="logo"
                             />
-                          </a>
+                          </Link>
                         </div>
                         <div className="card-sigin">
                           <div className="main-signup-header">
@@ -155,7 +146,8 @@ class CreateAccount extends Form {
                             </form>
                             <div className="main-signin-footer mt-5">
                               <p>
-                                Already have an account? <a href="#">Sign In</a>
+                                Already have an account?{" "}
+                                <Link to="/login">Sign In</Link>
                               </p>
                             </div>
                           </div>

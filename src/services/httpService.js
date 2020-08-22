@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 const successCallBack = (success) => {
   console.log(success);
   toast.success(success.data.message);
+  if (!success.data.message) toast.success(success.data);
 };
 
 const errorCallBack = (error) => {
