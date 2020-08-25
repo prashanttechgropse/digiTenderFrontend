@@ -8,6 +8,7 @@ import RegisterContainer from "./registerContainer.jsx";
 import ForgotPasswordContainer from "./forgotPassordContainer";
 import CustomerApp from "./customerApp";
 import SupplierApp from "./supplierApp";
+import Playground from "./playground";
 
 class App extends Component {
   render() {
@@ -15,6 +16,7 @@ class App extends Component {
       <React.Fragment>
         <ToastContainer />
         <Switch>
+          <Route exact path="/upload" component={Playground} />
           <Route exact path="/login" component={LoginForm} />
           <Route exact path="/customer" component={CustomerApp} />
           <Route exact path="/supplier" component={SupplierApp} />

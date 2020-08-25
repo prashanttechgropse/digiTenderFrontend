@@ -2,7 +2,9 @@ import React from "react";
 import Form from "./form/form";
 import Joi from "joi-browser";
 import { Link } from "react-router-dom";
-import http from "../services/httpService";
+import httpService from "../services/httpService";
+import { apiendpoint } from "../config.json";
+import * as registerService from "../services/registerServices";
 
 class ProfileSetup extends Form {
   state = {
@@ -66,44 +68,36 @@ class ProfileSetup extends Form {
     }
   };
 
-  onFileChange = (event) => {
+  onFileChange1 = (event) => {
     // Update the state
     this.setState({ selectedFile1: event.target.files[0] });
   };
+  onFileChange2 = (event) => {
+    // Update the state
+    this.setState({ selectedFile2: event.target.files[0] });
+  };
 
-  fileUpload = () => {
-    // Create an object of formData
-    const fileData = new FormData();
+  doSubmit = () => {
+    const formData = new FormData();
+    for (const item in this.state.formData) {
+      formData.append(item, this.state.formData[item]);
+    }
 
-    // Update the formData object
-    fileData.append(
+    formData.append(
       "myFile1",
       this.state.selectedFile1,
       this.state.selectedFile1.name
     );
     if (this.state.selectedFile2 !== null) {
-      fileData.append(
+      formData.append(
         "myFile2",
         this.state.selectedFile2,
         this.state.selectedFile2.name
       );
     }
+    console.log(formData);
 
-    // Details of the uploaded file
-    //console.log(this.state.selectedFile1);
-    //console.log(this.state.selectedFile2);
-    return fileData;
-    // Request made to the backend api
-    // Send formData object
-  };
-
-  doSubmit = async () => {
-    let fileData = this.fileUpload();
-    for (const item in this.state.formData) {
-      fileData.append(item, this.state.formData.item);
-    }
-    console.log(fileData);
-    //call api service.
+    registerService.setUpProfileService(formData);
   };
 
   render() {
@@ -246,7 +240,7 @@ class ProfileSetup extends Form {
                                       type="file"
                                       class="dropify"
                                       data-height="200"
-                                      onChange={this.onFileChange}
+                                      onChange={this.onFileChange1}
                                     />
                                   </div>
                                 </div>
@@ -259,7 +253,7 @@ class ProfileSetup extends Form {
                                       type="file"
                                       class="dropify"
                                       data-height="200"
-                                      onChange={this.onFileChange}
+                                      onChange={this.onFileChange2}
                                     />
                                   </div>
                                 </div>

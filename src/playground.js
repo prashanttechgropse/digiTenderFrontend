@@ -29,9 +29,10 @@ class Playground extends Component {
     // Details of the uploaded file
     console.log(this.state.selectedFile);
 
+    formData.append("name", "prashant");
     // Request made to the backend api
     // Send formData object
-    axios.post("http://localhost:3001/api/fileUpload", formData);
+    axios.post("http://localhost:3001/api/setUpProfile", formData);
   };
 
   // File content to be displayed after

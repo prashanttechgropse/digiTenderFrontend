@@ -36,7 +36,7 @@ class Form extends Component {
 
     if (errors) return;
 
-    this.doSubmit();
+    await this.doSubmit();
   };
 
   handleChange = async (e) => {

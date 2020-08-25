@@ -22,8 +22,16 @@ class LoginForm extends Form {
   };
 
   doSubmit = async () => {
-    const stake = await registerService.authentication(this.state.formData);
-    console.log(stake);
+    const profileType = await registerService.authentication(
+      this.state.formData
+    );
+    let stake;
+    if (profileType === 1) {
+      stake = "customer";
+    }
+    if (profileType === 2) {
+      stake = "supplier";
+    }
     this.props.history.push(`/${stake.toLowerCase()}`);
   };
 

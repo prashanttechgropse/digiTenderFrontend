@@ -3,7 +3,16 @@ import httpService from "./httpService";
 import { toast } from "react-toastify";
 
 export async function setUpProfileService(formData) {
-  await httpService.post(`${apiendpoint}/setUpProfile`, formData);
+  try {
+    const { data } = await httpService.post(
+      `${apiendpoint}/setUpProfile`,
+      formData
+    );
+    toast.success(data.message);
+    if (!data.message) toast.success(data);
+  } catch (ex) {
+    if (ex.response) toast.error(ex.response.data);
+  }
 }
 
 export async function authentication(formData) {
@@ -42,7 +51,7 @@ export async function otpVerification(formData, email) {
       }
     );
     console.log(headers);
-    return localStorage.setItem("token", headers["x-auth-token"]);
+    localStorage.setItem("token", headers["x-auth-token"]);
   } catch (ex) {
     if (ex.response) toast.error(ex.response.data);
   }
