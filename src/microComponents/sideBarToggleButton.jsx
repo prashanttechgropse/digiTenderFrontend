@@ -1,15 +1,16 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 class SideBarToggleButton extends Component {
   state = {};
   render() {
     return (
       <div className="app-sidebar__toggle" data-toggle="sidebar">
-        <a className="open-toggle" href="#">
+        <Link className="open-toggle" href="#">
           <i className="header-icon fa fa-align-left"></i>
-        </a>
-        <a className="close-toggle" href="#">
+        </Link>
+        <Link className="close-toggle" href="#">
           <i className="header-icons fa fa-times"></i>
-        </a>
+        </Link>
       </div>
     );
   }

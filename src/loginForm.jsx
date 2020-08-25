@@ -1,9 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 import Form from "./macroComponents/form/form";
 import { Link } from "react-router-dom";
-import http from "./services/httpService";
-import config from "./config.json";
-import { toast } from "react-toastify";
+import * as registerService from "./services/registerServices";
 
 const Joi = require("joi-browser");
 
@@ -24,14 +22,9 @@ class LoginForm extends Form {
   };
 
   doSubmit = async () => {
-    try {
-      await http.post(`${config.apiendpoint}/login`, {
-        email: this.state.formData.email,
-        password: this.state.formData.password,
-      });
-    } catch (ex) {
-      if (ex.response) toast.error(ex.response.data);
-    }
+    const stake = await registerService.authentication(this.state.formData);
+    console.log(stake);
+    this.props.history.push(`/${stake.toLowerCase()}`);
   };
 
   render() {
@@ -84,13 +77,19 @@ class LoginForm extends Form {
                               {this.renderButton("Sign In", this.handleSubmit)}
                               <div className="row row-xs">
                                 <div className="col-sm-6">
-                                  <button className="btn btn-block">
+                                  <button
+                                    className="btn btn-block"
+                                    onClick={this.handleFacebookLogin}
+                                  >
                                     <i className="fa fa-facebook"></i> Signin
                                     with Facebook
                                   </button>
                                 </div>
                                 <div className="col-sm-6 mg-t-10 mg-sm-t-0">
-                                  <button className="btn btn-danger btn-block">
+                                  <button
+                                    className="btn btn-danger btn-block"
+                                    onClick={this.handleGoogleLogin}
+                                  >
                                     <i className="fa fa-google"></i> Signin with
                                     Google
                                   </button>

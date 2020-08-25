@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import Form from "./form/form";
 import Joi from "joi-browser";
 import config from "../config.json";
@@ -22,6 +22,7 @@ class ForgotPassword extends Form {
       await http.post(`${config.apiendpoint}/otpGeneration`, {
         email: this.state.formData.email,
       });
+      this.props.submitEmail(this.state.formData.email);
     } catch (ex) {
       if (ex.response) toast.error(ex.response.data);
     }

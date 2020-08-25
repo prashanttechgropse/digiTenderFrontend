@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 class CustomerSidebar extends Component {
   state = {
     toggleTenderManagement: 0,
@@ -6,61 +7,63 @@ class CustomerSidebar extends Component {
   };
   toggleAdminFunctions = () => {
     let temp = this.state.toggleAdminFunctions;
-    temp == 0 ? (temp = 1) : (temp = 0);
+    temp === 0 ? (temp = 1) : (temp = 0);
     this.setState({ toggleAdminFunctions: temp });
   };
   toggleTenderManagement = () => {
     let temp = this.state.toggleTenderManagement;
-    temp == 0 ? (temp = 1) : (temp = 0);
+    temp === 0 ? (temp = 1) : (temp = 0);
     this.setState({ toggleTenderManagement: temp });
   };
   renderAdminFunctions = () => {
-    if (this.state.toggleAdminFunctions == 1) {
+    if (this.state.toggleAdminFunctions === 1) {
       return (
         <ul>
           <li className="slide-item side-menu__item">
-            <a onClick={() => this.props.onClick("customerReceiverList")}>
+            <Link onClick={() => this.props.onClick("customerReceiverList")}>
               Receiver List
-            </a>
+            </Link>
           </li>
           <li className="slide-item side-menu__item">
-            <a onClick={() => this.props.onClick("createReceiver")}>
+            <Link onClick={() => this.props.onClick("createReceiver")}>
               Create Receiver
-            </a>
+            </Link>
           </li>
           <li className="slide-item side-menu__item">
-            <a onClick={() => this.props.onClick("changePassword")}>
+            <Link onClick={() => this.props.onClick("changePassword")}>
               Change Password
-            </a>
+            </Link>
           </li>
           <li className="slide-item side-menu__item">
-            <a onClick={() => this.props.onClick("profile")}>Profile</a>
+            <Link onClick={() => this.props.onClick("profile")}>Profile</Link>
           </li>
         </ul>
       );
     } else return;
   };
   renderTenderManagement = () => {
-    if (this.state.toggleTenderManagement == 1) {
+    if (this.state.toggleTenderManagement === 1) {
       return (
         <ul>
           <li className="slide-item side-menu__item">
-            <a onClick={() => this.props.onClick("createTender")}>
+            <Link onClick={() => this.props.onClick("createTender")}>
               Create Tender
-            </a>
+            </Link>
           </li>
           <li className="slide-item side-menu__item">
-            <a onClick={() => this.props.onClick("tenderList")}>Tender List</a>
+            <Link onClick={() => this.props.onClick("tenderList")}>
+              Tender List
+            </Link>
           </li>
           <li className="slide-item side-menu__item">
-            <a onClick={() => this.props.onClick("saveForLater")}>
+            <Link onClick={() => this.props.onClick("saveForLater")}>
               Save for Later
-            </a>
+            </Link>
           </li>
           <li className="slide-item side-menu__item">
-            <a onClick={() => this.props.onClick("transactionList")}>
+            <Link onClick={() => this.props.onClick("transactionList")}>
               Transaction List
-            </a>
+            </Link>
           </li>
         </ul>
       );
@@ -70,7 +73,7 @@ class CustomerSidebar extends Component {
     return (
       <aside className="app-sidebar sidebar-scroll">
         <div className="main-sidebar-header active">
-          <a
+          <Link
             className="desktop-logo logo-light active"
             onClick={() => this.props.onClick("dashboard")}
           >
@@ -81,8 +84,8 @@ class CustomerSidebar extends Component {
               className="main-logo"
               alt="logo"
             />
-          </a>
-          <a
+          </Link>
+          <Link
             className="desktop-logo logo-dark active"
             onClick={() => this.props.onClick("dashboard")}
           >
@@ -93,8 +96,8 @@ class CustomerSidebar extends Component {
               className="main-logo dark-theme"
               alt="logo"
             />
-          </a>
-          <a
+          </Link>
+          <Link
             className="logo-icon mobile-logo icon-light active"
             onClick={() => this.props.onClick("dashboard")}
           >
@@ -105,8 +108,8 @@ class CustomerSidebar extends Component {
               className="logo-icon"
               alt="logo"
             />
-          </a>
-          <a
+          </Link>
+          <Link
             className="logo-icon mobile-logo icon-dark active"
             onClick={() => this.props.onClick("dashboard")}
           >
@@ -117,7 +120,7 @@ class CustomerSidebar extends Component {
               className="logo-icon dark-theme"
               alt="logo"
             />
-          </a>
+          </Link>
         </div>
         <div className="main-sidemenu mCustomScrollbar _mCS_1 mCS-autoHide">
           <div
@@ -148,16 +151,16 @@ class CustomerSidebar extends Component {
               </div>
               <ul className="side-menu">
                 <li className="slide active">
-                  <a
+                  <Link
                     className="side-menu__item active"
                     onClick={() => this.props.onClick("dashboard")}
                   >
                     <i className="fa fa-home"></i>
                     <span className="side-menu__label">Dashboard</span>
-                  </a>
+                  </Link>
                 </li>
                 <li className="slide">
-                  <a
+                  <Link
                     className="side-menu__item"
                     data-toggle="slide"
                     onClick={this.toggleTenderManagement}
@@ -165,20 +168,20 @@ class CustomerSidebar extends Component {
                     <i className="fa fa-address-book"></i>
                     <span className="side-menu__label">Tender Management</span>
                     <i className="angle fa fa-angle-down"></i>
-                  </a>
+                  </Link>
                   {this.renderTenderManagement()}
                 </li>
                 <li className="slide">
-                  <a
+                  <Link
                     className="side-menu__item"
                     onClick={() => this.props.onClick("deliveryNotes")}
                   >
                     <i className="fa fa-book"></i>
                     <span className="side-menu__label">Delivery Notes</span>
-                  </a>
+                  </Link>
                 </li>
                 <li className="slide">
-                  <a
+                  <Link
                     className="side-menu__item"
                     data-toggle="slide"
                     onClick={this.toggleAdminFunctions}
@@ -186,20 +189,20 @@ class CustomerSidebar extends Component {
                     <i className="fa fa-cog"></i>
                     <span className="side-menu__label">Admin Functions</span>
                     <i className="angle fa fa-angle-down"></i>
-                  </a>
+                  </Link>
                   {this.renderAdminFunctions()}
                 </li>
                 <li className="slide">
-                  <a
+                  <Link
                     className="side-menu__item"
                     onClick={() => this.props.onClick("helpSupport")}
                   >
                     <i className="fa fa-support"></i>
                     <span className="side-menu__label">Help & Support</span>
-                  </a>
+                  </Link>
                 </li>
                 <li className="slide">
-                  <a
+                  <Link
                     className="side-menu__item"
                     onClick={() => this.props.onClick("termsConditions")}
                   >
@@ -207,7 +210,7 @@ class CustomerSidebar extends Component {
                     <span className="side-menu__label">
                       Terms and Conditions
                     </span>
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>

@@ -1,5 +1,4 @@
 import React from "react";
-import { options } from "joi-browser";
 const Select = ({ name, error, options, label, ...rest }) => {
   return (
     <div className="form-group">

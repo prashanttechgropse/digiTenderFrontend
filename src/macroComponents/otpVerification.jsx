@@ -1,33 +1,28 @@
-import React, { Component } from "react";
+import React from "react";
 import Form from "./form/form";
 import Joi from "joi-browser";
 import config from "../config.json";
 import { toast } from "react-toastify";
-import http from "../services/httpService";
 import { Link } from "react-router-dom";
+import http from "../services/httpService";
+import * as registerService from "../services/registerServices";
 
 class OtpVerificationForm extends Form {
   state = {
-    formData: { otp: "", email: "" },
+    formData: { otp: "" },
     errors: {},
   };
 
   schema = {
     otp: Joi.string().required(),
   };
-  constructor(props) {
-    super(props);
-    this.state.formData.email = props.email;
-  }
+
   doSubmit = async () => {
-    try {
-      await http.post(
-        `${config.apiendpoint}/otpVerification`,
-        this.state.formData
-      );
-    } catch (ex) {
-      if (ex.response) toast.error(ex.response.data);
-    }
+    await registerService.otpVerification(
+      this.state.formData,
+      this.props.email
+    );
+    this.props.history.push("/register/profileSetup");
   };
 
   resendOtp = async () => {

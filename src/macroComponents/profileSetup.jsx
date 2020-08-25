@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import Form from "./form/form";
 import Joi from "joi-browser";
 import { Link } from "react-router-dom";
@@ -23,9 +23,9 @@ class ProfileSetup extends Form {
       postalAddress: "",
       contactPerson: "",
       contactNo: "",
-      selectedFile: null,
-      vatDocument: null,
     },
+    selectedFile1: null,
+    selectedFile2: null,
     errors: {},
   };
   schema = {
@@ -47,51 +47,63 @@ class ProfileSetup extends Form {
     contactNo: Joi.string().required(),
   };
 
+  validateOnSubmit = () => {
+    const result = Joi.validate(this.state.formData, this.schema, {
+      abortEarly: false,
+    });
+    if (!result.error && this.state.selectedFile1 !== null) return null;
+    const errors = {};
+    if (result.error) {
+      for (let item of result.error.details) {
+        errors[item.path[0]] = item.message;
+      }
+      return errors;
+    }
+    if (this.state.selectedFile1 === null) {
+      const errors = {};
+      errors.selectedFile1 = "upload file";
+      return errors;
+    }
+  };
+
   onFileChange = (event) => {
     // Update the state
-    this.setState({ selectedFile: event.target.files[0] });
+    this.setState({ selectedFile1: event.target.files[0] });
   };
 
-  onFileUpload = () => {
+  fileUpload = () => {
     // Create an object of formData
-    const formData = new FormData();
+    const fileData = new FormData();
 
     // Update the formData object
-    formData.append(
-      "myFile",
-      this.state.selectedFile,
-      this.state.selectedFile.name
+    fileData.append(
+      "myFile1",
+      this.state.selectedFile1,
+      this.state.selectedFile1.name
     );
-
-    // Details of the uploaded file
-    console.log(this.state.selectedFile);
-
-    // Request made to the backend api
-    // Send formData object
-    http.post("api/uploadfile", formData);
-  };
-
-  fileData = () => {
-    if (this.state.selectedFile) {
-      return (
-        <div>
-          <h2>File Details:</h2>
-          <p>File Name: {this.state.selectedFile.name}</p>
-          <p>File Type: {this.state.selectedFile.type}</p>
-          <p>
-            Last Modified:{" "}
-            {this.state.selectedFile.lastModifiedDate.toDateString()}
-          </p>
-        </div>
-      );
-    } else {
-      return (
-        <div>
-          <br />
-          <h4>Choose before Pressing the Upload button</h4>
-        </div>
+    if (this.state.selectedFile2 !== null) {
+      fileData.append(
+        "myFile2",
+        this.state.selectedFile2,
+        this.state.selectedFile2.name
       );
     }
+
+    // Details of the uploaded file
+    //console.log(this.state.selectedFile1);
+    //console.log(this.state.selectedFile2);
+    return fileData;
+    // Request made to the backend api
+    // Send formData object
+  };
+
+  doSubmit = async () => {
+    let fileData = this.fileUpload();
+    for (const item in this.state.formData) {
+      fileData.append(item, this.state.formData.item);
+    }
+    console.log(fileData);
+    //call api service.
   };
 
   render() {
@@ -106,13 +118,13 @@ class ProfileSetup extends Form {
                     <div class="col-md-12 col-lg-12 col-xl-12 mx-auto">
                       <div class="card-sigin">
                         <div class="mb-2 d-flex">
-                          <a href="#">
+                          <Link to="#">
                             <img
                               src="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/common/img/logo/logo.png"
                               class="sign-favicon"
                               alt="logo"
                             />
-                          </a>
+                          </Link>
                         </div>
                         <div class="card-sigin">
                           <div class="main-signup-header">
@@ -236,12 +248,6 @@ class ProfileSetup extends Form {
                                       data-height="200"
                                       onChange={this.onFileChange}
                                     />
-                                    <button
-                                      class="btn btn-main-primary btn-block"
-                                      onClick={this.onFileUpload}
-                                    >
-                                      Upload!
-                                    </button>
                                   </div>
                                 </div>
                               </div>
@@ -255,12 +261,6 @@ class ProfileSetup extends Form {
                                       data-height="200"
                                       onChange={this.onFileChange}
                                     />
-                                    <button
-                                      class="btn btn-main-primary btn-block"
-                                      onClick={this.onFileUpload}
-                                    >
-                                      Upload!
-                                    </button>
                                   </div>
                                 </div>
                               </div>
@@ -289,7 +289,7 @@ class ProfileSetup extends Form {
                             <div class="main-signin-footer mt-5">
                               <p class="text-center">
                                 Already have an account?
-                                <Link to="/">Sign In</Link>
+                                <Link to="/login">Sign In</Link>
                               </p>
                             </div>
                           </div>

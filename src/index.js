@@ -6,7 +6,6 @@ import * as serviceWorker from "./serviceWorker";
 import GlobalLoader from "./microComponents/globalLoader";
 
 import App from "./app";
-import { BrowserRouer } from "react-router-dom";
 
 ReactDOM.render(
   <React.StrictMode>
