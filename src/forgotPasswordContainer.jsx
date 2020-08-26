@@ -19,7 +19,7 @@ class ForgotPasswordContainer extends Component {
       <React.Fragment>
         <Route
           exact
-          path="/forgotPassword"
+          path={["/forgotPassword", "/verify"]}
           render={(props) => (
             <ForgotPassword
               submitEmail={(email) => this.getEmail(email)}

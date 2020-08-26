@@ -2,6 +2,7 @@ import React from "react";
 import Form from "./macroComponents/form/form";
 import { Link } from "react-router-dom";
 import * as registerService from "./services/registerServices";
+import { toast } from "react-toastify";
 
 const Joi = require("joi-browser");
 
@@ -26,8 +27,18 @@ class LoginForm extends Form {
       this.state.formData
     );
     if (error) return;
-    const stake = data.profileType;
-    this.props.history.push(`/${stake.toLowerCase()}`);
+    if (data.verified) {
+      const stake = data.profileType;
+      this.props.history.push(`/${stake.toLowerCase()}`);
+    } else {
+      toast.error("verify your email before proceeding further");
+      const { data, error } = await registerService.otpGeneration(
+        this.state.formData.email
+      );
+      if (error) return;
+      this.props.submitEmail(this.state.formData.email);
+      this.props.history.push("/verify");
+    }
   };
 
   render() {

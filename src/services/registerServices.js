@@ -70,7 +70,7 @@ export async function otpVerification(formData, email) {
   }
 }
 
-export async function forgotPassword(email) {
+export async function otpGeneration(email) {
   try {
     const { data } = await httpService.post(`${apiendpoint}/otpGeneration`, {
       email: email,

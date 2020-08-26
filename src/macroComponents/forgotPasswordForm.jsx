@@ -18,7 +18,7 @@ class ForgotPassword extends Form {
   };
 
   doSubmit = async () => {
-    const { data, error } = await registerServices.forgotPassword(
+    const { data, error } = await registerServices.otpGeneration(
       this.state.formData.email
     );
     if (data) {

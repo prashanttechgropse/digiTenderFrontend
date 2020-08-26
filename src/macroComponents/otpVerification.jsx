@@ -30,14 +30,19 @@ class OtpVerificationForm extends Form {
         this.props.history.push("/forgotPassword/resetPassword");
         window.location.reload();
       } else {
-        this.props.history.push("/profileSetup");
-        window.location.reload();
+        if (data.isregistered === false) {
+          this.props.history.push("/profileSetup");
+          window.location.reload();
+        } else {
+          this.props.history.push(`/${data.profileType}`);
+          window.location.reload();
+        }
       }
     }
   };
 
   resendOtp = async () => {
-    await registerService.forgotPassword(this.props.email);
+    await registerService.otpGeneration(this.props.email);
     return;
   };
 
