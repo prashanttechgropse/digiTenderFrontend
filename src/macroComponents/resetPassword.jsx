@@ -1,20 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import CreateAccount from "./createAccount";
-class ResetPassword extends CreateAccount {
+import Form from "./form/form";
+import Joi from "joi-browser";
+import * as registerServices from "../services/registerServices";
+import httpService from "../services/httpService";
+class ResetPassword extends Form {
   state = {
     formData: {
-      email: "",
       password: "",
       confirmPassword: "",
     },
     errors: {},
   };
-  constructor(props) {
-    super(props);
-    this.state.formData.email = props.email;
-  }
 
   schema = {
     password: Joi.string().required().min(8),
@@ -22,13 +20,11 @@ class ResetPassword extends CreateAccount {
   };
 
   doSubmit = async () => {
-    try {
-      await http.post(
-        `${config.apiendpoint}/resetPassword`,
-        this.state.formData
-      );
-    } catch (ex) {
-      if (ex.response) toast.error(ex.response.data);
+    const { data, error } = await registerServices.resetPassword(
+      this.state.formData
+    );
+    if (data) {
+      this.props.history.replace(`/login`);
     }
   };
 

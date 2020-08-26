@@ -33,20 +33,20 @@ class ProfileSetup extends Form {
   schema = {
     profileType: Joi.string().required(),
     organisationType: Joi.string().required(),
-    firstName: Joi.string().required(),
-    lastName: Joi.string().required(),
-    idNumber: Joi.string().required(),
+    firstName: Joi.string().required().min(5),
+    lastName: Joi.string().required().min(5),
+    idNumber: Joi.string().required().min(5),
     contactNumber: Joi.string().required(),
-    companyName: Joi.string().required(),
-    entityRegistrationNo: Joi.string().required(),
+    companyName: Joi.string().required().min(5),
+    entityRegistrationNo: Joi.string().required().min(5),
     vatRegistration: Joi.string().required(),
-    vatNumber: Joi.string().required(),
-    tradingAs: Joi.string().required(),
-    website: Joi.string().required(),
-    physicalAddress: Joi.string().required(),
-    postalAddress: Joi.string().required(),
-    contactPerson: Joi.string().required(),
-    contactNo: Joi.string().required(),
+    vatNumber: Joi.string().required().min(5),
+    tradingAs: Joi.string().required().min(5),
+    website: Joi.string().required().min(5),
+    physicalAddress: Joi.string().required().min(5),
+    postalAddress: Joi.string().required().min(5),
+    contactPerson: Joi.string().required().min(5),
+    contactNo: Joi.string().required().min(5),
   };
 
   validateOnSubmit = () => {
@@ -77,7 +77,7 @@ class ProfileSetup extends Form {
     this.setState({ selectedFile2: event.target.files[0] });
   };
 
-  doSubmit = () => {
+  doSubmit = async () => {
     const formData = new FormData();
     for (const item in this.state.formData) {
       formData.append(item, this.state.formData[item]);
@@ -96,8 +96,14 @@ class ProfileSetup extends Form {
       );
     }
     console.log(formData);
-
-    registerService.setUpProfileService(formData);
+    const { data, error } = await registerService.setUpProfileService(formData);
+    if (data) {
+      const stake = data.profileType;
+      this.props.history.push(`/${stake.toLowerCase()}`);
+    }
+    if (error) {
+      this.props.history.push(`/login`);
+    }
   };
 
   render() {
@@ -135,8 +141,8 @@ class ProfileSetup extends Form {
                                     "profileType",
                                     "Profile Type",
                                     [
-                                      { _id: 1, name: "customer" },
-                                      { _id: 2, name: "suppliers" },
+                                      { _id: "customer", name: "customer" },
+                                      { _id: "supplier", name: "supplier" },
                                     ]
                                   )}
                                 </div>
@@ -145,8 +151,11 @@ class ProfileSetup extends Form {
                                     "organisationType",
                                     "Organisation Type",
                                     [
-                                      { _id: 1, name: "Private Limited" },
-                                      { _id: 2, name: "Government" },
+                                      {
+                                        _id: "private limited",
+                                        name: "Private Limited",
+                                      },
+                                      { _id: "government", name: "Government" },
                                     ]
                                   )}
                                 </div>
@@ -191,7 +200,7 @@ class ProfileSetup extends Form {
                                     "Vat Registration",
                                     [
                                       { _id: 1, name: "option 1" },
-                                      { _id: 2, name: "soption 2" },
+                                      { _id: 2, name: "option 2" },
                                     ]
                                   )}
                                 </div>

@@ -31,14 +31,11 @@ class RegisterContainer extends Component {
           exact
           path={`/register/otpVerification`}
           render={(props) => (
-            <OtpVerificationForm email={this.state.register.email} {...props} />
-          )}
-        />
-        <Route
-          exact
-          path={`/register/profileSetup`}
-          render={(props) => (
-            <ProfileSetup email={this.state.register.email} {...props} />
+            <OtpVerificationForm
+              email={this.state.register.email}
+              forgotPassword={false}
+              {...props}
+            />
           )}
         />
       </React.Fragment>

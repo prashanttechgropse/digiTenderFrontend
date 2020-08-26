@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Route } from "react-router-dom";
 import ForgotPassword from "./macroComponents/forgotPasswordForm";
+import ResetPassword from "./macroComponents/resetPassword";
+import OtpVerificationForm from "./macroComponents/otpVerification";
 class ForgotPasswordContainer extends Component {
   state = {
     register: {
@@ -24,6 +26,22 @@ class ForgotPasswordContainer extends Component {
               {...props}
             />
           )}
+        />
+        <Route
+          exact
+          path={`/forgotPassword/otpVerification`}
+          render={(props) => (
+            <OtpVerificationForm
+              email={this.state.register.email}
+              forgotPassword={true}
+              {...props}
+            />
+          )}
+        />
+        <Route
+          exact
+          path="/forgotPassword/resetPassword"
+          render={(props) => <ResetPassword {...props} />}
         />
       </React.Fragment>
     );

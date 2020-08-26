@@ -22,16 +22,11 @@ class LoginForm extends Form {
   };
 
   doSubmit = async () => {
-    const profileType = await registerService.authentication(
+    const { data, error } = await registerService.authentication(
       this.state.formData
     );
-    let stake;
-    if (profileType === 1) {
-      stake = "customer";
-    }
-    if (profileType === 2) {
-      stake = "supplier";
-    }
+    if (error) return;
+    const stake = data.profileType;
     this.props.history.push(`/${stake.toLowerCase()}`);
   };
 

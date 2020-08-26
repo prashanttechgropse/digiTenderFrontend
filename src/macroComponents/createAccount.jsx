@@ -65,7 +65,10 @@ class CreateAccount extends Form {
   };
 
   doSubmit = async () => {
-    await registerService.createAccount(this.state.formData);
+    const { data, error } = await registerService.createAccount(
+      this.state.formData
+    );
+    if (error) return;
     this.props.submitEmail(this.state.formData.email);
     this.props.history.push(`/register/otpVerification`);
   };

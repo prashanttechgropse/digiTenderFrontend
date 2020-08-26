@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import http from "../services/httpService";
 import * as registerService from "../services/registerServices";
+import ForgotPassword from "./forgotPasswordForm";
 
 class OtpVerificationForm extends Form {
   state = {
@@ -18,21 +19,26 @@ class OtpVerificationForm extends Form {
   };
 
   doSubmit = async () => {
-    await registerService.otpVerification(
+    await localStorage.removeItem("token");
+    const { data, error } = await registerService.otpVerification(
       this.state.formData,
       this.props.email
     );
-    this.props.history.push("/register/profileSetup");
+    if (error) return;
+    else {
+      if (this.props.forgotPassword === true) {
+        this.props.history.push("/forgotPassword/resetPassword");
+        window.location.reload();
+      } else {
+        this.props.history.push("/profileSetup");
+        window.location.reload();
+      }
+    }
   };
 
   resendOtp = async () => {
-    try {
-      await http.post(`${config.apiendpoint}/otpGeneration`, {
-        email: this.props.email,
-      });
-    } catch (ex) {
-      if (ex.response) toast.error(ex.response.data);
-    }
+    await registerService.forgotPassword(this.props.email);
+    return;
   };
 
   render() {

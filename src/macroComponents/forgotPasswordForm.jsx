@@ -3,7 +3,7 @@ import Form from "./form/form";
 import Joi from "joi-browser";
 import config from "../config.json";
 import { toast } from "react-toastify";
-import http from "../services/httpService";
+import * as registerServices from "../services/registerServices";
 import { Link } from "react-router-dom";
 class ForgotPassword extends Form {
   state = {
@@ -18,13 +18,15 @@ class ForgotPassword extends Form {
   };
 
   doSubmit = async () => {
-    try {
-      await http.post(`${config.apiendpoint}/otpGeneration`, {
-        email: this.state.formData.email,
-      });
+    const { data, error } = await registerServices.forgotPassword(
+      this.state.formData.email
+    );
+    if (data) {
       this.props.submitEmail(this.state.formData.email);
-    } catch (ex) {
-      if (ex.response) toast.error(ex.response.data);
+      this.props.history.push(`/forgotPassword/otpVerification`);
+    }
+    if (error) {
+      return;
     }
   };
 

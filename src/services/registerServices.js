@@ -1,6 +1,23 @@
 import { apiendpoint } from "../config.json";
 import httpService from "./httpService";
 import { toast } from "react-toastify";
+import ForgotPassword from "../macroComponents/forgotPasswordForm";
+import ResetPassword from "../macroComponents/resetPassword";
+
+export async function createAccount(formData) {
+  try {
+    await httpService.post(`${apiendpoint}/register`, formData);
+    const { data } = await httpService.post(`${apiendpoint}/otpGeneration`, {
+      email: formData.email,
+    });
+    toast.success(data.message);
+    if (!data.message) toast.success(data);
+    return { data };
+  } catch (error) {
+    if (error.response) toast.error(error.response.data);
+    return { error };
+  }
+}
 
 export async function setUpProfileService(formData) {
   try {
@@ -10,8 +27,10 @@ export async function setUpProfileService(formData) {
     );
     toast.success(data.message);
     if (!data.message) toast.success(data);
-  } catch (ex) {
-    if (ex.response) toast.error(ex.response.data);
+    return { data };
+  } catch (error) {
+    if (error.response) toast.error(error.response.data);
+    return { error };
   }
 }
 
@@ -21,38 +40,61 @@ export async function authentication(formData) {
       email: formData.email,
       password: formData.password,
     });
-    localStorage.setItem("token", headers["x-auth-token"]);
+    await localStorage.removeItem("token");
+    await localStorage.setItem("token", headers["x-auth-token"]);
     toast.success(data.message);
     if (!data.message) toast.success(data);
-    return data.stake;
-  } catch (ex) {
-    if (ex.response) toast.error(ex.response.data);
-  }
-}
-
-export async function createAccount(formData) {
-  try {
-    await httpService.post(`${apiendpoint}/register`, formData);
-    await httpService.post(`${apiendpoint}/otpGeneration`, {
-      email: formData.email,
-    });
-  } catch (ex) {
-    if (ex.response) toast.error(ex.response.data);
+    return { data };
+  } catch (error) {
+    if (error.response) toast.error(error.response.data);
+    return { error };
   }
 }
 
 export async function otpVerification(formData, email) {
   try {
-    const { headers } = await httpService.post(
+    const { data, headers } = await httpService.post(
       `${apiendpoint}/otpVerification`,
       {
         email: email,
         otp: formData.otp,
       }
     );
-    console.log(headers);
-    localStorage.setItem("token", headers["x-auth-token"]);
-  } catch (ex) {
-    if (ex.response) toast.error(ex.response.data);
+    await localStorage.setItem("token", headers["x-auth-token"]);
+    toast.success(data.message);
+    if (!data.message) toast.success(data);
+    return { data };
+  } catch (error) {
+    if (error.response) toast.error(error.response.data);
+    return { error };
+  }
+}
+
+export async function forgotPassword(email) {
+  try {
+    const { data } = await httpService.post(`${apiendpoint}/otpGeneration`, {
+      email: email,
+    });
+    toast.success(data.message);
+    if (!data.message) toast.success(data);
+    return { data };
+  } catch (error) {
+    if (error.response) toast.error(error.response.data);
+    return { error };
+  }
+}
+
+export async function resetPassword(formData) {
+  try {
+    const { data } = await httpService.post(
+      `${apiendpoint}/resetPassword`,
+      formData
+    );
+    toast.success(data.message);
+    if (!data.message) toast.success(data);
+    return { data };
+  } catch (error) {
+    if (error.response) toast.error(error.response.data);
+    return { error };
   }
 }
