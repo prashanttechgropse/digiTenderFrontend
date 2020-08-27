@@ -67,6 +67,7 @@ class SupplierSideBar extends Component {
   };
 
   render() {
+    const { firstName } = this.props.user.details;
     return (
       <aside className="app-sidebar sidebar-scroll">
         <div className="main-sidebar-header active">
@@ -130,7 +131,7 @@ class SupplierSideBar extends Component {
                   </div>
                   <div className="user-info">
                     <h4 className="font-weight-semibold mt-3 mb-0">
-                      Al Hamid Saif
+                      {firstName}
                     </h4>
                     <span className="mb-0 text-muted">Supplier</span>
                   </div>

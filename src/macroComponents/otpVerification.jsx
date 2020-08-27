@@ -31,7 +31,7 @@ class OtpVerificationForm extends Form {
         window.location.reload();
       } else {
         if (data.isregistered === false) {
-          this.props.history.push("/profileSetup");
+          this.props.history.push("/register/profileSetup");
           window.location.reload();
         } else {
           this.props.history.push(`/${data.profileType}`);

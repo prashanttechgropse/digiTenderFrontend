@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import httpService from "../services/httpService";
 import { apiendpoint } from "../config.json";
 import * as registerService from "../services/registerServices";
+import { toast } from "react-toastify";
 
 class ProfileSetup extends Form {
   state = {
@@ -97,12 +98,15 @@ class ProfileSetup extends Form {
     }
     console.log(formData);
     const { data, error } = await registerService.setUpProfileService(formData);
-    if (data) {
-      const stake = data.profileType;
-      this.props.history.push(`/${stake.toLowerCase()}`);
+    if (!data.bankDetailsStatus) {
+      this.props.submitProfileDetails(this.state.formData);
+      this.props.history.push(`/register/uploadBankDetails`);
+    } else {
+      toast.success("registration process already completed");
+      this.props.history.push(`/`);
     }
     if (error) {
-      this.props.history.push(`/login`);
+      return;
     }
   };
 

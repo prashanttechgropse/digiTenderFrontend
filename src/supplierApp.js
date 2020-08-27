@@ -7,7 +7,7 @@ import HelpSupport from "./macroComponents/helpSupport";
 import TermsConditions from "./macroComponents/termsConditions";
 import MyProfile from "./macroComponents/myProfile";
 import EditProfile from "./macroComponents/editProfile";
-import ChangePassword from "./macroComponents/changePassword";
+
 import SupplierDeliveryNoteMainContent from "./supplierComponents/supplierDeliveryNotesComponents/supplierDeliveryNoteMainContent";
 import SupplierDashboardMainContent from "./supplierComponents/supplierDashboardComponents/supplierDashboardMainContent";
 import SupplierSideBar from "./supplierComponents/supplierSideBar";
@@ -17,9 +17,24 @@ import SupplierTransactionManagement from "./supplierComponents/supplierTenderMa
 import SupplierHistory from "./supplierComponents/supplierTenderManagementComponents/supplierHistory";
 import SupplierEmployeeList from "./supplierComponents/supplierAdminFunctionsComponents/supplierEmployeeList";
 import SupplierCreateSubUser from "./supplierComponents/supplierAdminFunctionsComponents/supplierCreateSubUser";
+import httpService from "./services/httpService";
+import config from "./config.json";
+import { toast } from "react-toastify";
+import ChangePassword from "./userComponents/changePassword";
 
 class SupplierApp extends Component {
-  state = { mainRenderedContent: "dashboard" };
+  state = { supplier: null, mainRenderedContent: "dashboard" };
+
+  async componentDidMount() {
+    try {
+      const { data } = await httpService.get(`${config.apiendpoint}/myData`);
+      toast.success(data.message);
+      const supplier = data.user;
+      await this.setState({ supplier: supplier });
+    } catch (error) {
+      toast.error(error.response.data);
+    }
+  }
 
   setMainRenderedContent = (key) => {
     this.setState({ mainRenderedContent: key });
@@ -51,35 +66,49 @@ class SupplierApp extends Component {
         return <TermsConditions />;
       case "profile":
         return (
-          <MyProfile onClick={(key) => this.setMainRenderedContent(key)} />
+          <MyProfile
+            user={this.state.supplier}
+            onClick={(key) => this.setMainRenderedContent(key)}
+          />
         );
       case "editProfile":
         return <EditProfile />;
       case "changePassword":
-        return <ChangePassword />;
+        return <ChangePassword {...this.props} />;
       default:
-        return <SupplierDashboardMainContent />;
+        return <SupplierDashboardMainContent user={this.state.supplier} />;
+    }
+  }
+
+  checkSupplierPopulated() {
+    if (this.state.supplier) {
+      return (
+        <React.Fragment>
+          <SupplierSideBar
+            onClick={(key) => this.setMainRenderedContent(key)}
+            user={this.state.supplier}
+          />
+          <div className="main-content app-content">
+            <MainContentHeaderBar
+              onClick={(key) => this.setMainRenderedContent(key)}
+              user={this.state.supplier}
+            />
+            {this.renderMainComponent()}
+          </div>
+        </React.Fragment>
+      );
     }
   }
 
   render() {
     return (
       <body className="main-body app sidebar-mini">
-        {"add global loader tag here"}
         <div className="page active">
           <div
             className="app-sidebar__overlay active"
             data-toggle="sidebar"
           ></div>
-          <SupplierSideBar
-            onClick={(key) => this.setMainRenderedContent(key)}
-          />
-          <div className="main-content app-content">
-            <MainContentHeaderBar
-              onClick={(key) => this.setMainRenderedContent(key)}
-            />
-            {this.renderMainComponent()}
-          </div>
+          {this.checkSupplierPopulated()}
           <Footer />
         </div>
       </body>

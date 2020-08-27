@@ -27,15 +27,19 @@ class LoginForm extends Form {
       this.state.formData
     );
     if (error) return;
-    if (data.verified) {
+
+    //check whether registeration process completed or not
+    if (data.registerationCompleted) {
       const stake = data.profileType;
+      toast.success(data.message);
       this.props.history.push(`/${stake.toLowerCase()}`);
+      window.location.reload();
     } else {
-      toast.error("verify your email before proceeding further");
-      const { data, error } = await registerService.otpGeneration(
+      toast.error(data.message);
+      const { error: ex } = await registerService.otpGeneration(
         this.state.formData.email
       );
-      if (error) return;
+      if (ex) return;
       this.props.submitEmail(this.state.formData.email);
       this.props.history.push("/verify");
     }

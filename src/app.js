@@ -10,7 +10,6 @@ import CustomerApp from "./customerApp";
 import SupplierApp from "./supplierApp";
 import Playground from "./playground";
 import Tokencheck from "./tokencheck";
-import ProfileSetup from "./macroComponents/profileSetup";
 import OtpVerificationForm from "./macroComponents/otpVerification";
 
 class App extends Component {
@@ -43,7 +42,6 @@ class App extends Component {
           />
           <Route exact path="/customer" component={CustomerApp} />
           <Route exact path="/supplier" component={SupplierApp} />
-          <Route exact path={`/profileSetup`} component={ProfileSetup} />
           <Route path="/register" component={RegisterContainer} />
           <Route path="/forgotPassword" component={ForgotPasswordContainer} />
           <Route

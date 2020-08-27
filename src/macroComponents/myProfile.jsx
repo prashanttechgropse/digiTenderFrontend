@@ -1,7 +1,9 @@
 import React, { Component } from "react";
+import Label from "../microComponents/profileLabels";
 class MyProfile extends Component {
   state = {};
   render() {
+    const { user } = this.props;
     return (
       <div className="container-fluid">
         <div className="breadcrumb-header justify-content-between">
@@ -38,7 +40,9 @@ class MyProfile extends Component {
                       </div>
                       <div className="ml-auto">
                         <h5 className="tx-13">No Of Tenders</h5>
-                        <h2 className="mb-0 tx-22 mb-1 mt-1">20 Tenders</h2>
+                        <h2 className="mb-0 tx-22 mb-1 mt-1">
+                          {user.details.tenders.length}
+                        </h2>
                       </div>
                     </div>
                   </div>
@@ -110,26 +114,23 @@ class MyProfile extends Component {
                       <div className="media-list pb-0">
                         <div className="media">
                           <div className="media-body">
-                            <div>
-                              <label>First Name</label>{" "}
-                              <span className="tx-medium">Al Hamid</span>
-                            </div>
-                            <div>
-                              <label>Last Name</label>{" "}
-                              <span className="tx-medium">Saif</span>
-                            </div>
+                            <Label
+                              name="First Name"
+                              value={user.details.firstName}
+                            />
+                            <Label
+                              name="Last Name"
+                              value={user.details.lastName}
+                            />
                           </div>
                         </div>
                         <div className="media">
                           <div className="media-body">
-                            <div>
-                              <label>Email Id</label>{" "}
-                              <span className="tx-medium">hamid@gmail.com</span>
-                            </div>
-                            <div>
-                              <label>Contact No</label>{" "}
-                              <span className="tx-medium">+978 676768 678</span>
-                            </div>
+                            <Label name="Email Id" value={user.email} />
+                            <Label
+                              name="Contanct No"
+                              value={user.details.contactNo}
+                            />
                           </div>
                         </div>
                       </div>
@@ -140,70 +141,66 @@ class MyProfile extends Component {
                       <div className="media-list pb-0">
                         <div className="media">
                           <div className="media-body">
-                            <div>
-                              <label>Company Name</label>{" "}
-                              <span className="tx-medium">Hamid Pvt Ltd</span>
-                            </div>
-                            <div>
-                              <label>Registration No</label>{" "}
-                              <span className="tx-medium">686878787DF897</span>
-                            </div>
+                            <Label
+                              name="Company Name"
+                              value={user.details.companyName}
+                            />
+                            <Label
+                              name="Registration No"
+                              value={user.details.entityRegistrationNo}
+                            />
                           </div>
                         </div>
                         <div className="media">
                           <div className="media-body">
-                            <div>
-                              <label>VAT Registration</label>{" "}
-                              <span className="tx-medium">
-                                Registration Value
-                              </span>
-                            </div>
-                            <div>
-                              <label>VAT Number</label>{" "}
-                              <span className="tx-medium">VAT65767677</span>
-                            </div>
+                            <Label
+                              name="VAT Registration"
+                              value={
+                                user.details.vatRegistration === 1
+                                  ? "option1"
+                                  : "option2"
+                              }
+                            />
+                            <Label
+                              name="VAT Number"
+                              value={user.details.vatNumber}
+                            />
                           </div>
                         </div>
                         <div className="media">
                           <div className="media-body">
-                            <div>
-                              <label>Trading As</label>{" "}
-                              <span className="tx-medium">Trading Value</span>
-                            </div>
-                            <div>
-                              <label>Website</label>{" "}
-                              <span className="tx-medium">
-                                <a href="">https://www.hamid.com</a>
-                              </span>
-                            </div>
+                            <Label
+                              name="Trading As"
+                              value={user.details.tradingAs}
+                            />
+                            <Label
+                              name="Website"
+                              value={<a href="">{user.details.website}</a>}
+                            />
                           </div>
                         </div>
                         <div className="media">
                           <div className="media-body">
-                            <div>
-                              <label>Physical Address</label>{" "}
-                              <span className="tx-medium">
-                                DR565 MAll Road Dubai
-                              </span>
-                            </div>
-                            <div>
-                              <label>Postal Address</label>{" "}
-                              <span className="tx-medium">
-                                676 Hamilton City Newyork
-                              </span>
-                            </div>
+                            <Label
+                              name="Physical Address"
+                              value={user.details.physicalAddress}
+                            />
+                            <Label
+                              name="Postal Address"
+                              value={user.details.postalAddress}
+                            />
                           </div>
                         </div>
                         <div className="media mb-0">
                           <div className="media-body">
-                            <div>
-                              <label>Contact Person</label>{" "}
-                              <span className="tx-medium">Nadeem Khan</span>
-                            </div>
-                            <div>
-                              <label>Contact Number</label>{" "}
-                              <span className="tx-medium">+7878 667 67777</span>
-                            </div>
+                            <Label
+                              name="Contact Person"
+                              value={user.details.contactPerson}
+                            />
+                            <Label
+                              name="Contact Number"
+                              value={user.details.contactNo}
+                            />
                           </div>
                         </div>
                         <div className="media mb-0">

@@ -25,8 +25,8 @@ class ProfileDropDown extends Component {
                 />
               </div>
               <div className="ml-3 my-auto">
-                <h6>Al Hamid Saif</h6>
-                <span>Customer</span>
+                <h6>{this.props.user.details.firstName}</h6>
+                <span>{this.props.user.profileType}</span>
               </div>
             </div>
           </div>

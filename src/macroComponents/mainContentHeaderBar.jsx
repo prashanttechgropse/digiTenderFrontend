@@ -52,7 +52,10 @@ class MainContentHeaderBar extends Component {
                   </svg>
                 </a>
               </div>
-              <ProfileDropDown onClick={(key) => this.props.onClick(key)} />
+              <ProfileDropDown
+                user={this.props.user}
+                onClick={(key) => this.props.onClick(key)}
+              />
             </div>
           </div>
         </div>

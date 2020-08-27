@@ -34,6 +34,21 @@ export async function setUpProfileService(formData) {
   }
 }
 
+export async function uploadBankDetails(formData) {
+  try {
+    const { data } = await httpService.post(
+      `${apiendpoint}/addBankDetails`,
+      formData
+    );
+    toast.success(data.message);
+    if (!data.message) toast.success(data);
+    return { data };
+  } catch (error) {
+    if (error.response) toast.error(error.response.data);
+    return { error };
+  }
+}
+
 export async function authentication(formData) {
   try {
     const { data, headers } = await httpService.post(`${apiendpoint}/login`, {
@@ -42,7 +57,7 @@ export async function authentication(formData) {
     });
     await localStorage.removeItem("token");
     await localStorage.setItem("token", headers["x-auth-token"]);
-    toast.success(data.message);
+
     if (!data.message) toast.success(data);
     return { data };
   } catch (error) {
@@ -88,6 +103,21 @@ export async function resetPassword(formData) {
   try {
     const { data } = await httpService.post(
       `${apiendpoint}/resetPassword`,
+      formData
+    );
+    toast.success(data.message);
+    if (!data.message) toast.success(data);
+    return { data };
+  } catch (error) {
+    if (error.response) toast.error(error.response.data);
+    return { error };
+  }
+}
+
+export async function changePassword(formData) {
+  try {
+    const { data } = await httpService.post(
+      `${apiendpoint}/changePassword`,
       formData
     );
     toast.success(data.message);

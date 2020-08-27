@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Form from "./form/form";
 import Joi from "joi-browser";
 import * as registerServices from "../services/registerServices";
-import httpService from "../services/httpService";
+
 class ResetPassword extends Form {
   state = {
     formData: {
