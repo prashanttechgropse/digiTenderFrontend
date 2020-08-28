@@ -4,7 +4,7 @@ import Joi from "joi-browser";
 import DisplayTenderItemList from "../../microComponents/displayTenderItemList";
 import AddItemCard from "../../microComponents/addItemCard";
 import UploadTenderTermsAndConditions from "../../microComponents/uploadTenderTermsAndConditions";
-import TenderPublishModal from "../../microComponents/tenderPublishModal";
+
 import AddTenderDetailsCard from "../../microComponents/addTenderDetailsCard";
 
 class CustomerCreateTender extends Component {
@@ -27,7 +27,16 @@ class CustomerCreateTender extends Component {
     tenderBudgetAmount: Joi.string().required(),
     tenderDeliveryLocation: Joi.string().required(),
     isPublished: Joi.boolean().required(),
-    itemList: Joi.array(),
+    itemList: Joi.array()
+      .items(
+        Joi.object({
+          selectCategory: Joi.string().required(),
+          itemName: Joi.string().required(),
+          quantityOfItem: Joi.string().required(),
+          unitOfMeasure: Joi.string().required(),
+        })
+      )
+      .min(1),
   };
 
   updateTenderDetails = (tenderDetails, errors) => {
@@ -51,11 +60,55 @@ class CustomerCreateTender extends Component {
     this.setState({ formData });
   };
 
-  validateBeforeUpload() {
-    const { error, result } = Joi.validate(this.state.formData, this.schema);
-  }
+  uploadFile = async (file) => {
+    await this.setState({ file });
+  };
 
-  uploadTender = () => {};
+  validateOnSubmit = () => {
+    const result = Joi.validate(this.state.formData, this.schema, {
+      abortEarly: false,
+    });
+    if (
+      !result.error &&
+      this.state.file !== null &&
+      this.state.file !== undefined
+    )
+      return null;
+    const errors = {};
+    if (result.error) {
+      for (let item of result.error.details) {
+        errors[item.path[0]] = item.message;
+      }
+      return errors;
+    }
+    if (this.state.file === null || this.state.file === undefined) {
+      const errors = {};
+      errors.file = "upload file";
+      return errors;
+    }
+  };
+
+  handleSubmit = async (e) => {
+    e.preventDefault();
+    const errors = this.validateOnSubmit();
+    await this.setState({ errors: errors || {} });
+
+    if (errors) return;
+
+    await this.doSubmit();
+  };
+
+  published = async () => {
+    let formData = { ...this.state.formData };
+    formData.isPublished = true;
+    this.setState({ formData });
+  };
+
+  saveForLater = async () => {
+    let formData = { ...this.state.formData };
+    formData.isPublished = false;
+    this.setState({ formData });
+  };
 
   render() {
     const { formData } = this.state;
@@ -89,10 +142,47 @@ class CustomerCreateTender extends Component {
               />
             )}
 
-            <UploadTenderTermsAndConditions onUpload={this.uploadTender} />
+            <UploadTenderTermsAndConditions
+              onUpload={(file) => this.uploadFile(file)}
+              published={this.published}
+              saveForLater={this.saveForLater}
+              disableButton={this.validateOnSubmit()}
+            />
           </div>
         </div>
-        <TenderPublishModal />
+        <div className="modal" id="publishmodal">
+          <div className="modal-dialog modal-dialog-centered" role="document">
+            <div className="modal-content tx-size-sm">
+              <div className="modal-body tx-center pd-y-20 pd-x-20">
+                <button
+                  aria-label="Close"
+                  className="close"
+                  data-dismiss="modal"
+                  type="button"
+                >
+                  <span aria-hidden="true">×</span>
+                </button>
+                <i className="fa fa-upload tx-100 tx-orange lh-1 mg-t-20 d-inline-block"></i>
+                <h4 className="tx-orange tx-semibold mg-b-20">
+                  Are you sure u want to publish?
+                </h4>
+                <p className="mg-b-20 mg-x-20">
+                  There are many variations of passages of Lorem Ipsum
+                  available, but the majority have suffered alteration.
+                </p>
+                <button
+                  aria-label="Close"
+                  className="btn ripple btn-success pd-x-25"
+                  data-dismiss="modal"
+                  type="button"
+                  disabled={this.validateOnSubmit()}
+                >
+                  Continue
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

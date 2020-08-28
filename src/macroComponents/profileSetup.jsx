@@ -96,7 +96,7 @@ class ProfileSetup extends Form {
         this.state.selectedFile2.name
       );
     }
-    console.log(formData);
+
     const { data, error } = await registerService.setUpProfileService(formData);
     if (!data.bankDetailsStatus) {
       this.props.submitProfileDetails(this.state.formData);
