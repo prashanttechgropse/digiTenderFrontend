@@ -21,21 +21,25 @@ import httpService from "./services/httpService";
 import { toast } from "react-toastify";
 
 class CustomerApp extends Component {
-  state = { customer: {}, mainRenderedContent: "dashboard" };
+  state = { customer: null, mainRenderedContent: "dashboard" };
+
+  async componentDidMount() {
+    try {
+      const { data } = await httpService.get(`${config.apiendpoint}/myData`);
+      if (data.user.profileType.toLowerCase() === "customer") {
+        const customer = data.user;
+        await this.setState({ customer: customer });
+        toast.success(data.message);
+      } else this.props.history.push(`/${data.user.profileType}`);
+    } catch (error) {
+      toast.error(error.response.data);
+      this.props.history.push(`/login`);
+    }
+  }
 
   setMainRenderedContent = (key) => {
     this.setState({ mainRenderedContent: key });
   };
-  async componentDidMount() {
-    try {
-      const { data } = await httpService.get(`${config.apiendpoint}/myData`);
-      toast.success(data.message);
-      const customer = data.customer;
-      await this.setState({ customer: customer });
-    } catch (error) {
-      toast.error(error.response.data);
-    }
-  }
 
   renderMainComponent() {
     switch (this.state.mainRenderedContent) {
@@ -63,14 +67,22 @@ class CustomerApp extends Component {
         return <TermsConditions />;
       case "profile":
         return (
-          <MyProfile onClick={(key) => this.setMainRenderedContent(key)} />
+          <MyProfile
+            onClick={(key) => this.setMainRenderedContent(key)}
+            user={this.state.customer}
+          />
         );
       case "editProfile":
         return <EditProfile />;
       case "changePassword":
         return <ChangePassword {...this.props} />;
+      case "signOut": {
+        localStorage.removeItem("token");
+        return this.props.history.push("/login");
+      }
+
       default:
-        return <CustomerDashboardMainContent />;
+        return <CustomerDashboardMainContent user={this.state.customer} />;
     }
   }
 
@@ -83,7 +95,7 @@ class CustomerApp extends Component {
             data-toggle="sidebar"
           ></div>
           <CustomerSidebar
-            user={this.state.user}
+            user={this.state.customer}
             onClick={(key) => this.setMainRenderedContent(key)}
           />
           <div className="main-content app-content">
@@ -101,7 +113,6 @@ class CustomerApp extends Component {
   render() {
     return (
       <body className="main-body app sidebar-mini">
-        {"add global loader tag here"}
         <div className="page active">
           {this.checkCustomerPopulated()}
           <Footer />

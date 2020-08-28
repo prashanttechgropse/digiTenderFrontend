@@ -2,13 +2,14 @@ import React, { Component } from "react";
 class CustomerDashboardMainContent extends Component {
   state = {};
   render() {
+    const { user } = this.props;
     return (
       <div className="container-fluid">
         <div className="breadcrumb-header justify-content-between">
           <div className="left-content">
             <div>
               <h2 className="main-content-title tx-24 mg-b-1 mg-b-lg-1">
-                Hi, Al Hamid Saif !
+                {user.details.firstName}
               </h2>
               <p className="mg-b-0">Welcome Back to Digibids Platform.</p>
             </div>
@@ -25,11 +26,9 @@ class CustomerDashboardMainContent extends Component {
                   <div className="d-flex">
                     <div className="">
                       <h4 className="tx-20 font-weight-bold mb-1 text-white">
-                        20 Tenders
+                        {user.details.tenders.length}
                       </h4>
-                      <p className="mb-0 tx-12 text-white op-7">
-                        Compared to last month
-                      </p>
+                      <p className="mb-0 tx-12 text-white op-7">0</p>
                     </div>
                     <span className="float-right my-auto ml-auto">
                       <i className="fa fa-arrow-circle-up text-white"></i>

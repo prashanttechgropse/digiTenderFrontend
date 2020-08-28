@@ -205,22 +205,23 @@ class MyProfile extends Component {
                         </div>
                         <div className="media mb-0">
                           <div className="media-body">
-                            <div>
-                              <label>Document uploaded by Suplier</label>{" "}
-                              <span className="tx-medium">
+                            <Label
+                              name="Document uploaded by Suplier"
+                              value={
                                 <a href="">
                                   <i className="fa fa-file"></i> Download File
                                 </a>
-                              </span>
-                            </div>
-                            <div>
-                              <label>VAT Document uploaded by Suplier</label>{" "}
-                              <span className="tx-medium">
+                              }
+                            />
+
+                            <Label
+                              name="VAT Document uploaded by Suplier"
+                              value={
                                 <a href="">
                                   <i className="fa fa-file"></i> Download File
                                 </a>
-                              </span>
-                            </div>
+                              }
+                            />
                           </div>
                         </div>
                       </div>
@@ -231,38 +232,38 @@ class MyProfile extends Component {
                       <div className="media-list pb-0">
                         <div className="media">
                           <div className="media-body">
-                            <div>
-                              <label>Bank Name</label>{" "}
-                              <span className="tx-medium">ICICI Bank</span>
-                            </div>
-                            <div>
-                              <label>Account No</label>{" "}
-                              <span className="tx-medium">67676768686</span>
-                            </div>
+                            <Label
+                              name="Bank Name"
+                              value={user.bankDetails.bankName}
+                            />
+                            <Label
+                              name="Account No"
+                              value={user.bankDetails.accountNo}
+                            />
                           </div>
                         </div>
                         <div className="media">
                           <div className="media-body">
-                            <div>
-                              <label>Account Type</label>{" "}
-                              <span className="tx-medium">Current Account</span>
-                            </div>
-                            <div>
-                              <label>Branch Code</label>{" "}
-                              <span className="tx-medium">ICICI87878</span>
-                            </div>
+                            <Label
+                              name="Account Type"
+                              value={user.bankDetails.accountType}
+                            />
+                            <Label
+                              name="Branch Code"
+                              value={user.bankDetails.branchCode}
+                            />
                           </div>
                         </div>
                         <div className="media">
                           <div className="media-body">
-                            <div>
-                              <label>Upload Document</label>{" "}
-                              <span className="tx-medium">
+                            <Label
+                              name="Upload Document"
+                              value={
                                 <a href="">
                                   <i className="fa fa-file"></i> Download File
                                 </a>
-                              </span>
-                            </div>
+                              }
+                            />
                           </div>
                         </div>
                       </div>

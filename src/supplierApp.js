@@ -28,11 +28,14 @@ class SupplierApp extends Component {
   async componentDidMount() {
     try {
       const { data } = await httpService.get(`${config.apiendpoint}/myData`);
-      toast.success(data.message);
-      const supplier = data.user;
-      await this.setState({ supplier: supplier });
+      if (data.user.profileType.toLowerCase() === "supplier") {
+        const supplier = data.user;
+        toast.success(data.message);
+        await this.setState({ supplier: supplier });
+      } else this.props.history.push(`/${data.user.profileType}`);
     } catch (error) {
       toast.error(error.response.data);
+      this.props.history.push(`/login`);
     }
   }
 
@@ -75,6 +78,10 @@ class SupplierApp extends Component {
         return <EditProfile />;
       case "changePassword":
         return <ChangePassword {...this.props} />;
+      case "signOut": {
+        localStorage.removeItem("token");
+        return this.props.history.push("/login");
+      }
       default:
         return <SupplierDashboardMainContent user={this.state.supplier} />;
     }
