@@ -36,6 +36,10 @@ class LoginForm extends Form {
       window.location.reload();
     } else {
       toast.error(data.message);
+      if (!data.bankDetailsStatus) {
+        this.props.history.push("/register/uploadBankDetails");
+        return;
+      }
       const { error: ex } = await registerService.otpGeneration(
         this.state.formData.email
       );

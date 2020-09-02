@@ -128,3 +128,23 @@ export async function changePassword(formData) {
     return { error };
   }
 }
+
+export async function adminAuthentication(formData) {
+  try {
+    const { data, headers } = await httpService.post(
+      `${apiendpoint}/admin/login`,
+      {
+        email: formData.email,
+        password: formData.password,
+      }
+    );
+    await localStorage.removeItem("token");
+    await localStorage.setItem("token", headers["x-auth-token"]);
+
+    if (!data.message) toast.success(data);
+    return { data };
+  } catch (error) {
+    if (error.response) toast.error(error.response.data);
+    return { error };
+  }
+}

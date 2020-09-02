@@ -11,6 +11,8 @@ import SupplierApp from "./supplierApp";
 import Playground from "./playground";
 import Tokencheck from "./tokencheck";
 import OtpVerificationForm from "./macroComponents/otpVerification";
+import AdminLogIn from "./adminComponents/adminLoginForm";
+import AdminApp from "./AdminApp";
 
 class App extends Component {
   state = {
@@ -28,6 +30,7 @@ class App extends Component {
       <React.Fragment>
         <ToastContainer />
         <Switch>
+          <Route exact path="/adminLogin" component={AdminLogIn} />
           <Route exact path="/tokenCheck" component={Tokencheck} />
           <Route exact path="/upload" component={Playground} />
           <Route
@@ -40,7 +43,8 @@ class App extends Component {
               />
             )}
           />
-          <Route exact path="/customer" component={CustomerApp} />
+          <Route path="/customer" component={CustomerApp} />
+          <Route path="/admin" component={AdminApp} />
           <Route exact path="/supplier" component={SupplierApp} />
           <Route path="/register" component={RegisterContainer} />
           <Route path="/forgotPassword" component={ForgotPasswordContainer} />

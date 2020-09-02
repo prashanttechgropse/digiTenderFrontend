@@ -1,6 +1,47 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 class CustomerTenderList extends Component {
   state = {};
+
+  renderTenderTable = () => {
+    let srNo = 0;
+    let styleOfBadge;
+    let tenderList = this.props.tenderList.filter(
+      (tender) => tender.isPublished === true
+    );
+    return tenderList.map((tender) => {
+      srNo++;
+      if (tender.status === "paid") styleOfBadge = "success";
+      else if (tender.status === "cancelled") styleOfBadge = "danger";
+      else if (tender.status === "awarded") styleOfBadge = "primary";
+      else {
+        styleOfBadge = "warning";
+      }
+      return (
+        <tr role="row">
+          <td>{`#000${srNo}`}</td>
+          <td>
+            <Link
+              to={"/customer/tenderDetails"}
+              onClick={() => this.props.tenderClicked(tender._id)}
+            >
+              {tender._id}
+            </Link>
+          </td>
+          <td>{tender.budgetAmount}</td>
+          <td>{tender.creationDate}</td>
+          <td>{tender.deliveryDate}</td>
+          <td>{tender.closingDate}</td>
+          <td>
+            <span className={`badge badge-${styleOfBadge} f-14`}>
+              {tender.status}
+            </span>
+          </td>
+        </tr>
+      );
+    });
+  };
+
   render() {
     return (
       <div className="container-fluid">
@@ -15,13 +56,13 @@ class CustomerTenderList extends Component {
           </div>
           <div className="d-flex my-xl-auto right-content">
             <div className="pr-1 mb-3 mb-xl-0">
-              <a
-                href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/create-tender"
+              <Link
+                to={`/customer/createTender`}
                 type="button"
                 className="btn btn-primary "
               >
                 <i className="fa fa-plus"></i> Create New Tender
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -63,76 +104,7 @@ class CustomerTenderList extends Component {
                               <th>Status</th>
                             </tr>
                           </thead>
-                          <tbody>
-                            <tr role="row">
-                              <td>#0001</td>
-                              <td>
-                                <a href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/tender-detail">
-                                  #T686868
-                                </a>
-                              </td>
-                              <td>5000.00 USD</td>
-                              <td>10-07-2020</td>
-                              <td>20-09-2020</td>
-                              <td>30-09-2020</td>
-                              <td>
-                                <span className="badge badge-primary f-14">
-                                  Awarded
-                                </span>
-                              </td>
-                            </tr>
-                            <tr role="row">
-                              <td>#0002</td>
-                              <td>
-                                <a href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/tender-detail">
-                                  #T686868
-                                </a>
-                              </td>
-                              <td>5000.00 USD</td>
-                              <td>10-07-2020</td>
-                              <td>20-09-2020</td>
-                              <td>30-09-2020</td>
-                              <td>
-                                <span className="badge badge-success f-14">
-                                  Paid
-                                </span>
-                              </td>
-                            </tr>
-                            <tr role="row">
-                              <td>#0003</td>
-                              <td>
-                                <a href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/tender-detail">
-                                  #T686868
-                                </a>
-                              </td>
-                              <td>5000.00 USD</td>
-                              <td>10-07-2020</td>
-                              <td>20-09-2020</td>
-                              <td>30-09-2020</td>
-                              <td>
-                                <span className="badge badge-warning f-14">
-                                  In Process
-                                </span>
-                              </td>
-                            </tr>
-                            <tr role="row">
-                              <td>#0004</td>
-                              <td>
-                                <a href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/tender-detail">
-                                  #T686868
-                                </a>
-                              </td>
-                              <td>5000.00 USD</td>
-                              <td>10-07-2020</td>
-                              <td>20-09-2020</td>
-                              <td>30-09-2020</td>
-                              <td>
-                                <span className="badge badge-danger f-14">
-                                  Cancelled
-                                </span>
-                              </td>
-                            </tr>
-                          </tbody>
+                          <tbody>{this.renderTenderTable()}</tbody>
                         </table>
                       </div>
                     </div>

@@ -10,9 +10,9 @@ class DisplayTenderItemList extends Component {
       return (
         <tr role="row">
           <td>{`#000${itemNo}`}</td>
-          <td>{item.selectCategory}</td>
-          <td>{item.itemName} </td>
-          <td>{item.quantityOfItem}</td>
+          <td>{item.category}</td>
+          <td>{item.name} </td>
+          <td>{item.quantity}</td>
           <td>{item.unitOfMeasure}</td>
           <td>
             <button
@@ -48,7 +48,7 @@ class DisplayTenderItemList extends Component {
                     <thead>
                       <tr role="row">
                         <th>Sr no</th>
-                        <th>Catehory</th>
+                        <th>Category</th>
                         <th>Item Name</th>
                         <th>Quantity</th>
                         <th>Unit of Meassure</th>

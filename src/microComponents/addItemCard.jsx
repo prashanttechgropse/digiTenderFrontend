@@ -4,18 +4,18 @@ import Joi from "joi-browser";
 class AddItemCard extends Form {
   state = {
     formData: {
-      selectCategory: "",
-      itemName: "",
-      quantityOfItem: "",
+      category: "",
+      name: "",
+      quantity: "",
       unitOfMeasure: "",
     },
     errors: {},
   };
 
   schema = {
-    selectCategory: Joi.string().required(),
-    itemName: Joi.string().required(),
-    quantityOfItem: Joi.string().required(),
+    category: Joi.string().required(),
+    name: Joi.string().required(),
+    quantity: Joi.string().required(),
     unitOfMeasure: Joi.string().required(),
   };
 
@@ -31,7 +31,7 @@ class AddItemCard extends Form {
             <div className="main-signup-header">
               <div className="row">
                 <div className="col-md-6">
-                  {this.renderSelect("selectCategory", "Select Category", [
+                  {this.renderSelect("category", "Select Category", [
                     {
                       _id: "mobile",
                       name: "Mobile",
@@ -40,12 +40,12 @@ class AddItemCard extends Form {
                   ])}
                 </div>
                 <div className="col-md-6">
-                  {this.renderInput("itemName", "Item Name")}
+                  {this.renderInput("name", "Item Name")}
                 </div>
               </div>
               <div className="row">
                 <div className="col-md-6">
-                  {this.renderInput("quantityOfItem", "Add Quantity for Item")}
+                  {this.renderInput("quantity", "Add Quantity for Item")}
                 </div>
                 <div className="col-md-6">
                   {this.renderInput("unitOfMeasure", "Unit of Meassure")}

@@ -6,14 +6,16 @@ import AddItemCard from "../../microComponents/addItemCard";
 import UploadTenderTermsAndConditions from "../../microComponents/uploadTenderTermsAndConditions";
 
 import AddTenderDetailsCard from "../../microComponents/addTenderDetailsCard";
+import createaTender from "../../services/httpService.js";
+import { createTender } from "../../services/tenderService";
 
 class CustomerCreateTender extends Component {
   state = {
     formData: {
-      tenderClosingDate: "",
-      tenderDeliveryDate: "",
-      tenderDeliveryLocation: "",
-      tenderBudgetAmount: "",
+      closingDate: "",
+      deliveryDate: "",
+      deliveryLocation: "",
+      budgetAmount: "",
       isPublished: false,
       itemList: [],
     },
@@ -22,17 +24,17 @@ class CustomerCreateTender extends Component {
   };
 
   schema = {
-    tenderClosingDate: Joi.date().required(),
-    tenderDeliveryDate: Joi.date().required(),
-    tenderBudgetAmount: Joi.string().required(),
-    tenderDeliveryLocation: Joi.string().required(),
+    closingDate: Joi.date().required(),
+    deliveryDate: Joi.date().required(),
+    budgetAmount: Joi.number().required(),
+    deliveryLocation: Joi.string().required(),
     isPublished: Joi.boolean().required(),
     itemList: Joi.array()
       .items(
         Joi.object({
-          selectCategory: Joi.string().required(),
-          itemName: Joi.string().required(),
-          quantityOfItem: Joi.string().required(),
+          category: Joi.string().required(),
+          name: Joi.string().required(),
+          quantity: Joi.number().required(),
           unitOfMeasure: Joi.string().required(),
         })
       )
@@ -88,16 +90,6 @@ class CustomerCreateTender extends Component {
     }
   };
 
-  handleSubmit = async (e) => {
-    e.preventDefault();
-    const errors = this.validateOnSubmit();
-    await this.setState({ errors: errors || {} });
-
-    if (errors) return;
-
-    await this.doSubmit();
-  };
-
   published = async () => {
     let formData = { ...this.state.formData };
     formData.isPublished = true;
@@ -108,6 +100,37 @@ class CustomerCreateTender extends Component {
     let formData = { ...this.state.formData };
     formData.isPublished = false;
     this.setState({ formData });
+    this.handleSubmit();
+  };
+
+  handleSubmit = async (e) => {
+    if (e !== undefined) {
+      e.preventDefault();
+    }
+    const errors = this.validateOnSubmit();
+    await this.setState({ errors: errors || {} });
+
+    if (errors) return;
+
+    await this.doSubmit();
+  };
+
+  doSubmit = async () => {
+    const formData = new FormData();
+    for (const item in this.state.formData) {
+      if (item === "itemList") {
+        formData.append(item, JSON.stringify(this.state.formData[item]));
+      } else formData.append(item, this.state.formData[item]);
+    }
+
+    formData.append("myFile1", this.state.file, this.state.file.name);
+
+    const { data, error } = await createTender(formData);
+    if (data) {
+      this.props.history.push("/customer");
+      window.location.reload();
+    }
+    if (error) return;
   };
 
   render() {
@@ -175,6 +198,7 @@ class CustomerCreateTender extends Component {
                   className="btn ripple btn-success pd-x-25"
                   data-dismiss="modal"
                   type="button"
+                  onClick={this.handleSubmit}
                   disabled={this.validateOnSubmit()}
                 >
                   Continue

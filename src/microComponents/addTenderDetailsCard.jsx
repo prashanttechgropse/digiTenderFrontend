@@ -4,18 +4,18 @@ import Joi from "joi-browser";
 class AddTenderDetailsCard extends Form {
   state = {
     formData: {
-      tenderClosingDate: "",
-      tenderDeliveryDate: "",
-      tenderDeliveryLocation: "",
-      tenderBudgetAmount: "",
+      closingDate: "",
+      deliveryDate: "",
+      deliveryLocation: "",
+      budgetAmount: "",
     },
     errors: {},
   };
   schema = {
-    tenderClosingDate: Joi.date().required(),
-    tenderDeliveryDate: Joi.date().required(),
-    tenderBudgetAmount: Joi.string().required(),
-    tenderDeliveryLocation: Joi.string().required(),
+    closingDate: Joi.date().required(),
+    deliveryDate: Joi.date().required(),
+    budgetAmount: Joi.string().required(),
+    deliveryLocation: Joi.string().required(),
   };
 
   handleChange = async (e) => {
@@ -51,29 +51,26 @@ class AddTenderDetailsCard extends Form {
               <div className="row">
                 <div className="col-md-4">
                   {this.renderInput(
-                    "tenderClosingDate",
+                    "closingDate",
                     "Tender Closing Date",
                     "date"
                   )}
                 </div>
                 <div className="col-md-4">
                   {this.renderInput(
-                    "tenderDeliveryDate",
+                    "deliveryDate",
                     "Tender Delivery Date",
                     "date"
                   )}
                 </div>
                 <div className="col-md-4">
-                  {this.renderInput(
-                    "tenderBudgetAmount",
-                    "Tender Budget Amount"
-                  )}
+                  {this.renderInput("budgetAmount", "Tender Budget Amount")}
                 </div>
               </div>
               <div className="row">
                 <div className="col-md-12">
                   {this.renderInput(
-                    "tenderDeliveryLocation",
+                    "deliveryLocation",
                     "Tender Delivery Location"
                   )}
                 </div>

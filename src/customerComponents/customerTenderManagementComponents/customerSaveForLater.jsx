@@ -1,6 +1,38 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 class CustomerSaveForLater extends Component {
   state = {};
+
+  renderTenderTable = () => {
+    let srNo = 0;
+    let tenderList = this.props.tenderList.filter(
+      (tender) => tender.isPublished === false
+    );
+    return tenderList.map((tender) => {
+      srNo++;
+      return (
+        <tr role="row">
+          <td>{`#000${srNo}`}</td>
+          <td>
+            <Link
+              to={"/customer/tenderDetails"}
+              onClick={() => this.props.tenderClicked(tender._id)}
+            >
+              {tender._id}
+            </Link>
+          </td>
+          <td>{tender.budgetAmount}</td>
+          <td>{tender.creationDate}</td>
+          <td>{tender.deliveryDate}</td>
+          <td>{tender.closingDate}</td>
+          <td>
+            <span className={`badge badge-primary f-14`}>{tender.status}</span>
+          </td>
+        </tr>
+      );
+    });
+  };
+
   render() {
     return (
       <div className="container-fluid">
@@ -15,13 +47,13 @@ class CustomerSaveForLater extends Component {
           </div>
           <div className="d-flex my-xl-auto right-content">
             <div className="pr-1 mb-3 mb-xl-0">
-              <a
-                href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/create-tender"
+              <Link
                 type="button"
                 className="btn btn-primary "
+                to="/customer/createTender"
               >
                 <i className="fa fa-plus"></i> Create New Tender
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -63,76 +95,7 @@ class CustomerSaveForLater extends Component {
                               <th>Status</th>
                             </tr>
                           </thead>
-                          <tbody>
-                            <tr role="row">
-                              <td>#0001</td>
-                              <td>
-                                <a href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/save-for-later-tender-detail">
-                                  #T686868
-                                </a>
-                              </td>
-                              <td>5000.00 USD</td>
-                              <td>10-07-2020</td>
-                              <td>20-09-2020</td>
-                              <td>30-09-2020</td>
-                              <td>
-                                <span className="badge badge-primary f-14">
-                                  Pending
-                                </span>
-                              </td>
-                            </tr>
-                            <tr role="row">
-                              <td>#0002</td>
-                              <td>
-                                <a href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/save-for-later-tender-detail">
-                                  #T686868
-                                </a>
-                              </td>
-                              <td>5000.00 USD</td>
-                              <td>10-07-2020</td>
-                              <td>20-09-2020</td>
-                              <td>30-09-2020</td>
-                              <td>
-                                <span className="badge badge-primary f-14">
-                                  Pending
-                                </span>
-                              </td>
-                            </tr>
-                            <tr role="row">
-                              <td>#0003</td>
-                              <td>
-                                <a href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/save-for-later-tender-detail">
-                                  #T686868
-                                </a>
-                              </td>
-                              <td>5000.00 USD</td>
-                              <td>10-07-2020</td>
-                              <td>20-09-2020</td>
-                              <td>30-09-2020</td>
-                              <td>
-                                <span className="badge badge-primary f-14">
-                                  Pending
-                                </span>
-                              </td>
-                            </tr>
-                            <tr role="row">
-                              <td>#0004</td>
-                              <td>
-                                <a href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/save-for-later-tender-detail">
-                                  #T686868
-                                </a>
-                              </td>
-                              <td>5000.00 USD</td>
-                              <td>10-07-2020</td>
-                              <td>20-09-2020</td>
-                              <td>30-09-2020</td>
-                              <td>
-                                <span className="badge badge-primary f-14">
-                                  Pending
-                                </span>
-                              </td>
-                            </tr>
-                          </tbody>
+                          <tbody>{this.renderTenderTable()}</tbody>
                         </table>
                       </div>
                     </div>

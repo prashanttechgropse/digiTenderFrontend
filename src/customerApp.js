@@ -19,21 +19,33 @@ import CustomerCreateReceiver from "./customerComponents/customerAdminFunctionCo
 import config from "./config.json";
 import httpService from "./services/httpService";
 import { toast } from "react-toastify";
+import { Route } from "react-router-dom";
+import CustomerTenderDetails from "./customerComponents/customerTenderManagementComponents/customerTenderDetails";
 
 class CustomerApp extends Component {
-  state = { customer: null, mainRenderedContent: "dashboard" };
+  state = {
+    customer: null,
+    mainRenderedContent: "",
+    displayTenderDetails: null,
+  };
 
   async componentDidMount() {
     try {
       const { data } = await httpService.get(`${config.apiendpoint}/myData`);
-      if (data.user.profileType.toLowerCase() === "customer") {
-        const customer = data.user;
-        await this.setState({ customer: customer });
-        toast.success(data.message);
-      } else this.props.history.push(`/${data.user.profileType}`);
+      if (data) {
+        if (data.user.profileType.toLowerCase() === "customer") {
+          const customer = data.user;
+          await this.setState({ customer: customer });
+          toast.success(data.message);
+          return;
+        } else {
+          this.props.history.push(`/${data.user.profileType}`);
+          return;
+        }
+      }
     } catch (error) {
-      toast.error(error.response.data);
-      this.props.history.push(`/login`);
+      toast.error(error.message);
+      return;
     }
   }
 
@@ -41,52 +53,23 @@ class CustomerApp extends Component {
     this.setState({ mainRenderedContent: key });
   };
 
-  renderMainComponent() {
+  signOut() {
     switch (this.state.mainRenderedContent) {
-      case "deliveryNotes":
-        return <CustomerDeliveryNoteMainContent />;
-      case "createTender":
-        return <CustomerCreateTender />;
-      case "tenderList":
-        return <CustomerTenderList />;
-      case "saveForLater":
-        return <CustomerSaveForLater />;
-      case "transactionList":
-        return <CustomerTransactionList />;
-      case "customerReceiverList":
-        return (
-          <CustomerReceiverlist
-            onClick={(key) => this.setMainRenderedContent(key)}
-          />
-        );
-      case "createReceiver":
-        return <CustomerCreateReceiver />;
-      case "helpSupport":
-        return <HelpSupport />;
-      case "termsConditions":
-        return <TermsConditions />;
-      case "profile":
-        return (
-          <MyProfile
-            onClick={(key) => this.setMainRenderedContent(key)}
-            user={this.state.customer}
-          />
-        );
-      case "editProfile":
-        return <EditProfile />;
-      case "changePassword":
-        return <ChangePassword {...this.props} />;
       case "signOut": {
         localStorage.removeItem("token");
         return this.props.history.push("/login");
       }
-
-      default:
-        return <CustomerDashboardMainContent user={this.state.customer} />;
     }
   }
 
-  checkCustomerPopulated() {
+  displayTenderDetails = (tenderId) => {
+    const displayTenderDetails = this.state.customer.details.tenders.find(
+      (tender) => tender._id == tenderId
+    );
+    this.setState({ displayTenderDetails });
+  };
+
+  checkCustomerPopulated = () => {
     if (this.state.customer) {
       return (
         <React.Fragment>
@@ -103,12 +86,78 @@ class CustomerApp extends Component {
               user={this.state.customer}
               onClick={(key) => this.setMainRenderedContent(key)}
             />
-            {this.renderMainComponent()}
+            <Route exact path="/customer/createTender">
+              <CustomerCreateTender {...this.props} />
+            </Route>
+            <Route exact path="/customer/myProfile">
+              <MyProfile
+                onClick={(key) => this.setMainRenderedContent(key)}
+                user={this.state.customer}
+              />
+            </Route>
+            <Route exact path="/customer/tenderList">
+              <CustomerTenderList
+                tenderList={this.state.customer.details.tenders}
+                tenderClicked={(tenderId) =>
+                  this.displayTenderDetails(tenderId)
+                }
+              />
+              ;
+            </Route>
+            <Route exact path="/customer/saveForLater">
+              <CustomerSaveForLater
+                tenderList={this.state.customer.details.tenders}
+                tenderClicked={(tenderId) =>
+                  this.displayTenderDetails(tenderId)
+                }
+              />
+            </Route>
+            <Route exact path="/customer/changePassword">
+              <ChangePassword />;
+            </Route>
+            <Route exact path="/customer/transactionList">
+              <CustomerTransactionList />
+            </Route>
+            <Route exact path="/customer/tenderDetails">
+              <CustomerTenderDetails
+                tender={this.state.displayTenderDetails}
+                {...this.props}
+              />
+            </Route>
+            <Route exact path="/customer/termsConditions">
+              <TermsConditions />
+            </Route>
+            <Route exact path="/customer/editProfile">
+              <EditProfile />
+            </Route>
+            <Route exact path="/customer/helpSupport">
+              <HelpSupport />;
+            </Route>
+            <Route exact path="/customer/createReceiver">
+              <CustomerCreateReceiver />
+            </Route>
+            <Route exact path="/customer/deliveryNotes">
+              <CustomerDeliveryNoteMainContent />
+            </Route>
+            <Route exact path="/customer/customerReceiverList">
+              <CustomerReceiverlist
+                onClick={(key) => this.setMainRenderedContent(key)}
+              />
+            </Route>
+            <Route exact path="/customer">
+              <CustomerDashboardMainContent
+                user={this.state.customer}
+                tenderClicked={(tenderId) =>
+                  this.displayTenderDetails(tenderId)
+                }
+              />
+            </Route>
+            {this.signOut()}
           </div>
         </React.Fragment>
       );
     }
-  }
+  };
 
   render() {
     return (

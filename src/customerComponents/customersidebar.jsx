@@ -20,22 +20,18 @@ class CustomerSidebar extends Component {
       return (
         <ul>
           <li className="slide-item side-menu__item">
-            <Link onClick={() => this.props.onClick("customerReceiverList")}>
-              Receiver List
-            </Link>
+            <Link to="/customer/customerReceiverList">Receiver List</Link>
           </li>
           <li className="slide-item side-menu__item">
-            <Link onClick={() => this.props.onClick("createReceiver")}>
-              Create Receiver
-            </Link>
+            <Link to="/customer/createReceiver">Create Receiver</Link>
           </li>
           <li className="slide-item side-menu__item">
-            <Link onClick={() => this.props.onClick("changePassword")}>
+            <Link to={`/${this.props.user.profileType}/changePassword`}>
               Change Password
             </Link>
           </li>
           <li className="slide-item side-menu__item">
-            <Link onClick={() => this.props.onClick("profile")}>Profile</Link>
+            <Link to="/customer/myProfile">Profile</Link>
           </li>
         </ul>
       );
@@ -46,24 +42,16 @@ class CustomerSidebar extends Component {
       return (
         <ul>
           <li className="slide-item side-menu__item">
-            <Link onClick={() => this.props.onClick("createTender")}>
-              Create Tender
-            </Link>
+            <Link to="/customer/createTender">Create Tender</Link>
           </li>
           <li className="slide-item side-menu__item">
-            <Link onClick={() => this.props.onClick("tenderList")}>
-              Tender List
-            </Link>
+            <Link to="/customer/tenderList">Tender List</Link>
           </li>
           <li className="slide-item side-menu__item">
-            <Link onClick={() => this.props.onClick("saveForLater")}>
-              Save for Later
-            </Link>
+            <Link to="/customer/saveForLater">Save for Later</Link>
           </li>
           <li className="slide-item side-menu__item">
-            <Link onClick={() => this.props.onClick("transactionList")}>
-              Transaction List
-            </Link>
+            <Link to="/customer/transactionList">Transaction List</Link>
           </li>
         </ul>
       );
@@ -73,10 +61,7 @@ class CustomerSidebar extends Component {
     return (
       <aside className="app-sidebar sidebar-scroll">
         <div className="main-sidebar-header active">
-          <Link
-            className="desktop-logo logo-light active"
-            onClick={() => this.props.onClick("dashboard")}
-          >
+          <Link className="desktop-logo logo-light active" to="/customer">
             <img
               src={
                 "https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/common/img/logo/logo.png"
@@ -85,10 +70,7 @@ class CustomerSidebar extends Component {
               alt="logo"
             />
           </Link>
-          <Link
-            className="desktop-logo logo-dark active"
-            onClick={() => this.props.onClick("dashboard")}
-          >
+          <Link className="desktop-logo logo-dark active" to="/customer">
             <img
               src={
                 "https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/common/img/logo/logo.png"
@@ -99,7 +81,7 @@ class CustomerSidebar extends Component {
           </Link>
           <Link
             className="logo-icon mobile-logo icon-light active"
-            onClick={() => this.props.onClick("dashboard")}
+            to="/customer"
           >
             <img
               src={
@@ -111,7 +93,7 @@ class CustomerSidebar extends Component {
           </Link>
           <Link
             className="logo-icon mobile-logo icon-dark active"
-            onClick={() => this.props.onClick("dashboard")}
+            to="/customer"
           >
             <img
               src={
@@ -151,10 +133,7 @@ class CustomerSidebar extends Component {
               </div>
               <ul className="side-menu">
                 <li className="slide active">
-                  <Link
-                    className="side-menu__item active"
-                    onClick={() => this.props.onClick("dashboard")}
-                  >
+                  <Link className="side-menu__item active" to="/customer">
                     <i className="fa fa-home"></i>
                     <span className="side-menu__label">Dashboard</span>
                   </Link>
@@ -174,7 +153,7 @@ class CustomerSidebar extends Component {
                 <li className="slide">
                   <Link
                     className="side-menu__item"
-                    onClick={() => this.props.onClick("deliveryNotes")}
+                    to="/customer/deliveryNotes"
                   >
                     <i className="fa fa-book"></i>
                     <span className="side-menu__label">Delivery Notes</span>
@@ -193,10 +172,7 @@ class CustomerSidebar extends Component {
                   {this.renderAdminFunctions()}
                 </li>
                 <li className="slide">
-                  <Link
-                    className="side-menu__item"
-                    onClick={() => this.props.onClick("helpSupport")}
-                  >
+                  <Link className="side-menu__item" to="/customer/helpSupport">
                     <i className="fa fa-support"></i>
                     <span className="side-menu__label">Help & Support</span>
                   </Link>
@@ -204,7 +180,7 @@ class CustomerSidebar extends Component {
                 <li className="slide">
                   <Link
                     className="side-menu__item"
-                    onClick={() => this.props.onClick("termsConditions")}
+                    to="/customer/termsConditions"
                   >
                     <i className="fa fa-info"></i>
                     <span className="side-menu__label">
