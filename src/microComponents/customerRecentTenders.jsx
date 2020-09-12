@@ -25,13 +25,13 @@ class RecentlyAddedTenders extends Component {
               to={"/customer/tenderDetails"}
               onClick={() => this.props.tenderClicked(tender._id)}
             >
-              {tender._id}
+              {tender._id.toString().substring(18, 24)}
             </Link>
           </td>
           <td>{tender.budgetAmount}</td>
-          <td>{tender.creationDate}</td>
-          <td>{tender.deliveryDate}</td>
-          <td>{tender.closingDate}</td>
+          <td>{tender.creationDate.toString().substring(0, 10)}</td>
+          <td>{tender.deliveryDate.toString().substring(0, 10)}</td>
+          <td>{tender.closingDate.toString().substring(0, 10)}</td>
           <td>
             <span className={`badge badge-${styleOfBadge} f-14`}>
               {tender.status}

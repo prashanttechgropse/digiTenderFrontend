@@ -1,6 +1,64 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import { paginate } from "../../utilities/paginate";
+import Pagination from "../../microComponents/pagination";
 class AdminCustomerList extends Component {
-  state = {};
+  state = {
+    displayCustomerList: null,
+    currentPage: null,
+    pageSize: null,
+  };
+
+  constructor(props) {
+    super(props);
+    this.state.currentPage = 1;
+    this.state.pageSize = 1;
+    this.state.displayCustomerList = paginate(
+      this.props.customerList,
+      this.state.currentPage,
+      this.state.pageSize
+    );
+  }
+
+  handlePageChange = async (pageNumber) => {
+    this.setState({ currentPage: pageNumber });
+    const displayCustomerList = paginate(
+      this.props.customerList,
+      pageNumber,
+      this.state.pageSize
+    );
+    this.setState({ displayCustomerList });
+  };
+
+  renderCustomerList = () => {
+    let srNo = (this.state.currentPage - 1) * this.state.pageSize;
+    if (this.props.customerList === "") return;
+    return this.state.displayCustomerList.map((customer) => {
+      srNo++;
+      return (
+        <tr role="row">
+          <td>{`#000${srNo}`}</td>
+          <td>{customer.firstName}</td>
+          <td>{customer.entityRegistrationNo}</td>
+          <td>{customer.contactNumber}</td>
+          <td>{`${customer.tenders.length} Tenders`}</td>
+          <td>
+            <span className="badge badge-primary f-14">Active</span>
+          </td>
+          <td>
+            <Link
+              to="/admin/customerDetails"
+              className="detail-icons"
+              onClick={() => this.props.customerClicked(customer._id)}
+            >
+              <i className="fa fa-eye"></i>
+            </Link>
+          </td>
+        </tr>
+      );
+    });
+  };
+
   render() {
     return (
       <div className="container-fluid">
@@ -31,16 +89,10 @@ class AdminCustomerList extends Component {
               </div>
               <div className="card-body">
                 <div className="table-responsive">
-                  <div
-                    id="example1_wrapper"
-                    className="dataTables_wrapper dt-bootstrap4"
-                  >
+                  <div className="dataTables_wrapper dt-bootstrap4">
                     <div className="row">
                       <div className="col-sm-12">
-                        <table
-                          className="table text-md-nowrap dataTable"
-                          id="example1"
-                        >
+                        <table className="table text-md-nowrap dataTable">
                           <thead>
                             <tr role="row">
                               <th>Sr No</th>
@@ -52,109 +104,18 @@ class AdminCustomerList extends Component {
                               <th>Action</th>
                             </tr>
                           </thead>
-                          <tbody>
-                            <tr role="row">
-                              <td>#0001</td>
-                              <td>Mo Danish</td>
-                              <td>18818</td>
-                              <td>+878 6767 6767</td>
-                              <td>04 Tenders</td>
-                              <td>
-                                <span className="badge badge-primary f-14">
-                                  Active
-                                </span>
-                              </td>
-                              <td>
-                                <a
-                                  href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/admin/customer-detail"
-                                  className="detail-icons"
-                                >
-                                  <i className="fa fa-eye"></i>
-                                </a>
-                              </td>
-                            </tr>
-                            <tr role="row">
-                              <td>#0002</td>
-                              <td>Imran Khan</td>
-                              <td>18818</td>
-                              <td>+878 6767 6767</td>
-                              <td>04 Tenders</td>
-                              <td>
-                                <span className="badge badge-primary f-14">
-                                  Active
-                                </span>
-                              </td>
-                              <td>
-                                <a
-                                  href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/admin/customer-detail"
-                                  className="detail-icons"
-                                >
-                                  <i className="fa fa-eye"></i>
-                                </a>
-                              </td>
-                            </tr>
-                            <tr role="row">
-                              <td>#0003</td>
-                              <td>Al Hamid Ansari</td>
-                              <td>18818</td>
-                              <td>+878 6767 6767</td>
-                              <td>04 Tenders</td>
-                              <td>
-                                <span className="badge badge-danger f-14">
-                                  Suspend
-                                </span>
-                              </td>
-                              <td>
-                                <a
-                                  href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/admin/customer-detail"
-                                  className="detail-icons"
-                                >
-                                  <i className="fa fa-eye"></i>
-                                </a>
-                              </td>
-                            </tr>
-                            <tr role="row">
-                              <td>#0004</td>
-                              <td>Mo Danish</td>
-                              <td>18818</td>
-                              <td>+878 6767 6767</td>
-                              <td>04 Tenders</td>
-                              <td>
-                                <span className="badge badge-primary f-14">
-                                  Active
-                                </span>
-                              </td>
-                              <td>
-                                <a
-                                  href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/admin/customer-detail"
-                                  className="detail-icons"
-                                >
-                                  <i className="fa fa-eye"></i>
-                                </a>
-                              </td>
-                            </tr>
-                            <tr role="row">
-                              <td>#0005</td>
-                              <td>Imran Khan</td>
-                              <td>18818</td>
-                              <td>+878 6767 6767</td>
-                              <td>04 Tenders</td>
-                              <td>
-                                <span className="badge badge-primary f-14">
-                                  Active
-                                </span>
-                              </td>
-                              <td>
-                                <a
-                                  href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/admin/customer-detail"
-                                  className="detail-icons"
-                                >
-                                  <i className="fa fa-eye"></i>
-                                </a>
-                              </td>
-                            </tr>
-                          </tbody>
+                          <tbody>{this.renderCustomerList()}</tbody>
                         </table>
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-sm-12">
+                        <Pagination
+                          currentPage={this.state.currentPage}
+                          totalItemsCount={this.props.customerList.length}
+                          pageSize={this.state.pageSize}
+                          onPageChange={this.handlePageChange}
+                        />
                       </div>
                     </div>
                   </div>

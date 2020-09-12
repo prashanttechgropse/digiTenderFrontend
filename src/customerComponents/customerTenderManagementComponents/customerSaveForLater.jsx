@@ -1,13 +1,39 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { paginate } from "../../utilities/paginate";
+import Pagination from "../../microComponents/pagination";
 class CustomerSaveForLater extends Component {
-  state = {};
+  state = {
+    displayTenderList: null,
+    currentPage: null,
+    pageSize: null,
+  };
+
+  constructor(props) {
+    super(props);
+    this.state.currentPage = 1;
+    this.state.pageSize = 1;
+    this.state.displayTenderlist = paginate(
+      this.props.tenderList,
+      this.state.currentPage,
+      this.state.pageSize
+    );
+  }
+
+  handlePageChange = (pageNumber) => {
+    this.setState({ currentPage: pageNumber });
+    const displayTenderlist = paginate(
+      this.props.tenderList,
+      pageNumber,
+      this.state.pageSize
+    );
+    this.setState({ displayTenderlist });
+  };
 
   renderTenderTable = () => {
-    let srNo = 0;
-    let tenderList = this.props.tenderList.filter(
-      (tender) => tender.isPublished === false
-    );
+    let srNo = (this.state.currentPage - 1) * this.state.pageSize;
+
+    let tenderList = this.state.displayTenderlist;
     return tenderList.map((tender) => {
       srNo++;
       return (
@@ -18,7 +44,7 @@ class CustomerSaveForLater extends Component {
               to={"/customer/tenderDetails"}
               onClick={() => this.props.tenderClicked(tender._id)}
             >
-              {tender._id}
+              {tender._id.toString().substring(18, 24)}
             </Link>
           </td>
           <td>{tender.budgetAmount}</td>
@@ -80,10 +106,7 @@ class CustomerSaveForLater extends Component {
                   >
                     <div className="row">
                       <div className="col-sm-12">
-                        <table
-                          className="table text-md-nowrap dataTable"
-                          id="example1"
-                        >
+                        <table className="table  dataTable">
                           <thead>
                             <tr role="row">
                               <th>Sr no</th>
@@ -97,6 +120,16 @@ class CustomerSaveForLater extends Component {
                           </thead>
                           <tbody>{this.renderTenderTable()}</tbody>
                         </table>
+                        <div className="row">
+                          <div className="col-sm-12">
+                            <Pagination
+                              currentPage={this.state.currentPage}
+                              totalItemsCount={this.props.tenderList.length}
+                              pageSize={this.state.pageSize}
+                              onPageChange={this.handlePageChange}
+                            />
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>

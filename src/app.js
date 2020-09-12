@@ -8,11 +8,12 @@ import RegisterContainer from "./registerContainer.jsx";
 import ForgotPasswordContainer from "./forgotPasswordContainer";
 import CustomerApp from "./customerApp";
 import SupplierApp from "./supplierApp";
-import Playground from "./playground";
+
 import Tokencheck from "./tokencheck";
 import OtpVerificationForm from "./macroComponents/otpVerification";
 import AdminLogIn from "./adminComponents/adminLoginForm";
 import AdminApp from "./AdminApp";
+import SignOut from "./microComponents/signOut";
 
 class App extends Component {
   state = {
@@ -23,7 +24,7 @@ class App extends Component {
 
   getEmail = async (email) => {
     const userData = { email: email };
-    await this.setState({ userData });
+    this.setState({ userData });
   };
   render() {
     return (
@@ -32,7 +33,6 @@ class App extends Component {
         <Switch>
           <Route exact path="/adminLogin" component={AdminLogIn} />
           <Route exact path="/tokenCheck" component={Tokencheck} />
-          <Route exact path="/upload" component={Playground} />
           <Route
             exact
             path="/login"
@@ -45,7 +45,7 @@ class App extends Component {
           />
           <Route path="/customer" component={CustomerApp} />
           <Route path="/admin" component={AdminApp} />
-          <Route exact path="/supplier" component={SupplierApp} />
+          <Route path="/supplier" component={SupplierApp} />
           <Route path="/register" component={RegisterContainer} />
           <Route path="/forgotPassword" component={ForgotPasswordContainer} />
           <Route
@@ -59,6 +59,7 @@ class App extends Component {
               />
             )}
           />
+          <Route exact path="/signOut" component={SignOut} />
           <Route path="/not-found" component={NotFound} />
           <Redirect exact from="/createAccount" to="/register" />
           <Redirect exact from="/signIn" to="/login" />

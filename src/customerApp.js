@@ -25,18 +25,19 @@ import CustomerTenderDetails from "./customerComponents/customerTenderManagement
 class CustomerApp extends Component {
   state = {
     customer: null,
-    mainRenderedContent: "",
     displayTenderDetails: null,
   };
 
   async componentDidMount() {
     try {
-      const { data } = await httpService.get(`${config.apiendpoint}/myData`);
+      const { data } = await httpService.get(
+        `${config.apiendpoint}/customer/myData`
+      );
+      toast.success(data.message);
       if (data) {
         if (data.user.profileType.toLowerCase() === "customer") {
           const customer = data.user;
-          await this.setState({ customer: customer });
-          toast.success(data.message);
+          this.setState({ customer: customer });
           return;
         } else {
           this.props.history.push(`/${data.user.profileType}`);
@@ -46,19 +47,6 @@ class CustomerApp extends Component {
     } catch (error) {
       toast.error(error.message);
       return;
-    }
-  }
-
-  setMainRenderedContent = (key) => {
-    this.setState({ mainRenderedContent: key });
-  };
-
-  signOut() {
-    switch (this.state.mainRenderedContent) {
-      case "signOut": {
-        localStorage.removeItem("token");
-        return this.props.history.push("/login");
-      }
     }
   }
 
@@ -77,27 +65,20 @@ class CustomerApp extends Component {
             className="app-sidebar__overlay active"
             data-toggle="sidebar"
           ></div>
-          <CustomerSidebar
-            user={this.state.customer}
-            onClick={(key) => this.setMainRenderedContent(key)}
-          />
+          <CustomerSidebar user={this.state.customer} />
           <div className="main-content app-content">
-            <MainContentHeaderBar
-              user={this.state.customer}
-              onClick={(key) => this.setMainRenderedContent(key)}
-            />
+            <MainContentHeaderBar user={this.state.customer} />
             <Route exact path="/customer/createTender">
               <CustomerCreateTender {...this.props} />
             </Route>
             <Route exact path="/customer/myProfile">
-              <MyProfile
-                onClick={(key) => this.setMainRenderedContent(key)}
-                user={this.state.customer}
-              />
+              <MyProfile user={this.state.customer} />
             </Route>
             <Route exact path="/customer/tenderList">
               <CustomerTenderList
-                tenderList={this.state.customer.details.tenders}
+                tenderList={this.state.customer.details.tenders.filter(
+                  (tender) => tender.isPublished
+                )}
                 tenderClicked={(tenderId) =>
                   this.displayTenderDetails(tenderId)
                 }
@@ -106,7 +87,9 @@ class CustomerApp extends Component {
             </Route>
             <Route exact path="/customer/saveForLater">
               <CustomerSaveForLater
-                tenderList={this.state.customer.details.tenders}
+                tenderList={this.state.customer.details.tenders.filter(
+                  (tender) => !tender.isPublished
+                )}
                 tenderClicked={(tenderId) =>
                   this.displayTenderDetails(tenderId)
                 }
@@ -140,9 +123,7 @@ class CustomerApp extends Component {
               <CustomerDeliveryNoteMainContent />
             </Route>
             <Route exact path="/customer/customerReceiverList">
-              <CustomerReceiverlist
-                onClick={(key) => this.setMainRenderedContent(key)}
-              />
+              <CustomerReceiverlist />
             </Route>
             <Route exact path="/customer">
               <CustomerDashboardMainContent
@@ -152,7 +133,6 @@ class CustomerApp extends Component {
                 }
               />
             </Route>
-            {this.signOut()}
           </div>
         </React.Fragment>
       );

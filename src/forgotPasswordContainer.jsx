@@ -12,7 +12,7 @@ class ForgotPasswordContainer extends Component {
 
   getEmail = async (email) => {
     const register = { email: email };
-    await this.setState({ register });
+    this.setState({ register });
   };
   render() {
     return (

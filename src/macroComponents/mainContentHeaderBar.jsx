@@ -54,7 +54,7 @@ class MainContentHeaderBar extends Component {
               </div>
               <ProfileDropDown
                 user={this.props.user}
-                onClick={(key) => this.props.onClick(key)}
+                profileDropDown={this.props.profileDropDown}
               />
             </div>
           </div>

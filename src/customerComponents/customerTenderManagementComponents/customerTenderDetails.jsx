@@ -47,13 +47,46 @@ class CustomerTenderDetails extends Component {
           <div className="d-flex my-xl-auto right-content">
             <div className="pr-1 mb-3 mb-xl-0">
               <button
-                type="button"
-                className="btn btn-primary "
-                onClick={this.handleCancelTender}
                 disabled={this.props.tender.status == "cancelled"}
+                href="#publishmodal"
+                data-target="#publishmodal"
+                data-toggle="modal"
+                class="btn btn-main-primary btn-block"
               >
-                <i className="fa fa-times"></i> Cancel Tender
+                <i class="fa fa-times"></i> Cancel Tender
               </button>
+              <div class="modal show" id="publishmodal" aria-modal="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content tx-size-sm">
+                    <div class="modal-body tx-center pd-y-20 pd-x-20 pl-4 pr-4">
+                      <button
+                        aria-label="Close"
+                        class="close"
+                        data-dismiss="modal"
+                        type="button"
+                      >
+                        <span aria-hidden="true">×</span>
+                      </button>
+                      <i class="fa fa-times-circle tx-100 tx-danger lh-1 mg-t-20 d-inline-block"></i>
+                      <h4 class="tx-danger tx-semibold mg-b-20 mb-2">
+                        Confirmation..!!
+                      </h4>
+                      <p>Do you really want to cancel this Tender ?</p>
+                      <div class="text-center mt-4 mb-4">
+                        <a
+                          class="btn btn-primary mr-3"
+                          onClick={this.handleCancelTender}
+                        >
+                          Yes
+                        </a>
+                        <a class="btn btn-primary" data-dismiss="modal">
+                          No
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -70,7 +103,9 @@ class CustomerTenderDetails extends Component {
                   <div className="col-8">
                     <div className="mt-0 text-right">
                       <span className="text-white">Tender Ref No</span>
-                      <h2 className="text-white mb-0">{tender._id}</h2>
+                      <h2 className="text-white mb-0">
+                        {tender._id.toString().substring(18, 24)}
+                      </h2>
                     </div>
                   </div>
                 </div>
@@ -168,6 +203,10 @@ class CustomerTenderDetails extends Component {
   };
 
   render() {
+    if (this.props.tender === null) {
+      this.props.history.push("/");
+      return null;
+    }
     return (
       <div className="container-fluid">
         {this.props.tender === null

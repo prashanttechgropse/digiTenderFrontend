@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 class SupplierSideBar extends Component {
   state = {
     toggleTenderManagement: 0,
@@ -20,22 +21,18 @@ class SupplierSideBar extends Component {
       return (
         <ul>
           <li className="side-menu__item slide-item">
-            <a onClick={() => this.props.onClick("supplierEmployeeList")}>
+            <Link to="/supplier/supplierEmployeeList">
               Supplier Employee List
-            </a>
+            </Link>
           </li>
           <li className="slide-item side-menu__item">
-            <a onClick={() => this.props.onClick("createSubUser")}>
-              Create Subuser
-            </a>
+            <Link to="/supplier/createSubUser">Create Subuser</Link>
           </li>
           <li className="slide-item side-menu__item">
-            <a onClick={() => this.props.onClick("changePassword")}>
-              Change Password
-            </a>
+            <Link to="/supplier/changePassword">Change Password</Link>
           </li>
           <li className="slide-item side-menu__item">
-            <a onClick={() => this.props.onClick("profile")}>Profile</a>
+            <Link to="/supplier/profile">Profile</Link>
           </li>
         </ul>
       );
@@ -46,20 +43,18 @@ class SupplierSideBar extends Component {
       return (
         <ul>
           <li className="slide-item side-menu__item">
-            <a onClick={() => this.props.onClick("tenderList")}>Tender List</a>
+            <Link to="/supplier/tenderList">Tender List</Link>
           </li>
           <li className="slide-item side-menu__item">
-            <a onClick={() => this.props.onClick("saveForLater")}>
-              Save for Later
-            </a>
+            <Link to="/supplier/saveForLater">Save for Later</Link>
           </li>
           <li className="slide-item side-menu__item">
-            <a onClick={() => this.props.onClick("transactionManagement")}>
+            <Link to="/supplier/transactionManagement">
               Transaction Management
-            </a>
+            </Link>
           </li>
           <li className="slide-item side-menu__item">
-            <a onClick={() => this.props.onClick("history")}>History</a>
+            <Link to="/supplier/history">History</Link>
           </li>
         </ul>
       );
@@ -71,46 +66,40 @@ class SupplierSideBar extends Component {
     return (
       <aside className="app-sidebar sidebar-scroll">
         <div className="main-sidebar-header active">
-          <a
-            className="desktop-logo logo-light active"
-            onClick={() => this.props.onClick("dashboard")}
-          >
+          <Link className="desktop-logo logo-light active" to="/supplier">
             <img
               src="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/supplier/common/img/logo/logo.png"
               className="main-logo"
               alt="logo"
             />
-          </a>
-          <a
-            className="desktop-logo logo-dark active"
-            onClick={() => this.props.onClick("dashboard")}
-          >
+          </Link>
+          <Link className="desktop-logo logo-dark active" to="/supplier">
             <img
               src="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/supplier/common/img/logo/logo.png"
               className="main-logo dark-theme"
               alt="logo"
             />
-          </a>
-          <a
+          </Link>
+          <Link
             className="logo-icon mobile-logo icon-light active"
-            onClick={() => this.props.onClick("dashboard")}
+            to="/supplier"
           >
             <img
               src="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/supplier/common/img/logo/favicon.png"
               className="logo-icon"
               alt="logo"
             />
-          </a>
-          <a
+          </Link>
+          <Link
             className="logo-icon mobile-logo icon-dark active"
-            onClick={() => this.props.onClick("dashboard")}
+            to="/supplier"
           >
             <img
               src="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/supplier/common/img/logo/favicon.png"
               className="logo-icon dark-theme"
               alt="logo"
             />
-          </a>
+          </Link>
         </div>
         <div className="main-sidemenu mCustomScrollbar _mCS_1 mCS-autoHide">
           <div
@@ -139,16 +128,13 @@ class SupplierSideBar extends Component {
               </div>
               <ul className="side-menu">
                 <li className="slide active">
-                  <a
-                    className="side-menu__item active"
-                    onClick={() => this.props.onClick("dashboard")}
-                  >
+                  <Link className="side-menu__item active" to="/supplier">
                     <i className="fa fa-home"></i>
                     <span className="side-menu__label">Dashborad</span>
-                  </a>
+                  </Link>
                 </li>
                 <li className="slide">
-                  <a
+                  <Link
                     className="side-menu__item active"
                     data-toggle="slide"
                     href="#"
@@ -157,20 +143,20 @@ class SupplierSideBar extends Component {
                     <i className="fa fa-address-book"></i>
                     <span className="side-menu__label">Tender Management</span>
                     <i className="angle fa fa-angle-down"></i>
-                  </a>
+                  </Link>
                   {this.renderTenderManagement()}
                 </li>
                 <li className="slide">
-                  <a
+                  <Link
                     className="side-menu__item"
-                    onClick={() => this.props.onClick("deliveryNotes")}
+                    to="/supplier/deliveryNotes"
                   >
                     <i className="fa fa-book"></i>
                     <span className="side-menu__label">Delivery Notes</span>
-                  </a>
+                  </Link>
                 </li>
                 <li className="slide">
-                  <a
+                  <Link
                     className="side-menu__item"
                     data-toggle="slide"
                     href="#"
@@ -179,28 +165,25 @@ class SupplierSideBar extends Component {
                     <i className="fa fa-cog"></i>
                     <span className="side-menu__label">Admin Functions</span>
                     <i className="angle fa fa-angle-down"></i>
-                  </a>
+                  </Link>
                   {this.renderAdminFunctions()}
                 </li>
                 <li className="slide">
-                  <a
-                    className="side-menu__item"
-                    onClick={() => this.props.onClick("helpSupport")}
-                  >
+                  <Link className="side-menu__item" to="/supplier/helpSupport">
                     <i className="fa fa-question-circle"></i>
                     <span className="side-menu__label">Help & Support</span>
-                  </a>
+                  </Link>
                 </li>
                 <li className="slide">
-                  <a
+                  <Link
                     className="side-menu__item"
-                    onClick={() => this.props.onClick("termsConditions")}
+                    to={"/supplier/termsConditions"}
                   >
                     <i className="fa fa-info"></i>
                     <span className="side-menu__label">
                       Terms and Conditions
                     </span>
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>

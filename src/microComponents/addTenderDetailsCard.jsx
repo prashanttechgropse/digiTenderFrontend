@@ -27,7 +27,7 @@ class AddTenderDetailsCard extends Form {
     //setting state according to input
     const formData = { ...this.state.formData };
     formData[e.currentTarget.name] = e.currentTarget.value;
-    await this.setState({ formData, errors });
+    this.setState({ formData, errors });
     this.props.updateTenderDetails(this.state.formData, this.state.errors);
   };
 

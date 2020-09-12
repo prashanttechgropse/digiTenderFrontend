@@ -1,6 +1,66 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import Pagination from "../../microComponents/pagination";
+import { paginate } from "../../utilities/paginate";
 class AdminSupplierList extends Component {
-  state = {};
+  state = {
+    displaySupplierList: null,
+    currentPage: null,
+    pageSize: null,
+  };
+
+  constructor(props) {
+    super(props);
+    this.state.currentPage = 1;
+    this.state.pageSize = 1;
+    this.state.displaySupplierList = paginate(
+      this.props.supplierList,
+      this.state.currentPage,
+      this.state.pageSize
+    );
+  }
+
+  handlePageChange = (pageNumber) => {
+    console.log(pageNumber);
+    this.setState({ currentPage: pageNumber });
+    const displaySupplierList = paginate(
+      this.props.supplierList,
+      pageNumber,
+      this.state.pageSize
+    );
+    this.setState({ displaySupplierList });
+    console.log(this.state.displaySupplierList);
+  };
+
+  renderSupplierList = () => {
+    let srNo = (this.state.currentPage - 1) * this.state.pageSize;
+    if (this.state.displaySupplierList === null) return;
+    return this.state.displaySupplierList.map((supplier) => {
+      srNo++;
+      return (
+        <tr role="row">
+          <td>{`#000${srNo}`}</td>
+          <td>{supplier.firstName}</td>
+          <td>{supplier.entityRegistrationNo}</td>
+          <td>{supplier.contactNumber}</td>
+          <td>{`${supplier.tenders.length} Tenders`}</td>
+          <td>
+            <span className="badge badge-primary f-14">Active</span>
+          </td>
+          <td>
+            <Link
+              to="/admin/supplierDetails"
+              className="detail-icons"
+              onClick={() => this.props.supplierClicked(supplier._id)}
+            >
+              <i className="fa fa-eye"></i>
+            </Link>
+          </td>
+        </tr>
+      );
+    });
+  };
+
   render() {
     return (
       <div className="container-fluid">
@@ -52,111 +112,17 @@ class AdminSupplierList extends Component {
                               <th>Action</th>
                             </tr>
                           </thead>
-                          <tbody>
-                            <tr role="row">
-                              <td>#0001</td>
-                              <td>Mo Danish</td>
-                              <td>18818</td>
-                              <td>+878 6767 6767</td>
-                              <td>04 Tenders</td>
-                              <td>
-                                <span className="badge badge-primary f-14">
-                                  Active
-                                </span>
-                              </td>
-                              <td>
-                                <a
-                                  href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/admin/supplier-detail"
-                                  className="detail-icons"
-                                >
-                                  <i className="fa fa-eye"></i>
-                                </a>
-                              </td>
-                            </tr>
-                            <tr role="row">
-                              <td>#0002</td>
-                              <td>Imran Khan</td>
-                              <td>18818</td>
-                              <td>+878 6767 6767</td>
-                              <td>04 Tenders</td>
-                              <td>
-                                <span className="badge badge-primary f-14">
-                                  Active
-                                </span>
-                              </td>
-                              <td>
-                                <a
-                                  href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/admin/supplier-detail"
-                                  className="detail-icons"
-                                >
-                                  <i className="fa fa-eye"></i>
-                                </a>
-                              </td>
-                            </tr>
-                            <tr role="row">
-                              <td>#0003</td>
-                              <td>Al Hamid Ansari</td>
-                              <td>18818</td>
-                              <td>+878 6767 6767</td>
-                              <td>04 Tenders</td>
-                              <td>
-                                <span className="badge badge-danger f-14">
-                                  Suspend
-                                </span>
-                              </td>
-                              <td>
-                                <a
-                                  href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/admin/supplier-detail"
-                                  className="detail-icons"
-                                >
-                                  <i className="fa fa-eye"></i>
-                                </a>
-                              </td>
-                            </tr>
-                            <tr role="row">
-                              <td>#0004</td>
-                              <td>Mo Danish</td>
-                              <td>18818</td>
-                              <td>+878 6767 6767</td>
-                              <td>04 Tenders</td>
-                              <td>
-                                <span className="badge badge-primary f-14">
-                                  Active
-                                </span>
-                              </td>
-                              <td>
-                                <a
-                                  href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/admin/supplier-detail"
-                                  className="detail-icons"
-                                >
-                                  <i className="fa fa-eye"></i>
-                                </a>
-                              </td>
-                            </tr>
-                            <tr role="row">
-                              <td>#0005</td>
-                              <td>Imran Khan</td>
-                              <td>18818</td>
-                              <td>+878 6767 6767</td>
-                              <td>04 Tenders</td>
-                              <td>
-                                <span className="badge badge-primary f-14">
-                                  Active
-                                </span>
-                              </td>
-                              <td>
-                                <a
-                                  href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/admin/supplier-detail"
-                                  className="detail-icons"
-                                >
-                                  <i className="fa fa-eye"></i>
-                                </a>
-                              </td>
-                            </tr>
-                          </tbody>
+                          <tbody>{this.renderSupplierList()} </tbody>
                         </table>
                       </div>
                     </div>
+
+                    <Pagination
+                      currentPage={this.state.currentPage}
+                      totalItemsCount={this.props.supplierList.length}
+                      pageSize={this.state.pageSize}
+                      onPageChange={this.handlePageChange}
+                    />
                   </div>
                 </div>
               </div>

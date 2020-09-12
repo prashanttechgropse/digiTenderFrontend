@@ -5,9 +5,8 @@ class ProfileDropDown extends Component {
   render() {
     return (
       <div className="dropdown main-profile-menu nav nav-item nav-link">
-        <Link className="profile-user d-flex" to="/customer">
+        <Link className="profile-user d-flex">
           <img
-            alt=""
             src={
               "https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/common/img/customer/01.jpg"
             }
@@ -18,15 +17,17 @@ class ProfileDropDown extends Component {
             <div className="d-flex wd-100p">
               <div className="main-img-user">
                 <img
-                  alt=""
                   src={
                     "https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/common/img/customer/01.jpg"
                   }
-                  className=""
                 />
               </div>
               <div className="ml-3 my-auto">
-                <h6>{this.props.user.details.firstName}</h6>
+                <h6>
+                  {this.props.user.profileType === "admin"
+                    ? this.props.user.name
+                    : this.props.user.details.firstName}
+                </h6>
                 <span>{this.props.user.profileType}</span>
               </div>
             </div>
@@ -54,10 +55,7 @@ class ProfileDropDown extends Component {
           >
             <i className="bx bxs-inbox"></i>Change Password
           </Link>
-          <Link
-            className="dropdown-item"
-            onClick={() => this.props.onClick("signOut")}
-          >
+          <Link to="/signOut" className="dropdown-item">
             <i className="bx bx-log-out"></i> Sign Out
           </Link>
         </div>

@@ -16,78 +16,98 @@ import httpService from "./services/httpService";
 import config from "./config.json";
 import { toast } from "react-toastify";
 import { Route } from "react-router-dom";
+import CustomerDetailsContainer from "./adminComponents/customerDetailsComponents/customerDetailsContainer";
+import CustomerTenderDetails from "./customerComponents/customerTenderManagementComponents/customerTenderDetails";
+import SupplierDetailsContainer from "./adminComponents/supplierDetailsContainer/supplierDetailsContainer";
 
 class AdminApp extends Component {
   state = {
-    admin: null,
-    customerList: null,
-    supplierList: null,
-    tenderList: null,
-    mainRenderedContent: "dashboard",
+    admin: "",
+    customerList: "",
+    supplierList: "",
+    tenderList: "",
+    displayCustomerDetails: "",
+    displaySupplierDetails: "",
+    displayTenderDetails: null,
   };
 
-  async componentDidMount() {
+  componentDidMount = async () => {
     try {
       const { data } = await httpService.get(
         `${config.apiendpoint}/admin/adminData`
       );
+      toast.success(data.message);
       if (data) {
         if (data.user.profileType.toLowerCase() === "admin") {
           const admin = data.user;
-          await this.setState({ admin: admin });
+          this.setState({ admin: admin });
 
           const customerList = data.customerList;
-          await this.setState({ customerList });
+          this.setState({ customerList });
 
           const supplierList = data.supplierList;
-          await this.setState({ supplierList });
+          this.setState({ supplierList });
 
           const tenderList = data.tenderList;
-          await this.setState({ tenderList });
-
-          toast.success(data.message);
-          console.log(this.state);
-
-          return;
+          this.setState({ tenderList });
         } else {
           this.props.history.push(`/${data.user.profileType}`);
-          return;
         }
       }
     } catch (error) {
       toast.error(error.message);
       //window.location.reload();
     }
-  }
-
-  setMainRenderedContent = (key) => {
-    this.setState({ mainRenderedContent: key });
   };
 
-  renderMainComponent() {
-    switch (this.state.mainRenderedContent) {
-    }
-  }
+  displayCustomerDetails = async (customerId) => {
+    const displayCustomerDetails = this.state.customerList.find(
+      (customer) => customer._id === customerId
+    );
+    this.setState({ displayCustomerDetails });
+  };
+
+  displaySupplierDetails = async (supplierId) => {
+    const displaySupplierDetails = this.state.supplierList.find(
+      (supplier) => supplier._id === supplierId
+    );
+    this.setState({ displaySupplierDetails });
+  };
+
+  displayTenderDetails = async (tenderId) => {
+    const displayTenderDetails = this.state.tenderList.find(
+      (tender) => tender._id == tenderId
+    );
+    this.setState({ displayTenderDetails });
+    console.log(this.state.displayTenderDetails);
+  };
 
   checkAdminPopulated = () => {
-    if (this.state.admin) {
+    if (this.state.admin !== "") {
       return (
         <div className="page active">
           <div
             className="app-sidebar__overlay active"
             data-toggle="sidebar"
           ></div>
-          <AdminSideBar onClick={(key) => this.setMainRenderedContent(key)} />
+          <AdminSideBar admin={this.state.admin} />
           <div className="main-content app-content">
-            <MainContentHeaderBar
-              user={this.state.admin}
-              onClick={(key) => this.setMainRenderedContent(key)}
-            />
+            <MainContentHeaderBar user={this.state.admin} />
             <Route exact path="/admin/customerList">
-              <AdminCustomerList />
+              <AdminCustomerList
+                customerList={this.state.customerList}
+                customerClicked={(customerId) =>
+                  this.displayCustomerDetails(customerId)
+                }
+              />
             </Route>
             <Route exact path="/admin/supplierList">
-              <AdminSupplierList />
+              <AdminSupplierList
+                supplierList={this.state.supplierList}
+                supplierClicked={(supplierId) =>
+                  this.displaySupplierDetails(supplierId)
+                }
+              />
             </Route>
             <Route exact path="/admin/deliveryNoteList">
               <AdminDeliveryNoteList />
@@ -107,10 +127,43 @@ class AdminApp extends Component {
             <Route exact path="/admin/changePassword">
               <ChangePassword />
             </Route>
-            <Route exact path="/admin">
-              <AdminDashboardMainContent />
+            <Route exact path="/admin/customerDetails">
+              <CustomerDetailsContainer
+                customer={this.state.displayCustomerDetails}
+                tenderClicked={(tenderId) =>
+                  this.displayTenderDetails(tenderId)
+                }
+                {...this.props}
+              />
             </Route>
-            {this.renderMainComponent()}
+            <Route exact path="/admin/supplierDetails">
+              <SupplierDetailsContainer
+                supplier={this.state.displaySupplierDetails}
+                tenderClicked={(tenderId) =>
+                  this.displayTenderDetails(tenderId)
+                }
+                {...this.props}
+              />
+            </Route>
+            <Route exact path="/admin/tenderDetails">
+              <CustomerTenderDetails
+                tender={this.state.displayTenderDetails}
+                {...this.props}
+              />
+            </Route>
+            <Route exact path="/admin">
+              <AdminDashboardMainContent
+                tenderList={this.state.tenderList}
+                customerList={this.state.customerList}
+                supplierList={this.state.supplierList}
+                customerClicked={(customerId) =>
+                  this.displayCustomerDetails(customerId)
+                }
+                supplierClicked={(supplierId) =>
+                  this.displaySupplierDetails(supplierId)
+                }
+              />
+            </Route>
           </div>
           <Footer />
         </div>

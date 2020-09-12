@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import RecentlyAddedTenders from "../../microComponents/recentlyAddedTenders";
 class SupplierDashboardMainContent extends Component {
   state = {};
   render() {
@@ -148,99 +149,7 @@ class SupplierDashboardMainContent extends Component {
                   typesetting industry.
                 </p>
               </div>
-              <div className="card-body">
-                <div className="table-responsive">
-                  <div>
-                    <div className="row">
-                      <div className="col-sm-12">
-                        <table className="table text-md-nowrap">
-                          <thead>
-                            <tr role="row">
-                              <th>Sr no</th>
-                              <th>Tender I'd</th>
-                              <th>Closing Date</th>
-                              <th>Customer Name</th>
-                              <th>Location</th>
-                              <th>Amount</th>
-                              <th>Status</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr role="row">
-                              <td>#0001</td>
-                              <td>
-                                <a href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/supplier/tender-detail">
-                                  #T686868
-                                </a>
-                              </td>
-                              <td>10-07-2020</td>
-                              <td>Alex Smith</td>
-                              <td>H/123, Green Park</td>
-                              <td>5000.00 USD</td>
-                              <td>
-                                <span className="badge badge-primary f-14">
-                                  New
-                                </span>
-                              </td>
-                            </tr>
-                            <tr role="row">
-                              <td>#0002</td>
-                              <td>
-                                <a href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/supplier/tender-detail">
-                                  #T686868
-                                </a>
-                              </td>
-                              <td>10-07-2020</td>
-                              <td>Alex Smith</td>
-                              <td>H/123, Green Park</td>
-                              <td>5000.00 USD</td>
-                              <td>
-                                <span className="badge badge-success f-14">
-                                  Applied
-                                </span>
-                              </td>
-                            </tr>
-                            <tr role="row">
-                              <td>#0003</td>
-                              <td>
-                                <a href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/supplier/tender-detail">
-                                  #T686868
-                                </a>
-                              </td>
-                              <td>10-07-2020</td>
-                              <td>Alex Smith</td>
-                              <td>H/123, Green Park</td>
-                              <td>5000.00 USD</td>
-                              <td>
-                                <span className="badge badge-warning f-14">
-                                  In Progress
-                                </span>
-                              </td>
-                            </tr>
-                            <tr role="row">
-                              <td>#0004</td>
-                              <td>
-                                <a href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/supplier/tender-detail">
-                                  #T686868
-                                </a>
-                              </td>
-                              <td>10-07-2020</td>
-                              <td>Alex Smith</td>
-                              <td>H/123, Green Park</td>
-                              <td>5000.00 USD</td>
-                              <td>
-                                <span className="badge badge-danger f-14">
-                                  Rejected
-                                </span>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <RecentlyAddedTenders />
             </div>
           </div>
         </div>

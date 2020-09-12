@@ -63,7 +63,7 @@ class CustomerCreateTender extends Component {
   };
 
   uploadFile = async (file) => {
-    await this.setState({ file });
+    this.setState({ file });
   };
 
   validateOnSubmit = () => {
@@ -108,7 +108,7 @@ class CustomerCreateTender extends Component {
       e.preventDefault();
     }
     const errors = this.validateOnSubmit();
-    await this.setState({ errors: errors || {} });
+    this.setState({ errors: errors || {} });
 
     if (errors) return;
 

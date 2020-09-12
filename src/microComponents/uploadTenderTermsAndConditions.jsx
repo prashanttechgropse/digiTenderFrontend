@@ -19,7 +19,7 @@ class UploadTenderTermsAndConditions extends Form {
 
   onFileChange = async (event) => {
     // Update the state
-    await this.setState({ selectedFile: event.target.files[0] });
+    this.setState({ selectedFile: event.target.files[0] });
     this.props.onUpload(this.state.selectedFile);
   };
 

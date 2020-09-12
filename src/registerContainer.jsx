@@ -14,12 +14,12 @@ class RegisterContainer extends Component {
 
   getEmail = async (email) => {
     const register = { email: email };
-    await this.setState({ register });
+    this.setState({ register });
   };
 
   getProfileDetails = async (formData) => {
     const register = formData;
-    await this.setState({ register: register });
+    this.setState({ register: register });
     console.log(this.state);
   };
   render() {
