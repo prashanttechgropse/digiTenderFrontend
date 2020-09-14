@@ -22,9 +22,10 @@ import config from "./config.json";
 import { toast } from "react-toastify";
 import ChangePassword from "./userComponents/changePassword";
 import { Route } from "react-router-dom";
+import SupllierBid from "./supplierComponents/supplierBid";
 
 class SupplierApp extends Component {
-  state = { supplier: "" };
+  state = { supplier: "", displayTenderDetailsId: null };
 
   async componentDidMount() {
     try {
@@ -42,6 +43,10 @@ class SupplierApp extends Component {
     }
   }
 
+  displayTenderDetailsID = async (tenderId) => {
+    this.setState({ displayTenderDetailsId: tenderId });
+  };
+
   checkSupplierPopulated() {
     if (this.state.supplier !== "") {
       return (
@@ -53,7 +58,7 @@ class SupplierApp extends Component {
               <SupplierDeliveryNoteMainContent />;
             </Route>
             <Route exact path="/supplier/tenderList">
-              <SupplierTenderList />;
+              <SupplierTenderList tenderClicked={this.displayTenderDetailsID} />
             </Route>
             <Route exact path="/supplier/saveForLater">
               <SupplierSaveForLater />;
@@ -85,8 +90,14 @@ class SupplierApp extends Component {
             <Route exact path="/supplier/changePassword">
               <ChangePassword {...this.props} />
             </Route>
+            <Route exact path="/supplier/tenderDetails">
+              <SupllierBid tenderId={this.state.displayTenderDetailsId} />
+            </Route>
             <Route exact path="/supplier">
-              <SupplierDashboardMainContent user={this.state.supplier} />
+              <SupplierDashboardMainContent
+                user={this.state.supplier}
+                tenderClicked={this.displayTenderDetailsID}
+              />
             </Route>
           </div>
         </React.Fragment>

@@ -32,7 +32,7 @@ class Form extends Component {
   handleSubmit = async (e) => {
     e.preventDefault();
     const errors = this.validateOnSubmit();
-     this.setState({ errors: errors || {} });
+    this.setState({ errors: errors || {} });
 
     if (errors) return;
 
@@ -48,7 +48,7 @@ class Form extends Component {
     //setting state according to input
     const formData = { ...this.state.formData };
     formData[e.currentTarget.name] = e.currentTarget.value;
-     this.setState({ formData, errors });
+    this.setState({ formData, errors });
   };
 
   renderInput = (name, label, type = "text") => {

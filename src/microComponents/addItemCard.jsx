@@ -15,7 +15,7 @@ class AddItemCard extends Form {
   schema = {
     category: Joi.string().required(),
     name: Joi.string().required(),
-    quantity: Joi.string().required(),
+    quantity: Joi.number().required(),
     unitOfMeasure: Joi.string().required(),
   };
 

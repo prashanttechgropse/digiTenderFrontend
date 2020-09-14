@@ -27,6 +27,7 @@ class ProfileSetup extends Form {
       contactPerson: "",
       contactNo: "",
     },
+    acceptTermsConditions: false,
     selectedFile1: null,
     selectedFile2: null,
     errors: {},
@@ -50,11 +51,23 @@ class ProfileSetup extends Form {
     contactNo: Joi.string().required().min(5),
   };
 
+  toggleTermsConditions = async () => {
+    let acceptTermsConditions = this.state.acceptTermsConditions;
+    acceptTermsConditions = !acceptTermsConditions;
+    await this.setState({ acceptTermsConditions });
+    console.log(this.state.acceptTermsConditions);
+  };
+
   validateOnSubmit = () => {
     const result = Joi.validate(this.state.formData, this.schema, {
       abortEarly: false,
     });
-    if (!result.error && this.state.selectedFile1 !== null) return null;
+    if (
+      !result.error &&
+      this.state.selectedFile1 !== null &&
+      this.state.acceptTermsConditions
+    )
+      return null;
     const errors = {};
     if (result.error) {
       for (let item of result.error.details) {
@@ -65,6 +78,11 @@ class ProfileSetup extends Form {
     if (this.state.selectedFile1 === null) {
       const errors = {};
       errors.selectedFile1 = "upload file";
+      return errors;
+    }
+    if (this.state.acceptTermsConditions === false) {
+      const errors = {};
+      errors.acceptTermsConditions = "terms and conditions not accepted";
       return errors;
     }
   };
@@ -275,7 +293,11 @@ class ProfileSetup extends Form {
                                 <div class="col-md-12">
                                   <div class="parsley-checkbox" id="cbWrapper">
                                     <label class="ckbox">
-                                      <input name="browser[]" type="checkbox" />
+                                      <input
+                                        name="browser[]"
+                                        type="checkbox"
+                                        onClick={this.toggleTermsConditions}
+                                      />
                                       <span>
                                         I Accept
                                         <Link to="#">Terms and Condition</Link>

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import config from "../config.json";
 import httpService from "../services/httpService";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 class RecentlyAddedTenders extends Component {
   state = { tenders: "" };
@@ -38,14 +39,17 @@ class RecentlyAddedTenders extends Component {
         <tr role="row">
           <td>{`#000${srNo}`}</td>
           <td>
-            <a href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/supplier/tender-detail">
+            <Link
+              to={"/supplier/tenderDetails"}
+              onClick={() => this.props.tenderClicked(tender._id)}
+            >
               {tender._id.toString().substring(18, 24)}
-            </a>
+            </Link>
           </td>
           <td>{`${tender.creationDate.toString().substring(0, 10)}`}</td>
-          <td>{tender.createdBy}</td>
+          <td>{tender.createdBy.firstName}</td>
           <td>{tender.deliveryLocation}</td>
-          <td>{`${tender.budgetAmount}USD`}</td>
+          <td>{`${tender.budgetAmount} USD`}</td>
           <td>
             <span className={`badge badge-${styleOfBadge} f-14`}>
               {tender.status}

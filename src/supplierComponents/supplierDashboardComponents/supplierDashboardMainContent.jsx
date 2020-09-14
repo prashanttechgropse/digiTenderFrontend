@@ -149,7 +149,9 @@ class SupplierDashboardMainContent extends Component {
                   typesetting industry.
                 </p>
               </div>
-              <RecentlyAddedTenders />
+              <RecentlyAddedTenders
+                tenderClicked={(tenderId) => this.props.tenderClicked(tenderId)}
+              />
             </div>
           </div>
         </div>

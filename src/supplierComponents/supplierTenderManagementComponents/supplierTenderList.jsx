@@ -1,7 +1,97 @@
 import React, { Component } from "react";
+import httpService from "../../services/httpService";
+import config from "../../config.json";
+import { toast } from "react-toastify";
+import Pagination from "../../microComponents/pagination";
+import { paginate } from "../../utilities/paginate";
+import { Link } from "react-router-dom";
 class SupplierTenderList extends Component {
-  state = {};
+  state = {
+    tenderList: null,
+    displayTenderList: null,
+    currentPage: null,
+    pageSize: null,
+  };
+
+  constructor(props) {
+    super(props);
+    this.state.currentPage = 1;
+    this.state.pageSize = 4;
+  }
+
+  async componentDidMount() {
+    try {
+      const { data } = await httpService.get(
+        `${config.apiendpoint}/supplier/myTenderList`
+      );
+      const { tenderList } = data;
+      await this.setState({ tenderList });
+      const displayTenderList = paginate(
+        this.state.tenderList,
+        this.state.currentPage,
+        this.state.pageSize
+      );
+      await this.setState({ displayTenderList });
+    } catch (error) {
+      toast.error(error.message);
+      return;
+    }
+  }
+
+  handlePageChange = async (pageNumber) => {
+    this.setState({ currentPage: pageNumber });
+    const displayTenderList = paginate(
+      this.state.tenderList,
+      pageNumber,
+      this.state.pageSize
+    );
+    await this.setState({ displayTenderList });
+  };
+
+  renderTenderList = () => {
+    const tenderList = this.state.displayTenderList;
+    if (tenderList === null) return;
+    let srNo = (this.state.currentPage - 1) * this.state.pageSize;
+    let styleOfBadge;
+    return tenderList.map((tender) => {
+      srNo++;
+      if (tender.status === "completed") styleOfBadge = "success";
+      else if (tender.status === "cancelled") styleOfBadge = "danger";
+      else if (tender.status === "awarded") styleOfBadge = "primary";
+      else {
+        styleOfBadge = "warning";
+      }
+
+      return (
+        <tr role="row">
+          <td>{`#000${srNo}`}</td>
+          <td>
+            <Link
+              to={"/supplier/tenderDetails"}
+              onClick={() => this.props.tenderClicked(tender._id)}
+            >
+              {tender._id.toString().substring(18, 24)}
+            </Link>
+          </td>
+          <td>{`${tender.budgetAmount} USD`}</td>
+          <td>{`${tender.creationDate.toString().substring(0, 10)}`}</td>
+          <td>{tender.deliveryDate.toString().substring(0, 10)}</td>
+          <td>{tender.closingDate.toString().substring(0, 10)}</td>
+
+          <td>
+            <span className={`badge badge-${styleOfBadge} f-14`}>
+              {tender.status === "completed"
+                ? tender.paymentStatus
+                : tender.status}
+            </span>
+          </td>
+        </tr>
+      );
+    });
+  };
+
   render() {
+    if (this.state.tenderList === null) return null;
     return (
       <div className="container-fluid">
         <div className="breadcrumb-header justify-content-between">
@@ -31,16 +121,10 @@ class SupplierTenderList extends Component {
               </div>
               <div className="card-body">
                 <div className="table-responsive">
-                  <div
-                    id="example1_wrapper"
-                    className="dataTables_wrapper dt-bootstrap4"
-                  >
+                  <div className="dataTables_wrapper dt-bootstrap4">
                     <div className="row">
                       <div className="col-sm-12">
-                        <table
-                          className="table text-md-nowrap dataTable"
-                          id="example1"
-                        >
+                        <table className="table text-md-nowrap dataTable ">
                           <thead>
                             <tr role="row">
                               <th>Sr no</th>
@@ -52,77 +136,18 @@ class SupplierTenderList extends Component {
                               <th>Status</th>
                             </tr>
                           </thead>
-                          <tbody>
-                            <tr role="row">
-                              <td>#0001</td>
-                              <td>
-                                <a href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/supplier/tender-detail">
-                                  #T686868
-                                </a>
-                              </td>
-                              <td>5000.00 USD</td>
-                              <td>10-07-2020</td>
-                              <td>20-09-2020</td>
-                              <td>30-09-2020</td>
-                              <td>
-                                <span className="badge badge-primary f-14">
-                                  Awarded
-                                </span>
-                              </td>
-                            </tr>
-                            <tr role="row">
-                              <td>#0002</td>
-                              <td>
-                                <a href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/supplier/tender-detail">
-                                  #T686868
-                                </a>
-                              </td>
-                              <td>5000.00 USD</td>
-                              <td>10-07-2020</td>
-                              <td>20-09-2020</td>
-                              <td>30-09-2020</td>
-                              <td>
-                                <span className="badge badge-success f-14">
-                                  Paid
-                                </span>
-                              </td>
-                            </tr>
-                            <tr role="row">
-                              <td>#0003</td>
-                              <td>
-                                <a href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/supplier/tender-detail">
-                                  #T686868
-                                </a>
-                              </td>
-                              <td>5000.00 USD</td>
-                              <td>10-07-2020</td>
-                              <td>20-09-2020</td>
-                              <td>30-09-2020</td>
-                              <td>
-                                <span className="badge badge-warning f-14">
-                                  In Process
-                                </span>
-                              </td>
-                            </tr>
-                            <tr role="row">
-                              <td>#0004</td>
-                              <td>
-                                <a href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/supplier/tender-detail">
-                                  #T686868
-                                </a>
-                              </td>
-                              <td>5000.00 USD</td>
-                              <td>10-07-2020</td>
-                              <td>20-09-2020</td>
-                              <td>30-09-2020</td>
-                              <td>
-                                <span className="badge badge-danger f-14">
-                                  Cancelled
-                                </span>
-                              </td>
-                            </tr>
-                          </tbody>
+                          <tbody>{this.renderTenderList()}</tbody>
                         </table>
+                        <div className="row">
+                          <div className="col-sm-12">
+                            <Pagination
+                              currentPage={this.state.currentPage}
+                              totalItemsCount={this.state.tenderList.length}
+                              pageSize={this.state.pageSize}
+                              onPageChange={this.handlePageChange}
+                            />
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>

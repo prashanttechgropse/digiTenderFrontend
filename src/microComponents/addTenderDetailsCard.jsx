@@ -14,7 +14,7 @@ class AddTenderDetailsCard extends Form {
   schema = {
     closingDate: Joi.date().required(),
     deliveryDate: Joi.date().required(),
-    budgetAmount: Joi.string().required(),
+    budgetAmount: Joi.number().required(),
     deliveryLocation: Joi.string().required(),
   };
 

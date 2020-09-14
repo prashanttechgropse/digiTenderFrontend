@@ -13,7 +13,7 @@ class CustomerSaveForLater extends Component {
     super(props);
     this.state.currentPage = 1;
     this.state.pageSize = 1;
-    this.state.displayTenderlist = paginate(
+    this.state.displayTenderList = paginate(
       this.props.tenderList,
       this.state.currentPage,
       this.state.pageSize
@@ -22,18 +22,18 @@ class CustomerSaveForLater extends Component {
 
   handlePageChange = (pageNumber) => {
     this.setState({ currentPage: pageNumber });
-    const displayTenderlist = paginate(
+    const displayTenderList = paginate(
       this.props.tenderList,
       pageNumber,
       this.state.pageSize
     );
-    this.setState({ displayTenderlist });
+    this.setState({ displayTenderList });
   };
 
   renderTenderTable = () => {
     let srNo = (this.state.currentPage - 1) * this.state.pageSize;
 
-    let tenderList = this.state.displayTenderlist;
+    let tenderList = this.state.displayTenderList;
     return tenderList.map((tender) => {
       srNo++;
       return (
