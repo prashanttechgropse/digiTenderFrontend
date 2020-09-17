@@ -8,7 +8,7 @@ class DisplayTenderItemList extends Component {
       const index = itemNo;
       itemNo++;
       return (
-        <tr role="row">
+        <tr key={itemNo} role="row">
           <td>{`#000${itemNo}`}</td>
           <td>{item.category}</td>
           <td>{item.name} </td>

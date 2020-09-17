@@ -30,7 +30,7 @@ class LoginForm extends Form {
 
     //check whether registeration process completed or not
     if (data.registerationCompleted) {
-      const stake = data.profileType;
+      const stake = await data.profileType;
       toast.success(data.message);
       this.props.history.push(`/${stake.toLowerCase()}`);
       window.location.reload();

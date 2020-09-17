@@ -6,7 +6,7 @@ import AddItemCard from "../../microComponents/addItemCard";
 import UploadTenderTermsAndConditions from "../../microComponents/uploadTenderTermsAndConditions";
 
 import AddTenderDetailsCard from "../../microComponents/addTenderDetailsCard";
-import createaTender from "../../services/httpService.js";
+
 import { createTender } from "../../services/tenderService";
 
 class CustomerCreateTender extends Component {
@@ -24,8 +24,8 @@ class CustomerCreateTender extends Component {
   };
 
   schema = {
-    closingDate: Joi.date().required(),
-    deliveryDate: Joi.date().required(),
+    closingDate: Joi.date().min("now").required(),
+    deliveryDate: Joi.date().greater(Joi.ref("closingDate")).required(),
     budgetAmount: Joi.number().required(),
     deliveryLocation: Joi.string().required(),
     isPublished: Joi.boolean().required(),

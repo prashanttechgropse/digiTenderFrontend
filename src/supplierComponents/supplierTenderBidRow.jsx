@@ -4,7 +4,7 @@ import Joi from "joi-browser";
 class SupplierTenderBidRow extends Form {
   state = {
     formData: {
-      price: "",
+      price: null,
     },
     errors: {},
   };
@@ -57,7 +57,11 @@ class SupplierTenderBidRow extends Form {
             )}
           </div>
         </td>
-        <td>100 </td>
+        <td>
+          {this.state.formData.price === null
+            ? ""
+            : parseInt(this.state.formData.price) * parseInt(item.quantity)}
+        </td>
       </tr>
     );
   }

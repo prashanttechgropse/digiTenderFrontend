@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import Pagination from "../../microComponents/pagination";
 import { paginate } from "../../utilities/paginate";
 import { Link } from "react-router-dom";
-class SupplierTenderList extends Component {
+class TenderList extends Component {
   state = {
     tenderList: null,
     displayTenderList: null,
@@ -22,7 +22,7 @@ class SupplierTenderList extends Component {
   async componentDidMount() {
     try {
       const { data } = await httpService.get(
-        `${config.apiendpoint}/supplier/myTenderList`
+        `${config.apiendpoint}/tenderList`
       );
       const { tenderList } = data;
       await this.setState({ tenderList });
@@ -161,4 +161,4 @@ class SupplierTenderList extends Component {
   }
 }
 
-export default SupplierTenderList;
+export default TenderList;

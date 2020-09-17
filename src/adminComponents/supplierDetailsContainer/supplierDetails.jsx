@@ -4,11 +4,11 @@ class SupplierDetails extends Component {
   state = {};
 
   renderTenderList = () => {
-    if (!this.props.supplier.tenders) return null;
+    if (!this.props.supplier.tendersAwarded) return null;
 
     let srNo = 0;
     let styleOfBadge;
-    let tenderList = this.props.supplier.tenders;
+    let tenderList = this.props.supplier.tendersAwarded;
     return tenderList.map((tender) => {
       srNo++;
       if (tender.status === "paid") styleOfBadge = "success";

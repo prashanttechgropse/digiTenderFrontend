@@ -17,8 +17,10 @@ import config from "./config.json";
 import { toast } from "react-toastify";
 import { Route } from "react-router-dom";
 import CustomerDetailsContainer from "./adminComponents/customerDetailsComponents/customerDetailsContainer";
-import CustomerTenderDetails from "./customerComponents/customerTenderManagementComponents/customerTenderDetails";
+
 import SupplierDetailsContainer from "./adminComponents/supplierDetailsContainer/supplierDetailsContainer";
+import SupplierQuotationDetails from "./customerComponents/supllierQuotationDetails";
+import TenderDetails from "./customerComponents/customerTenderManagementComponents/TenderDetails";
 
 class AdminApp extends Component {
   state = {
@@ -29,6 +31,7 @@ class AdminApp extends Component {
     displayCustomerDetails: "",
     displaySupplierDetails: "",
     displayTenderDetails: null,
+    displayBidId: null,
   };
 
   componentDidMount = async () => {
@@ -80,6 +83,12 @@ class AdminApp extends Component {
     );
     this.setState({ displayTenderDetails });
     console.log(this.state.displayTenderDetails);
+  };
+
+  displayBidDetails = async (bidId) => {
+    console.log("this is the bidId");
+    console.log(bidId);
+    this.setState({ displayBidId: bidId });
   };
 
   checkAdminPopulated = () => {
@@ -146,9 +155,17 @@ class AdminApp extends Component {
               />
             </Route>
             <Route exact path="/admin/tenderDetails">
-              <CustomerTenderDetails
+              <TenderDetails
+                profileType="admin"
                 tender={this.state.displayTenderDetails}
                 {...this.props}
+                bidClicked={(bidId) => this.displayBidDetails(bidId)}
+              />
+            </Route>
+            <Route exact path="/admin/supplierQuotation">
+              <SupplierQuotationDetails
+                {...this.props}
+                bidId={this.state.displayBidId}
               />
             </Route>
             <Route exact path="/admin">

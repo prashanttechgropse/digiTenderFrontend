@@ -5,13 +5,13 @@ class ProfileDropDown extends Component {
   render() {
     return (
       <div className="dropdown main-profile-menu nav nav-item nav-link">
-        <Link className="profile-user d-flex">
+        <a className="profile-user d-flex">
           <img
             src={
               "https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/common/img/customer/01.jpg"
             }
           />
-        </Link>
+        </a>
         <div className="dropdown-menu">
           <div className="main-header-profile bg-primary p-3">
             <div className="d-flex wd-100p">

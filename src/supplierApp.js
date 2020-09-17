@@ -11,7 +11,7 @@ import EditProfile from "./macroComponents/editProfile";
 import SupplierDeliveryNoteMainContent from "./supplierComponents/supplierDeliveryNotesComponents/supplierDeliveryNoteMainContent";
 import SupplierDashboardMainContent from "./supplierComponents/supplierDashboardComponents/supplierDashboardMainContent";
 import SupplierSideBar from "./supplierComponents/supplierSideBar";
-import SupplierTenderList from "./supplierComponents/supplierTenderManagementComponents/supplierTenderList";
+import TenderList from "./supplierComponents/supplierTenderManagementComponents/supplierTenderList";
 import SupplierSaveForLater from "./supplierComponents/supplierTenderManagementComponents/supplierSaveForLater";
 import SupplierTransactionManagement from "./supplierComponents/supplierTenderManagementComponents/supplierTransactionManagement";
 import SupplierHistory from "./supplierComponents/supplierTenderManagementComponents/supplierHistory";
@@ -58,13 +58,19 @@ class SupplierApp extends Component {
               <SupplierDeliveryNoteMainContent />;
             </Route>
             <Route exact path="/supplier/tenderList">
-              <SupplierTenderList tenderClicked={this.displayTenderDetailsID} />
+              <TenderList tenderClicked={this.displayTenderDetailsID} />
             </Route>
             <Route exact path="/supplier/saveForLater">
-              <SupplierSaveForLater />;
+              <SupplierSaveForLater
+                tenderClicked={this.displayTenderDetailsID}
+              />
+              ;
             </Route>
             <Route exact path="/supplier/transactionManagement">
-              <SupplierTransactionManagement />;
+              <SupplierTransactionManagement
+                tenderClicked={this.displayTenderDetailsID}
+              />
+              ;
             </Route>
             <Route exact path="/supplier/history">
               <SupplierHistory />;
@@ -91,7 +97,10 @@ class SupplierApp extends Component {
               <ChangePassword {...this.props} />
             </Route>
             <Route exact path="/supplier/tenderDetails">
-              <SupllierBid tenderId={this.state.displayTenderDetailsId} />
+              <SupllierBid
+                {...this.props}
+                tenderId={this.state.displayTenderDetailsId}
+              />
             </Route>
             <Route exact path="/supplier">
               <SupplierDashboardMainContent

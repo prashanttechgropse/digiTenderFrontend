@@ -20,6 +20,21 @@ export async function createTender(formData) {
   }
 }
 
+export async function acceptTender(reqDetails) {
+  try {
+    const { data } = await httpService.post(
+      `${apiendpoint}/customer/acceptTender`,
+      reqDetails
+    );
+    toast.success(data.message);
+    if (!data.message) toast.success(data);
+    return { data };
+  } catch (error) {
+    if (error.response) toast.error(error.response.data);
+    return { error };
+  }
+}
+
 export async function cancelTender(id) {
   try {
     const { data } = await httpService.post(

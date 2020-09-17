@@ -63,7 +63,7 @@ class RecentlyAddedTenders extends Component {
                 <div>
                   <div className="row">
                     <div className="col-sm-12">
-                      <table className="table text-md-nowrap">
+                      <table className="table text-md-nowrap dataTable">
                         <thead>
                           <tr role="row">
                             <th>Sr no</th>

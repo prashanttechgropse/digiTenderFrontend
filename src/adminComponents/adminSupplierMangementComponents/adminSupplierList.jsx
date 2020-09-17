@@ -43,7 +43,7 @@ class AdminSupplierList extends Component {
           <td>{supplier.firstName}</td>
           <td>{supplier.entityRegistrationNo}</td>
           <td>{supplier.contactNumber}</td>
-          <td>{`${supplier.tenders.length} Tenders`}</td>
+          <td>{`${supplier.tendersAwarded.length} Tenders`}</td>
           <td>
             <span className="badge badge-primary f-14">Active</span>
           </td>

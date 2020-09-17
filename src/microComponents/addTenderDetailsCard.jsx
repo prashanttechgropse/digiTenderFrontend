@@ -12,10 +12,31 @@ class AddTenderDetailsCard extends Form {
     errors: {},
   };
   schema = {
-    closingDate: Joi.date().required(),
-    deliveryDate: Joi.date().required(),
+    closingDate: Joi.date().min("now").required(),
+    deliveryDate: Joi.date().greater(Joi.ref("closingDate")).required(),
     budgetAmount: Joi.number().required(),
     deliveryLocation: Joi.string().required(),
+  };
+
+  validateOnChange = (input) => {
+    let obj = { [input.name]: input.value };
+    let subSchema;
+    if (`${[input.name]}` === "deliveryDate") {
+      console.log(this.state.formData.closingDate);
+      obj = {
+        closingDate: this.state.formData.closingDate,
+        [input.name]: input.value,
+      };
+      subSchema = {
+        closingDate: this.schema["closingDate"],
+        [input.name]: this.schema[input.name],
+      };
+    } else {
+      subSchema = { [input.name]: this.schema[input.name] };
+    }
+    const { error } = Joi.validate(obj, subSchema);
+    if (!error) return null;
+    return error.details[0].message;
   };
 
   handleChange = async (e) => {
@@ -27,8 +48,11 @@ class AddTenderDetailsCard extends Form {
     //setting state according to input
     const formData = { ...this.state.formData };
     formData[e.currentTarget.name] = e.currentTarget.value;
-    this.setState({ formData, errors });
-    this.props.updateTenderDetails(this.state.formData, this.state.errors);
+    await this.setState({ formData, errors });
+    await this.props.updateTenderDetails(
+      this.state.formData,
+      this.state.errors
+    );
   };
 
   render() {

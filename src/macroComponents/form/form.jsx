@@ -48,7 +48,7 @@ class Form extends Component {
     //setting state according to input
     const formData = { ...this.state.formData };
     formData[e.currentTarget.name] = e.currentTarget.value;
-    this.setState({ formData, errors });
+    await this.setState({ formData, errors });
   };
 
   renderInput = (name, label, type = "text") => {

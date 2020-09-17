@@ -20,12 +20,14 @@ import config from "./config.json";
 import httpService from "./services/httpService";
 import { toast } from "react-toastify";
 import { Route } from "react-router-dom";
-import CustomerTenderDetails from "./customerComponents/customerTenderManagementComponents/customerTenderDetails";
+import SupplierQuotationDetails from "./customerComponents/supllierQuotationDetails";
+import TenderDetails from "./customerComponents/customerTenderManagementComponents/TenderDetails";
 
 class CustomerApp extends Component {
   state = {
     customer: null,
     displayTenderDetails: null,
+    displayBidId: null,
   };
 
   async componentDidMount() {
@@ -50,11 +52,17 @@ class CustomerApp extends Component {
     }
   }
 
-  displayTenderDetails = (tenderId) => {
+  displayTenderDetails = async (tenderId) => {
     const displayTenderDetails = this.state.customer.details.tenders.find(
       (tender) => tender._id == tenderId
     );
     this.setState({ displayTenderDetails });
+  };
+
+  displayBidDetails = async (bidId) => {
+    console.log("this is the bidId");
+    console.log(bidId);
+    this.setState({ displayBidId: bidId });
   };
 
   checkCustomerPopulated = () => {
@@ -102,9 +110,17 @@ class CustomerApp extends Component {
               <CustomerTransactionList />
             </Route>
             <Route exact path="/customer/tenderDetails">
-              <CustomerTenderDetails
+              <TenderDetails
+                profileType={this.state.customer.profileType}
                 tender={this.state.displayTenderDetails}
                 {...this.props}
+                bidClicked={(bidId) => this.displayBidDetails(bidId)}
+              />
+            </Route>
+            <Route exact path="/customer/supplierQuotation">
+              <SupplierQuotationDetails
+                {...this.props}
+                bidId={this.state.displayBidId}
               />
             </Route>
             <Route exact path="/customer/termsConditions">

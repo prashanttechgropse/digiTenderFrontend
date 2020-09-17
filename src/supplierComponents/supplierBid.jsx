@@ -8,8 +8,13 @@ import Joi from "joi-browser";
 import { Link } from "react-router-dom";
 import SupplierTenderBidRow from "./supplierTenderBidRow";
 
+import { createBid } from "../services/bidService";
+
+const fileDownload = require("js-file-download");
+
 class SupllierBid extends Component {
   state = {
+    bid: null,
     tender: null,
     errors: {},
     acceptTermsConditions: false,
@@ -30,6 +35,22 @@ class SupllierBid extends Component {
       )
       .min(1),
   }).unknown();
+
+  downloadTenderTerms = async () => {
+    const { tender } = this.state;
+    try {
+      const { data } = await httpService.get(
+        `${config.apiendpoint}/tenderDocuments/${tender._id}/${tender.tenderDoc}`,
+        {
+          responseType: "blob",
+        }
+      );
+      await fileDownload(data, `${tender.tenderDoc}`);
+    } catch (error) {
+      toast.error(error.message);
+      return;
+    }
+  };
 
   toggleTermsConditions = async () => {
     let acceptTermsConditions = this.state.acceptTermsConditions;
@@ -52,20 +73,51 @@ class SupllierBid extends Component {
 
   handleSubmit = async (e) => {
     e.preventDefault();
+
     const errors = this.validateOnSubmit();
     this.setState({ errors: errors || {} });
     console.log(errors);
 
     if (errors) return;
 
+    let bid = {};
+    bid.tender = this.state.tender._id;
+    bid.itemList = this.state.tender.itemList;
+    if (e.currentTarget.name === "submit") {
+      bid.isPublished = true;
+    } else bid.isPublished = false;
+
+    bid.totalAmount = 0;
+    bid.totalAmount =
+      bid.totalAmount +
+      parseInt(
+        bid.itemList.map((item) => {
+          return parseInt(item.price) * parseInt(item.quantity);
+        })
+      );
+    console.log(bid.totalAmount);
+
+    await this.setState({ bid });
+
     await this.doSubmit();
   };
 
   doSubmit = async () => {
-    console.log(this.state.tender.itemList);
+    const { bid, tender } = this.state;
+    if (bid.totalAmount > tender.budgetAmount) {
+      toast.error("Bid total amount exceeds tender budget amount");
+      return;
+    }
+    const { data, error } = await createBid(bid);
+    if (data) {
+      this.props.history.push("/supplier");
+      window.location.reload();
+    }
+    if (error) return;
   };
 
   async componentDidMount() {
+    if (!this.props.tenderId) return;
     try {
       const { data } = await httpService.get(
         `${config.apiendpoint}/tenders/${this.props.tenderId}`
@@ -154,6 +206,10 @@ class SupllierBid extends Component {
                           <tbody>{this.renderItemList()} </tbody>
                         </table>
                       </div>
+                      {`click here to download --> `}
+                      <Link onClick={this.downloadTenderTerms}>
+                        Tender Terms and conditions
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -187,10 +243,12 @@ class SupllierBid extends Component {
           </div>
           <div className="col-md-4">
             <button
+              onClick={this.handleSubmit}
               className="btn btn-primary-gradient btn-block"
               disabled={
                 !this.state.acceptTermsConditions || this.validateOnSubmit()
               }
+              name="saveDraft"
             >
               Save Draft
             </button>
@@ -202,6 +260,7 @@ class SupllierBid extends Component {
               disabled={
                 !this.state.acceptTermsConditions || this.validateOnSubmit()
               }
+              name="submit"
             >
               Submit
             </button>
