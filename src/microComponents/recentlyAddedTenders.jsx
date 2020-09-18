@@ -40,7 +40,11 @@ class RecentlyAddedTenders extends Component {
           <td>{`#000${srNo}`}</td>
           <td>
             <Link
-              to={"/supplier/tenderDetails"}
+              to={
+                tender.status == "inProcess"
+                  ? "/supplier/tenderDetails"
+                  : "/supplier/myBidDetails"
+              }
               onClick={() => this.props.tenderClicked(tender._id)}
             >
               {tender._id.toString().substring(18, 24)}

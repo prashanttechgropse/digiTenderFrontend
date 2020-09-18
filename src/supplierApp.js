@@ -23,6 +23,7 @@ import { toast } from "react-toastify";
 import ChangePassword from "./userComponents/changePassword";
 import { Route } from "react-router-dom";
 import SupllierBid from "./supplierComponents/supplierBid";
+import SupplierMyBidDetails from "./supplierComponents/supplierMyBidDetails";
 
 class SupplierApp extends Component {
   state = { supplier: "", displayTenderDetailsId: null };
@@ -98,6 +99,12 @@ class SupplierApp extends Component {
             </Route>
             <Route exact path="/supplier/tenderDetails">
               <SupllierBid
+                {...this.props}
+                tenderId={this.state.displayTenderDetailsId}
+              />
+            </Route>
+            <Route exact path="/supplier/myBidDetails">
+              <SupplierMyBidDetails
                 {...this.props}
                 tenderId={this.state.displayTenderDetailsId}
               />

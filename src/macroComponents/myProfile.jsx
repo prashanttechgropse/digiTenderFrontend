@@ -41,7 +41,9 @@ class MyProfile extends Component {
                       <div className="ml-auto">
                         <h5 className="tx-13">No Of Tenders</h5>
                         <h2 className="mb-0 tx-22 mb-1 mt-1">
-                          {user.details.tenders.length}
+                          {user.profileType == "customer"
+                            ? user.details.tenders.length
+                            : user.details.tendersAwarded.length}
                         </h2>
                       </div>
                     </div>

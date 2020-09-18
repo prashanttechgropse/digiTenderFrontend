@@ -107,7 +107,11 @@ class CustomerApp extends Component {
               <ChangePassword />;
             </Route>
             <Route exact path="/customer/transactionList">
-              <CustomerTransactionList />
+              <CustomerTransactionList
+                tenderClicked={(tenderId) =>
+                  this.displayTenderDetails(tenderId)
+                }
+              />
             </Route>
             <Route exact path="/customer/tenderDetails">
               <TenderDetails
