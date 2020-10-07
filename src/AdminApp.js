@@ -28,10 +28,6 @@ class AdminApp extends Component {
     customerList: "",
     supplierList: "",
     tenderList: "",
-    displayCustomerDetails: "",
-    displaySupplierDetails: "",
-    displayTenderDetails: null,
-    displayBidId: null,
   };
 
   componentDidMount = async () => {
@@ -63,34 +59,6 @@ class AdminApp extends Component {
     }
   };
 
-  displayCustomerDetails = async (customerId) => {
-    const displayCustomerDetails = this.state.customerList.find(
-      (customer) => customer._id === customerId
-    );
-    this.setState({ displayCustomerDetails });
-  };
-
-  displaySupplierDetails = async (supplierId) => {
-    const displaySupplierDetails = this.state.supplierList.find(
-      (supplier) => supplier._id === supplierId
-    );
-    this.setState({ displaySupplierDetails });
-  };
-
-  displayTenderDetails = async (tenderId) => {
-    const displayTenderDetails = this.state.tenderList.find(
-      (tender) => tender._id == tenderId
-    );
-    this.setState({ displayTenderDetails });
-    console.log(this.state.displayTenderDetails);
-  };
-
-  displayBidDetails = async (bidId) => {
-    console.log("this is the bidId");
-    console.log(bidId);
-    this.setState({ displayBidId: bidId });
-  };
-
   checkAdminPopulated = () => {
     if (this.state.admin !== "") {
       return (
@@ -102,83 +70,83 @@ class AdminApp extends Component {
           <AdminSideBar admin={this.state.admin} />
           <div className="main-content app-content">
             <MainContentHeaderBar user={this.state.admin} />
-            <Route exact path="/admin/customerList">
-              <AdminCustomerList
-                customerList={this.state.customerList}
-                customerClicked={(customerId) =>
-                  this.displayCustomerDetails(customerId)
-                }
-              />
-            </Route>
-            <Route exact path="/admin/supplierList">
-              <AdminSupplierList
-                supplierList={this.state.supplierList}
-                supplierClicked={(supplierId) =>
-                  this.displaySupplierDetails(supplierId)
-                }
-              />
-            </Route>
-            <Route exact path="/admin/deliveryNoteList">
-              <AdminDeliveryNoteList />
-            </Route>
-            <Route exact path="/admin/paymentList">
-              <AdminPaymentList />
-            </Route>
-            <Route exact path="/admin/createCategory">
-              <AdminCreateCategory />
-            </Route>
-            <Route exact path="/admin/helpSupport">
-              <AdminHelpSupport />
-            </Route>
-            <Route exact path="/admin/termsConditions">
-              <AdminTermsConditions />
-            </Route>
-            <Route exact path="/admin/changePassword">
-              <ChangePassword />
-            </Route>
-            <Route exact path="/admin/customerDetails">
-              <CustomerDetailsContainer
-                customer={this.state.displayCustomerDetails}
-                tenderClicked={(tenderId) =>
-                  this.displayTenderDetails(tenderId)
-                }
-                {...this.props}
-              />
-            </Route>
-            <Route exact path="/admin/supplierDetails">
-              <SupplierDetailsContainer
-                supplier={this.state.displaySupplierDetails}
-                tenderClicked={(tenderId) =>
-                  this.displayTenderDetails(tenderId)
-                }
-                {...this.props}
-              />
-            </Route>
-            <Route exact path="/admin/tenderDetails">
-              <TenderDetails
-                profileType="admin"
-                tender={this.state.displayTenderDetails}
-                {...this.props}
-                bidClicked={(bidId) => this.displayBidDetails(bidId)}
-              />
-            </Route>
-            <Route exact path="/admin/supplierQuotation">
-              <SupplierQuotationDetails
-                {...this.props}
-                bidId={this.state.displayBidId}
-              />
-            </Route>
+            <Route
+              exact
+              path="/admin/customerList"
+              component={AdminCustomerList}
+            />
+
+            <Route
+              exact
+              path="/admin/supplierList"
+              component={AdminSupplierList}
+            />
+
+            <Route
+              exact
+              path="/admin/deliveryNoteList"
+              component={AdminDeliveryNoteList}
+            />
+
+            <Route
+              exact
+              path="/admin/paymentList"
+              component={AdminPaymentList}
+            />
+
+            <Route
+              exact
+              path="/admin/createCategory"
+              component={AdminCreateCategory}
+            />
+
+            <Route
+              exact
+              path="/admin/helpSupport"
+              component={AdminHelpSupport}
+            />
+
+            <Route
+              exact
+              path="/admin/termsConditions"
+              component={AdminTermsConditions}
+            />
+
+            <Route
+              exact
+              path="/admin/changePassword"
+              component={ChangePassword}
+            />
+
+            <Route
+              exact
+              path="/admin/customerDetails/:customerId"
+              component={CustomerDetailsContainer}
+            />
+
+            <Route
+              exact
+              path="/admin/supplierDetails/:supplierId"
+              component={SupplierDetailsContainer}
+            />
+
+            <Route
+              exact
+              path="/admin/tenderDetails/:tenderId"
+              component={TenderDetails}
+            />
+
+            <Route
+              exact
+              path="/admin/supplierQuotation/:bidId"
+              component={SupplierQuotationDetails}
+            />
+
             <Route exact path="/admin">
               <AdminDashboardMainContent
                 tenderList={this.state.tenderList}
                 customerList={this.state.customerList}
                 supplierList={this.state.supplierList}
-                customerClicked={(customerId) =>
-                  this.displayCustomerDetails(customerId)
-                }
-                supplierClicked={(supplierId) =>
-                  this.displaySupplierDetails(supplierId)
-                }
               />
             </Route>
           </div>

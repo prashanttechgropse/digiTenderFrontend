@@ -12,7 +12,7 @@ class TenderListDisplayCard extends Component {
   constructor(props) {
     super(props);
     this.state.currentPage = 1;
-    this.state.pageSize = 4;
+    this.state.pageSize = 3;
     this.state.displayTenderlist = paginate(
       this.props.tenderList,
       this.state.currentPage,
@@ -46,10 +46,7 @@ class TenderListDisplayCard extends Component {
         <tr role="row">
           <td>{`#000${srNo}`}</td>
           <td>
-            <Link
-              to={"/customer/tenderDetails"}
-              onClick={() => this.props.tenderClicked(tender._id)}
-            >
+            <Link to={`/${this.props.profileType}/tenderDetails/${tender._id}`}>
               {tender._id.toString().substring(18, 24)}
             </Link>
           </td>

@@ -8,10 +8,26 @@ import { toast } from "react-toastify";
 class CustomerDetailsContainer extends Component {
   state = {
     userCurrentStatus: null,
+    customer: null,
   };
-  constructor(props) {
-    super(props);
-    this.state.userCurrentStatus = this.props.customer.user.isApproved;
+
+  async componentDidMount() {
+    if (!this.props.match.params.customerId) return null;
+    let data;
+    try {
+      data = await httpService.get(
+        `${config.apiendpoint}/admin/customers/${this.props.match.params.customerId}`
+      );
+
+      await this.setState({ customer: data.data.customer });
+      await this.setState({
+        userCurrentStatus: data.data.customer.user.isApproved,
+      });
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
+      return;
+    }
   }
 
   handleUserStatus = async (e) => {
@@ -25,7 +41,7 @@ class CustomerDetailsContainer extends Component {
       const { data, error } = await httpService.post(
         `${config.apiendpoint}/admin/userChangeStatus`,
         {
-          userId: this.props.customer.user._id,
+          userId: this.state.customer.user._id,
           status: isApproved,
         }
       );
@@ -40,6 +56,7 @@ class CustomerDetailsContainer extends Component {
   };
 
   render() {
+    if (this.state.customer === null) return null;
     return (
       <div className="container-fluid">
         <div className="breadcrumb-header justify-content-between">
@@ -52,7 +69,7 @@ class CustomerDetailsContainer extends Component {
             </div>
           </div>
         </div>
-        <CustomerDetailsCards customer={this.props.customer} />
+        <CustomerDetailsCards customer={this.state.customer} />
         <div class="breadcrumb-header justify-content-between">
           <div class="my-auto">
             <div class="d-flex">
@@ -80,10 +97,7 @@ class CustomerDetailsContainer extends Component {
             </div>
           </div>
         </div>
-        <CustomerDetails
-          customer={this.props.customer}
-          tenderClicked={(tenderId) => this.props.tenderClicked(tenderId)}
-        />
+        <CustomerDetails customer={this.state.customer} />
       </div>
     );
   }

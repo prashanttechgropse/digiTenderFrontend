@@ -24,15 +24,9 @@ class AdminDashboardMainContent extends Component {
         />
         <AdminDashBoardRecentlyAddedCustomers
           customerList={this.props.customerList}
-          customerClicked={(customerId) =>
-            this.props.customerClicked(customerId)
-          }
         />
         <AdminRecentlyAddedSupplierList
           supplierList={this.props.supplierList}
-          supplierClicked={(supplierId) =>
-            this.props.supplierClicked(supplierId)
-          }
         />
       </div>
     );

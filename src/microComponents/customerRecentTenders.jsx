@@ -11,20 +11,19 @@ class RecentlyAddedTenders extends Component {
     );
     return tenderList.map((tender) => {
       srNo++;
-      if (tender.status === "paid") styleOfBadge = "success";
-      else if (tender.status === "cancelled") styleOfBadge = "danger";
+      if (srNo > 5) return null;
+      if (tender.status === "completed") styleOfBadge = "success";
+      else if (tender.status === "cancelled" || tender.status === "rejected")
+        styleOfBadge = "danger";
       else if (tender.status === "awarded") styleOfBadge = "primary";
       else {
         styleOfBadge = "warning";
       }
       return (
-        <tr role="row">
+        <tr role="row" key={srNo}>
           <td>{`#000${srNo}`}</td>
           <td>
-            <Link
-              to={"/customer/tenderDetails"}
-              onClick={() => this.props.tenderClicked(tender._id)}
-            >
+            <Link to={`/${this.props.profileType}/tenderDetails/${tender._id}`}>
               {tender._id.toString().substring(18, 24)}
             </Link>
           </td>

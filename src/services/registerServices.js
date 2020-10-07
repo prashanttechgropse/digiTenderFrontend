@@ -19,10 +19,40 @@ export async function createAccount(formData) {
   }
 }
 
+export async function createAccountSecondaryUser(formData) {
+  try {
+    await httpService.post(`${apiendpoint}/registerSecondaryUser`, formData);
+    const { data } = await httpService.post(`${apiendpoint}/otpGeneration`, {
+      email: formData.email,
+    });
+    toast.success(data.message);
+    if (!data.message) toast.success(data);
+    return { data };
+  } catch (error) {
+    if (error.response) toast.error(error.response.data);
+    return { error };
+  }
+}
+
 export async function setUpProfileService(formData) {
   try {
     const { data } = await httpService.post(
       `${apiendpoint}/setUpProfile`,
+      formData
+    );
+    toast.success(data.message);
+    if (!data.message) toast.success(data);
+    return { data };
+  } catch (error) {
+    if (error.response) toast.error(error.response.data);
+    return { error };
+  }
+}
+
+export async function setUpSecondarUserProfileService(formData) {
+  try {
+    const { data } = await httpService.post(
+      `${apiendpoint}/setUpSecondaryUserProfile`,
       formData
     );
     toast.success(data.message);

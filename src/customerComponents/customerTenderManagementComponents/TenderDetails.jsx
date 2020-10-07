@@ -1,12 +1,40 @@
 import React, { Component } from "react";
 import * as tenderService from "../../services/tenderService";
 import SupplierBidListForTender from "../supplierBidListForTender";
+import httpService from "../../services/httpService";
+import { toast } from "react-toastify";
+import config from "../../config.json";
 
 class TenderDetails extends Component {
-  state = {};
+  state = { tender: null };
+
+  async componentDidMount() {
+    if (!this.props.match.params.tenderId) return null;
+    let data;
+    try {
+      if (this.props.match.path.includes("/customer")) {
+        data = await httpService.get(
+          `${config.apiendpoint}/customer/myTenders/${this.props.match.params.tenderId}`
+        );
+      }
+      if (this.props.match.path.includes("/admin")) {
+        data = await httpService.get(
+          `${config.apiendpoint}/admin/tenders/${this.props.match.params.tenderId}`
+        );
+      }
+
+      await this.setState({ tender: data.data.tender });
+      console.log(this.state.tender);
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
+      return;
+    }
+  }
+
   displayTenderItems = () => {
     let srNo = 0;
-    return this.props.tender.itemList.map((item) => {
+    return this.state.tender.itemList.map((item) => {
       srNo++;
       return (
         <tr role="row">
@@ -27,13 +55,185 @@ class TenderDetails extends Component {
   };
 
   handleCancelTender = async () => {
-    await tenderService.cancelTender(this.props.tender._id);
+    await tenderService.cancelTender(this.state.tender._id);
     this.props.history.push("/customer");
     window.location.reload();
   };
 
+  handleCompleteTender = async () => {
+    await tenderService.completeTender("customer", this.state.tender._id);
+    this.props.history.push(
+      `/customer/createDeliveryNote/${this.props.match.params.tenderId}`
+    );
+    window.location.reload();
+  };
+
+  handleRejectTender = async () => {
+    await tenderService.rejectTender("customer", this.state.tender._id);
+    this.props.history.push(
+      `/customer/createDeliveryNote/${this.props.match.params.tenderId}`
+    );
+    window.location.reload();
+  };
+
+  handlePublishTender = async () => {
+    await tenderService.publishSavedTender(this.state.tender._id);
+    this.props.history.push("/customer");
+  };
+
+  handleIgnoreTender = async () => {
+    await tenderService.ignoreSavedTender(this.state.tender._id);
+    this.props.history.push("/customer");
+  };
+
+  handleEditTender = async () => {
+    return this.props.history.push(
+      `/customer/editSavedTender/${this.props.match.params.tenderId}`
+    );
+  };
+
+  renderCancelTenderButton() {
+    return (
+      <div className="pr-1 mb-3 mb-xl-0">
+        <button
+          href="#publishmodal"
+          data-target="#publishmodal"
+          data-toggle="modal"
+          class="btn btn-main-primary btn-block"
+        >
+          <i class="fa fa-times"></i> Cancel Tender
+        </button>
+        <div class="modal show" id="publishmodal" aria-modal="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content tx-size-sm">
+              <div class="modal-body tx-center pd-y-20 pd-x-20 pl-4 pr-4">
+                <button
+                  aria-label="Close"
+                  class="close"
+                  data-dismiss="modal"
+                  type="button"
+                >
+                  <span aria-hidden="true">×</span>
+                </button>
+                <i class="fa fa-times-circle tx-100 tx-danger lh-1 mg-t-20 d-inline-block"></i>
+                <h4 class="tx-danger tx-semibold mg-b-20 mb-2">
+                  Confirmation..!!
+                </h4>
+                <p>Do you really want to cancel this Tender ?</p>
+                <div class="text-center mt-4 mb-4">
+                  <a
+                    class="btn btn-primary mr-3"
+                    onClick={this.handleCancelTender}
+                  >
+                    Yes
+                  </a>
+                  <a class="btn btn-primary" data-dismiss="modal">
+                    No
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+  renderCompleteTenderButton() {
+    return (
+      <div className="pr-1 mb-3 mb-xl-0">
+        <button
+          href="#publishmodalComplete"
+          data-target="#publishmodalComplete"
+          data-toggle="modal"
+          className="btn btn-success btn-block"
+        >
+          <i className="fa fa-check"></i> Complete Tender
+        </button>
+        <div class="modal show" id="publishmodalComplete" aria-modal="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content tx-size-sm">
+              <div class="modal-body tx-center pd-y-20 pd-x-20 pl-4 pr-4">
+                <button
+                  aria-label="Close"
+                  class="close"
+                  data-dismiss="modal"
+                  type="button"
+                >
+                  <span aria-hidden="true">×</span>
+                </button>
+                <i class="fa fa-check-circle tx-100 tx-success lh-1 mg-t-20 d-inline-block"></i>
+                <h4 class="tx-success tx-semibold mg-b-20 mb-2">
+                  Confirmation..!!
+                </h4>
+                <p>Do you really want to complete this Tender ?</p>
+                <div class="text-center mt-4 mb-4">
+                  <a
+                    class="btn btn-primary mr-3"
+                    onClick={this.handleCompleteTender}
+                  >
+                    Yes
+                  </a>
+                  <a class="btn btn-primary" data-dismiss="modal">
+                    No
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+  renderRejectTenderButton() {
+    return (
+      <div className="pr-1 mb-3 mb-xl-0">
+        <button
+          href="#publishmodalReject"
+          data-target="#publishmodalReject"
+          data-toggle="modal"
+          class="btn btn-danger btn-block"
+        >
+          <i class="fa fa-times"></i> Reject Tender
+        </button>
+        <div class="modal show" id="publishmodalReject" aria-modal="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content tx-size-sm">
+              <div class="modal-body tx-center pd-y-20 pd-x-20 pl-4 pr-4">
+                <button
+                  aria-label="Close"
+                  class="close"
+                  data-dismiss="modal"
+                  type="button"
+                >
+                  <span aria-hidden="true">×</span>
+                </button>
+                <i class="fa fa-times-circle tx-100 tx-danger lh-1 mg-t-20 d-inline-block"></i>
+                <h4 class="tx-danger tx-semibold mg-b-20 mb-2">
+                  Confirmation..!!
+                </h4>
+                <p>Do you really want to Reject this Tender ?</p>
+                <div class="text-center mt-4 mb-4">
+                  <a
+                    class="btn btn-primary mr-3"
+                    onClick={this.handleRejectTender}
+                  >
+                    Yes
+                  </a>
+                  <a class="btn btn-primary" data-dismiss="modal">
+                    No
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   renderTenderDetails = () => {
-    const { tender } = this.props;
+    const { tender } = this.state;
+    if (tender === null) return null;
     return (
       <React.Fragment>
         <div className="breadcrumb-header justify-content-between">
@@ -45,58 +245,20 @@ class TenderDetails extends Component {
               </span>
             </div>
           </div>
-          {this.props.profileType == "customer" ? (
-            <div className="d-flex my-xl-auto right-content">
-              <div className="pr-1 mb-3 mb-xl-0">
-                <button
-                  disabled={this.props.tender.status != "inProcess"}
-                  href="#publishmodal"
-                  data-target="#publishmodal"
-                  data-toggle="modal"
-                  class="btn btn-main-primary btn-block"
-                >
-                  <i class="fa fa-times"></i> Cancel Tender
-                </button>
-                <div class="modal show" id="publishmodal" aria-modal="true">
-                  <div
-                    class="modal-dialog modal-dialog-centered"
-                    role="document"
-                  >
-                    <div class="modal-content tx-size-sm">
-                      <div class="modal-body tx-center pd-y-20 pd-x-20 pl-4 pr-4">
-                        <button
-                          aria-label="Close"
-                          class="close"
-                          data-dismiss="modal"
-                          type="button"
-                        >
-                          <span aria-hidden="true">×</span>
-                        </button>
-                        <i class="fa fa-times-circle tx-100 tx-danger lh-1 mg-t-20 d-inline-block"></i>
-                        <h4 class="tx-danger tx-semibold mg-b-20 mb-2">
-                          Confirmation..!!
-                        </h4>
-                        <p>Do you really want to cancel this Tender ?</p>
-                        <div class="text-center mt-4 mb-4">
-                          <a
-                            class="btn btn-primary mr-3"
-                            onClick={this.handleCancelTender}
-                          >
-                            Yes
-                          </a>
-                          <a class="btn btn-primary" data-dismiss="modal">
-                            No
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ) : (
-            ""
-          )}
+          <div className="d-flex my-xl-auto right-content">
+            {this.props.match.path.includes("customer") &&
+            this.state.tender.status == "inProcess"
+              ? this.renderCancelTenderButton()
+              : ""}
+            {this.props.match.path.includes("customer") &&
+            this.state.tender.status == "awarded"
+              ? this.renderCompleteTenderButton()
+              : ""}
+            {this.props.match.path.includes("customer") &&
+            this.state.tender.status == "awarded"
+              ? this.renderRejectTenderButton()
+              : ""}
+          </div>
         </div>
         <div className="row row-sm">
           <div className="col-lg-6 col-xl-4 col-md-6 col-12">
@@ -179,16 +341,10 @@ class TenderDetails extends Component {
               </div>
               <div className="card-body">
                 <div className="table-responsive">
-                  <div
-                    id="example1_wrapper"
-                    className="dataTables_wrapper dt-bootstrap4"
-                  >
+                  <div className="dataTables_wrapper dt-bootstrap4">
                     <div className="row">
                       <div className="col-sm-12">
-                        <table
-                          className="table text-md-nowrap dataTable"
-                          id="example1"
-                        >
+                        <table className="table text-md-nowrap dataTable">
                           <thead>
                             <tr role="row">
                               <th>Sr. No</th>
@@ -213,20 +369,133 @@ class TenderDetails extends Component {
   };
 
   render() {
-    if (this.props.tender === null) {
-      this.props.history.push("/");
+    const { tender } = this.state;
+    if (tender === null) {
       return null;
     }
     return (
       <div className="container-fluid">
-        {this.props.tender === null
-          ? this.propshistory.push("/customer")
-          : this.renderTenderDetails()}
-        <SupplierBidListForTender
-          profileType={this.props.profileType}
-          tender={this.props.tender}
-          bidClicked={(bidId) => this.props.bidClicked(bidId)}
-        />
+        {this.renderTenderDetails()}
+        {tender.status !== "pending" ? (
+          <SupplierBidListForTender
+            profileType={
+              this.props.match.path.includes("/customer") ? "customer" : "admin"
+            }
+            tender={this.state.tender}
+            bidClicked={(bidId) => this.props.bidClicked(bidId)}
+          />
+        ) : null}
+        {tender.status == "pending" ? (
+          <React.Fragment>
+            <div className="row">
+              <div className="col-md-12">
+                <button
+                  data-target="#publishmodal2"
+                  data-toggle="modal"
+                  className="btn btn-primary-gradient btn-block m-2"
+                  name="publishTender"
+                >
+                  Publish Tender
+                </button>
+              </div>
+            </div>
+            <div className="modal" id="publishmodal2">
+              <div
+                className="modal-dialog modal-dialog-centered"
+                role="document"
+              >
+                <div className="modal-content tx-size-sm">
+                  <div className="modal-body tx-center pd-y-20 pd-x-20">
+                    <button
+                      aria-label="Close"
+                      className="close"
+                      data-dismiss="modal"
+                      type="button"
+                    >
+                      <span aria-hidden="true">×</span>
+                    </button>
+                    <i className="fa fa-upload tx-100 tx-orange lh-1 mg-t-20 d-inline-block"></i>
+                    <h4 className="tx-orange tx-semibold mg-b-20">
+                      Are you sure u want to publish?
+                    </h4>
+                    <p className="mg-b-20 mg-x-20">
+                      There are many variations of passages of Lorem Ipsum
+                      available, but the majority have suffered alteration.
+                    </p>
+                    <button
+                      aria-label="Close"
+                      className="btn ripple btn-success pd-x-25"
+                      data-dismiss="modal"
+                      type="button"
+                      onClick={this.handlePublishTender}
+                    >
+                      Continue
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-md-12">
+                <button
+                  className="btn btn-warning-gradient btn-block m-2"
+                  name="editTender"
+                  onClick={this.handleEditTender}
+                >
+                  edit Tender
+                </button>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-md-12">
+                <button
+                  data-target="#ignoremodal3"
+                  data-toggle="modal"
+                  className="btn btn-danger-gradient btn-block m-2"
+                  name="ignoreTender"
+                >
+                  Ignore Tender
+                </button>
+              </div>
+            </div>
+            <div className="modal" id="ignoremodal3">
+              <div
+                className="modal-dialog modal-dialog-centered"
+                role="document"
+              >
+                <div className="modal-content tx-size-sm">
+                  <div className="modal-body tx-center pd-y-20 pd-x-20">
+                    <button
+                      aria-label="Close"
+                      className="close"
+                      data-dismiss="modal"
+                      type="button"
+                    >
+                      <span aria-hidden="true">×</span>
+                    </button>
+                    <i className="fa fa-upload tx-100 tx-orange lh-1 mg-t-20 d-inline-block"></i>
+                    <h4 className="tx-orange tx-semibold mg-b-20">
+                      Are you sure u want to ignore?
+                    </h4>
+                    <p className="mg-b-20 mg-x-20">
+                      There are many variations of passages of Lorem Ipsum
+                      available, but the majority have suffered alteration.
+                    </p>
+                    <button
+                      aria-label="Close"
+                      className="btn ripple btn-success pd-x-25"
+                      data-dismiss="modal"
+                      type="button"
+                      onClick={this.handleIgnoreTender}
+                    >
+                      Continue
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </React.Fragment>
+        ) : null}
       </div>
     );
   }

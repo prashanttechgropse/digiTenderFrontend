@@ -14,6 +14,7 @@ import OtpVerificationForm from "./macroComponents/otpVerification";
 import AdminLogIn from "./adminComponents/adminLoginForm";
 import AdminApp from "./AdminApp";
 import SignOut from "./microComponents/signOut";
+import ReceiverApp from "./stakeContainers/receiverApp";
 
 class App extends Component {
   state = {
@@ -44,6 +45,7 @@ class App extends Component {
             )}
           />
           <Route path="/customer" component={CustomerApp} />
+          <Route path="/receiver" component={ReceiverApp} />
           <Route path="/admin" component={AdminApp} />
           <Route path="/supplier" component={SupplierApp} />
           <Route path="/register" component={RegisterContainer} />
@@ -60,11 +62,10 @@ class App extends Component {
             )}
           />
           <Route exact path="/signOut" component={SignOut} />
-          <Route path="/not-found" component={NotFound} />
+          <Route exact path="/not-found" component={NotFound} />
           <Redirect exact from="/createAccount" to="/register" />
           <Redirect exact from="/signIn" to="/login" />
-          <Redirect exact from="/" to="/register" />
-          <Redirect to="/not-found" />
+          <Redirect from="/" to="/login" />
         </Switch>
       </React.Fragment>
     );

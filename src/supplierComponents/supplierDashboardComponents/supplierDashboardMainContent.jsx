@@ -1,16 +1,35 @@
 import React, { Component } from "react";
 import RecentlyAddedTenders from "../../microComponents/recentlyAddedTenders";
+import httpService from "../../services/httpService";
+import { toast } from "react-toastify";
+import config from "../../config.json";
 class SupplierDashboardMainContent extends Component {
-  state = {};
+  state = { supplier: null };
+
+  async componentDidMount() {
+    try {
+      const { data } = await httpService.get(
+        `${config.apiendpoint}/supplier/myData`
+      );
+      if (data.user.profileType.toLowerCase() === "supplier") {
+        const supplier = data.user;
+        this.setState({ supplier: supplier });
+      } else this.props.history.push(`/${data.user.profileType}`);
+    } catch (error) {
+      toast.error(error.message);
+      return;
+    }
+  }
   render() {
-    const { user } = this.props;
+    const { supplier: user } = this.state;
+    if (user === null) return null;
     return (
       <div className="container-fluid">
         <div className="breadcrumb-header justify-content-between">
           <div className="left-content">
             <div>
               <h2 className="main-content-title tx-24 mg-b-1 mg-b-lg-1">
-                {this.props.user.details.firstName}
+                {user.details.firstName}
               </h2>
               <p className="mg-b-0">Welcome Back to DigiBids Platform.</p>
             </div>
@@ -149,9 +168,7 @@ class SupplierDashboardMainContent extends Component {
                   typesetting industry.
                 </p>
               </div>
-              <RecentlyAddedTenders
-                tenderClicked={(tenderId) => this.props.tenderClicked(tenderId)}
-              />
+              <RecentlyAddedTenders />
             </div>
           </div>
         </div>

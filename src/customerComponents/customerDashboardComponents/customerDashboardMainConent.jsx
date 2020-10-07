@@ -1,10 +1,36 @@
 import React, { Component } from "react";
 import RecentlyAddedTenders from "../../microComponents/customerRecentTenders";
+import httpService from "../../services/httpService";
+import { toast } from "react-toastify";
+import config from "../../config.json";
 class CustomerDashboardMainContent extends Component {
-  state = {};
+  state = {
+    customer: null,
+  };
+
+  async componentDidMount() {
+    try {
+      const { data } = await httpService.get(
+        `${config.apiendpoint}/customer/myData`
+      );
+      if (data) {
+        if (data.user.profileType.toLowerCase() === "customer") {
+          const customer = data.user;
+          this.setState({ customer: customer });
+          return;
+        } else {
+          this.props.history.push(`/${data.user.profileType}`);
+          return;
+        }
+      }
+    } catch (error) {
+      toast.error(error.message);
+      return;
+    }
+  }
 
   calculateOnGoingTenders = () => {
-    const { tenders } = this.props.user.details;
+    const { tenders } = this.state.customer.details;
     const temp = tenders.filter(
       (tender) =>
         tender.status.toLowerCase() === "inprocess" ||
@@ -14,7 +40,7 @@ class CustomerDashboardMainContent extends Component {
   };
 
   calculateCompletedTenders = () => {
-    const { tenders } = this.props.user.details;
+    const { tenders } = this.state.customer.details;
     const temp = tenders.filter(
       (tender) => tender.status.toLowerCase() === "paid"
     );
@@ -22,7 +48,8 @@ class CustomerDashboardMainContent extends Component {
   };
 
   render() {
-    const { user } = this.props;
+    const { customer: user } = this.state;
+    if (user === null) return null;
     return (
       <div className="container-fluid">
         <div className="breadcrumb-header justify-content-between">
@@ -150,8 +177,8 @@ class CustomerDashboardMainContent extends Component {
           </div>
         </div>
         <RecentlyAddedTenders
-          tenderList={this.props.user.details.tenders}
-          tenderClicked={(tenderId) => this.props.tenderClicked(tenderId)}
+          tenderList={this.state.customer.details.tenders}
+          profileType="customer"
         />
       </div>
     );

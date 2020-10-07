@@ -37,8 +37,7 @@ class SupplierBidListRow extends Component {
         </td>
         <td>
           <Link
-            onClick={() => this.props.bidClicked(bid._id)}
-            to={`/${this.props.profileType}/supplierQuotation`}
+            to={`/${this.props.profileType}/supplierQuotation/${bid._id}`}
             className="detail-icons"
           >
             View Detail

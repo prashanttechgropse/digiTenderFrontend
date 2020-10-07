@@ -23,7 +23,7 @@ class CustomerSidebar extends Component {
             <Link to="/customer/customerReceiverList">Receiver List</Link>
           </li>
           <li className="slide-item side-menu__item">
-            <Link to="/customer/createReceiver">Create Receiver</Link>
+            <Link to="/customer/assignReceiver">Assign Tender to receiver</Link>
           </li>
           <li className="slide-item side-menu__item">
             <Link to={`/${this.props.user.profileType}/changePassword`}>
@@ -108,7 +108,7 @@ class CustomerSidebar extends Component {
           <div
             id="mCSB_1"
             className="mCustomScrollBox mCS-minimal mCSB_vertical mCSB_outside"
-            tabindex="0"
+            tabIndex="0"
           >
             <div id="mCSB_1_container" className="mCSB_container" dir="ltr">
               <div className="app-sidebar__user clearfix active">
@@ -139,7 +139,7 @@ class CustomerSidebar extends Component {
                   </Link>
                 </li>
                 <li className="slide">
-                  <Link
+                  <a
                     className="side-menu__item"
                     data-toggle="slide"
                     onClick={this.toggleTenderManagement}
@@ -147,7 +147,7 @@ class CustomerSidebar extends Component {
                     <i className="fa fa-address-book"></i>
                     <span className="side-menu__label">Tender Management</span>
                     <i className="angle fa fa-angle-down"></i>
-                  </Link>
+                  </a>
                   {this.renderTenderManagement()}
                 </li>
                 <li className="slide">
@@ -160,7 +160,7 @@ class CustomerSidebar extends Component {
                   </Link>
                 </li>
                 <li className="slide">
-                  <Link
+                  <a
                     className="side-menu__item"
                     data-toggle="slide"
                     onClick={this.toggleAdminFunctions}
@@ -168,7 +168,7 @@ class CustomerSidebar extends Component {
                     <i className="fa fa-cog"></i>
                     <span className="side-menu__label">Admin Functions</span>
                     <i className="angle fa fa-angle-down"></i>
-                  </Link>
+                  </a>
                   {this.renderAdminFunctions()}
                 </li>
                 <li className="slide">

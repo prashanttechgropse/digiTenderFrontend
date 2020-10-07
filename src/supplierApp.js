@@ -24,6 +24,7 @@ import ChangePassword from "./userComponents/changePassword";
 import { Route } from "react-router-dom";
 import SupllierBid from "./supplierComponents/supplierBid";
 import SupplierMyBidDetails from "./supplierComponents/supplierMyBidDetails";
+import SavedTenderDetails from "./supplierComponents/savedTenderDetails";
 
 class SupplierApp extends Component {
   state = { supplier: "", displayTenderDetailsId: null };
@@ -35,7 +36,6 @@ class SupplierApp extends Component {
       );
       if (data.user.profileType.toLowerCase() === "supplier") {
         const supplier = data.user;
-        toast.success(data.message);
         this.setState({ supplier: supplier });
       } else this.props.history.push(`/${data.user.profileType}`);
     } catch (error) {
@@ -58,21 +58,18 @@ class SupplierApp extends Component {
             <Route exact path="/supplier/deliveryNotes">
               <SupplierDeliveryNoteMainContent />;
             </Route>
-            <Route exact path="/supplier/tenderList">
-              <TenderList tenderClicked={this.displayTenderDetailsID} />
-            </Route>
+            <Route exact path="/supplier/tenderList" component={TenderList} />
             <Route exact path="/supplier/saveForLater">
               <SupplierSaveForLater
                 tenderClicked={this.displayTenderDetailsID}
               />
               ;
             </Route>
-            <Route exact path="/supplier/transactionManagement">
-              <SupplierTransactionManagement
-                tenderClicked={this.displayTenderDetailsID}
-              />
-              ;
-            </Route>
+            <Route
+              exact
+              path="/supplier/transactionManagement"
+              component={SupplierTransactionManagement}
+            />
             <Route exact path="/supplier/history">
               <SupplierHistory />;
             </Route>
@@ -97,23 +94,24 @@ class SupplierApp extends Component {
             <Route exact path="/supplier/changePassword">
               <ChangePassword {...this.props} />
             </Route>
-            <Route exact path="/supplier/tenderDetails">
-              <SupllierBid
-                {...this.props}
-                tenderId={this.state.displayTenderDetailsId}
-              />
-            </Route>
-            <Route exact path="/supplier/myBidDetails">
-              <SupplierMyBidDetails
-                {...this.props}
-                tenderId={this.state.displayTenderDetailsId}
-              />
-            </Route>
+            <Route
+              exact
+              path="/supplier/tenderDetails/:tenderId"
+              component={SupllierBid}
+            />
+            <Route
+              exact
+              path="/supplier/savedTenderDetails/:tenderId"
+              component={SavedTenderDetails}
+            />
+            <Route
+              exact
+              path="/supplier/myBidDetails/:tenderId"
+              component={SupplierMyBidDetails}
+            />
+
             <Route exact path="/supplier">
-              <SupplierDashboardMainContent
-                user={this.state.supplier}
-                tenderClicked={this.displayTenderDetailsID}
-              />
+              <SupplierDashboardMainContent user={this.state.supplier} />
             </Route>
           </div>
         </React.Fragment>
@@ -123,7 +121,7 @@ class SupplierApp extends Component {
 
   render() {
     return (
-      <body className="main-body app sidebar-mini">
+      <div className="main-body app sidebar-mini">
         <div className="page active">
           <div
             className="app-sidebar__overlay active"
@@ -132,7 +130,7 @@ class SupplierApp extends Component {
           {this.checkSupplierPopulated()}
           <Footer />
         </div>
-      </body>
+      </div>
     );
   }
 }

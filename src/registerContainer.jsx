@@ -4,6 +4,8 @@ import { Route } from "react-router-dom";
 import OtpVerificationForm from "./macroComponents/otpVerification";
 import ProfileSetup from "./macroComponents/profileSetup";
 import BankDetails from "./macroComponents/bankDetails";
+import CreateAccountReceiver from "./macroComponents/createAccountReceiver";
+import SecondaryUserProfileSetup from "./secondaryUserComponents/secondaryUserProfileSetup";
 class RegisterContainer extends Component {
   state = {
     register: {
@@ -34,6 +36,26 @@ class RegisterContainer extends Component {
               {...props}
             />
           )}
+        />
+        <Route
+          exact
+          path="/register/receiver"
+          render={(props) => (
+            <CreateAccountReceiver
+              submitEmail={(email) => this.getEmail(email)}
+              {...props}
+            />
+          )}
+        />
+        <Route
+          exact
+          path="/register/secondaryUserProfileSetup"
+          component={SecondaryUserProfileSetup}
+        />
+        <Route
+          exact
+          from="/register/employeeProfileSetup"
+          to="/receiverProfileSetup"
         />
         <Route
           exact

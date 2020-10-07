@@ -7,10 +7,10 @@ class SupplierBidDetails extends Component {
   state = { bid: null, bidNotFound: false };
 
   async componentDidMount() {
-    if (!this.props.tenderId) return;
+    if (!this.props.match.params.tenderId) return;
     try {
       const { data } = await httpService.get(
-        `${config.apiendpoint}/supplier/myBidDetails/${this.props.tenderId}`
+        `${config.apiendpoint}/supplier/myBidDetails/${this.props.match.params.tenderId}`
       );
       await this.setState({ bid: data.bid });
       if (this.state.bid === null) {

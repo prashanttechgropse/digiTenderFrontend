@@ -23,7 +23,7 @@ class SupplierTransactionManagement extends Component {
     console.log("in component did mount");
     try {
       const { data } = await httpService.get(
-        `${config.apiendpoint}/supplier/myTenderList`
+        `${config.apiendpoint}/supplier/myTenderList/completed`
       );
       const { tenderList } = data;
       console.log();
@@ -51,20 +51,24 @@ class SupplierTransactionManagement extends Component {
   };
 
   renderTenderList = () => {
+    if (this.state.tenderList === null || this.state.tenderList.length === 0) {
+      return null;
+    }
     const tenderList = this.state.displayTenderList;
     if (tenderList === null) return;
     let srNo = (this.state.currentPage - 1) * this.state.pageSize;
+    let styleOfBadge;
     return tenderList.map((tender) => {
       srNo++;
-
+      if (tender.paymentstatus === "paid") styleOfBadge = "success";
+      else {
+        styleOfBadge = "danger";
+      }
       return (
         <tr role="row">
           <td>{`000${srNo}`}</td>
           <td>
-            <Link
-              to={"/supplier/tenderDetails"}
-              onClick={() => this.props.tenderClicked(tender._id)}
-            >
+            <Link to={`/supplier/tenderDetails/${tender._id}`}>
               {tender._id.toString().substring(18, 24)}
             </Link>
           </td>
@@ -73,7 +77,9 @@ class SupplierTransactionManagement extends Component {
           <td>{`${tender.deliveryLocation}`}</td>
           <td>{`${tender.budgetAmount}.00 USD`}</td>
           <td>
-            <span className="badge badge-success f-14">Paid</span>
+            <span className={`badge badge-${styleOfBadge} f-14`}>
+              {tender.paymentStatus}
+            </span>
           </td>
         </tr>
       );
@@ -81,7 +87,8 @@ class SupplierTransactionManagement extends Component {
   };
 
   render() {
-    if (this.state.tenderList === null) return null;
+    if (this.state.tenderList === null || this.state.tenderList.length === 0)
+      return null;
     return (
       <div className="container-fluid">
         <div className="breadcrumb-header justify-content-between">

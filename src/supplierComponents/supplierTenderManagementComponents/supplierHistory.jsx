@@ -1,7 +1,91 @@
 import React, { Component } from "react";
+import Pagination from "../../microComponents/pagination";
+import { paginate } from "../../utilities/paginate";
+import httpService from "../../services/httpService";
+import config from "../../config.json";
+import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 class SupplierHistory extends Component {
-  state = {};
+  state = {
+    tenderList: null,
+    displayTenderList: null,
+    currentPage: null,
+    pageSize: null,
+  };
+
+  constructor(props) {
+    super(props);
+    this.state.currentPage = 1;
+    this.state.pageSize = 4;
+  }
+
+  async componentDidMount() {
+    try {
+      const { data } = await httpService.get(
+        `${config.apiendpoint}/supplier/myTenderList`
+      );
+      const { tenderList } = data;
+      await this.setState({ tenderList });
+      const displayTenderList = paginate(
+        this.state.tenderList,
+        this.state.currentPage,
+        this.state.pageSize
+      );
+      await this.setState({ displayTenderList });
+    } catch (error) {
+      toast.error(error.message);
+      return;
+    }
+  }
+
+  handlePageChange = async (pageNumber) => {
+    this.setState({ currentPage: pageNumber });
+    const displayTenderList = paginate(
+      this.state.tenderList,
+      pageNumber,
+      this.state.pageSize
+    );
+    await this.setState({ displayTenderList });
+  };
+
+  renderTenderList = () => {
+    const tenderList = this.state.displayTenderList;
+    if (tenderList === null) return;
+    let srNo = (this.state.currentPage - 1) * this.state.pageSize;
+
+    return tenderList.map((tender) => {
+      srNo++;
+
+      return (
+        <tr role="row" key={srNo}>
+          <td>{`#000${srNo}`}</td>
+          <td>
+            <Link
+              to={
+                tender.status == "inProcess"
+                  ? `/supplier/tenderDetails/${tender._id}`
+                  : `/supplier/myBidDetails/${tender._id}`
+              }
+            >
+              {tender._id.toString().substring(18, 24)}
+            </Link>
+          </td>
+          <td>{tender.closingDate.toString().substring(0, 10)}</td>
+          <td>{`${tender.createdBy.firstName}`}</td>
+          <td>{tender.deliveryLocation}</td>
+
+          <td>{`${tender.budgetAmount} USD`}</td>
+          <td>
+            <span className="badge badge-success f-14">{`${tender.status}`}</span>
+          </td>
+        </tr>
+      );
+    });
+  };
   render() {
+    if (this.state.tenderList === null) return null;
+    if (this.state.tenderList.length === 0)
+      return <h1>you dont have any completed tenders yet</h1>;
     return (
       <div className="container-fluid">
         <div className="breadcrumb-header justify-content-between">
@@ -9,7 +93,7 @@ class SupplierHistory extends Component {
             <div className="d-flex">
               <h4 className="content-title mb-0 my-auto">Tender</h4>
               <span className="text-muted mt-1 tx-13 ml-2 mb-0">
-                / Tenders List
+                / Tenders history
               </span>
             </div>
           </div>
@@ -20,7 +104,7 @@ class SupplierHistory extends Component {
               <div className="card-header pb-0">
                 <div className="d-flex justify-content-between">
                   <h4 className="card-title mg-b-0 datatable-link">
-                    RECENT TENDERS POSTED BY THE CUSTOMER
+                    History of Tenders
                   </h4>
                 </div>
                 <p className="tx-12 tx-gray-500 mb-2">
@@ -45,77 +129,18 @@ class SupplierHistory extends Component {
                               <th>Status</th>
                             </tr>
                           </thead>
-                          <tbody>
-                            <tr role="row">
-                              <td>#0001</td>
-                              <td>
-                                <a href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/supplier/tender-detail">
-                                  #T686868
-                                </a>
-                              </td>
-                              <td>10-07-2020</td>
-                              <td>Alex Smith</td>
-                              <td>H/123, Green Park</td>
-                              <td>5000.00 USD</td>
-                              <td>
-                                <span className="badge badge-success f-14">
-                                  Completed
-                                </span>
-                              </td>
-                            </tr>
-                            <tr role="row">
-                              <td>#0002</td>
-                              <td>
-                                <a href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/supplier/tender-detail">
-                                  #T686868
-                                </a>
-                              </td>
-                              <td>10-07-2020</td>
-                              <td>Alex Smith</td>
-                              <td>H/123, Green Park</td>
-                              <td>5000.00 USD</td>
-                              <td>
-                                <span className="badge badge-success f-14">
-                                  Completed
-                                </span>
-                              </td>
-                            </tr>
-                            <tr role="row">
-                              <td>#0003</td>
-                              <td>
-                                <a href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/supplier/tender-detail">
-                                  #T686868
-                                </a>
-                              </td>
-                              <td>10-07-2020</td>
-                              <td>Alex Smith</td>
-                              <td>H/123, Green Park</td>
-                              <td>5000.00 USD</td>
-                              <td>
-                                <span className="badge badge-success f-14">
-                                  Completed
-                                </span>
-                              </td>
-                            </tr>
-                            <tr role="row">
-                              <td>#0004</td>
-                              <td>
-                                <a href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/supplier/tender-detail">
-                                  #T686868
-                                </a>
-                              </td>
-                              <td>10-07-2020</td>
-                              <td>Alex Smith</td>
-                              <td>H/123, Green Park</td>
-                              <td>5000.00 USD</td>
-                              <td>
-                                <span className="badge badge-success f-14">
-                                  Completed
-                                </span>
-                              </td>
-                            </tr>
-                          </tbody>
+                          <tbody>{this.renderTenderList()} </tbody>
                         </table>
+                        <div className="row">
+                          <div className="col-sm-12">
+                            <Pagination
+                              currentPage={this.state.currentPage}
+                              totalItemsCount={this.state.tenderList.length}
+                              pageSize={this.state.pageSize}
+                              onPageChange={this.handlePageChange}
+                            />
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>

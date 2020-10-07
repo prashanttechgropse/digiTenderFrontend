@@ -8,10 +8,11 @@ class SupplierQuotationDetails extends Component {
   state = { bid: null };
 
   async componentDidMount() {
-    if (!this.props.bidId) return;
+    console.log(this.props.match.params.bidId);
+    if (!this.props.match.params.bidId) return;
     try {
       const { data } = await httpService.get(
-        `${config.apiendpoint}/bids/${this.props.bidId}`
+        `${config.apiendpoint}/bids/${this.props.match.params.bidId}`
       );
       await this.setState({ bid: data.bid });
     } catch (error) {
@@ -29,7 +30,6 @@ class SupplierQuotationDetails extends Component {
     reqDetails.supplierId = bid.createdBy._id;
     await acceptTender(reqDetails);
     this.props.history.push("/customer");
-    window.location.reload();
     return;
   };
 

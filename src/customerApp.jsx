@@ -15,19 +15,21 @@ import CustomerSaveForLater from "./customerComponents/customerTenderManagementC
 import CustomerTransactionList from "./customerComponents/customerTenderManagementComponents/customerTransactionList";
 import CustomerCreateTender from "./customerComponents/customerTenderManagementComponents/customerCreateTender";
 import CustomerReceiverlist from "./customerComponents/customerAdminFunctionComponents.jsx/customerReceiverList";
-import CustomerCreateReceiver from "./customerComponents/customerAdminFunctionComponents.jsx/customerCreateReceiver";
+
 import config from "./config.json";
 import httpService from "./services/httpService";
 import { toast } from "react-toastify";
 import { Route } from "react-router-dom";
 import SupplierQuotationDetails from "./customerComponents/supllierQuotationDetails";
 import TenderDetails from "./customerComponents/customerTenderManagementComponents/TenderDetails";
+import CustomerDeliveryNoteDetails from "./customerComponents/customerDeliveryNotesComponents/customerDeliveryNoteDetails";
+import CustomerEditTender from "./customerComponents/customerTenderManagementComponents/customerEditTender";
+import AssignReceiver from "./customerComponents/customerAdminFunctionComponents.jsx/assignReceiver";
+import CreateDeliveryNote from "./customerComponents/createDeliveryNote";
 
 class CustomerApp extends Component {
   state = {
     customer: null,
-    displayTenderDetails: null,
-    displayBidId: null,
   };
 
   async componentDidMount() {
@@ -35,7 +37,6 @@ class CustomerApp extends Component {
       const { data } = await httpService.get(
         `${config.apiendpoint}/customer/myData`
       );
-      toast.success(data.message);
       if (data) {
         if (data.user.profileType.toLowerCase() === "customer") {
           const customer = data.user;
@@ -52,19 +53,6 @@ class CustomerApp extends Component {
     }
   }
 
-  displayTenderDetails = async (tenderId) => {
-    const displayTenderDetails = this.state.customer.details.tenders.find(
-      (tender) => tender._id == tenderId
-    );
-    this.setState({ displayTenderDetails });
-  };
-
-  displayBidDetails = async (bidId) => {
-    console.log("this is the bidId");
-    console.log(bidId);
-    this.setState({ displayBidId: bidId });
-  };
-
   checkCustomerPopulated = () => {
     if (this.state.customer) {
       return (
@@ -76,83 +64,87 @@ class CustomerApp extends Component {
           <CustomerSidebar user={this.state.customer} />
           <div className="main-content app-content">
             <MainContentHeaderBar user={this.state.customer} />
-            <Route exact path="/customer/createTender">
-              <CustomerCreateTender {...this.props} />
-            </Route>
+            <Route
+              exact
+              path="/customer/createTender"
+              component={CustomerCreateTender}
+            />
             <Route exact path="/customer/myProfile">
               <MyProfile user={this.state.customer} />
             </Route>
-            <Route exact path="/customer/tenderList">
-              <CustomerTenderList
-                tenderList={this.state.customer.details.tenders.filter(
-                  (tender) => tender.isPublished
-                )}
-                tenderClicked={(tenderId) =>
-                  this.displayTenderDetails(tenderId)
-                }
-              />
-              ;
-            </Route>
-            <Route exact path="/customer/saveForLater">
-              <CustomerSaveForLater
-                tenderList={this.state.customer.details.tenders.filter(
-                  (tender) => !tender.isPublished
-                )}
-                tenderClicked={(tenderId) =>
-                  this.displayTenderDetails(tenderId)
-                }
-              />
-            </Route>
-            <Route exact path="/customer/changePassword">
-              <ChangePassword />;
-            </Route>
-            <Route exact path="/customer/transactionList">
-              <CustomerTransactionList
-                tenderClicked={(tenderId) =>
-                  this.displayTenderDetails(tenderId)
-                }
-              />
-            </Route>
-            <Route exact path="/customer/tenderDetails">
-              <TenderDetails
-                profileType={this.state.customer.profileType}
-                tender={this.state.displayTenderDetails}
-                {...this.props}
-                bidClicked={(bidId) => this.displayBidDetails(bidId)}
-              />
-            </Route>
-            <Route exact path="/customer/supplierQuotation">
-              <SupplierQuotationDetails
-                {...this.props}
-                bidId={this.state.displayBidId}
-              />
-            </Route>
-            <Route exact path="/customer/termsConditions">
-              <TermsConditions />
-            </Route>
-            <Route exact path="/customer/editProfile">
-              <EditProfile />
-            </Route>
-            <Route exact path="/customer/helpSupport">
-              <HelpSupport />;
-            </Route>
-            <Route exact path="/customer/createReceiver">
-              <CustomerCreateReceiver />
-            </Route>
-            <Route exact path="/customer/deliveryNotes">
-              <CustomerDeliveryNoteMainContent />
-            </Route>
-            <Route exact path="/customer/customerReceiverList">
-              <CustomerReceiverlist />
-            </Route>
-            <Route exact path="/customer">
-              <CustomerDashboardMainContent
-                user={this.state.customer}
-                tenderClicked={(tenderId) =>
-                  this.displayTenderDetails(tenderId)
-                }
-              />
-            </Route>
+            <Route
+              exact
+              path="/customer/tenderList"
+              component={CustomerTenderList}
+            />
+
+            <Route
+              exact
+              path="/customer/saveForLater"
+              component={CustomerSaveForLater}
+            />
+            <Route
+              exact
+              path="/customer/editSavedTender/:tenderId"
+              component={CustomerEditTender}
+            />
+            <Route
+              exact
+              path="/customer/changePassword"
+              component={ChangePassword}
+            />
+            <Route
+              exact
+              path="/customer/transactionList"
+              component={CustomerTransactionList}
+            />
+            <Route
+              exact
+              path="/customer/tenderDetails/:tenderId"
+              component={TenderDetails}
+            />
+            <Route
+              exact
+              path="/customer/supplierQuotation/:bidId"
+              component={SupplierQuotationDetails}
+            />
+            <Route
+              exact
+              path="/customer/termsConditions"
+              component={TermsConditions}
+            />
+            <Route exact path="/customer/editProfile" component={EditProfile} />
+            <Route exact path="/customer/helpSupport" component={HelpSupport} />
+            <Route
+              exact
+              path="/customer/assignReceiver"
+              component={AssignReceiver}
+            />
+            <Route
+              exact
+              path="/customer/deliveryNotes"
+              component={CustomerDeliveryNoteMainContent}
+            />
+            <Route
+              exact
+              path="/customer/deliveryNoteDetails/:tenderId"
+              component={CustomerDeliveryNoteDetails}
+            />
+            <Route
+              exact
+              path="/customer/customerReceiverList"
+              component={CustomerReceiverlist}
+            />
+            <Route
+              exact
+              path="/customer/createDeliveryNote/:tenderId"
+              component={CreateDeliveryNote}
+            />
+            <Route
+              exact
+              path="/customer"
+              component={CustomerDashboardMainContent}
+            />
           </div>
         </React.Fragment>
       );
@@ -161,12 +153,12 @@ class CustomerApp extends Component {
 
   render() {
     return (
-      <body className="main-body app sidebar-mini">
+      <div className="main-body app sidebar-mini">
         <div className="page active">
           {this.checkCustomerPopulated()}
           <Footer />
         </div>
-      </body>
+      </div>
     );
   }
 }

@@ -1,7 +1,98 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import Pagination from "../../microComponents/pagination";
+import { toast } from "react-toastify";
+import { paginate } from "../../utilities/paginate";
+import config from "../../config.json";
+import httpService from "../../services/httpService";
 class CustomerDeliveryNoteMainContent extends Component {
-  state = {};
+  state = {
+    tenderList: null,
+    displayTenderList: null,
+    currentPage: null,
+    pageSize: null,
+  };
+
+  constructor(props) {
+    super(props);
+    this.state.currentPage = 1;
+    this.state.pageSize = 4;
+  }
+
+  async componentDidMount() {
+    try {
+      const { data } = await httpService.get(
+        `${config.apiendpoint}/customer/deliveryNoteTenderList`
+      );
+      const { tenderList } = data;
+      await this.setState({ tenderList });
+      const displayTenderList = paginate(
+        this.state.tenderList,
+        this.state.currentPage,
+        this.state.pageSize
+      );
+      await this.setState({ displayTenderList });
+    } catch (error) {
+      toast.error(error.message);
+      return;
+    }
+  }
+
+  handlePageChange = async (pageNumber) => {
+    this.setState({ currentPage: pageNumber });
+    const displayTenderList = paginate(
+      this.state.tenderList,
+      pageNumber,
+      this.state.pageSize
+    );
+    await this.setState({ displayTenderList });
+  };
+
+  renderTenderTable = () => {
+    let srNo = (this.state.currentPage - 1) * this.state.pageSize;
+
+    let tenderList = this.state.displayTenderList;
+    if (tenderList === null) return;
+    return tenderList.map((tender) => {
+      srNo++;
+      return (
+        <tr role="row">
+          <td>
+            <Link
+              to={`/customer/deliveryNoteDetails/${tender._id}`}
+            >{`0000${srNo}`}</Link>
+          </td>
+          <td>
+            <Link to={`/customer/tenderDetails/${tender._id}`}>
+              {tender._id.toString().substring(18, 24)}
+            </Link>
+          </td>
+          <td>{tender.suppliedBy.firstName}</td>
+          <td>{`DN${tender.tenderRefNo}`}</td>
+          <td>{tender.deliveryLocation}</td>
+          <td>
+            {tender.receiver
+              ? tender.receiver.firstName
+              : "no receiver assigned"}
+          </td>
+          <td>
+            <span
+              className={`badge badge-${
+                tender.status == "completed" ? "success" : "danger"
+              } f-14`}
+            >
+              {tender.status}
+            </span>
+          </td>
+        </tr>
+      );
+    });
+  };
   render() {
+    if (this.state.tenderList === null) return null;
+    if (this.state.tenderList.length === 0) {
+      return <h1>No completed Tenders yet</h1>;
+    }
     return (
       <div className="container-fluid">
         <div className="breadcrumb-header justify-content-between">
@@ -52,93 +143,18 @@ class CustomerDeliveryNoteMainContent extends Component {
                               <th>Status</th>
                             </tr>
                           </thead>
-                          <tbody>
-                            <tr role="row">
-                              <td>
-                                <a href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/delivery-notes-detail">
-                                  #DN0001
-                                </a>
-                              </td>
-                              <td>
-                                <a href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/tender-detail">
-                                  #T0001
-                                </a>
-                              </td>
-                              <td>Mo Danish</td>
-                              <td>D797898</td>
-                              <td>Mall Road 78 Hamilton</td>
-                              <td>Saih Ahemed</td>
-                              <td>
-                                <span className="badge badge-danger f-14">
-                                  Rejected
-                                </span>
-                              </td>
-                            </tr>
-                            <tr role="row">
-                              <td>
-                                <a href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/delivery-notes-detail">
-                                  #DN0002
-                                </a>
-                              </td>
-                              <td>
-                                <a href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/tender-detail">
-                                  #T0002
-                                </a>
-                              </td>
-                              <td>Mo Danish</td>
-                              <td>D797898</td>
-                              <td>Mall Road 78 Hamilton</td>
-                              <td>Saih Ahemed</td>
-                              <td>
-                                <span className="badge badge-success f-14">
-                                  Completed
-                                </span>
-                              </td>
-                            </tr>
-                            <tr role="row">
-                              <td>
-                                <a href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/delivery-notes-detail">
-                                  #DN0003
-                                </a>
-                              </td>
-                              <td>
-                                <a href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/tender-detail">
-                                  #T0003
-                                </a>
-                              </td>
-                              <td>Mo Danish</td>
-                              <td>D797898</td>
-                              <td>Mall Road 78 Hamilton</td>
-                              <td>Saih Ahemed</td>
-                              <td>
-                                <span className="badge badge-warning f-14">
-                                  Completed
-                                </span>
-                              </td>
-                            </tr>
-                            <tr role="row">
-                              <td>
-                                <a href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/delivery-notes-detail">
-                                  #DN0004
-                                </a>
-                              </td>
-                              <td>
-                                <a href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/tender-detail">
-                                  #T0004
-                                </a>
-                              </td>
-                              <td>Mo Danish</td>
-                              <td>D797898</td>
-                              <td>Mall Road 78 Hamilton</td>
-                              <td>Saih Ahemed</td>
-                              <td>
-                                <span className="badge badge-danger f-14">
-                                  Rejected
-                                </span>
-                              </td>
-                            </tr>
-                          </tbody>
+                          <tbody>{this.renderTenderTable()} </tbody>
                         </table>
+                        <div className="row">
+                          <div className="col-sm-12">
+                            <Pagination
+                              currentPage={this.state.currentPage}
+                              totalItemsCount={this.state.tenderList.length}
+                              pageSize={this.state.pageSize}
+                              onPageChange={this.handlePageChange}
+                            />
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>

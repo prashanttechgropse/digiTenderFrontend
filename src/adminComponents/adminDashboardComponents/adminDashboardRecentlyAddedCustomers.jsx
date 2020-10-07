@@ -21,9 +21,8 @@ class AdminDashBoardRecentlyAddedCustomers extends Component {
             </td>
             <td>
               <Link
-                to="/admin/customerDetails"
+                to={`/admin/customerDetails/${customer._id}`}
                 className="detail-icons"
-                onClick={() => this.props.customerClicked(customer._id)}
               >
                 <i className="fa fa-eye"></i>
               </Link>

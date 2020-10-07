@@ -10,10 +10,26 @@ class SupplierDetailsContainer extends Component {
   state = {
     userCurrentStatus: null,
   };
-  constructor(props) {
-    super(props);
-    this.state.userCurrentStatus = this.props.supplier.user.isApproved;
+
+  async componentDidMount() {
+    if (!this.props.match.params.supplierId) return null;
+    let data;
+    try {
+      data = await httpService.get(
+        `${config.apiendpoint}/admin/suppliers/${this.props.match.params.supplierId}`
+      );
+
+      await this.setState({ supplier: data.data.supplier });
+      await this.setState({
+        userCurrentStatus: data.data.supplier.user.isApproved,
+      });
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
+      return;
+    }
   }
+
   handleUserStatus = async (e) => {
     let previousState = this.state.userCurrentStatus;
     try {
@@ -25,7 +41,7 @@ class SupplierDetailsContainer extends Component {
       const { data, error } = await httpService.post(
         `${config.apiendpoint}/admin/userChangeStatus`,
         {
-          userId: this.props.supplier.user._id,
+          userId: this.state.supplier.user._id,
           status: isApproved,
         }
       );
@@ -51,7 +67,7 @@ class SupplierDetailsContainer extends Component {
             </div>
           </div>
         </div>
-        <SupplierDetailsCards supplier={this.props.supplier} />
+        <SupplierDetailsCards supplier={this.state.supplier} />
         <div class="breadcrumb-header justify-content-between">
           <div class="my-auto">
             <div class="d-flex">
@@ -79,10 +95,7 @@ class SupplierDetailsContainer extends Component {
             </div>
           </div>
         </div>
-        <SupplierDetails
-          supplier={this.props.supplier}
-          tenderClicked={(tenderId) => this.props.tenderClicked(tenderId)}
-        />
+        <SupplierDetails supplier={this.state.supplier} />
       </div>
     );
   }

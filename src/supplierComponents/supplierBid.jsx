@@ -20,6 +20,33 @@ class SupllierBid extends Component {
     acceptTermsConditions: false,
   };
 
+  async componentDidMount() {
+    if (!this.props.match.params.tenderId) return;
+    try {
+      const { data } = await httpService.get(
+        `${config.apiendpoint}/supplier/checkIfBidCreated/${this.props.match.params.tenderId}`
+      );
+      console.log(data);
+      if (!data.bidAlreadyExists) {
+        const { data } = await httpService.get(
+          `${config.apiendpoint}/tenders/${this.props.match.params.tenderId}`
+        );
+        await this.setState({ tender: data.tender });
+      } else if (data.bidIsPublished) {
+        this.props.history.push(
+          `/supplier/myBidDetails/${this.props.match.params.tenderId}`
+        );
+      } else if (!data.bidIsPublished) {
+        this.props.history.push(
+          `/supplier/savedTenderDetails/${this.props.match.params.tenderId}`
+        );
+      }
+    } catch (error) {
+      toast.error(error.message);
+      return;
+    }
+  }
+
   schema = {};
 
   schema = Joi.object({
@@ -111,23 +138,9 @@ class SupllierBid extends Component {
     const { data, error } = await createBid(bid);
     if (data) {
       this.props.history.push("/supplier");
-      window.location.reload();
     }
     if (error) return;
   };
-
-  async componentDidMount() {
-    if (!this.props.tenderId) return;
-    try {
-      const { data } = await httpService.get(
-        `${config.apiendpoint}/tenders/${this.props.tenderId}`
-      );
-      this.setState({ tender: data.tender });
-    } catch (error) {
-      toast.error(error.message);
-      return;
-    }
-  }
 
   addPrice = async (price, srNo) => {
     const tender = { ...this.state.tender };
@@ -207,9 +220,9 @@ class SupllierBid extends Component {
                         </table>
                       </div>
                       {`click here to download --> `}
-                      <Link onClick={this.downloadTenderTerms}>
+                      <a onClick={this.downloadTenderTerms}>
                         Tender Terms and conditions
-                      </Link>
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -236,12 +249,7 @@ class SupllierBid extends Component {
           </div>
         </div>
         <div className="row">
-          <div className="col-md-4">
-            <Link to="/supplier" className="btn btn-warning-gradient btn-block">
-              Ignore
-            </Link>
-          </div>
-          <div className="col-md-4">
+          <div className="col-md-6">
             <button
               onClick={this.handleSubmit}
               className="btn btn-primary-gradient btn-block"
@@ -253,7 +261,7 @@ class SupllierBid extends Component {
               Save Draft
             </button>
           </div>
-          <div className="col-md-4">
+          <div className="col-md-6">
             <button
               onClick={this.handleSubmit}
               className="btn btn-warning-gradient btn-block"

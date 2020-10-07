@@ -1,9 +1,13 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { paginate } from "../../utilities/paginate";
+import httpService from "../../services/httpService";
+import config from "../../config.json";
+import { toast } from "react-toastify";
 import Pagination from "../../microComponents/pagination";
+import { paginate } from "../../utilities/paginate";
+import { Link } from "react-router-dom";
 class CustomerSaveForLater extends Component {
   state = {
+    tenderList: null,
     displayTenderList: null,
     currentPage: null,
     pageSize: null,
@@ -12,45 +16,57 @@ class CustomerSaveForLater extends Component {
   constructor(props) {
     super(props);
     this.state.currentPage = 1;
-    this.state.pageSize = 1;
-    this.state.displayTenderList = paginate(
-      this.props.tenderList,
-      this.state.currentPage,
-      this.state.pageSize
-    );
+    this.state.pageSize = 4;
   }
 
-  handlePageChange = (pageNumber) => {
+  async componentDidMount() {
+    try {
+      const { data } = await httpService.get(
+        `${config.apiendpoint}/customer/tenderList/pending`
+      );
+      const { tenderList } = data;
+      await this.setState({ tenderList });
+      const displayTenderList = paginate(
+        this.state.tenderList,
+        this.state.currentPage,
+        this.state.pageSize
+      );
+      await this.setState({ displayTenderList });
+    } catch (error) {
+      toast.error(error.message);
+      return;
+    }
+  }
+
+  handlePageChange = async (pageNumber) => {
     this.setState({ currentPage: pageNumber });
     const displayTenderList = paginate(
-      this.props.tenderList,
+      this.state.tenderList,
       pageNumber,
       this.state.pageSize
     );
-    this.setState({ displayTenderList });
+    await this.setState({ displayTenderList });
   };
 
   renderTenderTable = () => {
     let srNo = (this.state.currentPage - 1) * this.state.pageSize;
 
     let tenderList = this.state.displayTenderList;
+    if (tenderList === null) return;
     return tenderList.map((tender) => {
       srNo++;
       return (
         <tr role="row">
           <td>{`#000${srNo}`}</td>
           <td>
-            <Link
-              to={"/customer/tenderDetails"}
-              onClick={() => this.props.tenderClicked(tender._id)}
-            >
+            <Link to={`/customer/tenderDetails/${tender._id}`}>
               {tender._id.toString().substring(18, 24)}
             </Link>
           </td>
           <td>{tender.budgetAmount}</td>
-          <td>{tender.creationDate}</td>
-          <td>{tender.deliveryDate}</td>
-          <td>{tender.closingDate}</td>
+          <td>{tender.creationDate.toString().substring(0, 10)}</td>
+          <td>{tender.deliveryDate.toString().substring(0, 10)}</td>
+          <td>{tender.closingDate.toString().substring(0, 10)}</td>
           <td>
             <span className={`badge badge-primary f-14`}>{tender.status}</span>
           </td>
@@ -60,6 +76,10 @@ class CustomerSaveForLater extends Component {
   };
 
   render() {
+    if (this.state.tenderList === null) return null;
+    if (this.state.tenderList.length == 0) {
+      return <h1>you dont have any saved tenders yet</h1>;
+    }
     return (
       <div className="container-fluid">
         <div className="breadcrumb-header justify-content-between">
@@ -124,7 +144,7 @@ class CustomerSaveForLater extends Component {
                           <div className="col-sm-12">
                             <Pagination
                               currentPage={this.state.currentPage}
-                              totalItemsCount={this.props.tenderList.length}
+                              totalItemsCount={this.state.tenderList.length}
                               pageSize={this.state.pageSize}
                               onPageChange={this.handlePageChange}
                             />

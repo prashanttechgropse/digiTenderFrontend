@@ -105,7 +105,7 @@ class SupplierSideBar extends Component {
           <div
             id="mCSB_1"
             className="mCustomScrollBox mCS-minimal mCSB_vertical mCSB_outside"
-            tabindex="0"
+            tabIndex="0"
           >
             <div id="mCSB_1_container" className="mCSB_container" dir="ltr">
               <div className="app-sidebar__user clearfix active">
@@ -134,16 +134,15 @@ class SupplierSideBar extends Component {
                   </Link>
                 </li>
                 <li className="slide">
-                  <Link
+                  <a
                     className="side-menu__item active"
                     data-toggle="slide"
-                    href="#"
                     onClick={this.toggleTenderManagement}
                   >
                     <i className="fa fa-address-book"></i>
                     <span className="side-menu__label">Tender Management</span>
                     <i className="angle fa fa-angle-down"></i>
-                  </Link>
+                  </a>
                   {this.renderTenderManagement()}
                 </li>
                 <li className="slide">
@@ -156,16 +155,15 @@ class SupplierSideBar extends Component {
                   </Link>
                 </li>
                 <li className="slide">
-                  <Link
+                  <a
                     className="side-menu__item"
                     data-toggle="slide"
-                    href="#"
                     onClick={this.toggleAdminFunctions}
                   >
                     <i className="fa fa-cog"></i>
                     <span className="side-menu__label">Admin Functions</span>
                     <i className="angle fa fa-angle-down"></i>
-                  </Link>
+                  </a>
                   {this.renderAdminFunctions()}
                 </li>
                 <li className="slide">

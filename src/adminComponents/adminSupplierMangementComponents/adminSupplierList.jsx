@@ -2,33 +2,52 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Pagination from "../../microComponents/pagination";
 import { paginate } from "../../utilities/paginate";
+import httpService from "../../services/httpService";
+import { toast } from "react-toastify";
+import config from "../../config.json";
+
 class AdminSupplierList extends Component {
   state = {
+    currentPage: 1,
+    pageSize: 4,
+    supplierList: null,
     displaySupplierList: null,
-    currentPage: null,
-    pageSize: null,
   };
 
-  constructor(props) {
-    super(props);
-    this.state.currentPage = 1;
-    this.state.pageSize = 1;
-    this.state.displaySupplierList = paginate(
-      this.props.supplierList,
-      this.state.currentPage,
-      this.state.pageSize
-    );
-  }
+  componentDidMount = async () => {
+    try {
+      const { data } = await httpService.get(
+        `${config.apiendpoint}/admin/suppliers`
+      );
+      const supplierList = data.supplierList;
+      let state = { ...this.state };
+      state.supplierList = supplierList;
 
-  handlePageChange = (pageNumber) => {
-    console.log(pageNumber);
+      await this.setState(state);
+
+      const displaySupplierList = paginate(
+        this.state.supplierList,
+        this.state.currentPage,
+        this.state.pageSize
+      );
+      state = { ...this.state };
+      state.displaySupplierList = displaySupplierList;
+      await this.setState(state);
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
+      return;
+    }
+  };
+
+  handlePageChange = async (pageNumber) => {
     this.setState({ currentPage: pageNumber });
     const displaySupplierList = paginate(
       this.props.supplierList,
       pageNumber,
       this.state.pageSize
     );
-    this.setState({ displaySupplierList });
+    await this.setState({ displaySupplierList });
     console.log(this.state.displaySupplierList);
   };
 
@@ -49,9 +68,8 @@ class AdminSupplierList extends Component {
           </td>
           <td>
             <Link
-              to="/admin/supplierDetails"
+              to={`/admin/supplierDetails/${supplier._id}`}
               className="detail-icons"
-              onClick={() => this.props.supplierClicked(supplier._id)}
             >
               <i className="fa fa-eye"></i>
             </Link>
@@ -62,6 +80,7 @@ class AdminSupplierList extends Component {
   };
 
   render() {
+    if (this.state.supplierList === null) return null;
     return (
       <div className="container-fluid">
         <div className="breadcrumb-header justify-content-between">
@@ -119,7 +138,7 @@ class AdminSupplierList extends Component {
 
                     <Pagination
                       currentPage={this.state.currentPage}
-                      totalItemsCount={this.props.supplierList.length}
+                      totalItemsCount={this.state.supplierList.length}
                       pageSize={this.state.pageSize}
                       onPageChange={this.handlePageChange}
                     />

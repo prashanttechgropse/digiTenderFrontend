@@ -21,9 +21,8 @@ class AdminRecentlyAddedSupplierList extends Component {
             </td>
             <td>
               <Link
-                to="/admin/supplierDetails"
+                to={`/admin/supplierDetails/${supplier._id}`}
                 className="detail-icons"
-                onClick={() => this.props.supplierClicked(supplier._id)}
               >
                 <i className="fa fa-eye"></i>
               </Link>

@@ -26,6 +26,7 @@ class CustomerTransactionList extends Component {
       );
       const { tenderList } = data;
       await this.setState({ tenderList });
+      console.log(tenderList);
       const displayTenderList = paginate(
         this.state.tenderList,
         this.state.currentPage,
@@ -50,7 +51,7 @@ class CustomerTransactionList extends Component {
 
   renderTenderList = () => {
     const tenderList = this.state.displayTenderList;
-    if (tenderList === null) return;
+    if (tenderList === null) return null;
     let srNo = (this.state.currentPage - 1) * this.state.pageSize;
     let styleOfBadge;
     return tenderList.map((tender) => {
@@ -66,19 +67,22 @@ class CustomerTransactionList extends Component {
         <tr role="row">
           <td>{`000${srNo}`}</td>
           <td>
-            <Link
-              to={"/customer/tenderDetails"}
-              onClick={() => this.props.tenderClicked(tender._id)}
-            >
+            <Link to={`/customer/tenderDetails/${tender._id}`}>
               {tender._id.toString().substring(18, 24)}
             </Link>
           </td>
           <td>"hard coded"</td>
           <td>{tender.createdBy.firstName}</td>
           <td>{tender.deliveryLocation}</td>
-          <td>{`${tender.acceptedBid.totalAmount}.00 USD`}</td>
+          <td>{`${tender.budgetAmount}.00 USD`}</td>
           <td>
-            <span className="badge badge-success f-14">"hard coded"</span>
+            <span
+              className={`badge badge-${
+                tender.paymentStatus == "paid" ? "success" : "danger"
+              } f-14`}
+            >
+              {tender.paymentStatus}
+            </span>
           </td>
         </tr>
       );
@@ -86,6 +90,10 @@ class CustomerTransactionList extends Component {
   };
   render() {
     if (this.state.tenderList === null) return null;
+    if (this.state.tenderList.length === 0) {
+      return <h1>you dont have any transactions yet</h1>;
+    }
+
     return (
       <div className="container-fluid">
         <div className="breadcrumb-header justify-content-between">
@@ -115,16 +123,10 @@ class CustomerTransactionList extends Component {
               </div>
               <div className="card-body">
                 <div className="table-responsive">
-                  <div
-                    id="example1_wrapper"
-                    className="dataTables_wrapper dt-bootstrap4"
-                  >
+                  <div className="dataTables_wrapper dt-bootstrap4">
                     <div className="row">
                       <div className="col-sm-12">
-                        <table
-                          className="table text-md-nowrap dataTable"
-                          id="example1"
-                        >
+                        <table className="table text-md-nowrap dataTable">
                           <thead>
                             <tr role="row">
                               <th>Sr No</th>

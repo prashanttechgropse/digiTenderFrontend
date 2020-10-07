@@ -2,37 +2,60 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { paginate } from "../../utilities/paginate";
 import Pagination from "../../microComponents/pagination";
+import httpService from "../../services/httpService";
+import { toast } from "react-toastify";
+import config from "../../config.json";
+
 class AdminCustomerList extends Component {
   state = {
+    currentPage: 1,
+    pageSize: 1,
+    customerList: null,
     displayCustomerList: null,
-    currentPage: null,
-    pageSize: null,
   };
 
-  constructor(props) {
-    super(props);
-    this.state.currentPage = 1;
-    this.state.pageSize = 1;
-    this.state.displayCustomerList = paginate(
-      this.props.customerList,
-      this.state.currentPage,
-      this.state.pageSize
-    );
-  }
+  componentDidMount = async () => {
+    try {
+      const { data } = await httpService.get(
+        `${config.apiendpoint}/admin/customers`
+      );
+      const customerList = data.customerList;
+      let state = { ...this.state };
+      state.customerList = customerList;
+
+      await this.setState(state);
+
+      const displayCustomerList = paginate(
+        this.state.customerList,
+        this.state.currentPage,
+        this.state.pageSize
+      );
+      console.log(displayCustomerList);
+      state = { ...this.state };
+      state.displayCustomerList = displayCustomerList;
+      await this.setState(state);
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
+      return;
+    }
+  };
 
   handlePageChange = async (pageNumber) => {
     this.setState({ currentPage: pageNumber });
     const displayCustomerList = paginate(
-      this.props.customerList,
+      this.state.customerList,
       pageNumber,
       this.state.pageSize
     );
-    this.setState({ displayCustomerList });
+    await this.setState({ displayCustomerList });
   };
 
   renderCustomerList = () => {
     let srNo = (this.state.currentPage - 1) * this.state.pageSize;
-    if (this.props.customerList === "") return;
+    if (this.state.displayCustomerList === null) {
+      return null;
+    }
     return this.state.displayCustomerList.map((customer) => {
       srNo++;
       return (
@@ -47,9 +70,8 @@ class AdminCustomerList extends Component {
           </td>
           <td>
             <Link
-              to="/admin/customerDetails"
+              to={`/admin/customerDetails/${customer._id}`}
               className="detail-icons"
-              onClick={() => this.props.customerClicked(customer._id)}
             >
               <i className="fa fa-eye"></i>
             </Link>
@@ -60,6 +82,7 @@ class AdminCustomerList extends Component {
   };
 
   render() {
+    if (this.state.customerList === null) return null;
     return (
       <div className="container-fluid">
         <div className="breadcrumb-header justify-content-between">
@@ -112,7 +135,7 @@ class AdminCustomerList extends Component {
                       <div className="col-sm-12">
                         <Pagination
                           currentPage={this.state.currentPage}
-                          totalItemsCount={this.props.customerList.length}
+                          totalItemsCount={this.state.customerList.length}
                           pageSize={this.state.pageSize}
                           onPageChange={this.handlePageChange}
                         />

@@ -63,16 +63,15 @@ class TenderList extends Component {
       }
 
       return (
-        <tr role="row">
+        <tr role="row" key={srNo}>
           <td>{`#000${srNo}`}</td>
           <td>
             <Link
               to={
                 tender.status == "inProcess"
-                  ? "/supplier/tenderDetails"
-                  : "/supplier/myBidDetails"
+                  ? `/supplier/tenderDetails/${tender._id}`
+                  : `/supplier/myBidDetails/${tender._id}`
               }
-              onClick={() => this.props.tenderClicked(tender._id)}
             >
               {tender._id.toString().substring(18, 24)}
             </Link>

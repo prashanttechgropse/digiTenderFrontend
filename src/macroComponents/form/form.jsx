@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Joi from "joi-browser";
 import Input from "../../microComponents/input";
 import Select from "../../microComponents/select";
+import TextArea from "../../microComponents/textArea";
 
 class Form extends Component {
   state = {
@@ -55,6 +56,19 @@ class Form extends Component {
     const { formData, errors } = this.state;
     return (
       <Input
+        onChange={this.handleChange}
+        value={formData[name]}
+        label={label}
+        name={name}
+        error={errors[name]}
+        type={type}
+      />
+    );
+  };
+  renderTextArea = (name, label, type = "text") => {
+    const { formData, errors } = this.state;
+    return (
+      <TextArea
         onChange={this.handleChange}
         value={formData[name]}
         label={label}

@@ -150,6 +150,14 @@ class CreateAccount extends Form {
                                   <Link to="/login">Sign In</Link>
                                 </p>
                               </div>
+                              <div className="main-signin-footer mt-5">
+                                <p>
+                                  Click to Sign up as a Secondary User
+                                  <Link to="/register/receiver">
+                                    Secondary User Sign Up
+                                  </Link>
+                                </p>
+                              </div>
                             </div>
                           </div>
                         </div>

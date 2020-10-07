@@ -31,11 +31,16 @@ class OtpVerificationForm extends Form {
         window.location.reload();
       } else {
         if (data.isregistered === false) {
-          this.props.history.push("/register/profileSetup");
-          window.location.reload();
+          if (data.profileType == "primaryUser") {
+            this.props.history.push("/register/profileSetup");
+            window.location.reload();
+          }
+          if (data.profileType == "secondaryUser") {
+            this.props.history.push("/register/secondaryUserProfileSetup");
+            window.location.reload();
+          }
         } else {
           this.props.history.push(`/${data.profileType}`);
-          window.location.reload();
         }
       }
     }

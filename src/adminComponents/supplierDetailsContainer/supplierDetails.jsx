@@ -29,8 +29,7 @@ class SupplierDetails extends Component {
           </td>
           <td>
             <Link
-              to="/admin/tenderDetails"
-              onClick={() => this.props.tenderClicked(tender._id)}
+              to={`/admin/tenderDetails/${tender._id}`}
               className="detail-icons"
             >
               <i className="fa fa-eye"></i>

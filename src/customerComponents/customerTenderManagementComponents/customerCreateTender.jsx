@@ -128,7 +128,6 @@ class CustomerCreateTender extends Component {
     const { data, error } = await createTender(formData);
     if (data) {
       this.props.history.push("/customer");
-      window.location.reload();
     }
     if (error) return;
   };

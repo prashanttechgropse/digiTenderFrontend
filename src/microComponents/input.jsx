@@ -5,6 +5,7 @@ const Input = ({ name, value, error, label, ...rest }) => {
       <label htmlFor={name}>{label}</label>
       <input
         {...rest}
+        value={value}
         id={name}
         name={name}
         className="form-control"

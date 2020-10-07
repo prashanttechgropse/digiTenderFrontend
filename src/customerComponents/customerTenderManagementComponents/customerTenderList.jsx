@@ -1,10 +1,30 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import TenderListDisplayCard from "../../microComponents/customerTenderListDisplay";
+import httpService from "../../services/httpService";
+import { toast } from "react-toastify";
+import config from "../../config.json";
 class CustomerTenderList extends Component {
-  state = {};
+  state = {
+    tenderList: null,
+  };
+
+  async componentDidMount() {
+    try {
+      const { data } = await httpService.get(
+        `${config.apiendpoint}/customer/tenderList`
+      );
+      const { tenderList } = data;
+      await this.setState({ tenderList });
+    } catch (error) {
+      toast.error(error.message);
+      return;
+    }
+  }
 
   render() {
+    const { tenderList } = this.state;
+    if (tenderList === null) return null;
     return (
       <div className="container-fluid">
         <div className="breadcrumb-header justify-content-between">
@@ -32,8 +52,8 @@ class CustomerTenderList extends Component {
         <div className="row row-sm">
           <div className="col-xl-12">
             <TenderListDisplayCard
-              tenderList={this.props.tenderList}
-              tenderClicked={(tenderId) => this.props.tenderClicked(tenderId)}
+              tenderList={tenderList}
+              profileType="customer"
             />
           </div>
         </div>
