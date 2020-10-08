@@ -4,7 +4,7 @@ import CustomerSidebar from "./customerComponents/customersidebar";
 import Footer from "./macroComponents/footer";
 import MainContentHeaderBar from "./macroComponents/mainContentHeaderBar";
 import CustomerDashboardMainContent from "./customerComponents/customerDashboardComponents/customerDashboardMainConent";
-import CustomerDeliveryNoteMainContent from "./customerComponents/customerDeliveryNotesComponents/customerDeliveryNoteMainContent";
+
 import HelpSupport from "./macroComponents/helpSupport";
 import TermsConditions from "./macroComponents/termsConditions";
 import MyProfile from "./macroComponents/myProfile";
@@ -22,10 +22,11 @@ import { toast } from "react-toastify";
 import { Route } from "react-router-dom";
 import SupplierQuotationDetails from "./customerComponents/supllierQuotationDetails";
 import TenderDetails from "./customerComponents/customerTenderManagementComponents/TenderDetails";
-import CustomerDeliveryNoteDetails from "./customerComponents/customerDeliveryNotesComponents/customerDeliveryNoteDetails";
 import CustomerEditTender from "./customerComponents/customerTenderManagementComponents/customerEditTender";
 import AssignReceiver from "./customerComponents/customerAdminFunctionComponents.jsx/assignReceiver";
 import CreateDeliveryNote from "./customerComponents/createDeliveryNote";
+import DeliveryNoteMainContent from "./customerComponents/customerDeliveryNotesComponents/DeliveryNoteMainContent";
+import DeliveryNoteDetails from "./customerComponents/customerDeliveryNotesComponents/DeliveryNoteDetails";
 
 class CustomerApp extends Component {
   state = {
@@ -123,12 +124,12 @@ class CustomerApp extends Component {
             <Route
               exact
               path="/customer/deliveryNotes"
-              component={CustomerDeliveryNoteMainContent}
+              component={DeliveryNoteMainContent}
             />
             <Route
               exact
               path="/customer/deliveryNoteDetails/:tenderId"
-              component={CustomerDeliveryNoteDetails}
+              component={DeliveryNoteDetails}
             />
             <Route
               exact
@@ -137,7 +138,7 @@ class CustomerApp extends Component {
             />
             <Route
               exact
-              path="/customer/createDeliveryNote/:tenderId"
+              path="/customer/createDeliveryNote/:tenderId/:status"
               component={CreateDeliveryNote}
             />
             <Route

@@ -61,17 +61,15 @@ class TenderDetails extends Component {
   };
 
   handleCompleteTender = async () => {
-    await tenderService.completeTender("customer", this.state.tender._id);
     this.props.history.push(
-      `/customer/createDeliveryNote/${this.props.match.params.tenderId}`
+      `/customer/createDeliveryNote/${this.props.match.params.tenderId}/completed`
     );
     window.location.reload();
   };
 
   handleRejectTender = async () => {
-    await tenderService.rejectTender("customer", this.state.tender._id);
     this.props.history.push(
-      `/customer/createDeliveryNote/${this.props.match.params.tenderId}`
+      `/customer/createDeliveryNote/${this.props.match.params.tenderId}/rejected`
     );
     window.location.reload();
   };

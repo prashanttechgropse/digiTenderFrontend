@@ -5,8 +5,9 @@ import { toast } from "react-toastify";
 import { paginate } from "../../utilities/paginate";
 import config from "../../config.json";
 import httpService from "../../services/httpService";
-class CustomerDeliveryNoteMainContent extends Component {
+class DeliveryNoteMainContent extends Component {
   state = {
+    profileType: "",
     tenderList: null,
     displayTenderList: null,
     currentPage: null,
@@ -21,10 +22,20 @@ class CustomerDeliveryNoteMainContent extends Component {
 
   async componentDidMount() {
     try {
-      const { data } = await httpService.get(
-        `${config.apiendpoint}/customer/deliveryNoteTenderList`
-      );
-      const { tenderList } = data;
+      let res;
+      if (this.props.match.path.includes("/customer")) {
+        this.setState({ profileType: "customer" });
+        res = await httpService.get(
+          `${config.apiendpoint}/customer/deliveryNoteTenderList`
+        );
+      }
+      if (this.props.match.path.includes("/receiver")) {
+        this.setState({ profileType: "receiver" });
+        res = await httpService.get(
+          `${config.apiendpoint}/receiver/deliveryNoteTenderList`
+        );
+      }
+      const { tenderList } = res.data;
       await this.setState({ tenderList });
       const displayTenderList = paginate(
         this.state.tenderList,
@@ -59,22 +70,24 @@ class CustomerDeliveryNoteMainContent extends Component {
         <tr role="row">
           <td>
             <Link
-              to={`/customer/deliveryNoteDetails/${tender._id}`}
+              to={`/${this.state.profileType}/deliveryNoteDetails/${tender._id}`}
             >{`0000${srNo}`}</Link>
           </td>
           <td>
-            <Link to={`/customer/tenderDetails/${tender._id}`}>
+            <Link to={`/${this.state.profileType}/tenderDetails/${tender._id}`}>
               {tender._id.toString().substring(18, 24)}
             </Link>
           </td>
           <td>{tender.suppliedBy.firstName}</td>
           <td>{`DN${tender.tenderRefNo}`}</td>
           <td>{tender.deliveryLocation}</td>
-          <td>
-            {tender.receiver
-              ? tender.receiver.firstName
-              : "no receiver assigned"}
-          </td>
+          {this.state.profileType === "customer" ? (
+            <td>
+              {tender.receiver ? tender.receiver.name : "no receiver assigned"}
+            </td>
+          ) : (
+            ""
+          )}
           <td>
             <span
               className={`badge badge-${
@@ -139,7 +152,11 @@ class CustomerDeliveryNoteMainContent extends Component {
                               <th>Supplier Name</th>
                               <th>Note Number</th>
                               <th>Delivery Location</th>
-                              <th>Receiver Name</th>
+                              {this.state.profileType === "customer" ? (
+                                <th>Receiver Name</th>
+                              ) : (
+                                ""
+                              )}
                               <th>Status</th>
                             </tr>
                           </thead>
@@ -168,4 +185,4 @@ class CustomerDeliveryNoteMainContent extends Component {
   }
 }
 
-export default CustomerDeliveryNoteMainContent;
+export default DeliveryNoteMainContent;

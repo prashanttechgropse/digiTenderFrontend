@@ -70,39 +70,6 @@ export async function cancelTender(id) {
   }
 }
 
-export async function completeTender(profileType, id) {
-  try {
-    const { data } = await httpService.post(
-      `${apiendpoint}/${profileType}/completeTender`,
-      {
-        tenderId: id,
-      }
-    );
-    toast.success(data.message);
-    if (!data.message) toast.success(data);
-    return;
-  } catch (error) {
-    if (error.response) toast.error(error.response.data);
-    return;
-  }
-}
-export async function rejectTender(profileType, id) {
-  try {
-    const { data } = await httpService.post(
-      `${apiendpoint}/${profileType}/rejectTender`,
-      {
-        tenderId: id,
-      }
-    );
-    toast.success(data.message);
-    if (!data.message) toast.success(data);
-    return;
-  } catch (error) {
-    if (error.response) toast.error(error.response.data);
-    return;
-  }
-}
-
 export async function publishSavedTender(id) {
   try {
     const { data } = await httpService.post(

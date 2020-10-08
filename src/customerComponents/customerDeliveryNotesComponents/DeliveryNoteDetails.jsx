@@ -4,17 +4,33 @@ import config from "../../config.json";
 import { toast } from "react-toastify";
 const fileDownload = require("js-file-download");
 
-class CustomerDeliveryNoteDetails extends Component {
+class DeliveryNoteDetails extends Component {
   state = {
+    profileType: "",
     deliveryNote: null,
   };
   componentDidMount = async () => {
-    const { data } = await httpService.get(
-      `${config.apiendpoint}/customer/myDeliveryNote/${this.props.match.params.tenderId}`
-    );
-    const { deliveryNote } = data;
-    await this.setState({ deliveryNote });
-    console.log(this.state.deliveryNote);
+    try {
+      let res;
+      if (this.props.match.path.includes("/customer")) {
+        this.setState({ profileType: "customer" });
+        res = await httpService.get(
+          `${config.apiendpoint}/customer/myDeliveryNote/${this.props.match.params.tenderId}`
+        );
+      }
+      if (this.props.match.path.includes("/receiver")) {
+        this.setState({ profileType: "receiver" });
+        res = await httpService.get(
+          `${config.apiendpoint}/receiver/myDeliveryNote/${this.props.match.params.tenderId}`
+        );
+      }
+      console.log(res);
+      const { deliveryNote } = res.data;
+      await this.setState({ deliveryNote });
+      console.log(this.state.deliveryNote);
+    } catch (error) {
+      toast.error(error);
+    }
   };
 
   downloadDeliveryNote = async () => {
@@ -211,4 +227,4 @@ class CustomerDeliveryNoteDetails extends Component {
   }
 }
 
-export default CustomerDeliveryNoteDetails;
+export default DeliveryNoteDetails;

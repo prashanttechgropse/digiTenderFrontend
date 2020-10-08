@@ -7,6 +7,7 @@ import Joi from "joi-browser";
 import { createDeliveryNote } from "../services/deliveryNoteService";
 class CreateDeliveryNote extends Form {
   state = {
+    profileType: "",
     formData: {
       deliveryNoteNo: "",
       customerName: "",
@@ -35,16 +36,27 @@ class CreateDeliveryNote extends Form {
 
   componentDidMount = async () => {
     try {
-      const { data } = await httpService.get(
-        `${config.apiendpoint}/customer/myDeliveryNote/${this.props.match.params.tenderId}`
-      );
-      const { deliveryNote } = data;
+      let res;
+      if (this.props.match.path.includes("/customer")) {
+        this.setState({ profileType: "customer" });
+        res = await httpService.get(
+          `${config.apiendpoint}/customer/myTenders/${this.props.match.params.tenderId}`
+        );
+      }
+      if (this.props.match.path.includes("/receiver")) {
+        this.setState({ profileType: "receiver" });
+        res = await httpService.get(
+          `${config.apiendpoint}/receiver/myTenders/${this.props.match.params.tenderId}`
+        );
+      }
+      const { tender } = res.data;
+      console.log(tender);
       let formData = {};
-      formData.deliveryNoteNo = deliveryNote.deliveryNoteNo;
-      formData.customerName = deliveryNote.customerId.firstName;
-      formData.supplierName = deliveryNote.supplierId.firstName;
-      formData.tenderRefNo = deliveryNote.tender.tenderRefNo;
-      formData.deliveryLocation = deliveryNote.tender.deliveryLocation;
+      formData.deliveryNoteNo = `DN${tender.tenderRefNo}`;
+      formData.customerName = tender.createdBy.firstName;
+      formData.supplierName = tender.suppliedBy.firstName;
+      formData.tenderRefNo = tender.tenderRefNo;
+      formData.deliveryLocation = tender.deliveryLocation;
       this.setState({ formData });
     } catch (error) {
       toast.error(error.message);
@@ -53,11 +65,13 @@ class CreateDeliveryNote extends Form {
   };
   doSubmit = async () => {
     const { data, error } = await createDeliveryNote(
+      this.state.profileType,
       this.state.formData,
-      this.props.match.params.tenderId
+      this.props.match.params.tenderId,
+      this.props.match.params.status
     );
     if (data) {
-      this.props.history.push("/customer");
+      this.props.history.push(`/${this.state.profileType}`);
     }
     if (error) return;
   };

@@ -2,10 +2,15 @@ import { apiendpoint } from "../config.json";
 import httpService from "./httpService";
 import { toast } from "react-toastify";
 
-export async function createDeliveryNote(formData, tenderId) {
+export async function createDeliveryNote(
+  profileType,
+  formData,
+  tenderId,
+  status
+) {
   try {
     const { data } = await httpService.post(
-      `${apiendpoint}/customer/createDeliveryNote/${tenderId}`,
+      `${apiendpoint}/${profileType}/createDeliveryNote/${tenderId}/${status}`,
       formData
     );
     toast.success(data.message);

@@ -45,17 +45,15 @@ class ReceiverTenderDetails extends Component {
   };
 
   handleCompleteTender = async () => {
-    await tenderService.completeTender("receiver", this.state.tender._id);
     this.props.history.push(
-      `/receiver/createDeliveryNote/${this.props.match.params.tenderId}`
+      `/receiver/createDeliveryNote/${this.props.match.params.tenderId}/completed`
     );
     window.location.reload();
   };
 
   handleRejectTender = async () => {
-    await tenderService.rejectTender("receiver", this.state.tender._id);
     this.props.history.push(
-      `/receiver/createDeliveryNote/${this.props.match.params.tenderId}`
+      `/receiver/createDeliveryNote/${this.props.match.params.tenderId}/rejected`
     );
     window.location.reload();
   };

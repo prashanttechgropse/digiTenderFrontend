@@ -16,10 +16,12 @@ import { Route } from "react-router-dom";
 import ReceiverDashboardMainContent from "../receiverComponents/receiverDashboardMainContent";
 import ReceiverSideBar from "../receiverComponents/receiverSideBar";
 import SecondaryUserMyProfile from "../microComponents/secondaryUserMyProfile";
-import TenderDetails from "../customerComponents/customerTenderManagementComponents/TenderDetails";
+
 import ReceiverTenderDetails from "../receiverComponents/receiverTenderDetails";
 import ReceiverTenderList from "../receiverComponents/receiverTenderList";
 import CreateDeliveryNote from "../customerComponents/createDeliveryNote";
+import DeliveryNoteMainContent from "../customerComponents/customerDeliveryNotesComponents/DeliveryNoteMainContent";
+import DeliveryNoteDetails from "../customerComponents/customerDeliveryNotesComponents/DeliveryNoteDetails";
 
 class ReceiverApp extends Component {
   state = {
@@ -75,8 +77,18 @@ class ReceiverApp extends Component {
             />
             <Route
               exact
-              path="/receiver/createDeliveryNote/:tenderId"
+              path="/receiver/deliveryNotes"
+              component={DeliveryNoteMainContent}
+            />
+            <Route
+              exact
+              path="/receiver/createDeliveryNote/:tenderId/:status"
               component={CreateDeliveryNote}
+            />
+            <Route
+              exact
+              path="/receiver/deliveryNoteDetails/:tenderId"
+              component={DeliveryNoteDetails}
             />
             <Route
               exact
