@@ -32,20 +32,18 @@ class LoginForm extends Form {
     if (data.registerationCompleted) {
       const stake = await data.profileType;
       toast.success(data.message);
-      this.props.history.push(`/${stake.toLowerCase()}`);
-      window.location.reload();
+      return await this.props.history.push(`/${stake.toLowerCase()}`);
     } else {
       toast.error(data.message);
       if (!data.bankDetailsStatus) {
-        this.props.history.push("/register/uploadBankDetails");
-        return;
+        return await this.props.history.push("/register/uploadBankDetails");
       }
       const { error: ex } = await registerService.otpGeneration(
         this.state.formData.email
       );
       if (ex) return;
       this.props.submitEmail(this.state.formData.email);
-      this.props.history.push("/verify");
+      return await this.props.history.push("/verify");
     }
   };
 

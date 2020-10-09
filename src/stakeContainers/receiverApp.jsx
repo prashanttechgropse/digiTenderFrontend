@@ -40,8 +40,7 @@ class ReceiverApp extends Component {
           this.setState({ receiver: receiver });
           return;
         } else {
-          this.props.history.push(`/${data.user.profileType}`);
-          return;
+          return await this.props.history.push(`/${data.user.profileType}`);
         }
       }
     } catch (error) {

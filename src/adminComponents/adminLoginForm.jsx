@@ -27,8 +27,7 @@ class AdminLogIn extends Form {
     if (data) {
       const stake = data.profileType;
       toast.success(data.message);
-      this.props.history.push(`/${stake.toLowerCase()}`);
-      window.location.reload();
+      return await this.props.history.push(`/${stake.toLowerCase()}`);
     }
     if (error) return;
   };

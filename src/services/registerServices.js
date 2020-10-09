@@ -105,10 +105,13 @@ export async function otpVerification(formData, email) {
         otp: formData.otp,
       }
     );
-    await localStorage.setItem("token", headers["x-auth-token"]);
-    toast.success(data.message);
-    if (!data.message) toast.success(data);
-    return { data };
+    if (data) {
+      await window.localStorage.removeItem("token");
+      await window.localStorage.setItem("token", headers["x-auth-token"]);
+      toast.success(data.message);
+      if (!data.message) toast.success(data);
+      return { data };
+    }
   } catch (error) {
     if (error.response) toast.error(error.response.data);
     return { error };

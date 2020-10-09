@@ -124,7 +124,7 @@ class SavedTenderDetails extends Component {
     }
     const { data, error } = await createBid(bid);
     if (data) {
-      this.props.history.push("/supplier");
+      return await this.props.history.push("/supplier");
     }
     if (error) return;
   };
@@ -136,7 +136,7 @@ class SavedTenderDetails extends Component {
       );
       toast.success(data.message);
       if (data) {
-        this.props.history.push("/supplier");
+        return await this.props.history.push("/supplier");
       }
     } catch (error) {
       toast.error(error.message);

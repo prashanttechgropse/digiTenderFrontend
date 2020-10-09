@@ -33,7 +33,7 @@ class SecondaryUserProfileSetup extends Form {
       error,
     } = await registerService.setUpSecondarUserProfileService(formData);
     if (data) {
-      this.props.history.push("/");
+      return await this.props.history.push("/");
     }
     if (error) {
       return;

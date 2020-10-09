@@ -13,6 +13,10 @@ const errorCallBack = (error) => {
   return Promise.reject(error);
 };
 axios.defaults.headers.common["x-auth-token"] = localStorage.getItem("token");
+axios.interceptors.request.use(async (req) => {
+  req.headers["x-auth-token"] = await localStorage.getItem("token");
+  return req;
+});
 //intercept errors while communicating with backend server
 axios.interceptors.response.use(null, errorCallBack);
 

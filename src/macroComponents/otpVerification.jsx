@@ -18,6 +18,10 @@ class OtpVerificationForm extends Form {
     otp: Joi.string().required(),
   };
 
+  componentDidMount = () => {
+    localStorage.removeItem("token");
+  };
+
   doSubmit = async () => {
     await localStorage.removeItem("token");
     const { data, error } = await registerService.otpVerification(
@@ -27,17 +31,16 @@ class OtpVerificationForm extends Form {
     if (error) return;
     else {
       if (this.props.forgotPassword === true) {
-        this.props.history.push("/forgotPassword/resetPassword");
-        window.location.reload();
+        return await this.props.history.push("/forgotPassword/resetPassword");
       } else {
         if (data.isregistered === false) {
           if (data.profileType == "primaryUser") {
-            this.props.history.push("/register/profileSetup");
-            window.location.reload();
+            return await this.props.history.push("/register/profileSetup");
           }
           if (data.profileType == "secondaryUser") {
-            this.props.history.push("/register/secondaryUserProfileSetup");
-            window.location.reload();
+            return await this.props.history.push(
+              "/register/secondaryUserProfileSetup"
+            );
           }
         } else {
           this.props.history.push(`/${data.profileType}`);

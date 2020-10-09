@@ -79,7 +79,6 @@ class AssignReceiver extends Form {
       `${config.apiendpoint}/customer/assignReceiver`,
       this.state.formData
     );
-    window.location.reload();
   };
 
   renderTenderList = () => {

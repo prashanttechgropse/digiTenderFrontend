@@ -33,11 +33,11 @@ class SupllierBid extends Component {
         );
         await this.setState({ tender: data.tender });
       } else if (data.bidIsPublished) {
-        this.props.history.push(
+        return await this.props.history.push(
           `/supplier/myBidDetails/${this.props.match.params.tenderId}`
         );
       } else if (!data.bidIsPublished) {
-        this.props.history.push(
+        return await this.props.history.push(
           `/supplier/savedTenderDetails/${this.props.match.params.tenderId}`
         );
       }
@@ -137,7 +137,7 @@ class SupllierBid extends Component {
     }
     const { data, error } = await createBid(bid);
     if (data) {
-      this.props.history.push("/supplier");
+      return await this.props.history.push("/supplier");
     }
     if (error) return;
   };

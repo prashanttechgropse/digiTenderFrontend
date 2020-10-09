@@ -14,7 +14,7 @@ class SupplierDashboardMainContent extends Component {
       if (data.user.profileType.toLowerCase() === "supplier") {
         const supplier = data.user;
         this.setState({ supplier: supplier });
-      } else this.props.history.push(`/${data.user.profileType}`);
+      } else return await this.props.history.push(`/${data.user.profileType}`);
     } catch (error) {
       toast.error(error.message);
       return;

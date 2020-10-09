@@ -50,12 +50,11 @@ class AdminApp extends Component {
           const tenderList = data.tenderList;
           this.setState({ tenderList });
         } else {
-          this.props.history.push(`/${data.user.profileType}`);
+          return await this.props.history.push(`/${data.user.profileType}`);
         }
       }
     } catch (error) {
       toast.error(error.message);
-      //window.location.reload();
     }
   };
 
