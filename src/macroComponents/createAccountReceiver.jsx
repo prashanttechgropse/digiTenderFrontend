@@ -83,7 +83,7 @@ class CreateAccountReceiver extends Form {
                 <div className="row wd-100p mx-auto text-center">
                   <div className="col-md-12 col-lg-12 col-xl-12 my-auto mx-auto wd-100p">
                     <img
-                      src="/common/img/backgrounds/receiver.png"
+                      src="/common/img/backgrounds/verify.png"
                       className="my-auto ht-xl-80p wd-md-100p wd-xl-80p mx-auto"
                       alt="logo"
                     />
