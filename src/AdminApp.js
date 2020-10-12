@@ -13,7 +13,7 @@ import AdminHelpSupport from "./adminComponents/adminAdminFunctionComponents/adm
 import AdminTermsConditions from "./adminComponents/adminAdminFunctionComponents/adminTerms&Conditions";
 import ChangePassword from "./userComponents/changePassword";
 import httpService from "./services/httpService";
-import config from "./config.json";
+
 import { toast } from "react-toastify";
 import { Route } from "react-router-dom";
 import CustomerDetailsContainer from "./adminComponents/customerDetailsComponents/customerDetailsContainer";
@@ -35,7 +35,6 @@ class AdminApp extends Component {
       const { data } = await httpService.get(
         `${process.env.REACT_APP_APIENDPOINT}/admin/adminData`
       );
-      toast.success(data.message);
       if (data) {
         if (data.user.profileType.toLowerCase() === "admin") {
           const admin = data.user;

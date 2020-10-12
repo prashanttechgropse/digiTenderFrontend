@@ -8,7 +8,6 @@ import TermsConditions from "./macroComponents/termsConditions";
 import MyProfile from "./macroComponents/myProfile";
 import EditProfile from "./macroComponents/editProfile";
 
-import SupplierDeliveryNoteMainContent from "./supplierComponents/supplierDeliveryNotesComponents/supplierDeliveryNoteMainContent";
 import SupplierDashboardMainContent from "./supplierComponents/supplierDashboardComponents/supplierDashboardMainContent";
 import SupplierSideBar from "./supplierComponents/supplierSideBar";
 import TenderList from "./supplierComponents/supplierTenderManagementComponents/supplierTenderList";
@@ -18,13 +17,14 @@ import SupplierHistory from "./supplierComponents/supplierTenderManagementCompon
 import SupplierEmployeeList from "./supplierComponents/supplierAdminFunctionsComponents/supplierEmployeeList";
 import SupplierCreateSubUser from "./supplierComponents/supplierAdminFunctionsComponents/supplierCreateSubUser";
 import httpService from "./services/httpService";
-import config from "./config.json";
+
 import { toast } from "react-toastify";
 import ChangePassword from "./userComponents/changePassword";
 import { Route } from "react-router-dom";
 import SupllierBid from "./supplierComponents/supplierBid";
 import SupplierMyBidDetails from "./supplierComponents/supplierMyBidDetails";
 import SavedTenderDetails from "./supplierComponents/savedTenderDetails";
+import DeliveryNoteMainContent from "./customerComponents/customerDeliveryNotesComponents/DeliveryNoteMainContent";
 
 class SupplierApp extends Component {
   state = { supplier: "", displayTenderDetailsId: null };
@@ -55,9 +55,11 @@ class SupplierApp extends Component {
           <SupplierSideBar user={this.state.supplier} />
           <div className="main-content app-content">
             <MainContentHeaderBar user={this.state.supplier} />
-            <Route exact path="/supplier/deliveryNotes">
-              <SupplierDeliveryNoteMainContent />;
-            </Route>
+            <Route
+              exact
+              path="/supplier/deliveryNotes"
+              component={DeliveryNoteMainContent}
+            ></Route>
             <Route exact path="/supplier/tenderList" component={TenderList} />
             <Route exact path="/supplier/saveForLater">
               <SupplierSaveForLater

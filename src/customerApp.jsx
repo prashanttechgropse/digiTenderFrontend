@@ -16,7 +16,6 @@ import CustomerTransactionList from "./customerComponents/customerTenderManageme
 import CustomerCreateTender from "./customerComponents/customerTenderManagementComponents/customerCreateTender";
 import CustomerReceiverlist from "./customerComponents/customerAdminFunctionComponents.jsx/customerReceiverList";
 
-import config from "./config.json";
 import httpService from "./services/httpService";
 import { toast } from "react-toastify";
 import { Route } from "react-router-dom";

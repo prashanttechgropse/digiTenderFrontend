@@ -100,7 +100,6 @@ export async function authentication(formData) {
     await localStorage.removeItem("token");
     await localStorage.setItem("token", headers["x-auth-token"]);
 
-    if (!data.message) toast.success(data);
     return { data };
   } catch (error) {
     if (error.response) toast.error(error.response.data);
@@ -189,8 +188,6 @@ export async function adminAuthentication(formData) {
     );
     await localStorage.removeItem("token");
     await localStorage.setItem("token", headers["x-auth-token"]);
-
-    if (!data.message) toast.success(data);
     return { data };
   } catch (error) {
     if (error.response) toast.error(error.response.data);

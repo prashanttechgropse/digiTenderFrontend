@@ -35,6 +35,12 @@ class DeliveryNoteMainContent extends Component {
           `${process.env.REACT_APP_APIENDPOINT}/receiver/deliveryNoteTenderList`
         );
       }
+      if (this.props.match.path.includes("/supplier")) {
+        this.setState({ profileType: "supplier" });
+        res = await httpService.get(
+          `${process.env.REACT_APP_APIENDPOINT}/supplier/deliveryNoteTenderList`
+        );
+      }
       const { tenderList } = res.data;
       await this.setState({ tenderList });
       const displayTenderList = paginate(
