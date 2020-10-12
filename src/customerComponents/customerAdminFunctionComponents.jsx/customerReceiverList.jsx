@@ -21,7 +21,7 @@ class CustomerReceiverlist extends Component {
   async componentDidMount() {
     try {
       const { data } = await httpService.get(
-        `${config.apiendpoint}/customer/receiverList`
+        `${process.env.REACT_APP_APIENDPOINT}/customer/receiverList`
       );
       const { receiversList: receiverList } = data;
       await this.setState({ receiverList });
@@ -56,7 +56,7 @@ class CustomerReceiverlist extends Component {
         if (receiver._id === receiverId) {
           receiver.user.isApproved = !receiver.user.isApproved;
           httpService.post(
-            `${config.apiendpoint}/customer/changeReceiverStatus`,
+            `${process.env.REACT_APP_APIENDPOINT}/customer/changeReceiverStatus`,
             {
               receiverId: receiverId,
               receiverStatus: receiver.user.isApproved,

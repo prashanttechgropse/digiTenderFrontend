@@ -24,12 +24,12 @@ class SupllierBid extends Component {
     if (!this.props.match.params.tenderId) return;
     try {
       const { data } = await httpService.get(
-        `${config.apiendpoint}/supplier/checkIfBidCreated/${this.props.match.params.tenderId}`
+        `${process.env.REACT_APP_APIENDPOINT}/supplier/checkIfBidCreated/${this.props.match.params.tenderId}`
       );
       console.log(data);
       if (!data.bidAlreadyExists) {
         const { data } = await httpService.get(
-          `${config.apiendpoint}/tenders/${this.props.match.params.tenderId}`
+          `${process.env.REACT_APP_APIENDPOINT}/tenders/${this.props.match.params.tenderId}`
         );
         await this.setState({ tender: data.tender });
       } else if (data.bidIsPublished) {
@@ -67,7 +67,7 @@ class SupllierBid extends Component {
     const { tender } = this.state;
     try {
       const { data } = await httpService.get(
-        `${config.apiendpoint}/tenderDocuments/${tender._id}/${tender.tenderDoc}`,
+        `${process.env.REACT_APP_APIENDPOINT}/tenderDocuments/${tender._id}/${tender.tenderDoc}`,
         {
           responseType: "blob",
         }
@@ -241,9 +241,7 @@ class SupllierBid extends Component {
                   onClick={this.toggleTermsConditions}
                 />
                 I accept
-                <a href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/supplier/terms-and-condition">
-                  Terms & Conditions
-                </a>
+                <a href="/supplier/terms-and-condition">Terms & Conditions</a>
               </label>
             </div>
           </div>

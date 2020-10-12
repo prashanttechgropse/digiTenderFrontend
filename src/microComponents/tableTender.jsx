@@ -22,9 +22,7 @@ class TableTender extends Component {
               <tr role="row">
                 <td>#0001</td>
                 <td>
-                  <a href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/supplier/tender-detail">
-                    #T686868
-                  </a>
+                  <a href="/supplier/tender-detail">#T686868</a>
                 </td>
                 <td>10-07-2020</td>
                 <td>Alex Smith</td>

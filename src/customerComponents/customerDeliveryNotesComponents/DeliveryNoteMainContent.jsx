@@ -26,13 +26,13 @@ class DeliveryNoteMainContent extends Component {
       if (this.props.match.path.includes("/customer")) {
         this.setState({ profileType: "customer" });
         res = await httpService.get(
-          `${config.apiendpoint}/customer/deliveryNoteTenderList`
+          `${process.env.REACT_APP_APIENDPOINT}/customer/deliveryNoteTenderList`
         );
       }
       if (this.props.match.path.includes("/receiver")) {
         this.setState({ profileType: "receiver" });
         res = await httpService.get(
-          `${config.apiendpoint}/receiver/deliveryNoteTenderList`
+          `${process.env.REACT_APP_APIENDPOINT}/receiver/deliveryNoteTenderList`
         );
       }
       const { tenderList } = res.data;

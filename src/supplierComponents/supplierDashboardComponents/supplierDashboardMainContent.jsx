@@ -9,7 +9,7 @@ class SupplierDashboardMainContent extends Component {
   async componentDidMount() {
     try {
       const { data } = await httpService.get(
-        `${config.apiendpoint}/supplier/myData`
+        `${process.env.REACT_APP_APIENDPOINT}/supplier/myData`
       );
       if (data.user.profileType.toLowerCase() === "supplier") {
         const supplier = data.user;

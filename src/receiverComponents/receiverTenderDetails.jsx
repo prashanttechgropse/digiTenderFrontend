@@ -12,7 +12,7 @@ class ReceiverTenderDetails extends Component {
 
     try {
       const { data } = await httpService.get(
-        `${config.apiendpoint}/receiver/myTenders/${this.props.match.params.tenderId}`
+        `${process.env.REACT_APP_APIENDPOINT}/receiver/myTenders/${this.props.match.params.tenderId}`
       );
 
       await this.setState({ tender: data.tender });

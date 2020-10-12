@@ -55,14 +55,12 @@ class SupplierDeliveryNoteMainContent extends Component {
                           <tbody>
                             <tr role="row">
                               <td>
-                                <a href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/supplier/delivery-note-detail">
+                                <a href="/supplier/delivery-note-detail">
                                   DN16276
                                 </a>
                               </td>
                               <td>
-                                <a href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/supplier/tender-detail">
-                                  #T0003
-                                </a>
+                                <a href="/supplier/tender-detail">#T0003</a>
                               </td>
                               <td>Mo Danish</td>
                               <td>D797898</td>
@@ -76,14 +74,12 @@ class SupplierDeliveryNoteMainContent extends Component {
                             </tr>
                             <tr role="row">
                               <td>
-                                <a href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/supplier/delivery-note-detail">
+                                <a href="/supplier/delivery-note-detail">
                                   DN16276
                                 </a>
                               </td>
                               <td>
-                                <a href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/supplier/tender-detail">
-                                  #T0003
-                                </a>
+                                <a href="/supplier/tender-detail">#T0003</a>
                               </td>
                               <td>Mo Danish</td>
                               <td>D797898</td>
@@ -97,14 +93,12 @@ class SupplierDeliveryNoteMainContent extends Component {
                             </tr>
                             <tr role="row">
                               <td>
-                                <a href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/supplier/delivery-note-detail">
+                                <a href="/supplier/delivery-note-detail">
                                   DN16276
                                 </a>
                               </td>
                               <td>
-                                <a href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/supplier/tender-detail">
-                                  #T0003
-                                </a>
+                                <a href="/supplier/tender-detail">#T0003</a>
                               </td>
                               <td>Mo Danish</td>
                               <td>D797898</td>
@@ -118,14 +112,12 @@ class SupplierDeliveryNoteMainContent extends Component {
                             </tr>
                             <tr role="row">
                               <td>
-                                <a href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/supplier/delivery-note-detail">
+                                <a href="/supplier/delivery-note-detail">
                                   DN16276
                                 </a>
                               </td>
                               <td>
-                                <a href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/supplier/tender-detail">
-                                  #T0004
-                                </a>
+                                <a href="/supplier/tender-detail">#T0004</a>
                               </td>
                               <td>Mo Danish</td>
                               <td>D797898</td>

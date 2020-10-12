@@ -25,7 +25,7 @@ class SavedTenderDetails extends Component {
     if (!this.props.match.params.tenderId) return;
     try {
       let { data } = await httpService.get(
-        `${config.apiendpoint}/supplier/savedTenders/${this.props.match.params.tenderId}`
+        `${process.env.REACT_APP_APIENDPOINT}/supplier/savedTenders/${this.props.match.params.tenderId}`
       );
 
       await data.bid.itemList.map(
@@ -57,7 +57,7 @@ class SavedTenderDetails extends Component {
     const { tender } = this.state;
     try {
       const { data } = await httpService.get(
-        `${config.apiendpoint}/tenderDocuments/${tender._id}/${tender.tenderDoc}`,
+        `${process.env.REACT_APP_APIENDPOINT}/tenderDocuments/${tender._id}/${tender.tenderDoc}`,
         {
           responseType: "blob",
         }
@@ -132,7 +132,7 @@ class SavedTenderDetails extends Component {
   handleIgnore = async () => {
     try {
       let { data } = await httpService.delete(
-        `${config.apiendpoint}/supplier/ignoreSavedTender/${this.props.match.params.tenderId}`
+        `${process.env.REACT_APP_APIENDPOINT}/supplier/ignoreSavedTender/${this.props.match.params.tenderId}`
       );
       toast.success(data.message);
       if (data) {
@@ -244,9 +244,7 @@ class SavedTenderDetails extends Component {
                   onClick={this.toggleTermsConditions}
                 />
                 I accept
-                <a href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/supplier/terms-and-condition">
-                  Terms & Conditions
-                </a>
+                <a href="/supplier/terms-and-condition">Terms & Conditions</a>
               </label>
             </div>
           </div>

@@ -83,7 +83,7 @@ class CreateAccountReceiver extends Form {
                 <div className="row wd-100p mx-auto text-center">
                   <div className="col-md-12 col-lg-12 col-xl-12 my-auto mx-auto wd-100p">
                     <img
-                      src="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/receiver/common/img/backgrounds/receiver.png"
+                      src="/receiver/common/img/backgrounds/receiver.png"
                       className="my-auto ht-xl-80p wd-md-100p wd-xl-80p mx-auto"
                       alt="logo"
                     />
@@ -99,7 +99,7 @@ class CreateAccountReceiver extends Form {
                           <div className="mb-2 d-flex">
                             <Link to="#">
                               <img
-                                src="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/common/img/logo/logo.png"
+                                src="/common/img/logo/logo.png"
                                 className="sign-favicon"
                                 alt="logo"
                               />

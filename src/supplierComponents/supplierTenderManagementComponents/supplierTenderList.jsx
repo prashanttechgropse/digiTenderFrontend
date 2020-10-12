@@ -22,7 +22,7 @@ class TenderList extends Component {
   async componentDidMount() {
     try {
       const { data } = await httpService.get(
-        `${config.apiendpoint}/tenderList`
+        `${process.env.REACT_APP_APIENDPOINT}/tenderList`
       );
       const { tenderList } = data;
       await this.setState({ tenderList });

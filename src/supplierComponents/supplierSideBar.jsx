@@ -68,14 +68,14 @@ class SupplierSideBar extends Component {
         <div className="main-sidebar-header active">
           <Link className="desktop-logo logo-light active" to="/supplier">
             <img
-              src="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/supplier/common/img/logo/logo.png"
+              src="/common/img/logo/logo.png"
               className="main-logo"
               alt="logo"
             />
           </Link>
           <Link className="desktop-logo logo-dark active" to="/supplier">
             <img
-              src="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/supplier/common/img/logo/logo.png"
+              src="/common/img/logo/logo.png"
               className="main-logo dark-theme"
               alt="logo"
             />
@@ -85,7 +85,7 @@ class SupplierSideBar extends Component {
             to="/supplier"
           >
             <img
-              src="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/supplier/common/img/logo/favicon.png"
+              src="/common/img/logo/favicon.png"
               className="logo-icon"
               alt="logo"
             />
@@ -95,7 +95,7 @@ class SupplierSideBar extends Component {
             to="/supplier"
           >
             <img
-              src="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/supplier/common/img/logo/favicon.png"
+              src="/common/img/logo/favicon.png"
               className="logo-icon dark-theme"
               alt="logo"
             />
@@ -114,7 +114,7 @@ class SupplierSideBar extends Component {
                     <img
                       alt="user-img"
                       className="avatar avatar-xl brround mCS_img_loaded"
-                      src="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/supplier/common/img/customer/01.jpg"
+                      src="/common/img/customer/01.jpg"
                     />
                     <span className="avatar-status profile-status bg-green"></span>
                   </div>

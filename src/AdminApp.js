@@ -33,7 +33,7 @@ class AdminApp extends Component {
   componentDidMount = async () => {
     try {
       const { data } = await httpService.get(
-        `${config.apiendpoint}/admin/adminData`
+        `${process.env.REACT_APP_APIENDPOINT}/admin/adminData`
       );
       toast.success(data.message);
       if (data) {

@@ -11,7 +11,7 @@ class CustomerDashboardMainContent extends Component {
   async componentDidMount() {
     try {
       const { data } = await httpService.get(
-        `${config.apiendpoint}/customer/myData`
+        `${process.env.REACT_APP_APIENDPOINT}/customer/myData`
       );
       if (data) {
         if (data.user.profileType.toLowerCase() === "customer") {

@@ -50,7 +50,7 @@ class CustomerEditTender extends Component {
     let data;
     try {
       data = await httpService.get(
-        `${config.apiendpoint}/customer/myTenders/${this.props.match.params.tenderId}`
+        `${process.env.REACT_APP_APIENDPOINT}/customer/myTenders/${this.props.match.params.tenderId}`
       );
       await this.setState({ tender: data.data.tender });
       let formData = { ...this.state.formData };

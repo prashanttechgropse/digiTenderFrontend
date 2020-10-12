@@ -11,7 +11,7 @@ class ReceiverTenderList extends Component {
   async componentDidMount() {
     try {
       const { data } = await httpService.get(
-        `${config.apiendpoint}/receiver/tenderList`
+        `${process.env.REACT_APP_APIENDPOINT}/receiver/tenderList`
       );
       const { tenderList } = data;
       await this.setState({ tenderList });

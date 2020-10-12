@@ -12,7 +12,7 @@ class CustomerTenderList extends Component {
   async componentDidMount() {
     try {
       const { data } = await httpService.get(
-        `${config.apiendpoint}/customer/tenderList`
+        `${process.env.REACT_APP_APIENDPOINT}/customer/tenderList`
       );
       const { tenderList } = data;
       await this.setState({ tenderList });

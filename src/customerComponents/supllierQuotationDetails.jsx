@@ -12,7 +12,7 @@ class SupplierQuotationDetails extends Component {
     if (!this.props.match.params.bidId) return;
     try {
       const { data } = await httpService.get(
-        `${config.apiendpoint}/bids/${this.props.match.params.bidId}`
+        `${process.env.REACT_APP_APIENDPOINT}/bids/${this.props.match.params.bidId}`
       );
       await this.setState({ bid: data.bid });
     } catch (error) {

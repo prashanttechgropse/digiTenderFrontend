@@ -14,12 +14,12 @@ class TenderDetails extends Component {
     try {
       if (this.props.match.path.includes("/customer")) {
         data = await httpService.get(
-          `${config.apiendpoint}/customer/myTenders/${this.props.match.params.tenderId}`
+          `${process.env.REACT_APP_APIENDPOINT}/customer/myTenders/${this.props.match.params.tenderId}`
         );
       }
       if (this.props.match.path.includes("/admin")) {
         data = await httpService.get(
-          `${config.apiendpoint}/admin/tenders/${this.props.match.params.tenderId}`
+          `${process.env.REACT_APP_APIENDPOINT}/admin/tenders/${this.props.match.params.tenderId}`
         );
       }
 

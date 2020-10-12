@@ -68,7 +68,7 @@ class AdminDeliveryNoteList extends Component {
                               </td>
                               <td>
                                 <a
-                                  href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/admin/delivery-note-detail"
+                                  href="/admin/delivery-note-detail"
                                   className="detail-icons"
                                 >
                                   <i className="fa fa-eye"></i>
@@ -89,7 +89,7 @@ class AdminDeliveryNoteList extends Component {
                               </td>
                               <td>
                                 <a
-                                  href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/admin/delivery-note-detail"
+                                  href="/admin/delivery-note-detail"
                                   className="detail-icons"
                                 >
                                   <i className="fa fa-eye"></i>
@@ -110,7 +110,7 @@ class AdminDeliveryNoteList extends Component {
                               </td>
                               <td>
                                 <a
-                                  href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/admin/delivery-note-detail"
+                                  href="/admin/delivery-note-detail"
                                   className="detail-icons"
                                 >
                                   <i className="fa fa-eye"></i>
@@ -131,7 +131,7 @@ class AdminDeliveryNoteList extends Component {
                               </td>
                               <td>
                                 <a
-                                  href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/admin/delivery-note-detail"
+                                  href="/admin/delivery-note-detail"
                                   className="detail-icons"
                                 >
                                   <i className="fa fa-eye"></i>
@@ -152,7 +152,7 @@ class AdminDeliveryNoteList extends Component {
                               </td>
                               <td>
                                 <a
-                                  href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/admin/delivery-note-detail"
+                                  href="/admin/delivery-note-detail"
                                   className="detail-icons"
                                 >
                                   <i className="fa fa-eye"></i>

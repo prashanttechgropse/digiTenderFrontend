@@ -107,14 +107,14 @@ class AdminSideBar extends Component {
         <div className="main-sidebar-header active">
           <Link to={"/admin"} className="desktop-logo logo-light active">
             <img
-              src="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/admin/common/img/logo/logo.png"
+              src="/common/img/logo/logo.png"
               className="main-logo"
               alt="logo"
             />
           </Link>
           <Link to={"/admin"} className="desktop-logo logo-dark active">
             <img
-              src="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/admin/common/img/logo/logo.png"
+              src="/common/img/logo/logo.png"
               className="main-logo dark-theme"
               alt="logo"
             />
@@ -124,7 +124,7 @@ class AdminSideBar extends Component {
             className="logo-icon mobile-logo icon-light active"
           >
             <img
-              src="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/admin/common/img/logo/favicon.png"
+              src="/common/img/logo/favicon.png"
               className="logo-icon"
               alt="logo"
             />
@@ -134,7 +134,7 @@ class AdminSideBar extends Component {
             className="logo-icon mobile-logo icon-dark active"
           >
             <img
-              src="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/admin/common/img/logo/favicon.png"
+              src="/common/img/logo/favicon.png"
               className="logo-icon dark-theme"
               alt="logo"
             />
@@ -153,7 +153,7 @@ class AdminSideBar extends Component {
                     <img
                       alt="user-img"
                       className="avatar avatar-xl brround mCS_img_loaded"
-                      src="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/admin/common/img/customer/01.jpg"
+                      src="/common/img/customer/01.jpg"
                     />
                     <span className="avatar-status profile-status bg-green"></span>
                   </div>

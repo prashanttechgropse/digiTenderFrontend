@@ -3,7 +3,7 @@ import Form from "./form/form";
 import Joi from "joi-browser";
 import { Link } from "react-router-dom";
 import httpService from "../services/httpService";
-import { apiendpoint } from "../config.json";
+
 import * as registerService from "../services/registerServices";
 import { toast } from "react-toastify";
 
@@ -142,7 +142,7 @@ class ProfileSetup extends Form {
                         <div class="mb-2 d-flex">
                           <Link to="#">
                             <img
-                              src="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/common/img/logo/logo.png"
+                              src="/common/img/logo/logo.png"
                               class="sign-favicon"
                               alt="logo"
                             />

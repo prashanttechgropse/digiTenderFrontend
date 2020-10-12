@@ -55,7 +55,7 @@ class SecondaryUserProfileSetup extends Form {
                           <div class="mb-2 d-flex">
                             <a href="#">
                               <img
-                                src="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/common/img/logo/logo.png"
+                                src="/common/img/logo/logo.png"
                                 class="sign-favicon"
                                 alt="logo"
                               />

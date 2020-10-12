@@ -1,11 +1,10 @@
-import { apiendpoint } from "../config.json";
 import httpService from "./httpService";
 import { toast } from "react-toastify";
 
 export async function createBid(bid) {
   try {
     const { data } = await httpService.post(
-      `${apiendpoint}/supplier/createBid`,
+      `${process.env.REACT_APP_APIENDPOINT}/supplier/createBid`,
       bid
     );
     toast.success(data.message);

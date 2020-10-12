@@ -22,7 +22,7 @@ class CustomerTransactionList extends Component {
   async componentDidMount() {
     try {
       const { data } = await httpService.get(
-        `${config.apiendpoint}/customer/tenderList/completed`
+        `${process.env.REACT_APP_APIENDPOINT}/customer/tenderList/completed`
       );
       const { tenderList } = data;
       await this.setState({ tenderList });

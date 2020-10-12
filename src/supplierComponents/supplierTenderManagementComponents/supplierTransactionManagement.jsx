@@ -23,7 +23,7 @@ class SupplierTransactionManagement extends Component {
     console.log("in component did mount");
     try {
       const { data } = await httpService.get(
-        `${config.apiendpoint}/supplier/myTenderList/completed`
+        `${process.env.REACT_APP_APIENDPOINT}/supplier/myTenderList/completed`
       );
       const { tenderList } = data;
       console.log();

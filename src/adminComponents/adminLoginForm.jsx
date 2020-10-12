@@ -41,7 +41,7 @@ class AdminLogIn extends Form {
               <div class="row wd-100p mx-auto text-center">
                 <div class="col-md-12 col-lg-12 col-xl-12 my-auto mx-auto wd-100p">
                   <img
-                    src="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/admin/common/img/backgrounds/login.png"
+                    src="/common/img/backgrounds/login.png"
                     class="my-auto ht-xl-80p wd-md-100p wd-xl-80p mx-auto"
                     alt="logo"
                   />
@@ -57,7 +57,7 @@ class AdminLogIn extends Form {
                         <div class="mb-2 d-flex">
                           <a href="#">
                             <img
-                              src="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/admin/common/img/logo/logo.png"
+                              src="/common/img/logo/logo.png"
                               class="sign-favicon "
                               alt="logo"
                             />
@@ -69,7 +69,7 @@ class AdminLogIn extends Form {
                             <h5 class="font-weight-semibold mb-4">
                               Please sign in to continue.
                             </h5>
-                            <form action="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/admin/dashboard">
+                            <form action="/admin/dashboard">
                               {this.renderInput("email", "Email")}
                               {this.renderInput(
                                 "password",

@@ -10,7 +10,7 @@ class RecentlyAddedTenders extends Component {
   componentDidMount = async () => {
     try {
       const { data } = await httpService.get(
-        `${config.apiendpoint}/recentTenders`
+        `${process.env.REACT_APP_APIENDPOINT}/recentTenders`
       );
       const tenders = data.tenders;
       this.setState({ tenders });

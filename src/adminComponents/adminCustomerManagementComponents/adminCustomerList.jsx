@@ -17,7 +17,7 @@ class AdminCustomerList extends Component {
   componentDidMount = async () => {
     try {
       const { data } = await httpService.get(
-        `${config.apiendpoint}/admin/customers`
+        `${process.env.REACT_APP_APIENDPOINT}/admin/customers`
       );
       const customerList = data.customerList;
       let state = { ...this.state };

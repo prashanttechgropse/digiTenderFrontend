@@ -103,7 +103,7 @@ class AdminPaymentList extends Component {
                                       </td>
                                       <td>
                                         <a
-                                          href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/admin/customer-payment-detail"
+                                          href="/admin/customer-payment-detail"
                                           className="detail-icons"
                                         >
                                           <i className="fa fa-eye"></i>
@@ -123,7 +123,7 @@ class AdminPaymentList extends Component {
                                       </td>
                                       <td>
                                         <a
-                                          href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/admin/customer-payment-detail"
+                                          href="/admin/customer-payment-detail"
                                           className="detail-icons"
                                         >
                                           <i className="fa fa-eye"></i>
@@ -143,7 +143,7 @@ class AdminPaymentList extends Component {
                                       </td>
                                       <td>
                                         <a
-                                          href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/admin/customer-payment-detail"
+                                          href="/admin/customer-payment-detail"
                                           className="detail-icons"
                                         >
                                           <i className="fa fa-eye"></i>
@@ -163,7 +163,7 @@ class AdminPaymentList extends Component {
                                       </td>
                                       <td>
                                         <a
-                                          href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/admin/customer-payment-detail"
+                                          href="/admin/customer-payment-detail"
                                           className="detail-icons"
                                         >
                                           <i className="fa fa-eye"></i>
@@ -183,7 +183,7 @@ class AdminPaymentList extends Component {
                                       </td>
                                       <td>
                                         <a
-                                          href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/admin/customer-payment-detail"
+                                          href="/admin/customer-payment-detail"
                                           className="detail-icons"
                                         >
                                           <i className="fa fa-eye"></i>
@@ -253,7 +253,7 @@ class AdminPaymentList extends Component {
                                       </td>
                                       <td>
                                         <a
-                                          href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/admin/supplier-payment-detail"
+                                          href="/admin/supplier-payment-detail"
                                           className="detail-icons"
                                         >
                                           <i className="fa fa-eye"></i>
@@ -278,7 +278,7 @@ class AdminPaymentList extends Component {
                                       </td>
                                       <td>
                                         <a
-                                          href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/admin/supplier-payment-detail"
+                                          href="/admin/supplier-payment-detail"
                                           className="detail-icons"
                                         >
                                           <i className="fa fa-eye"></i>
@@ -303,7 +303,7 @@ class AdminPaymentList extends Component {
                                       </td>
                                       <td>
                                         <a
-                                          href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/admin/supplier-payment-detail"
+                                          href="/admin/supplier-payment-detail"
                                           className="detail-icons"
                                         >
                                           <i className="fa fa-eye"></i>
@@ -367,7 +367,7 @@ class AdminPaymentList extends Component {
                                       </td>
                                       <td>
                                         <a
-                                          href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/admin/commission-detail"
+                                          href="/admin/commission-detail"
                                           className="detail-icons"
                                         >
                                           <i className="fa fa-eye"></i>
@@ -387,7 +387,7 @@ class AdminPaymentList extends Component {
                                       </td>
                                       <td>
                                         <a
-                                          href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/admin/commission-detail"
+                                          href="/admin/commission-detail"
                                           className="detail-icons"
                                         >
                                           <i className="fa fa-eye"></i>
@@ -407,7 +407,7 @@ class AdminPaymentList extends Component {
                                       </td>
                                       <td>
                                         <a
-                                          href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/admin/commission-detail"
+                                          href="/admin/commission-detail"
                                           className="detail-icons"
                                         >
                                           <i className="fa fa-eye"></i>

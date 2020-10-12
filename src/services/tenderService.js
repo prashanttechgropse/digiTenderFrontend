@@ -1,4 +1,3 @@
-import { apiendpoint } from "../config.json";
 import httpService from "./httpService";
 import { toast } from "react-toastify";
 
@@ -8,7 +7,7 @@ export async function createTender(formData) {
   }
   try {
     const { data } = await httpService.post(
-      `${apiendpoint}/customer/createTender`,
+      `${process.env.REACT_APP_APIENDPOINT}/customer/createTender`,
       formData
     );
     toast.success(data.message);
@@ -26,7 +25,7 @@ export async function editSavedTender(formData) {
   }
   try {
     const { data } = await httpService.post(
-      `${apiendpoint}/customer/editSavedTender`,
+      `${process.env.REACT_APP_APIENDPOINT}/customer/editSavedTender`,
       formData
     );
     toast.success(data.message);
@@ -41,7 +40,7 @@ export async function editSavedTender(formData) {
 export async function acceptTender(reqDetails) {
   try {
     const { data } = await httpService.post(
-      `${apiendpoint}/customer/acceptTender`,
+      `${process.env.REACT_APP_APIENDPOINT}/customer/acceptTender`,
       reqDetails
     );
     toast.success(data.message);
@@ -56,7 +55,7 @@ export async function acceptTender(reqDetails) {
 export async function cancelTender(id) {
   try {
     const { data } = await httpService.post(
-      `${apiendpoint}/customer/cancelTender`,
+      `${process.env.REACT_APP_APIENDPOINT}/customer/cancelTender`,
       {
         tenderId: id,
       }
@@ -73,7 +72,7 @@ export async function cancelTender(id) {
 export async function publishSavedTender(id) {
   try {
     const { data } = await httpService.post(
-      `${apiendpoint}/customer/publishSavedTender`,
+      `${process.env.REACT_APP_APIENDPOINT}/customer/publishSavedTender`,
       {
         tenderId: id,
       }
@@ -90,7 +89,7 @@ export async function publishSavedTender(id) {
 export async function ignoreSavedTender(id) {
   try {
     const { data } = await httpService.post(
-      `${apiendpoint}/customer/ignoreSavedTender`,
+      `${process.env.REACT_APP_APIENDPOINT}/customer/ignoreSavedTender`,
       {
         tenderId: id,
       }

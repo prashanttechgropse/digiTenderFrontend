@@ -15,13 +15,13 @@ class DeliveryNoteDetails extends Component {
       if (this.props.match.path.includes("/customer")) {
         this.setState({ profileType: "customer" });
         res = await httpService.get(
-          `${config.apiendpoint}/customer/myDeliveryNote/${this.props.match.params.tenderId}`
+          `${process.env.REACT_APP_APIENDPOINT}/customer/myDeliveryNote/${this.props.match.params.tenderId}`
         );
       }
       if (this.props.match.path.includes("/receiver")) {
         this.setState({ profileType: "receiver" });
         res = await httpService.get(
-          `${config.apiendpoint}/receiver/myDeliveryNote/${this.props.match.params.tenderId}`
+          `${process.env.REACT_APP_APIENDPOINT}/receiver/myDeliveryNote/${this.props.match.params.tenderId}`
         );
       }
       console.log(res);
@@ -37,7 +37,7 @@ class DeliveryNoteDetails extends Component {
     const { tender } = this.state;
     try {
       const { data } = await httpService.get(
-        `${config.apiendpoint}/deliveryNote/${this.props.match.params.tenderId}`,
+        `${process.env.REACT_APP_APIENDPOINT}}/deliveryNote/${this.props.match.params.tenderId}`,
         {
           responseType: "blob",
         }

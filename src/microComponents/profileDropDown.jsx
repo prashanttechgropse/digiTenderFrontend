@@ -6,21 +6,13 @@ class ProfileDropDown extends Component {
     return (
       <div className="dropdown main-profile-menu nav nav-item nav-link">
         <a className="profile-user d-flex">
-          <img
-            src={
-              "https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/common/img/customer/01.jpg"
-            }
-          />
+          <img src={"/common/img/customer/01.jpg"} />
         </a>
         <div className="dropdown-menu">
           <div className="main-header-profile bg-primary p-3">
             <div className="d-flex wd-100p">
               <div className="main-img-user">
-                <img
-                  src={
-                    "https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/common/img/customer/01.jpg"
-                  }
-                />
+                <img src={"/common/img/customer/01.jpg"} />
               </div>
               <div className="ml-3 my-auto">
                 <h6>

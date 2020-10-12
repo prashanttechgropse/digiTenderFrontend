@@ -5,9 +5,7 @@ class GlobalLoader extends Component {
     return (
       <div id="global-loader">
         <img
-          src={
-            "https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/common/img/logo/loader.gif"
-          }
+          src={"/common/img/logo/loader.gif"}
           className="loader-img"
           alt="Loader"
         />

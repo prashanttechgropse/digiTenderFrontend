@@ -398,7 +398,7 @@ class SupplierDetails extends Component {
                                     <td>$1200</td>
                                     <td>
                                       <a
-                                        href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/admin/supplier-payment-detail"
+                                        href="/admin/supplier-payment-detail"
                                         className="detail-icons"
                                       >
                                         <i className="fa fa-eye"></i>
@@ -414,7 +414,7 @@ class SupplierDetails extends Component {
                                     <td>$1200</td>
                                     <td>
                                       <a
-                                        href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/admin/supplier-payment-detail"
+                                        href="/admin/supplier-payment-detail"
                                         className="detail-icons"
                                       >
                                         <i className="fa fa-eye"></i>
@@ -430,7 +430,7 @@ class SupplierDetails extends Component {
                                     <td>$1200</td>
                                     <td>
                                       <a
-                                        href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/admin/supplier-payment-detail"
+                                        href="/admin/supplier-payment-detail"
                                         className="detail-icons"
                                       >
                                         <i className="fa fa-eye"></i>
@@ -446,7 +446,7 @@ class SupplierDetails extends Component {
                                     <td>$1200</td>
                                     <td>
                                       <a
-                                        href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/admin/supplier-payment-detail"
+                                        href="/admin/supplier-payment-detail"
                                         className="detail-icons"
                                       >
                                         <i className="fa fa-eye"></i>
@@ -506,7 +506,7 @@ class SupplierDetails extends Component {
                                     <td>Mall Road Dubai UAE</td>
                                     <td>
                                       <a
-                                        href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/admin/subsupplier-detail"
+                                        href="/admin/subsupplier-detail"
                                         className="detail-icons"
                                       >
                                         <i className="fa fa-eye"></i>
@@ -522,7 +522,7 @@ class SupplierDetails extends Component {
                                     <td>Mall Road Dubai UAE</td>
                                     <td>
                                       <a
-                                        href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/admin/subsupplier-detail"
+                                        href="/admin/subsupplier-detail"
                                         className="detail-icons"
                                       >
                                         <i className="fa fa-eye"></i>
@@ -538,7 +538,7 @@ class SupplierDetails extends Component {
                                     <td>Mall Road Dubai UAE</td>
                                     <td>
                                       <a
-                                        href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/admin/subsupplier-detail"
+                                        href="/admin/subsupplier-detail"
                                         className="detail-icons"
                                       >
                                         <i className="fa fa-eye"></i>

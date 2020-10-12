@@ -40,13 +40,13 @@ class CreateDeliveryNote extends Form {
       if (this.props.match.path.includes("/customer")) {
         this.setState({ profileType: "customer" });
         res = await httpService.get(
-          `${config.apiendpoint}/customer/myTenders/${this.props.match.params.tenderId}`
+          `${process.env.REACT_APP_APIENDPOINT}/customer/myTenders/${this.props.match.params.tenderId}`
         );
       }
       if (this.props.match.path.includes("/receiver")) {
         this.setState({ profileType: "receiver" });
         res = await httpService.get(
-          `${config.apiendpoint}/receiver/myTenders/${this.props.match.params.tenderId}`
+          `${process.env.REACT_APP_APIENDPOINT}/receiver/myTenders/${this.props.match.params.tenderId}`
         );
       }
       const { tender } = res.data;

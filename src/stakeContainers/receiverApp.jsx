@@ -31,7 +31,7 @@ class ReceiverApp extends Component {
   async componentDidMount() {
     try {
       const { data } = await httpService.get(
-        `${config.apiendpoint}/receiver/myData`
+        `${process.env.REACT_APP_APIENDPOINT}/receiver/myData`
       );
       console.log(data);
       if (data) {

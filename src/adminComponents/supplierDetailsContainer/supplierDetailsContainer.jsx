@@ -16,7 +16,7 @@ class SupplierDetailsContainer extends Component {
     let data;
     try {
       data = await httpService.get(
-        `${config.apiendpoint}/admin/suppliers/${this.props.match.params.supplierId}`
+        `${process.env.REACT_APP_APIENDPOINT}/admin/suppliers/${this.props.match.params.supplierId}`
       );
 
       await this.setState({ supplier: data.data.supplier });
@@ -39,7 +39,7 @@ class SupplierDetailsContainer extends Component {
       } else isApproved = false;
       this.setState({ userCurrentStatus: isApproved });
       const { data, error } = await httpService.post(
-        `${config.apiendpoint}/admin/userChangeStatus`,
+        `${process.env.REACT_APP_APIENDPOINT}/admin/userChangeStatus`,
         {
           userId: this.state.supplier.user._id,
           status: isApproved,

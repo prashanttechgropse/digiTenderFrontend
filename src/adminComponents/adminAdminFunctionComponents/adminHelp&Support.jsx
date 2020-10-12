@@ -58,7 +58,7 @@ class AdminHelpSupport extends Component {
                               <td>Hi Admin Pls Help For Account </td>
                               <td>
                                 <a
-                                  href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/admin/complain-detail"
+                                  href="/admin/complain-detail"
                                   className="detail-icons"
                                 >
                                   <i className="fa fa-eye"></i>
@@ -72,7 +72,7 @@ class AdminHelpSupport extends Component {
                               <td>Hi Admin Pls Help For Account </td>
                               <td>
                                 <a
-                                  href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/admin/complain-detail"
+                                  href="/admin/complain-detail"
                                   className="detail-icons"
                                 >
                                   <i className="fa fa-eye"></i>
@@ -86,7 +86,7 @@ class AdminHelpSupport extends Component {
                               <td>Hi Admin Pls Help For Account </td>
                               <td>
                                 <a
-                                  href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/admin/complain-detail"
+                                  href="/admin/complain-detail"
                                   className="detail-icons"
                                 >
                                   <i className="fa fa-eye"></i>
@@ -100,7 +100,7 @@ class AdminHelpSupport extends Component {
                               <td>Hi Admin Pls Help For Account </td>
                               <td>
                                 <a
-                                  href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/admin/complain-detail"
+                                  href="/admin/complain-detail"
                                   className="detail-icons"
                                 >
                                   <i className="fa fa-eye"></i>
@@ -114,7 +114,7 @@ class AdminHelpSupport extends Component {
                               <td>Hi Admin Pls Help For Account </td>
                               <td>
                                 <a
-                                  href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/admin/complain-detail"
+                                  href="/admin/complain-detail"
                                   className="detail-icons"
                                 >
                                   <i className="fa fa-eye"></i>

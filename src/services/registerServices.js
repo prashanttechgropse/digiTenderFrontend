@@ -1,15 +1,18 @@
-import { apiendpoint } from "../config.json";
 import httpService from "./httpService";
 import { toast } from "react-toastify";
-import ForgotPassword from "../macroComponents/forgotPasswordForm";
-import ResetPassword from "../macroComponents/resetPassword";
 
 export async function createAccount(formData) {
   try {
-    await httpService.post(`${apiendpoint}/register`, formData);
-    const { data } = await httpService.post(`${apiendpoint}/otpGeneration`, {
-      email: formData.email,
-    });
+    await httpService.post(
+      `${process.env.REACT_APP_APIENDPOINT}/register`,
+      formData
+    );
+    const { data } = await httpService.post(
+      `${process.env.REACT_APP_APIENDPOINT}/otpGeneration`,
+      {
+        email: formData.email,
+      }
+    );
     toast.success(data.message);
     if (!data.message) toast.success(data);
     return { data };
@@ -21,10 +24,16 @@ export async function createAccount(formData) {
 
 export async function createAccountSecondaryUser(formData) {
   try {
-    await httpService.post(`${apiendpoint}/registerSecondaryUser`, formData);
-    const { data } = await httpService.post(`${apiendpoint}/otpGeneration`, {
-      email: formData.email,
-    });
+    await httpService.post(
+      `${process.env.REACT_APP_APIENDPOINT}/registerSecondaryUser`,
+      formData
+    );
+    const { data } = await httpService.post(
+      `${process.env.REACT_APP_APIENDPOINT}/otpGeneration`,
+      {
+        email: formData.email,
+      }
+    );
     toast.success(data.message);
     if (!data.message) toast.success(data);
     return { data };
@@ -37,7 +46,7 @@ export async function createAccountSecondaryUser(formData) {
 export async function setUpProfileService(formData) {
   try {
     const { data } = await httpService.post(
-      `${apiendpoint}/setUpProfile`,
+      `${process.env.REACT_APP_APIENDPOINT}/setUpProfile`,
       formData
     );
     toast.success(data.message);
@@ -52,7 +61,7 @@ export async function setUpProfileService(formData) {
 export async function setUpSecondarUserProfileService(formData) {
   try {
     const { data } = await httpService.post(
-      `${apiendpoint}/setUpSecondaryUserProfile`,
+      `${process.env.REACT_APP_APIENDPOINT}/setUpSecondaryUserProfile`,
       formData
     );
     toast.success(data.message);
@@ -67,7 +76,7 @@ export async function setUpSecondarUserProfileService(formData) {
 export async function uploadBankDetails(formData) {
   try {
     const { data } = await httpService.post(
-      `${apiendpoint}/addBankDetails`,
+      `${process.env.REACT_APP_APIENDPOINT}/addBankDetails`,
       formData
     );
     toast.success(data.message);
@@ -81,10 +90,13 @@ export async function uploadBankDetails(formData) {
 
 export async function authentication(formData) {
   try {
-    const { data, headers } = await httpService.post(`${apiendpoint}/login`, {
-      email: formData.email,
-      password: formData.password,
-    });
+    const { data, headers } = await httpService.post(
+      `${process.env.REACT_APP_APIENDPOINT}/login`,
+      {
+        email: formData.email,
+        password: formData.password,
+      }
+    );
     await localStorage.removeItem("token");
     await localStorage.setItem("token", headers["x-auth-token"]);
 
@@ -99,7 +111,7 @@ export async function authentication(formData) {
 export async function otpVerification(formData, email) {
   try {
     const { data, headers } = await httpService.post(
-      `${apiendpoint}/otpVerification`,
+      `${process.env.REACT_APP_APIENDPOINT}/otpVerification`,
       {
         email: email,
         otp: formData.otp,
@@ -120,9 +132,12 @@ export async function otpVerification(formData, email) {
 
 export async function otpGeneration(email) {
   try {
-    const { data } = await httpService.post(`${apiendpoint}/otpGeneration`, {
-      email: email,
-    });
+    const { data } = await httpService.post(
+      `${process.env.REACT_APP_APIENDPOINT}/otpGeneration`,
+      {
+        email: email,
+      }
+    );
     toast.success(data.message);
     if (!data.message) toast.success(data);
     return { data };
@@ -135,7 +150,7 @@ export async function otpGeneration(email) {
 export async function resetPassword(formData) {
   try {
     const { data } = await httpService.post(
-      `${apiendpoint}/resetPassword`,
+      `${process.env.REACT_APP_APIENDPOINT}/resetPassword`,
       formData
     );
     toast.success(data.message);
@@ -150,7 +165,7 @@ export async function resetPassword(formData) {
 export async function changePassword(formData) {
   try {
     const { data } = await httpService.post(
-      `${apiendpoint}/changePassword`,
+      `${process.env.REACT_APP_APIENDPOINT}/changePassword`,
       formData
     );
     toast.success(data.message);
@@ -164,8 +179,9 @@ export async function changePassword(formData) {
 
 export async function adminAuthentication(formData) {
   try {
+    console.log(process.env);
     const { data, headers } = await httpService.post(
-      `${apiendpoint}/admin/login`,
+      `${process.env.REACT_APP_APIENDPOINT}/admin/login`,
       {
         email: formData.email,
         password: formData.password,

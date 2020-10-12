@@ -22,7 +22,7 @@ class SupplierSaveForLater extends Component {
   async componentDidMount() {
     try {
       const { data } = await httpService.get(
-        `${config.apiendpoint}/supplier/tendersSavedForLater`
+        `${process.env.REACT_APP_APIENDPOINT}/supplier/tendersSavedForLater`
       );
       const { tenderList } = data;
       await this.setState({ tenderList });

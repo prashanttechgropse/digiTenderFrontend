@@ -83,7 +83,7 @@ class BankDetails extends Form {
                           <div className="mb-2 d-flex">
                             <a href="#">
                               <img
-                                src="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/common/img/logo/logo.png"
+                                src="/common/img/logo/logo.png"
                                 className="sign-favicon"
                                 alt="logo"
                               />

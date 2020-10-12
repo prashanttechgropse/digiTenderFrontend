@@ -379,7 +379,7 @@ class CustomerDetails extends Component {
                                     <td>$200</td>
                                     <td>
                                       <a
-                                        href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/admin/customer-commision-detail"
+                                        href="/admin/customer-commision-detail"
                                         className="detail-icons"
                                       >
                                         <i className="fa fa-eye"></i>
@@ -395,7 +395,7 @@ class CustomerDetails extends Component {
                                     <td>$200</td>
                                     <td>
                                       <a
-                                        href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/admin/customer-commision-detail"
+                                        href="/admin/customer-commision-detail"
                                         className="detail-icons"
                                       >
                                         <i className="fa fa-eye"></i>
@@ -411,7 +411,7 @@ class CustomerDetails extends Component {
                                     <td>$200</td>
                                     <td>
                                       <a
-                                        href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/admin/customer-commision-detail"
+                                        href="/admin/customer-commision-detail"
                                         className="detail-icons"
                                       >
                                         <i className="fa fa-eye"></i>
@@ -427,7 +427,7 @@ class CustomerDetails extends Component {
                                     <td>$200</td>
                                     <td>
                                       <a
-                                        href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/admin/customer-commision-detail"
+                                        href="/admin/customer-commision-detail"
                                         className="detail-icons"
                                       >
                                         <i className="fa fa-eye"></i>
@@ -487,7 +487,7 @@ class CustomerDetails extends Component {
                                     <td>Mall Road Dubai UAE</td>
                                     <td>
                                       <a
-                                        href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/admin/receiver-detail"
+                                        href="/admin/receiver-detail"
                                         className="detail-icons"
                                       >
                                         <i className="fa fa-eye"></i>
@@ -503,7 +503,7 @@ class CustomerDetails extends Component {
                                     <td>Mall Road Dubai UAE</td>
                                     <td>
                                       <a
-                                        href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/admin/receiver-detail"
+                                        href="/admin/receiver-detail"
                                         className="detail-icons"
                                       >
                                         <i className="fa fa-eye"></i>
@@ -519,7 +519,7 @@ class CustomerDetails extends Component {
                                     <td>Mall Road Dubai UAE</td>
                                     <td>
                                       <a
-                                        href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/admin/receiver-detail"
+                                        href="/admin/receiver-detail"
                                         className="detail-icons"
                                       >
                                         <i className="fa fa-eye"></i>
@@ -535,7 +535,7 @@ class CustomerDetails extends Component {
                                     <td>Mall Road Dubai UAE</td>
                                     <td>
                                       <a
-                                        href="https://www.goinstablog.com/goinstablog.com/sumitdesign/design/digibids.com/admin/receiver-detail"
+                                        href="/admin/receiver-detail"
                                         className="detail-icons"
                                       >
                                         <i className="fa fa-eye"></i>

@@ -35,14 +35,14 @@ class AssignReceiver extends Form {
     try {
       {
         const { data } = await httpService.get(
-          `${config.apiendpoint}/customer/receiverList`
+          `${process.env.REACT_APP_APIENDPOINT}/customer/receiverList`
         );
         const { receiversList } = data;
         await this.setState({ receiversList });
         console.log(this.state.receiversList);
       }
       const { data } = await httpService.get(
-        `${config.apiendpoint}/customer/tenderList/awarded`
+        `${process.env.REACT_APP_APIENDPOINT}/customer/tenderList/awarded`
       );
       const { tenderList } = data;
       await this.setState({ tenderList });
@@ -76,7 +76,7 @@ class AssignReceiver extends Form {
 
   doSubmit = async () => {
     await httpService.post(
-      `${config.apiendpoint}/customer/assignReceiver`,
+      `${process.env.REACT_APP_APIENDPOINT}/customer/assignReceiver`,
       this.state.formData
     );
   };
