@@ -24,6 +24,12 @@ class DeliveryNoteDetails extends Component {
           `${process.env.REACT_APP_APIENDPOINT}/receiver/myDeliveryNote/${this.props.match.params.tenderId}`
         );
       }
+      if (this.props.match.path.includes("/supplier")) {
+        this.setState({ profileType: "supplier" });
+        res = await httpService.get(
+          `${process.env.REACT_APP_APIENDPOINT}/supplier/myDeliveryNote/${this.props.match.params.tenderId}`
+        );
+      }
       console.log(res);
       const { deliveryNote } = res.data;
       await this.setState({ deliveryNote });
@@ -37,7 +43,7 @@ class DeliveryNoteDetails extends Component {
     const { tender } = this.state;
     try {
       const { data } = await httpService.get(
-        `${process.env.REACT_APP_APIENDPOINT}}/deliveryNote/${this.props.match.params.tenderId}`,
+        `${process.env.REACT_APP_APIENDPOINT}/deliveryNote/${this.props.match.params.tenderId}`,
         {
           responseType: "blob",
         }
@@ -180,6 +186,14 @@ class DeliveryNoteDetails extends Component {
                               <i class="fa fa-file"></i> Doc File
                             </a>
                           </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="media">
+                      <div class="media-body">
+                        <div>
+                          <label>Message</label>
+                          <span class="tx-medium">{deliveryNote.message}</span>
                         </div>
                       </div>
                     </div>

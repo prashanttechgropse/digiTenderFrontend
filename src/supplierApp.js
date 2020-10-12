@@ -25,6 +25,7 @@ import SupllierBid from "./supplierComponents/supplierBid";
 import SupplierMyBidDetails from "./supplierComponents/supplierMyBidDetails";
 import SavedTenderDetails from "./supplierComponents/savedTenderDetails";
 import DeliveryNoteMainContent from "./customerComponents/customerDeliveryNotesComponents/DeliveryNoteMainContent";
+import DeliveryNoteDetails from "./customerComponents/customerDeliveryNotesComponents/DeliveryNoteDetails";
 
 class SupplierApp extends Component {
   state = { supplier: "", displayTenderDetailsId: null };
@@ -111,7 +112,11 @@ class SupplierApp extends Component {
               path="/supplier/myBidDetails/:tenderId"
               component={SupplierMyBidDetails}
             />
-
+            <Route
+              exact
+              path="/supplier/deliveryNoteDetails/:tenderId"
+              component={DeliveryNoteDetails}
+            />
             <Route exact path="/supplier">
               <SupplierDashboardMainContent user={this.state.supplier} />
             </Route>
