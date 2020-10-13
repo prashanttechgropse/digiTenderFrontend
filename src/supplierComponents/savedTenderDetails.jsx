@@ -212,7 +212,7 @@ class SavedTenderDetails extends Component {
                             <tr role="row">
                               <th>Sr. No</th>
                               <th>Category</th>
-                              <th>Item / Description</th>
+                              <th>Item </th>
                               <th>Unit of Meassure</th>
                               <th>Qty</th>
                               <th>Price</th>

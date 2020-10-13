@@ -187,7 +187,7 @@ class SupplierQuotationDetails extends Component {
                               <tr role="row">
                                 <th>Sr. No</th>
                                 <th>Category</th>
-                                <th>Item / Description</th>
+                                <th>Item </th>
                                 <th>Qty</th>
                                 <th>Unit Price</th>
                                 <th>Total Amount</th>

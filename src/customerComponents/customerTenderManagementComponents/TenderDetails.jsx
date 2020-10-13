@@ -56,19 +56,17 @@ class TenderDetails extends Component {
 
   handleCancelTender = async () => {
     await tenderService.cancelTender(this.state.tender._id);
-    this.props.history.push("/customer");
-    window.location.reload();
+    return await this.props.history.push("/customer");
   };
 
   handleCompleteTender = async () => {
-    this.props.history.push(
+    return await this.props.history.push(
       `/customer/createDeliveryNote/${this.props.match.params.tenderId}/completed`
     );
-    window.location.reload();
   };
 
   handleRejectTender = async () => {
-    this.props.history.push(
+    return await this.props.history.push(
       `/customer/createDeliveryNote/${this.props.match.params.tenderId}/rejected`
     );
     window.location.reload();
@@ -76,16 +74,16 @@ class TenderDetails extends Component {
 
   handlePublishTender = async () => {
     await tenderService.publishSavedTender(this.state.tender._id);
-    this.props.history.push("/customer");
+    return await this.props.history.push("/customer");
   };
 
   handleIgnoreTender = async () => {
     await tenderService.ignoreSavedTender(this.state.tender._id);
-    this.props.history.push("/customer");
+    return await this.props.history.push("/customer");
   };
 
   handleEditTender = async () => {
-    return this.props.history.push(
+    return await this.props.history.push(
       `/customer/editSavedTender/${this.props.match.params.tenderId}`
     );
   };
@@ -347,7 +345,7 @@ class TenderDetails extends Component {
                             <tr role="row">
                               <th>Sr. No</th>
                               <th>Category</th>
-                              <th>Item / Description</th>
+                              <th>Item </th>
                               <th>Qty</th>
                               <th>Unit of Meassure</th>
                             </tr>

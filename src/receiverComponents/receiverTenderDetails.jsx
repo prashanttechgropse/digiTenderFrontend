@@ -261,7 +261,7 @@ class ReceiverTenderDetails extends Component {
                             <tr role="row">
                               <th>Sr. No</th>
                               <th>Category</th>
-                              <th>Item / Description</th>
+                              <th>Item </th>
                               <th>Qty</th>
                               <th>Unit of Meassure</th>
                             </tr>
