@@ -15,6 +15,7 @@ import AdminLogIn from "./adminComponents/adminLoginForm";
 import AdminApp from "./AdminApp";
 import SignOut from "./microComponents/signOut";
 import ReceiverApp from "./stakeContainers/receiverApp";
+import EmployeeApp from "./stakeContainers/employeeApp";
 
 class App extends Component {
   state = {
@@ -45,6 +46,7 @@ class App extends Component {
             )}
           />
           <Route path="/customer" component={CustomerApp} />
+          <Route path="/employee" component={EmployeeApp} />
           <Route path="/receiver" component={ReceiverApp} />
           <Route path="/admin" component={AdminApp} />
           <Route path="/supplier" component={SupplierApp} />
