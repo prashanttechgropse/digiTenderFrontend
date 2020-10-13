@@ -26,13 +26,13 @@ class SupplierSideBar extends Component {
             </Link>
           </li>
           <li className="slide-item side-menu__item">
-            <Link to="/supplier/createSubUser">Create Subuser</Link>
+            <Link to="/supplier/assignEmployee">Assign Tender To Employee</Link>
           </li>
           <li className="slide-item side-menu__item">
             <Link to="/supplier/changePassword">Change Password</Link>
           </li>
           <li className="slide-item side-menu__item">
-            <Link to="/supplier/profile">Profile</Link>
+            <Link to="/supplier/myProfile">Profile</Link>
           </li>
         </ul>
       );

@@ -15,7 +15,7 @@ import SupplierSaveForLater from "./supplierComponents/supplierTenderManagementC
 import SupplierTransactionManagement from "./supplierComponents/supplierTenderManagementComponents/supplierTransactionManagement";
 import SupplierHistory from "./supplierComponents/supplierTenderManagementComponents/supplierHistory";
 import SupplierEmployeeList from "./supplierComponents/supplierAdminFunctionsComponents/supplierEmployeeList";
-import SupplierCreateSubUser from "./supplierComponents/supplierAdminFunctionsComponents/supplierCreateSubUser";
+
 import httpService from "./services/httpService";
 
 import { toast } from "react-toastify";
@@ -26,6 +26,8 @@ import SupplierMyBidDetails from "./supplierComponents/supplierMyBidDetails";
 import SavedTenderDetails from "./supplierComponents/savedTenderDetails";
 import DeliveryNoteMainContent from "./customerComponents/customerDeliveryNotesComponents/DeliveryNoteMainContent";
 import DeliveryNoteDetails from "./customerComponents/customerDeliveryNotesComponents/DeliveryNoteDetails";
+
+import AssignEmployee from "./supplierComponents/assignEmployee";
 
 class SupplierApp extends Component {
   state = { supplier: "", displayTenderDetailsId: null };
@@ -76,12 +78,16 @@ class SupplierApp extends Component {
             <Route exact path="/supplier/history">
               <SupplierHistory />;
             </Route>
-            <Route exact path="/supplier/supplierEmployeeList">
-              <SupplierEmployeeList />
-            </Route>
-            <Route exact path="/supplier/createSubUser">
-              <SupplierCreateSubUser />;
-            </Route>
+            <Route
+              exact
+              path="/supplier/supplierEmployeeList"
+              component={SupplierEmployeeList}
+            />
+            <Route
+              exact
+              path="/supplier/assignEmployee"
+              component={AssignEmployee}
+            />
             <Route exact path="/supplier/helpSupport">
               <HelpSupport />
             </Route>
