@@ -126,7 +126,7 @@ class CustomerDashboardMainContent extends Component {
                     <span className="float-right my-auto ml-auto">
                       <i
                         className={`fa fa-arrow-circle-${
-                          this.state.increaseInOngointTenders > 0
+                          this.state.increaseInOngoingTenders > 0
                             ? "up"
                             : "down"
                         } text-white`}

@@ -4,7 +4,12 @@ import httpService from "../../services/httpService";
 import { toast } from "react-toastify";
 import config from "../../config.json";
 class SupplierDashboardMainContent extends Component {
-  state = { supplier: null };
+  state = {
+    supplier: null,
+    increaseInTenders: "",
+    increaseInOngoingTenders: "",
+    increaseInCompletedTenders: "",
+  };
 
   async componentDidMount() {
     try {
@@ -14,12 +19,36 @@ class SupplierDashboardMainContent extends Component {
       if (data.user.profileType.toLowerCase() === "supplier") {
         const supplier = data.user;
         this.setState({ supplier: supplier });
+        this.setState({ increaseInTenders: data.increaseInTenders });
+        this.setState({
+          increaseInOngoingTenders: data.increaseInOngoingTenders,
+        });
+        this.setState({
+          increaseInCompletedTenders: data.increaseInCompletedTenders,
+        });
       } else return await this.props.history.push(`/${data.user.profileType}`);
     } catch (error) {
       toast.error(error.message);
       return;
     }
   }
+
+  calculateOnGoingTenders = () => {
+    const { tendersAwarded: tenders } = this.state.supplier.details;
+    const temp = tenders.filter(
+      (tender) => tender.status.toLowerCase() === "awarded"
+    );
+    return temp.length;
+  };
+
+  calculateCompletedTenders = () => {
+    const { tendersAwarded: tenders } = this.state.supplier.details;
+    const temp = tenders.filter(
+      (tender) => tender.status.toLowerCase() === "completed"
+    );
+    return temp.length;
+  };
+
   render() {
     const { supplier: user } = this.state;
     if (user === null) return null;
@@ -46,15 +75,23 @@ class SupplierDashboardMainContent extends Component {
                   <div className="d-flex">
                     <div className="">
                       <h4 className="tx-20 font-weight-bold mb-1 text-white">
-                        {user.details.bids.length}
+                        {user.details.tendersAwarded.length}
                       </h4>
                       <p className="mb-0 tx-12 text-white op-7">
                         Compared to last month
                       </p>
                     </div>
                     <span className="float-right my-auto ml-auto">
-                      <i className="fa fa-arrow-circle-up text-white"></i>{" "}
-                      <span className="text-white op-7"> +5</span>{" "}
+                      <i
+                        className={`fa fa-arrow-circle-${
+                          this.state.increaseInTenders > 0 ? "up" : "down"
+                        } text-white`}
+                      ></i>
+                      <span className="text-white op-7">
+                        {this.state.increaseInTenders > 0
+                          ? `+${this.state.increaseInTenders}`
+                          : this.state.increaseInTenders}
+                      </span>
                     </span>
                   </div>
                 </div>
@@ -74,16 +111,25 @@ class SupplierDashboardMainContent extends Component {
                   <div className="d-flex">
                     <div className="">
                       <h4 className="tx-20 font-weight-bold mb-1 text-white">
-                        12 Tenders
+                        {this.calculateOnGoingTenders()}
                       </h4>
                       <p className="mb-0 tx-12 text-white op-7">
                         Compared to last month
                       </p>
                     </div>
                     <span className="float-right my-auto ml-auto">
-                      {" "}
-                      <i className="fa fa-arrow-circle-up text-white"></i>{" "}
-                      <span className="text-white op-7"> 20%</span>{" "}
+                      <i
+                        className={`fa fa-arrow-circle-${
+                          this.state.increaseInOngoingTenders > 0
+                            ? "up"
+                            : "down"
+                        } text-white`}
+                      ></i>
+                      <span className="text-white op-7">
+                        {this.state.increaseInOngoingTenders > 0
+                          ? `+${this.state.increaseInOngoingTenders}`
+                          : this.state.increaseInOngoingTenders}
+                      </span>
                     </span>
                   </div>
                 </div>
@@ -103,16 +149,25 @@ class SupplierDashboardMainContent extends Component {
                   <div className="d-flex">
                     <div className="">
                       <h4 className="tx-20 font-weight-bold mb-1 text-white">
-                        8 Tenders
+                        {this.calculateCompletedTenders()}
                       </h4>
                       <p className="mb-0 tx-12 text-white op-7">
                         Compared to last month
                       </p>
                     </div>
                     <span className="float-right my-auto ml-auto">
-                      {" "}
-                      <i className="fa fa-arrow-circle-up text-white"></i>{" "}
-                      <span className="text-white op-7"> 10%</span>{" "}
+                      <i
+                        className={`fa fa-arrow-circle-${
+                          this.state.increaseInCompletedTenders > 0
+                            ? "up"
+                            : "down"
+                        } text-white`}
+                      ></i>
+                      <span className="text-white op-7">
+                        {this.state.increaseInCompletedTenders > 0
+                          ? `+${this.state.increaseInCompletedTenders}`
+                          : this.state.increaseInCompletedTenders}
+                      </span>
                     </span>
                   </div>
                 </div>
