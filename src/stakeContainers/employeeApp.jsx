@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 //import "./App.css";
-import CustomerSidebar from "../customerComponents/customersidebar";
+
 import Footer from "../macroComponents/footer";
 import MainContentHeaderBar from "../macroComponents/mainContentHeaderBar";
 import HelpSupport from "../macroComponents/helpSupport";
@@ -17,6 +17,10 @@ import SecondaryUserMyProfile from "../microComponents/secondaryUserMyProfile";
 
 import EmployeeSideBar from "../employeeComponents.jsx/employeeSideBar";
 import EmployeeDashBoardMainContent from "../employeeComponents.jsx/employeeDashboardMainContent";
+import SecondaryUserTenderDetails from "../secondaryUserComponents/secondaryUserTenderDetails";
+import SecondaryUserTenderList from "../secondaryUserComponents/secondaryUserTenderList";
+import DeliveryNoteMainContent from "../customerComponents/customerDeliveryNotesComponents/DeliveryNoteMainContent";
+import DeliveryNoteDetails from "../customerComponents/customerDeliveryNotesComponents/DeliveryNoteDetails";
 
 class EmployeeApp extends Component {
   state = {
@@ -59,6 +63,27 @@ class EmployeeApp extends Component {
             <Route exact path="/employee/myProfile">
               <SecondaryUserMyProfile user={this.state.employee} />
             </Route>
+            <Route
+              exact
+              path="/employee/tenderDetails/:tenderId"
+              component={SecondaryUserTenderDetails}
+            />
+            <Route
+              exact
+              path="/employee/tenderList"
+              component={SecondaryUserTenderList}
+            />
+            <Route
+              exact
+              path="/employee/deliveryNotes"
+              component={DeliveryNoteMainContent}
+            />
+            <Route
+              exact
+              path="/employee/deliveryNoteDetails/:tenderId"
+              component={DeliveryNoteDetails}
+            />
+
             <Route
               exact
               path="/employee/changePassword"

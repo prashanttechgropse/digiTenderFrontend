@@ -2,19 +2,31 @@ import React, { Component } from "react";
 import TenderListDisplayCard from "../microComponents/customerTenderListDisplay";
 import httpService from "../services/httpService";
 import { toast } from "react-toastify";
-import config from "../config.json";
-class ReceiverTenderList extends Component {
+
+class SecondaryUserTenderList extends Component {
   state = {
     tenderList: null,
+    profileType: "",
   };
 
   async componentDidMount() {
     try {
-      const { data } = await httpService.get(
-        `${process.env.REACT_APP_APIENDPOINT}/receiver/tenderList`
-      );
-      const { tenderList } = data;
-      await this.setState({ tenderList });
+      if (this.props.match.path.includes("/receiver")) {
+        const { data } = await httpService.get(
+          `${process.env.REACT_APP_APIENDPOINT}/receiver/tenderList`
+        );
+        const { tenderList } = data;
+        await this.setState({ tenderList });
+        await this.setState({ profileType: "receiver" });
+      }
+      if (this.props.match.path.includes("/employee")) {
+        const { data } = await httpService.get(
+          `${process.env.REACT_APP_APIENDPOINT}/employee/tenderList`
+        );
+        const { tenderList } = data;
+        await this.setState({ tenderList });
+        await this.setState({ profileType: "employee" });
+      }
     } catch (error) {
       toast.error(error.message);
       return;
@@ -23,7 +35,8 @@ class ReceiverTenderList extends Component {
 
   render() {
     const { tenderList } = this.state;
-    if (tenderList === null) return null;
+    if (tenderList === null || tenderList.length == 0)
+      return <h1>no tenders assigned yet</h1>;
     return (
       <div className="container-fluid">
         <div className="breadcrumb-header justify-content-between">
@@ -41,7 +54,7 @@ class ReceiverTenderList extends Component {
           <div className="col-xl-12">
             <TenderListDisplayCard
               tenderList={tenderList}
-              profileType="receiver"
+              profileType={this.state.profileType}
             />
           </div>
         </div>
@@ -50,4 +63,4 @@ class ReceiverTenderList extends Component {
   }
 }
 
-export default ReceiverTenderList;
+export default SecondaryUserTenderList;

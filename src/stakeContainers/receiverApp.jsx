@@ -1,15 +1,14 @@
 import React, { Component } from "react";
 //import "./App.css";
-import CustomerSidebar from "../customerComponents/customersidebar";
+
 import Footer from "../macroComponents/footer";
 import MainContentHeaderBar from "../macroComponents/mainContentHeaderBar";
 import HelpSupport from "../macroComponents/helpSupport";
 import TermsConditions from "../macroComponents/termsConditions";
-import MyProfile from "../macroComponents/myProfile";
+
 import EditProfile from "../macroComponents/editProfile";
 import ChangePassword from "../userComponents/changePassword";
 
-import config from "../config.json";
 import httpService from "../services/httpService";
 import { toast } from "react-toastify";
 import { Route } from "react-router-dom";
@@ -17,11 +16,11 @@ import ReceiverDashboardMainContent from "../receiverComponents/receiverDashboar
 import ReceiverSideBar from "../receiverComponents/receiverSideBar";
 import SecondaryUserMyProfile from "../microComponents/secondaryUserMyProfile";
 
-import ReceiverTenderDetails from "../receiverComponents/receiverTenderDetails";
-import ReceiverTenderList from "../receiverComponents/receiverTenderList";
 import CreateDeliveryNote from "../customerComponents/createDeliveryNote";
 import DeliveryNoteMainContent from "../customerComponents/customerDeliveryNotesComponents/DeliveryNoteMainContent";
 import DeliveryNoteDetails from "../customerComponents/customerDeliveryNotesComponents/DeliveryNoteDetails";
+import SecondaryUserTenderDetails from "../secondaryUserComponents/secondaryUserTenderDetails";
+import SecondaryUserTenderList from "../secondaryUserComponents/secondaryUserTenderList";
 
 class ReceiverApp extends Component {
   state = {
@@ -67,12 +66,12 @@ class ReceiverApp extends Component {
             <Route
               exact
               path="/receiver/tenderDetails/:tenderId"
-              component={ReceiverTenderDetails}
+              component={SecondaryUserTenderDetails}
             />
             <Route
               exact
               path="/receiver/tenderList"
-              component={ReceiverTenderList}
+              component={SecondaryUserTenderList}
             />
             <Route
               exact

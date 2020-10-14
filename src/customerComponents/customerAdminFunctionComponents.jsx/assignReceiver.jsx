@@ -79,6 +79,7 @@ class AssignReceiver extends Form {
       `${process.env.REACT_APP_APIENDPOINT}/customer/assignReceiver`,
       this.state.formData
     );
+    window.location.reload();
   };
 
   renderTenderList = () => {

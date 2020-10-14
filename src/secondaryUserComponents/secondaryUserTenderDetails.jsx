@@ -4,22 +4,35 @@ import * as tenderService from "../services/tenderService";
 import { toast } from "react-toastify";
 import config from "../config.json";
 
-class ReceiverTenderDetails extends Component {
-  state = { tender: null };
+class SecondaryUserTenderDetails extends Component {
+  state = { tender: null, profileType: "" };
 
   async componentDidMount() {
     if (!this.props.match.params.tenderId) return null;
 
     try {
-      const { data } = await httpService.get(
-        `${process.env.REACT_APP_APIENDPOINT}/receiver/myTenders/${this.props.match.params.tenderId}`
-      );
-
-      await this.setState({ tender: data.tender });
+      if (this.props.match.path.includes("/receiver")) {
+        this.setState({ profileType: "receiver" });
+        const { data } = await httpService.get(
+          `${process.env.REACT_APP_APIENDPOINT}/receiver/myTenders/${this.props.match.params.tenderId}`
+        );
+        await this.setState({ tender: data.tender });
+      }
+      if (this.props.match.path.includes("/employee")) {
+        this.setState({ profileType: "employee" });
+        const { data } = await httpService.get(
+          `${process.env.REACT_APP_APIENDPOINT}/employee/myTenders/${this.props.match.params.tenderId}`
+        );
+        await this.setState({ tender: data.tender });
+      }
     } catch (error) {
       toast.error(error.message);
       return;
     }
+  }
+
+  componentWillUnmount() {
+    window.location.reload();
   }
 
   displayTenderItems = () => {
@@ -28,7 +41,7 @@ class ReceiverTenderDetails extends Component {
       srNo++;
       return (
         <tr role="row">
-          <td>{`#Q000${srNo}`}</td>
+          <td>{`000${srNo}`}</td>
           <td>{item.category}</td>
           <td>{item.name}</td>
           <td>
@@ -164,10 +177,12 @@ class ReceiverTenderDetails extends Component {
             </div>
           </div>
           <div className="d-flex my-xl-auto right-content">
-            {this.state.tender.status == "awarded"
+            {this.state.profileType == "receiver" &&
+            this.state.tender.status == "awarded"
               ? this.renderCompleteTenderButton()
               : ""}
-            {this.state.tender.status == "awarded"
+            {this.state.profileType == "receiver" &&
+            this.state.tender.status == "awarded"
               ? this.renderRejectTenderButton()
               : ""}
           </div>
@@ -289,4 +304,4 @@ class ReceiverTenderDetails extends Component {
   }
 }
 
-export default ReceiverTenderDetails;
+export default SecondaryUserTenderDetails;

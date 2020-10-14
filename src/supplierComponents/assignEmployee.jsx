@@ -79,6 +79,7 @@ class AssignEmployee extends Form {
       `${process.env.REACT_APP_APIENDPOINT}/supplier/assignEmployee`,
       this.state.formData
     );
+    window.location.reload();
   };
 
   renderTenderList = () => {

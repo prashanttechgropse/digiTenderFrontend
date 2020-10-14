@@ -30,6 +30,12 @@ class DeliveryNoteDetails extends Component {
           `${process.env.REACT_APP_APIENDPOINT}/supplier/myDeliveryNote/${this.props.match.params.tenderId}`
         );
       }
+      if (this.props.match.path.includes("/employee")) {
+        this.setState({ profileType: "employee" });
+        res = await httpService.get(
+          `${process.env.REACT_APP_APIENDPOINT}/employee/myDeliveryNote/${this.props.match.params.tenderId}`
+        );
+      }
       console.log(res);
       const { deliveryNote } = res.data;
       await this.setState({ deliveryNote });
