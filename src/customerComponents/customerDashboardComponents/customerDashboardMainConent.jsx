@@ -6,6 +6,9 @@ import config from "../../config.json";
 class CustomerDashboardMainContent extends Component {
   state = {
     customer: null,
+    increaseInTenders: "",
+    increaseInOngoingTenders: "",
+    increaseInCompletedTenders: "",
   };
 
   async componentDidMount() {
@@ -17,6 +20,13 @@ class CustomerDashboardMainContent extends Component {
         if (data.user.profileType.toLowerCase() === "customer") {
           const customer = data.user;
           this.setState({ customer: customer });
+          this.setState({ increaseInTenders: data.increaseInTenders });
+          this.setState({
+            increaseInOngoingTenders: data.increaseInOngoingTenders,
+          });
+          this.setState({
+            increaseInCompletedTenders: data.increaseInCompletedTenders,
+          });
           return;
         } else {
           this.props.history.push(`/${data.user.profileType}`);
@@ -78,8 +88,16 @@ class CustomerDashboardMainContent extends Component {
                       <p className="mb-0 tx-12 text-white op-7">0</p>
                     </div>
                     <span className="float-right my-auto ml-auto">
-                      <i className="fa fa-arrow-circle-up text-white"></i>
-                      <span className="text-white op-7"> +5</span>
+                      <i
+                        className={`fa fa-arrow-circle-${
+                          this.state.increaseInTenders > 0 ? "up" : "down"
+                        } text-white`}
+                      ></i>
+                      <span className="text-white op-7">
+                        {this.state.increaseInTenders > 0
+                          ? `+${this.state.increaseInTenders}`
+                          : this.state.increaseInTenders}
+                      </span>
                     </span>
                   </div>
                 </div>
@@ -106,8 +124,18 @@ class CustomerDashboardMainContent extends Component {
                       </p>
                     </div>
                     <span className="float-right my-auto ml-auto">
-                      <i className="fa fa-arrow-circle-up text-white"></i>
-                      <span className="text-white op-7"> 20%</span>
+                      <i
+                        className={`fa fa-arrow-circle-${
+                          this.state.increaseInOngointTenders > 0
+                            ? "up"
+                            : "down"
+                        } text-white`}
+                      ></i>
+                      <span className="text-white op-7">
+                        {this.state.increaseInOngoingTenders > 0
+                          ? `+${this.state.increaseInOngoingTenders}`
+                          : this.state.increaseInOngoingTenders}
+                      </span>
                     </span>
                   </div>
                 </div>
@@ -134,8 +162,18 @@ class CustomerDashboardMainContent extends Component {
                       </p>
                     </div>
                     <span className="float-right my-auto ml-auto">
-                      <i className="fa fa-arrow-circle-up text-white"></i>
-                      <span className="text-white op-7"> 10%</span>
+                      <i
+                        className={`fa fa-arrow-circle-${
+                          this.state.increaseInCompletedTenders > 0
+                            ? "up"
+                            : "down"
+                        } text-white`}
+                      ></i>
+                      <span className="text-white op-7">
+                        {this.state.increaseInCompletedTenders > 0
+                          ? `+${this.state.increaseInCompletedTenders}`
+                          : this.state.increaseInCompletedTenders}
+                      </span>
                     </span>
                   </div>
                 </div>

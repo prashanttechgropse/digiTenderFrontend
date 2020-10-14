@@ -117,8 +117,9 @@ class ProfileSetup extends Form {
 
     const { data, error } = await registerService.setUpProfileService(formData);
     if (!data.bankDetailsStatus) {
-      this.props.submitProfileDetails(this.state.formData);
-      this.props.history.push(`/register/uploadBankDetails`);
+      return await this.props.history.push(
+        `/register/uploadBankDetails/${this.state.formData.profileType}/${this.state.formData.organisationType}`
+      );
     } else {
       toast.success("registration process already completed");
       this.props.history.push(`/`);

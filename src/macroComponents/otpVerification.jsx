@@ -92,10 +92,7 @@ class OtpVerificationForm extends Form {
                               <h4>Check your email for the OTP</h4>
                               <form action="/reset-password">
                                 {this.renderInput("otp", "One Time Password")}
-                                {this.renderButton(
-                                  "Sign Up",
-                                  this.handleSubmit
-                                )}
+                                {this.renderButton("Submit", this.handleSubmit)}
                               </form>
                             </div>
                             <div className="main-signup-footer mg-t-20">

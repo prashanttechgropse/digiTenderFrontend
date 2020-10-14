@@ -9,7 +9,7 @@ import config from "../../config.json";
 class AdminCustomerList extends Component {
   state = {
     currentPage: 1,
-    pageSize: 1,
+    pageSize: 5,
     customerList: null,
     displayCustomerList: null,
   };

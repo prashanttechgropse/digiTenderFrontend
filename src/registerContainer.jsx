@@ -68,24 +68,11 @@ class RegisterContainer extends Component {
             />
           )}
         />
+        <Route exact path={`/register/profileSetup`} component={ProfileSetup} />
         <Route
           exact
-          path={`/register/profileSetup`}
-          render={(props) => (
-            <ProfileSetup
-              submitProfileDetails={(formData) =>
-                this.getProfileDetails(formData)
-              }
-              {...props}
-            />
-          )}
-        />
-        <Route
-          exact
-          path={`/register/uploadBankDetails`}
-          render={(props) => (
-            <BankDetails profileDetails={this.state.register} {...props} />
-          )}
+          path={`/register/uploadBankDetails/:profileType/:organisationType`}
+          component={BankDetails}
         />
       </React.Fragment>
     );

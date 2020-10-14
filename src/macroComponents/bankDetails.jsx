@@ -49,10 +49,10 @@ class BankDetails extends Form {
   doSubmit = async () => {
     const formData = new FormData();
     for (const item in this.state.formData) {
-      await formData.append(item, this.state.formData[item]);
+      formData.append(item, this.state.formData[item]);
     }
 
-    await formData.append(
+    formData.append(
       "myFile1",
       this.state.selectedFile,
       this.state.selectedFile.name
@@ -60,14 +60,16 @@ class BankDetails extends Form {
 
     const { data, error } = await registerServices.uploadBankDetails(formData);
     if (data) {
-      await this.props.history.push(`/`);
-      window.location.reload();
-      return;
+      return await this.props.history.push(`/login`);
     }
     if (error) {
       return;
     }
   };
+
+  componentWillUnmount() {
+    window.location.reload();
+  }
 
   render() {
     return (
@@ -183,13 +185,13 @@ class BankDetails extends Form {
                   <p>
                     User type
                     <span className="pull-right">
-                      {this.props.profileDetails.profileType}
+                      {this.props.match.params.profileType}
                     </span>
                   </p>
                   <p>
                     Organization type
                     <span className="pull-right">
-                      {this.props.profileDetails.organisationType}
+                      {this.props.match.params.organisationType}
                     </span>
                   </p>
                 </div>
@@ -202,7 +204,7 @@ class BankDetails extends Form {
                 )}
               </div>
             </div>
-          </div>
+          </div>{" "}
         </div>
       </React.Fragment>
     );
