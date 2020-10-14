@@ -59,7 +59,7 @@ class MyProfile extends Component {
                       </div>
                       <div className="ml-auto">
                         <h5 className="tx-13">No Of Receivers</h5>
-                        <h2 className="mb-0 tx-22 mb-1 mt-1">10 Receivers</h2>
+                        <h2 className="mb-0 tx-22 mb-1 mt-1">{`${user.details.receivers.length} Receivers`}</h2>
                       </div>
                     </div>
                   </div>

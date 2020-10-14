@@ -40,6 +40,7 @@ class CustomerApp extends Component {
       if (data) {
         if (data.user.profileType.toLowerCase() === "customer") {
           const customer = data.user;
+
           this.setState({ customer: customer });
           return;
         } else {
