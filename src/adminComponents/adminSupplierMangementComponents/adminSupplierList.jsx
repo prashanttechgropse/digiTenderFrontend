@@ -8,31 +8,32 @@ import config from "../../config.json";
 
 class AdminSupplierList extends Component {
   state = {
-    currentPage: 1,
-    pageSize: 4,
-    supplierList: null,
-    displaySupplierList: null,
+    currentPage: "",
+    pageSize: "",
+    supplierList: "",
+    displaySupplierList: "",
   };
+
+  constructor(props) {
+    super(props);
+    this.state.currentPage = 1;
+    this.state.pageSize = 4;
+  }
 
   componentDidMount = async () => {
     try {
       const { data } = await httpService.get(
         `${process.env.REACT_APP_APIENDPOINT}/admin/suppliers`
       );
-      const supplierList = data.supplierList;
-      let state = { ...this.state };
-      state.supplierList = supplierList;
 
-      await this.setState(state);
+      this.setState({ supplierList: data.supplierList });
 
       const displaySupplierList = paginate(
-        this.state.supplierList,
+        data.supplierList,
         this.state.currentPage,
         this.state.pageSize
       );
-      state = { ...this.state };
-      state.displaySupplierList = displaySupplierList;
-      await this.setState(state);
+      this.setState({ displaySupplierList });
     } catch (error) {
       console.log(error);
       toast.error(error.message);
@@ -43,17 +44,16 @@ class AdminSupplierList extends Component {
   handlePageChange = async (pageNumber) => {
     this.setState({ currentPage: pageNumber });
     const displaySupplierList = paginate(
-      this.props.supplierList,
+      this.state.supplierList,
       pageNumber,
       this.state.pageSize
     );
     await this.setState({ displaySupplierList });
-    console.log(this.state.displaySupplierList);
   };
 
   renderSupplierList = () => {
     let srNo = (this.state.currentPage - 1) * this.state.pageSize;
-    if (this.state.displaySupplierList === null) return;
+    if (this.state.displaySupplierList === "") return;
     return this.state.displaySupplierList.map((supplier) => {
       srNo++;
       return (
@@ -80,7 +80,7 @@ class AdminSupplierList extends Component {
   };
 
   render() {
-    if (this.state.supplierList === null) return null;
+    if (this.state.supplierList === "") return null;
     return (
       <div className="container-fluid">
         <div className="breadcrumb-header justify-content-between">
