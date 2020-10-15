@@ -65,13 +65,16 @@ class AdminCustomerList extends Component {
           <td>{customer.entityRegistrationNo}</td>
           <td>{customer.contactNumber}</td>
           <td>{`${customer.tenders.length} Tenders`}</td>
-          <span
-            className={`badge badge-${
-              customer.user.isApproved === true ? "success" : "danger"
-            } f-14`}
-          >
-            {customer.user.isApproved === true ? "Active" : "Blocked"}
-          </span>
+          <td>
+            <span
+              className={`badge badge-${
+                customer.user.isApproved === true ? "success" : "danger"
+              } f-14`}
+            >
+              {customer.user.isApproved === true ? "Active" : "Blocked"}
+            </span>
+          </td>
+
           <td>
             <Link
               to={`/admin/customerDetails/${customer._id}`}
