@@ -23,6 +23,12 @@ class DeliveryNoteMainContent extends Component {
   async componentDidMount() {
     try {
       let res;
+      if (this.props.match.path.includes("/admin")) {
+        this.setState({ profileType: "admin" });
+        res = await httpService.get(
+          `${process.env.REACT_APP_APIENDPOINT}/admin/deliveryNoteTenderList`
+        );
+      }
       if (this.props.match.path.includes("/customer")) {
         this.setState({ profileType: "customer" });
         res = await httpService.get(

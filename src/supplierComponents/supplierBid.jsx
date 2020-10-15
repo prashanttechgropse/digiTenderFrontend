@@ -219,10 +219,6 @@ class SupllierBid extends Component {
                           <tbody>{this.renderItemList()} </tbody>
                         </table>
                       </div>
-                      {`click here to download --> `}
-                      <a onClick={this.downloadTenderTerms}>
-                        Tender Terms and conditions
-                      </a>
                     </div>
                   </div>
                 </div>
@@ -241,7 +237,9 @@ class SupllierBid extends Component {
                   onClick={this.toggleTermsConditions}
                 />
                 I accept
-                <a href="/supplier/terms-and-condition">Terms & Conditions</a>
+                <a href="#" onClick={this.downloadTenderTerms}>
+                  Terms & Conditions
+                </a>
               </label>
             </div>
           </div>

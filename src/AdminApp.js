@@ -21,6 +21,8 @@ import CustomerDetailsContainer from "./adminComponents/customerDetailsComponent
 import SupplierDetailsContainer from "./adminComponents/supplierDetailsContainer/supplierDetailsContainer";
 import SupplierQuotationDetails from "./customerComponents/supllierQuotationDetails";
 import TenderDetails from "./customerComponents/customerTenderManagementComponents/TenderDetails";
+import DeliveryNoteMainContent from "./customerComponents/customerDeliveryNotesComponents/DeliveryNoteMainContent";
+import DeliveryNoteDetails from "./customerComponents/customerDeliveryNotesComponents/DeliveryNoteDetails";
 
 class AdminApp extends Component {
   state = {
@@ -83,7 +85,12 @@ class AdminApp extends Component {
             <Route
               exact
               path="/admin/deliveryNoteList"
-              component={AdminDeliveryNoteList}
+              component={DeliveryNoteMainContent}
+            />
+            <Route
+              exact
+              path="/admin/deliveryNoteDetails/:tenderId"
+              component={DeliveryNoteDetails}
             />
 
             <Route
