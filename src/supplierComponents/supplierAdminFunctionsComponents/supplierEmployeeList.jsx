@@ -101,7 +101,7 @@ class SupplierEmployeeList extends Component {
   render() {
     if (this.state.employeeList === null) return null;
     if (this.state.employeeList.length == 0) {
-      return <h1>you dont have anyemployees yet</h1>;
+      return <h1>you dont have any employees yet</h1>;
     }
     return (
       <div className="container-fluid">

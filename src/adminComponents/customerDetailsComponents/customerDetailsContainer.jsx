@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import CustomerDetailsCards from "./customerDetailsCards";
 import CustomerDetails from "./customerDetails";
 import httpService from "../../services/httpService";
-import config from "../../config.json";
+
 import { toast } from "react-toastify";
 
 class CustomerDetailsContainer extends Component {

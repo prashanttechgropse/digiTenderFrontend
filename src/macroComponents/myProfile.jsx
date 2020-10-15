@@ -58,8 +58,16 @@ class MyProfile extends Component {
                         <i className="fa fa-user text-danger"></i>
                       </div>
                       <div className="ml-auto">
-                        <h5 className="tx-13">No Of Receivers</h5>
-                        <h2 className="mb-0 tx-22 mb-1 mt-1">{`${user.details.receivers.length} Receivers`}</h2>
+                        <h5 className="tx-13">{`No Of ${
+                          user.profileType == "customer"
+                            ? "Receivers"
+                            : "Employees"
+                        }`}</h5>
+                        <h2 className="mb-0 tx-22 mb-1 mt-1">
+                          {user.profileType == "customer"
+                            ? user.details.receivers
+                            : user.details.employees.length}
+                        </h2>
                       </div>
                     </div>
                   </div>
