@@ -67,7 +67,7 @@ class AdminCustomerList extends Component {
           <td>{`${customer.tenders.length} Tenders`}</td>
           <td>
             <span className="badge badge-primary f-14">
-              {customer.user.isApproved ? "Active" : "Blocked"}
+              {customer.user.isApproved ? "active" : "blocked"}
             </span>
           </td>
           <td>
