@@ -17,13 +17,7 @@ class AdminDashBoardRecentlyAddedCustomers extends Component {
             <td>{customer.contactNumber}</td>
             <td>{`${customer.tenders.length} Tenders`}</td>
             <td>
-              <span
-                className={`badge badge-${
-                  customer.user.isApproved === true ? "success" : "danger"
-                } f-14`}
-              >
-                {customer.user.isApproved === true ? "Active" : "Blocked"}
-              </span>
+              <span className="badge badge-primary f-14">Active</span>
             </td>
             <td>
               <Link
