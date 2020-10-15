@@ -243,8 +243,10 @@ class SavedTenderDetails extends Component {
                   className="check-term"
                   onClick={this.toggleTermsConditions}
                 />
-                I accept
-                <a href="/supplier/terms-and-condition">Terms & Conditions</a>
+                {" I accept"}
+                <a href="/supplier/terms-and-condition">
+                  {" Terms & Conditions"}
+                </a>
               </label>
             </div>
           </div>

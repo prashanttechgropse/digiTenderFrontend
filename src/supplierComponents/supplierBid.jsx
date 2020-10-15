@@ -236,9 +236,9 @@ class SupllierBid extends Component {
                   className="check-term"
                   onClick={this.toggleTermsConditions}
                 />
-                I accept
+                {" I accept"}
                 <a href="#" onClick={this.downloadTenderTerms}>
-                  Terms & Conditions
+                  {" Terms & Conditions"}
                 </a>
               </label>
             </div>
