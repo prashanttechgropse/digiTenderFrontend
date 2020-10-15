@@ -57,9 +57,6 @@ class AdminCustomerList extends Component {
       return null;
     }
     return this.state.displayCustomerList.map((customer) => {
-      if (customer.user.isApproved) {
-        customer.status = "active";
-      } else customer.status = "blocked";
       srNo++;
       return (
         <tr role="row">
@@ -68,9 +65,7 @@ class AdminCustomerList extends Component {
           <td>{customer.entityRegistrationNo}</td>
           <td>{customer.contactNumber}</td>
           <td>{`${customer.tenders.length} Tenders`}</td>
-          <td>
-            <span className="badge badge-primary f-14">{customer.status}</span>
-          </td>
+          <td>{customer.user.isApproved ? "active" : "blocked"}</td>
           <td>
             <Link
               to={`/admin/customerDetails/${customer._id}`}
