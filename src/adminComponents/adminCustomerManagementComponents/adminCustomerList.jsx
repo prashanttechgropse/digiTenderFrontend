@@ -20,20 +20,16 @@ class AdminCustomerList extends Component {
         `${process.env.REACT_APP_APIENDPOINT}/admin/customers`
       );
       const customerList = data.customerList;
-      let state = { ...this.state };
-      state.customerList = customerList;
 
-      await this.setState(state);
+      await this.setState({ customerList });
 
       const displayCustomerList = paginate(
         this.state.customerList,
         this.state.currentPage,
         this.state.pageSize
       );
-      console.log(displayCustomerList);
-      state = { ...this.state };
-      state.displayCustomerList = displayCustomerList;
-      await this.setState(state);
+
+      await this.setState({ displayCustomerList });
     } catch (error) {
       console.log(error);
       toast.error(error.message);
@@ -65,7 +61,9 @@ class AdminCustomerList extends Component {
           <td>{customer.entityRegistrationNo}</td>
           <td>{customer.contactNumber}</td>
           <td>{`${customer.tenders.length} Tenders`}</td>
-          <td>{customer.user.isApproved ? "active" : "blocked"}</td>
+          <td>
+            <span className="badge badge-primary f-14">Active</span>
+          </td>
           <td>
             <Link
               to={`/admin/customerDetails/${customer._id}`}
