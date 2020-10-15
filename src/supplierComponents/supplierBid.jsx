@@ -238,7 +238,7 @@ class SupllierBid extends Component {
                 />
                 {" I accept"}
                 <a href="#" onClick={this.downloadTenderTerms}>
-                  {" Terms & Conditions"}
+                  {" Tender Terms & Conditions"}
                 </a>
               </label>
             </div>

@@ -222,10 +222,6 @@ class SavedTenderDetails extends Component {
                           <tbody>{this.renderItemList()} </tbody>
                         </table>
                       </div>
-                      {`click here to download --> `}
-                      <Link onClick={this.downloadTenderTerms}>
-                        Tender Terms and conditions
-                      </Link>
                     </div>
                   </div>
                 </div>
@@ -244,9 +240,9 @@ class SavedTenderDetails extends Component {
                   onClick={this.toggleTermsConditions}
                 />
                 {" I accept"}
-                <a href="/supplier/terms-and-condition">
-                  {" Terms & Conditions"}
-                </a>
+                <Link onClick={this.downloadTenderTerms}>
+                  {" Tender Terms & Conditions"}
+                </Link>
               </label>
             </div>
           </div>
