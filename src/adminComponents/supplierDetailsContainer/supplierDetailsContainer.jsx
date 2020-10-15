@@ -71,7 +71,7 @@ class SupplierDetailsContainer extends Component {
         <div class="breadcrumb-header justify-content-between">
           <div class="my-auto">
             <div class="d-flex">
-              <h4 class="content-title mb-0 my-auto">Supplier Status :</h4>
+              <h4 class="content-title mb-0 my-auto">Status :</h4>
             </div>
           </div>
           <div className="d-flex my-xl-auto right-content">
