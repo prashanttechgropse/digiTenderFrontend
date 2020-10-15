@@ -95,7 +95,7 @@ class SupplierDetailsContainer extends Component {
             </div>
           </div>
         </div>
-        <SupplierDetails supplier={this.state.supplier} />
+        <SupplierDetails supplier={this.state.supplier} {...this.props} />
       </div>
     );
   }

@@ -1,7 +1,41 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import httpService from "../../services/httpService";
+import { toast } from "react-toastify";
 class CustomerDetails extends Component {
-  state = {};
+  state = { receiverList: "" };
+
+  componentDidMount = async () => {
+    try {
+      const { data } = await httpService.get(
+        `${process.env.REACT_APP_APIENDPOINT}/admin/receiverList/${this.props.match.params.customerId}`
+      );
+      const { receiversList: receiverList } = data;
+      await this.setState({ receiverList });
+      console.log(this.state.receiverList);
+    } catch (error) {
+      toast.error(error.message);
+      return;
+    }
+  };
+
+  renderReceiverList = () => {
+    let srNo = 0;
+
+    let receiverList = this.state.receiverList;
+    return receiverList.map((receiver) => {
+      srNo++;
+      return (
+        <tr role="row">
+          <td>{srNo}</td>
+          <td>{receiver.name}</td>
+          <td>{receiver.physicalAddress}</td>
+          <td>{receiver.postalAddress}</td>
+          <td>{receiver.contactNumber}</td>
+        </tr>
+      );
+    });
+  };
 
   renderTenderTable = () => {
     let srNo = 0;
@@ -462,88 +496,25 @@ class CustomerDetails extends Component {
                         >
                           <div className="row">
                             <div className="col-sm-12">
-                              <table
-                                className="table text-md-nowrap dataTable"
-                                id="example3"
-                              >
-                                <thead>
-                                  <tr role="row">
-                                    <th>Sr.No</th>
-                                    <th>Receiver Name</th>
-                                    <th>Tender Title</th>
-                                    <th>Delivery Date</th>
-                                    <th>Customer Name</th>
-                                    <th>Delivery Address</th>
-                                    <th>Action</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <tr role="row">
-                                    <td>#1001</td>
-                                    <td>Hamid Ansari</td>
-                                    <td>Mobile Phones</td>
-                                    <td>20-18-2020</td>
-                                    <td>Mo Danish</td>
-                                    <td>Mall Road Dubai UAE</td>
-                                    <td>
-                                      <a
-                                        href="/admin/receiver-detail"
-                                        className="detail-icons"
-                                      >
-                                        <i className="fa fa-eye"></i>
-                                      </a>
-                                    </td>
-                                  </tr>
-                                  <tr role="row">
-                                    <td>#1002</td>
-                                    <td>Hamid Ansari</td>
-                                    <td>Mobile Phones</td>
-                                    <td>20-18-2020</td>
-                                    <td>Mo Danish</td>
-                                    <td>Mall Road Dubai UAE</td>
-                                    <td>
-                                      <a
-                                        href="/admin/receiver-detail"
-                                        className="detail-icons"
-                                      >
-                                        <i className="fa fa-eye"></i>
-                                      </a>
-                                    </td>
-                                  </tr>
-                                  <tr role="row">
-                                    <td>#1003</td>
-                                    <td>Hamid Ansari</td>
-                                    <td>Mobile Phones</td>
-                                    <td>20-18-2020</td>
-                                    <td>Mo Danish</td>
-                                    <td>Mall Road Dubai UAE</td>
-                                    <td>
-                                      <a
-                                        href="/admin/receiver-detail"
-                                        className="detail-icons"
-                                      >
-                                        <i className="fa fa-eye"></i>
-                                      </a>
-                                    </td>
-                                  </tr>
-                                  <tr role="row">
-                                    <td>#1004</td>
-                                    <td>Hamid Ansari</td>
-                                    <td>Mobile Phones</td>
-                                    <td>20-18-2020</td>
-                                    <td>Mo Danish</td>
-                                    <td>Mall Road Dubai UAE</td>
-                                    <td>
-                                      <a
-                                        href="/admin/receiver-detail"
-                                        className="detail-icons"
-                                      >
-                                        <i className="fa fa-eye"></i>
-                                      </a>
-                                    </td>
-                                  </tr>
-                                </tbody>
-                              </table>
+                              {this.state.receiverList.length !== 0 ? (
+                                <table
+                                  className="table text-md-nowrap dataTable"
+                                  id="example3"
+                                >
+                                  <thead>
+                                    <tr role="row">
+                                      <th>Sr.No</th>
+                                      <th>Receiver Name</th>
+                                      <th>Physical Address</th>
+                                      <th>postal Address</th>
+                                      <th>contact Number</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>{this.renderReceiverList()} </tbody>
+                                </table>
+                              ) : (
+                                <h1>no Receiver</h1>
+                              )}
                             </div>
                           </div>
                         </div>

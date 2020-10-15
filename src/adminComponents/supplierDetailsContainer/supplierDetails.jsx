@@ -1,7 +1,41 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import httpService from "../../services/httpService";
+import { toast } from "react-toastify";
+
 class SupplierDetails extends Component {
-  state = {};
+  state = { employeesList: "" };
+
+  componentDidMount = async () => {
+    try {
+      const { data } = await httpService.get(
+        `${process.env.REACT_APP_APIENDPOINT}/admin/employeeList/${this.props.match.params.supplierId}`
+      );
+      const { employeesList } = data;
+      await this.setState({ employeesList });
+    } catch (error) {
+      toast.error(error.message);
+      return;
+    }
+  };
+
+  renderEmployeeList = () => {
+    let srNo = 0;
+
+    let employeesList = this.state.employeesList;
+    return employeesList.map((employee) => {
+      srNo++;
+      return (
+        <tr role="row">
+          <td>{srNo}</td>
+          <td>{employee.name}</td>
+          <td>{employee.physicalAddress}</td>
+          <td>{employee.postalAddress}</td>
+          <td>{employee.contactNumber}</td>
+        </tr>
+      );
+    });
+  };
 
   renderTenderList = () => {
     if (!this.props.supplier.tendersAwarded) return null;
@@ -481,72 +515,25 @@ class SupplierDetails extends Component {
                         >
                           <div className="row">
                             <div className="col-sm-12">
-                              <table
-                                className="table text-md-nowrap dataTable"
-                                id="example3"
-                              >
-                                <thead>
-                                  <tr role="row">
-                                    <th>Sr.No</th>
-                                    <th>Employee Name</th>
-                                    <th>Tender Title</th>
-                                    <th>Delivery Date</th>
-                                    <th>Customer Name</th>
-                                    <th>Delivery Address</th>
-                                    <th>Action</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <tr role="row">
-                                    <td>#1002</td>
-                                    <td>Hamid Ansari</td>
-                                    <td>Mobile Phones</td>
-                                    <td>20-18-2020</td>
-                                    <td>Mo Danish</td>
-                                    <td>Mall Road Dubai UAE</td>
-                                    <td>
-                                      <a
-                                        href="/admin/subsupplier-detail"
-                                        className="detail-icons"
-                                      >
-                                        <i className="fa fa-eye"></i>
-                                      </a>
-                                    </td>
-                                  </tr>
-                                  <tr role="row">
-                                    <td>#1003</td>
-                                    <td>Hamid Ansari</td>
-                                    <td>Mobile Phones</td>
-                                    <td>20-18-2020</td>
-                                    <td>Mo Danish</td>
-                                    <td>Mall Road Dubai UAE</td>
-                                    <td>
-                                      <a
-                                        href="/admin/subsupplier-detail"
-                                        className="detail-icons"
-                                      >
-                                        <i className="fa fa-eye"></i>
-                                      </a>
-                                    </td>
-                                  </tr>
-                                  <tr role="row">
-                                    <td>#1004</td>
-                                    <td>Hamid Ansari</td>
-                                    <td>Mobile Phones</td>
-                                    <td>20-18-2020</td>
-                                    <td>Mo Danish</td>
-                                    <td>Mall Road Dubai UAE</td>
-                                    <td>
-                                      <a
-                                        href="/admin/subsupplier-detail"
-                                        className="detail-icons"
-                                      >
-                                        <i className="fa fa-eye"></i>
-                                      </a>
-                                    </td>
-                                  </tr>
-                                </tbody>
-                              </table>
+                              {this.state.employeesList.length !== 0 ? (
+                                <table
+                                  className="table text-md-nowrap dataTable"
+                                  id="example3"
+                                >
+                                  <thead>
+                                    <tr role="row">
+                                      <th>Sr.No</th>
+                                      <th>Employee Name</th>
+                                      <th>Physical Address</th>
+                                      <th>postal Address</th>
+                                      <th>contact Number</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>{this.renderEmployeeList()} </tbody>
+                                </table>
+                              ) : (
+                                <h1>no Employee</h1>
+                              )}
                             </div>
                           </div>
                         </div>

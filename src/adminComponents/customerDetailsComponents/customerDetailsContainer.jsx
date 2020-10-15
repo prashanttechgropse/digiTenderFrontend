@@ -97,7 +97,7 @@ class CustomerDetailsContainer extends Component {
             </div>
           </div>
         </div>
-        <CustomerDetails customer={this.state.customer} />
+        <CustomerDetails customer={this.state.customer} {...this.props} />
       </div>
     );
   }
