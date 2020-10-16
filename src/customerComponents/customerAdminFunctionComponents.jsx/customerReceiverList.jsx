@@ -140,8 +140,8 @@ class CustomerReceiverlist extends Component {
                           <thead>
                             <tr role="row">
                               <th>Code No</th>
-                              <th>Conatact Person</th>
-                              <th>Conatact Number</th>
+                              <th>Contact Person</th>
+                              <th>Contact Number</th>
                               <th>Postal Address</th>
                               <th>Action</th>
                             </tr>

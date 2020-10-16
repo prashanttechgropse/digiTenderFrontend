@@ -23,7 +23,7 @@ class Form extends Component {
   };
 
   validateOnChange = (input) => {
-    const obj = { [input.name]: input.value };
+    const obj = { [input.name]: input.value.trim() };
     const subSchema = { [input.name]: this.schema[input.name] };
     const { error } = Joi.validate(obj, subSchema);
     if (!error) return null;

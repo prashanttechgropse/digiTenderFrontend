@@ -12,7 +12,7 @@ class TenderListDisplayCard extends Component {
   constructor(props) {
     super(props);
     this.state.currentPage = 1;
-    this.state.pageSize = 3;
+    this.state.pageSize = 5;
     this.state.displayTenderlist = paginate(
       this.props.tenderList,
       this.state.currentPage,

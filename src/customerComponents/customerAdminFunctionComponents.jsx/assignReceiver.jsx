@@ -173,7 +173,7 @@ class AssignReceiver extends Form {
                               <th>Tender Amount</th>
                               <th>Date of Creation</th>
                               <th>Date of Delivery</th>
-                              <th>Assign Reveiver</th>
+                              <th>Assign Receiver</th>
                               <th>Action</th>
                             </tr>
                           </thead>

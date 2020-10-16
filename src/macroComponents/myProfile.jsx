@@ -65,7 +65,7 @@ class MyProfile extends Component {
                         }`}</h5>
                         <h2 className="mb-0 tx-22 mb-1 mt-1">
                           {user.profileType == "customer"
-                            ? user.details.receivers
+                            ? user.details.receivers.length
                             : user.details.employees.length}
                         </h2>
                       </div>

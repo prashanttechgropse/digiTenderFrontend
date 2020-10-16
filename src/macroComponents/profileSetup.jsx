@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 
 class ProfileSetup extends Form {
   state = {
+    organisationTypes: "",
     formData: {
       profileType: "",
       organisationType: "",
@@ -48,7 +49,23 @@ class ProfileSetup extends Form {
     physicalAddress: Joi.string().required().min(5),
     postalAddress: Joi.string().required().min(5),
     contactPerson: Joi.string().required().min(5),
-    contactNo: Joi.string().required().min(5),
+    contactNo: Joi.number().required().min(5),
+  };
+
+  componentDidMount = async () => {
+    try {
+      const { data } = await httpService.get(
+        `${process.env.REACT_APP_APIENDPOINT}/organisationTypes`
+      );
+      let organisationTypes = await data.organisationType.map(
+        (organisationType) => {
+          return { id: organisationType, name: organisationType };
+        }
+      );
+      await this.setState({ organisationTypes });
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
   toggleTermsConditions = async () => {
@@ -130,6 +147,7 @@ class ProfileSetup extends Form {
   };
 
   render() {
+    if (this.state.organisationTypes === "") return null;
     return (
       <div class="page">
         <div class="container-fluid">
@@ -173,13 +191,7 @@ class ProfileSetup extends Form {
                                   {this.renderSelect(
                                     "organisationType",
                                     "Organisation Type",
-                                    [
-                                      {
-                                        _id: "private limited",
-                                        name: "Private Limited",
-                                      },
-                                      { _id: "government", name: "Government" },
-                                    ]
+                                    this.state.organisationTypes
                                   )}
                                 </div>
                               </div>

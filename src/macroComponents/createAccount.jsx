@@ -154,7 +154,7 @@ class CreateAccount extends Form {
                                 <p>
                                   Click to Sign up as a Secondary User
                                   <Link to="/register/receiver">
-                                    Secondary User Sign Up
+                                    {" Secondary User Sign Up"}
                                   </Link>
                                 </p>
                               </div>

@@ -76,7 +76,7 @@ class EditTenderDetailsCards extends Form {
         <div className="card-header pb-0">
           <div className="d-flex justify-content-between">
             <h4 className="card-title mg-b-0 datatable-link">
-              if You want to Create New Tender. Fill the Forms !
+              if You want to Edit Tender. Fill the Forms !
             </h4>
           </div>
           <p className="tx-12 tx-gray-500 mb-2">

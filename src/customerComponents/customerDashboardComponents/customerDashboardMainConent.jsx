@@ -85,7 +85,9 @@ class CustomerDashboardMainContent extends Component {
                       <h4 className="tx-20 font-weight-bold mb-1 text-white">
                         {user.details.tenders.length}
                       </h4>
-                      <p className="mb-0 tx-12 text-white op-7">0</p>
+                      <p className="mb-0 tx-12 text-white op-7">
+                        compared to last month
+                      </p>
                     </div>
                     <span className="float-right my-auto ml-auto">
                       <i
