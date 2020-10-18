@@ -144,7 +144,7 @@ class AdminSideBar extends Component {
           <div
             id="mCSB_1"
             className="mCustomScrollBox mCS-minimal mCSB_vertical mCSB_outside"
-            tabindex="0"
+            tabIndex="0"
           >
             <div id="mCSB_1_container" className="mCSB_container" dir="ltr">
               <div className="app-sidebar__user clearfix active">
@@ -173,7 +173,8 @@ class AdminSideBar extends Component {
                   </Link>
                 </li>
                 <li className="slide">
-                  <a
+                  <Link
+                    to="#"
                     className="side-menu__item"
                     data-toggle="slide"
                     onClick={this.toggleCustomerManagement}
@@ -183,11 +184,12 @@ class AdminSideBar extends Component {
                       Customer Management
                     </span>
                     <i className="angle fa fa-angle-down"></i>
-                  </a>
+                  </Link>
                   {this.renderCustomerManagement()}
                 </li>
                 <li className="slide">
-                  <a
+                  <Link
+                    to="#"
                     className="side-menu__item"
                     data-toggle="slide"
                     onClick={this.toggleSupplierManagement}
@@ -197,11 +199,12 @@ class AdminSideBar extends Component {
                       Supplier Management
                     </span>
                     <i className="angle fa fa-angle-down"></i>
-                  </a>
+                  </Link>
                   {this.renderSupplierManagement()}
                 </li>
                 <li className="slide">
-                  <a
+                  <Link
+                    to="#"
                     className="side-menu__item"
                     data-toggle="slide"
                     onClick={this.toggleDeliveryNoteManagement}
@@ -211,11 +214,12 @@ class AdminSideBar extends Component {
                       Delivery Note Management
                     </span>
                     <i className="angle fa fa-angle-down"></i>
-                  </a>
+                  </Link>
                   {this.renderDeliveryNoteManagement()}
                 </li>
                 <li className="slide">
-                  <a
+                  <Link
+                    to="#"
                     className="side-menu__item"
                     data-toggle="slide"
                     onClick={this.togglePaymentManagement}
@@ -223,11 +227,12 @@ class AdminSideBar extends Component {
                     <i className="fa fa-money"></i>
                     <span className="side-menu__label">Payment Management</span>
                     <i className="angle fa fa-angle-down"></i>
-                  </a>
+                  </Link>
                   {this.renderPaymentManagement()}
                 </li>
                 <li className="slide">
-                  <a
+                  <Link
+                    to="#"
                     className="side-menu__item"
                     data-toggle="slide"
                     onClick={this.toggleAdmin}
@@ -235,7 +240,7 @@ class AdminSideBar extends Component {
                     <i className="fa fa-cog"></i>
                     <span className="side-menu__label">Admin</span>
                     <i className="angle fa fa-angle-down"></i>
-                  </a>
+                  </Link>
                   {this.renderAdmin()}
                 </li>
               </ul>

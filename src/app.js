@@ -28,6 +28,7 @@ class App extends Component {
     const userData = { email: email };
     this.setState({ userData });
   };
+
   render() {
     return (
       <React.Fragment>

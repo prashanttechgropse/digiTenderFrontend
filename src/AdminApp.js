@@ -6,7 +6,6 @@ import AdminSideBar from "./adminComponents/adminSideBar";
 import AdminDashboardMainContent from "./adminComponents/adminDashboardComponents/adminDashboardMainContent";
 import AdminCustomerList from "./adminComponents/adminCustomerManagementComponents/adminCustomerList";
 import AdminSupplierList from "./adminComponents/adminSupplierMangementComponents/adminSupplierList";
-import AdminDeliveryNoteList from "./adminComponents/adminDeliveryNoteManagementComponents/AdminDeliveryNoteList";
 import AdminPaymentList from "./adminComponents/adminPaymentManagementComponents/adminPaymentList";
 import AdminCreateCategory from "./adminComponents/adminAdminFunctionComponents/adminCreateCategory";
 import AdminHelpSupport from "./adminComponents/adminAdminFunctionComponents/adminHelp&Support";
@@ -163,9 +162,9 @@ class AdminApp extends Component {
 
   render() {
     return (
-      <body className="main-body app sidebar-mini">
+      <div className="main-body app sidebar-mini">
         {this.checkAdminPopulated()}
-      </body>
+      </div>
     );
   }
 }

@@ -70,7 +70,7 @@ class CustomerApp extends Component {
               component={CustomerCreateTender}
             />
             <Route exact path="/customer/myProfile">
-              <MyProfile user={this.state.customer} />
+              <MyProfile user={this.state.customer} {...this.props} />
             </Route>
             <Route
               exact
@@ -113,7 +113,9 @@ class CustomerApp extends Component {
               path="/customer/termsConditions"
               component={TermsConditions}
             />
-            <Route exact path="/customer/editProfile" component={EditProfile} />
+            <Route exact path="/customer/editProfile">
+              <EditProfile user={this.state.customer} {...this.props} />
+            </Route>
             <Route exact path="/customer/helpSupport" component={HelpSupport} />
             <Route
               exact

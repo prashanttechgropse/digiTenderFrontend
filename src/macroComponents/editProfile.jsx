@@ -1,7 +1,77 @@
-import React, { Component } from "react";
-class EditProfile extends Component {
-  state = {};
+import React from "react";
+import Joi from "joi-browser";
+import Form from "./form/form";
+class EditProfile extends Form {
+  state = {
+    email: "",
+    formData: {
+      firstName: "",
+      lastName: "",
+      contactNumber: "",
+      companyName: "",
+      entityRegistrationNo: "",
+      vatRegistration: "",
+      vatNumber: "",
+      tradingAs: "",
+      website: "",
+      physicalAddress: "",
+      postalAddress: "",
+      contactPerson: "",
+      contactNo: "",
+      bankName: "",
+      accountNo: "",
+      accountType: "",
+      branchCode: "",
+    },
+  };
+
+  constructor(props) {
+    super(props);
+    let { formData } = this.state;
+    const { user } = this.props;
+    this.state.email = user.email;
+    formData.firstName = user.details.firstName;
+    formData.lastName = user.details.firstName;
+    formData.contactNumber = user.details.contactNumber;
+    formData.companyName = user.details.companyName;
+    formData.entityRegistrationNo = user.details.entityRegistrationNo;
+    formData.vatRegistration = user.details.vatRegistration;
+    formData.vatNumber = user.details.vatNumber;
+    formData.tradingAs = user.details.tradingAs;
+    formData.website = user.details.website;
+    formData.physicalAddress = user.details.physicalAddress;
+    formData.postalAddress = user.details.postalAddress;
+    formData.contactPerson = user.details.contactPerson;
+    formData.contactNo = user.details.contactNo;
+    formData.bankName = user.bankDetails.bankName;
+    formData.accountNo = user.bankDetails.accountNo;
+    formData.accountType = user.bankDetails.accountType;
+    formData.branchCode = user.bankDetails.branchCode;
+  }
+
+  schema = {
+    firstName: Joi.string().required().min(5),
+    lastName: Joi.string().required().min(5),
+    idNumber: Joi.string().required().min(5),
+    contactNumber: Joi.number().min(5).required(),
+    companyName: Joi.string().required().min(5),
+    entityRegistrationNo: Joi.string().required().min(5),
+    vatRegistration: Joi.string().required(),
+    vatNumber: Joi.string().required().min(5),
+    tradingAs: Joi.string().required().min(5),
+    website: Joi.string().required().min(5),
+    physicalAddress: Joi.string().required().min(5),
+    postalAddress: Joi.string().required().min(5),
+    contactPerson: Joi.string().required().min(5),
+    contactNo: Joi.number().required().min(5),
+    bankName: Joi.string().required(),
+    accountNo: Joi.string().required(),
+    accountType: Joi.string().required(),
+    branchCode: Joi.string().required(),
+  };
+
   render() {
+    const { formData: user, email } = this.state;
     return (
       <div className="container-fluid">
         <div className="breadcrumb-header justify-content-between">
@@ -31,21 +101,21 @@ class EditProfile extends Component {
                     <div className="row">
                       <div className="col-md-6">
                         <div className="form-group">
-                          <label>First Name</label>{" "}
+                          <label>First Name</label>
                           <input
                             className="form-control"
                             type="text"
-                            placeholder="Al Hamid "
+                            placeholder={user.firstName}
                           />
                         </div>
                       </div>
                       <div className="col-md-6">
                         <div className="form-group">
-                          <label>Last Name</label>{" "}
+                          <label>Last Name</label>
                           <input
                             className="form-control"
                             type="text"
-                            placeholder="Saif"
+                            placeholder={user.lastName}
                           />
                         </div>
                       </div>
@@ -53,22 +123,22 @@ class EditProfile extends Component {
                     <div className="row">
                       <div className="col-md-6">
                         <div className="form-group">
-                          <label>Email Id</label>{" "}
+                          <label>Email Id</label>
                           <input
                             className="form-control"
                             type="text"
-                            placeholder="hamid@gmail.com "
+                            placeholder={email}
                             disabled
                           />
                         </div>
                       </div>
                       <div className="col-md-6">
                         <div className="form-group">
-                          <label>Contact No</label>{" "}
+                          <label>Contact No</label>
                           <input
                             className="form-control"
                             type="text"
-                            placeholder="+989 6767 7687"
+                            placeholder={user.contactNo}
                           />
                         </div>
                       </div>
@@ -91,21 +161,21 @@ class EditProfile extends Component {
                     <div className="row">
                       <div className="col-md-6">
                         <div className="form-group">
-                          <label>Company Name</label>{" "}
+                          <label>Company Name</label>
                           <input
                             className="form-control"
                             type="text"
-                            placeholder="Hamid Pvt Ltd"
+                            placeholder={user.companyName}
                           />
                         </div>
                       </div>
                       <div className="col-md-6">
                         <div className="form-group">
-                          <label>Registration No</label>{" "}
+                          <label>Registration No</label>
                           <input
                             className="form-control"
                             type="text"
-                            placeholder="7878686868889"
+                            placeholder={user.entityRegistrationNo}
                           />
                         </div>
                       </div>
@@ -114,16 +184,24 @@ class EditProfile extends Component {
                       <div className="col-md-6">
                         <label>VAT Registration</label>
                         <select className="form-control select2-no-search ">
-                          <option> Option 1 </option>
-                          <option> Option 2 </option>
+                          <option
+                            selected={user.vatRegistration === 1 ? true : false}
+                          >
+                            Option 1
+                          </option>
+                          <option
+                            selected={user.vatRegistration === 2 ? true : false}
+                          >
+                            Option 2
+                          </option>
                         </select>
                       </div>
                       <div className="col-md-6">
                         <div className="form-group">
-                          <label>VAT Number</label>{" "}
+                          <label>VAT Number</label>
                           <input
                             className="form-control"
-                            placeholder="687868788"
+                            placeholder={user.vatNumber}
                             type="text"
                           />
                         </div>
@@ -132,42 +210,20 @@ class EditProfile extends Component {
                     <div className="row">
                       <div className="col-md-6">
                         <div className="form-group">
-                          <label>Trading as</label>{" "}
+                          <label>Trading as</label>
                           <input
                             className="form-control"
-                            placeholder="Mobile Phone"
+                            placeholder={user.tradingAs}
                             type="text"
                           />
                         </div>
                       </div>
                       <div className="col-md-6">
                         <div className="form-group">
-                          <label>Website</label>{" "}
+                          <label>Website</label>
                           <input
                             className="form-control"
-                            placeholder="https://www.hamod.com"
-                            type="text"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="row">
-                      <div className="col-md-6">
-                        <div className="form-group">
-                          <label>Physical Address</label>{" "}
-                          <input
-                            className="form-control"
-                            placeholder="Mall Road 7878 Hamilton"
-                            type="text"
-                          />
-                        </div>
-                      </div>
-                      <div className="col-md-6">
-                        <div className="form-group">
-                          <label>Postal Address</label>{" "}
-                          <input
-                            className="form-control"
-                            placeholder="Mall Road 7878 Hamilton"
+                            placeholder={user.website}
                             type="text"
                           />
                         </div>
@@ -176,20 +232,42 @@ class EditProfile extends Component {
                     <div className="row">
                       <div className="col-md-6">
                         <div className="form-group">
-                          <label>Contact Person</label>{" "}
+                          <label>Physical Address</label>
                           <input
                             className="form-control"
-                            placeholder="Mo Danish"
+                            placeholder={user.physicalAddress}
                             type="text"
                           />
                         </div>
                       </div>
                       <div className="col-md-6">
                         <div className="form-group">
-                          <label>Contact No</label>{" "}
+                          <label>Postal Address</label>
                           <input
                             className="form-control"
-                            placeholder="+678 766 7676 77"
+                            placeholder={user.postalAddress}
+                            type="text"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-md-6">
+                        <div className="form-group">
+                          <label>Contact Person</label>
+                          <input
+                            className="form-control"
+                            placeholder={user.contactPerson}
+                            type="text"
+                          />
+                        </div>
+                      </div>
+                      <div className="col-md-6">
+                        <div className="form-group">
+                          <label>Contact No</label>
+                          <input
+                            className="form-control"
+                            placeholder={user.contactNo}
                             type="text"
                           />
                         </div>
@@ -237,20 +315,20 @@ class EditProfile extends Component {
                     <div className="row">
                       <div className="col-md-6">
                         <div className="form-group">
-                          <label>Bank Name</label>{" "}
+                          <label>Bank Name</label>
                           <input
                             className="form-control"
-                            placeholder="ICICI Bank"
+                            placeholder={user.bankName}
                             type="text"
                           />
                         </div>
                       </div>
                       <div className="col-md-6">
                         <div className="form-group">
-                          <label>Account No.</label>{" "}
+                          <label>Account No.</label>
                           <input
                             className="form-control"
-                            placeholder="5757576767"
+                            placeholder={user.accountNo}
                             type="text"
                           />
                         </div>
@@ -259,20 +337,20 @@ class EditProfile extends Component {
                     <div className="row">
                       <div className="col-md-6">
                         <div className="form-group">
-                          <label>Account Type</label>{" "}
+                          <label>Account Type</label>
                           <input
                             className="form-control"
-                            placeholder="Current Account"
+                            placeholder={user.accountType}
                             type="text"
                           />
                         </div>
                       </div>
                       <div className="col-md-6">
                         <div className="form-group">
-                          <label>Branch Code</label>{" "}
+                          <label>Branch Code</label>
                           <input
                             className="form-control"
-                            placeholder="ICICI68687"
+                            placeholder={user.branchCode}
                             type="text"
                           />
                         </div>

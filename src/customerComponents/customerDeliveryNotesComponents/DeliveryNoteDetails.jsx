@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import httpService from "../../services/httpService";
-import config from "../../config.json";
+import pad from "../../services/padding";
+
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 const fileDownload = require("js-file-download");
 
 class DeliveryNoteDetails extends Component {
@@ -52,7 +54,6 @@ class DeliveryNoteDetails extends Component {
   };
 
   downloadDeliveryNote = async () => {
-    const { tender } = this.state;
     try {
       const { data } = await httpService.get(
         `${process.env.REACT_APP_APIENDPOINT}/deliveryNote/${this.props.match.params.tenderId}`,
@@ -72,8 +73,8 @@ class DeliveryNoteDetails extends Component {
     return this.state.deliveryNote.tender.itemList.map((item) => {
       srNo++;
       return (
-        <tr role="row">
-          <td>{`000${srNo}`}</td>
+        <tr key={srNo} role="row">
+          <td>{pad(srNo, 3)}</td>
           <td>{item.category}</td>
           <td>{item.name}</td>
           <td>
@@ -194,9 +195,13 @@ class DeliveryNoteDetails extends Component {
                         <div>
                           <label>Download File</label>
                           <span class="tx-medium">
-                            <a onClick={this.downloadDeliveryNote} href="#">
+                            <Link
+                              to="#"
+                              onClick={this.downloadDeliveryNote}
+                              href="#"
+                            >
                               <i class="fa fa-file"></i> Doc File
-                            </a>
+                            </Link>
                           </span>
                         </div>
                       </div>

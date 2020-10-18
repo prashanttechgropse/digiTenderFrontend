@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import httpService from "../../services/httpService";
+import pad from "../../services/padding";
 import { toast } from "react-toastify";
 class CustomerDetails extends Component {
   state = { receiverList: "" };
@@ -26,7 +27,7 @@ class CustomerDetails extends Component {
     return receiverList.map((receiver) => {
       srNo++;
       return (
-        <tr role="row">
+        <tr role="row" key={srNo}>
           <td>{srNo}</td>
           <td>{receiver.name}</td>
           <td>{receiver.physicalAddress}</td>
@@ -39,21 +40,16 @@ class CustomerDetails extends Component {
 
   renderTenderTable = () => {
     let srNo = 0;
-    let styleOfBadge;
+
     let tenderList = this.props.customer.tenders.filter(
       (tender) => tender.isPublished === true
     );
     return tenderList.map((tender) => {
       srNo++;
-      if (tender.status === "paid") styleOfBadge = "success";
-      else if (tender.status === "cancelled") styleOfBadge = "danger";
-      else if (tender.status === "awarded") styleOfBadge = "primary";
-      else {
-        styleOfBadge = "warning";
-      }
+
       return (
-        <tr role="row">
-          <td>{`#00${srNo}`}</td>
+        <tr role="row" key={srNo}>
+          <td>{pad(srNo, 3)}</td>
           <td>{tender._id.toString().substring(18, 24)}</td>
           <td>{tender.deliveryDate.toString().substring(0, 10)}</td>
           <td>{tender.budgetAmount}</td>
@@ -245,9 +241,9 @@ class CustomerDetails extends Component {
                               <div>
                                 <label>Customer Document</label>
                                 <span className="tx-medium">
-                                  <a href="#">
+                                  <Link to="#">
                                     <i className="fa fa-file"></i> Download
-                                  </a>
+                                  </Link>
                                 </span>
                               </div>
                             </div>
@@ -314,9 +310,9 @@ class CustomerDetails extends Component {
                               <div>
                                 <label>Attach Documnet</label>{" "}
                                 <span className="tx-medium">
-                                  <a href="#">
+                                  <Link to="#">
                                     <i className="fa fa-file"></i> Download
-                                  </a>
+                                  </Link>
                                 </span>
                               </div>
                             </div>
@@ -359,7 +355,7 @@ class CustomerDetails extends Component {
                                     <th>Action</th>
                                   </tr>
                                 </thead>
-                                <tbody>{this.renderTenderTable()} </tbody>
+                                <tbody>{this.renderTenderTable()}</tbody>
                               </table>
                             </div>
                           </div>
@@ -403,7 +399,6 @@ class CustomerDetails extends Component {
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  {" "}
                                   <tr role="row">
                                     <td>#1001</td>
                                     <td>Hamid Ansari</td>
@@ -510,7 +505,7 @@ class CustomerDetails extends Component {
                                       <th>contact Number</th>
                                     </tr>
                                   </thead>
-                                  <tbody>{this.renderReceiverList()} </tbody>
+                                  <tbody>{this.renderReceiverList()}</tbody>
                                 </table>
                               ) : (
                                 <h1>no Receiver</h1>

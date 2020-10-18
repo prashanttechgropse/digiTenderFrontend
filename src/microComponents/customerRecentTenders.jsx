@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import pad from "../services/padding";
 class RecentlyAddedTenders extends Component {
   state = {};
 
@@ -21,7 +22,7 @@ class RecentlyAddedTenders extends Component {
       }
       return (
         <tr role="row" key={srNo}>
-          <td>{`#000${srNo}`}</td>
+          <td>{pad(srNo, 3)}</td>
           <td>
             <Link to={`/${this.props.profileType}/tenderDetails/${tender._id}`}>
               {tender._id.toString().substring(18, 24)}

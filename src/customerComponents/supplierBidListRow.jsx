@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import httpService from "../services/httpService";
-import config from ".././config.json";
+
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 
@@ -28,7 +28,7 @@ class SupplierBidListRow extends Component {
       <tr role="row">
         <td>{`#000${index + 1}`}</td>
         <td>
-          <a>{bid.createdBy._id.toString().substring(18, 24)}</a>
+          <Link to="#">{bid.createdBy._id.toString().substring(18, 24)}</Link>
         </td>
         <td>{bid.createdBy.firstName}</td>
         <td>{`${bid.totalAmount}.00 USD`}</td>

@@ -4,12 +4,12 @@ class BidItemListRow extends Component {
   render() {
     const { item, index } = this.props;
     return (
-      <tr role="row">
+      <tr key={index} role="row">
         <td>{`000${index + 1}`}</td>
         <td>{item.category}</td>
         <td>{item.name}</td>
         <td>
-          <span class="badge badge-primary f-14">
+          <span className="badge badge-primary f-14">
             {`${item.quantity} ${item.unitOfMeasure}`}
           </span>
         </td>

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import RecentlyAddedTenders from "../microComponents/customerRecentTenders";
 import httpService from "../services/httpService";
 import { toast } from "react-toastify";
-import config from "../config.json";
+
 class ReceiverDashboardMainContent extends Component {
   state = {
     receiver: null,

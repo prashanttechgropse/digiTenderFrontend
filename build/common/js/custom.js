@@ -48,18 +48,7 @@ $(function() {
 		}
 	})
 
-	// ______________ RATING STAR
-	var ratingOptions = {
-		selectors: {
-			starsSelector: '.rating-stars',
-			starSelector: '.rating-star',
-			starActiveClass: 'is--active',
-			starHoverClass: 'is--hover',
-			starNoHoverClass: 'is--no-hover',
-			targetFormElementSelector: '.rating-value'
-		}
-	};
-	$(".rating-stars").ratingStars(ratingOptions);
+
 	
 	
 	// ______________Cover Image
@@ -248,24 +237,7 @@ $(function() {
 			}
 		});
 	});
-	
-	// Enable Eva-icons with SVG markup
-	eva.replace();
-	
-	
-	// ______________Horizontal-menu Active Class
-	$(document).ready(function() {
-		$(".horizontalMenu-list li a").each(function() {
-			var pageUrl = window.location.href.split(/[?#]/)[0];
-			if (this.href == pageUrl) {
-				$(this).addClass("active");
-				$(this).parent().addClass("active"); // add active to li of the current link
-				$(this).parent().parent().prev().addClass("active"); // add active class to an anchor
-				$(this).parent().parent().prev().click(); // click the item to make it drop
-			}
-		});
-	});
-	
+
 	
 	// ______________Active Class
 	$(document).ready(function() {

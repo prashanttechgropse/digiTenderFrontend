@@ -1,14 +1,15 @@
 import React, { Component } from "react";
 import httpService from "../services/httpService";
-import config from "../config.json";
+
 import { toast } from "react-toastify";
 import SupplierBidCards from "./supplierBidCards";
 
 import Joi from "joi-browser";
-import { Link } from "react-router-dom";
+
 import SupplierTenderBidRow from "./supplierTenderBidRow";
 
 import { createBid } from "../services/bidService";
+import { Link } from "react-router-dom";
 
 const fileDownload = require("js-file-download");
 
@@ -237,9 +238,9 @@ class SupllierBid extends Component {
                   onClick={this.toggleTermsConditions}
                 />
                 {" I accept"}
-                <a href="#" onClick={this.downloadTenderTerms}>
+                <Link onClick={this.downloadTenderTerms}>
                   {" Tender Terms & Conditions"}
-                </a>
+                </Link>
               </label>
             </div>
           </div>

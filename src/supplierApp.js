@@ -95,10 +95,10 @@ class SupplierApp extends Component {
               <TermsConditions />;
             </Route>
             <Route exact path="/supplier/myProfile">
-              <MyProfile user={this.state.supplier} />
+              <MyProfile user={this.state.supplier} {...this.props} />
             </Route>
             <Route exact path="/supplier/editProfile">
-              <EditProfile />
+              <EditProfile user={this.state.supplier} />
             </Route>
             <Route exact path="/supplier/changePassword">
               <ChangePassword {...this.props} />

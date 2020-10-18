@@ -1,6 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 import Form from "../macroComponents/form/form";
 import Joi from "joi-browser";
+import pad from "../services/padding";
 class SupplierTenderBidRow extends Form {
   state = {
     formData: {
@@ -29,8 +30,8 @@ class SupplierTenderBidRow extends Form {
   render() {
     const { item, srNo } = this.props;
     return (
-      <tr role="row">
-        <td>{`#000${srNo}`}</td>
+      <tr role="row" key={srNo}>
+        <td>{pad(srNo, 3)}</td>
         <td>{item.category}</td>
         <td>{item.name}</td>
         <td>

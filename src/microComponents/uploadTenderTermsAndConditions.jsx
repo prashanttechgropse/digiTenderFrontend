@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import Form from "../macroComponents/form/form";
 class UploadTenderTermsAndConditions extends Form {
   state = {

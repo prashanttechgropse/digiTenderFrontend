@@ -8,9 +8,12 @@ import UploadTenderTermsAndConditions from "../../microComponents/uploadTenderTe
 import AddTenderDetailsCard from "../../microComponents/addTenderDetailsCard";
 
 import { createTender } from "../../services/tenderService";
+import httpService from "../../services/httpService";
+import { toast } from "react-toastify";
 
 class CustomerCreateTender extends Component {
   state = {
+    itemTypes: [],
     formData: {
       closingDate: "",
       deliveryDate: "",
@@ -39,6 +42,20 @@ class CustomerCreateTender extends Component {
         })
       )
       .min(1),
+  };
+
+  componentDidMount = async () => {
+    try {
+      const { data } = await httpService.get(
+        `${process.env.REACT_APP_APIENDPOINT}/itemTypes`
+      );
+      let itemTypes = await data.itemType.map((itemType) => {
+        return { _id: itemType, name: itemType };
+      });
+      await this.setState({ itemTypes });
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
   updateTenderDetails = (tenderDetails, errors) => {
@@ -154,7 +171,10 @@ class CustomerCreateTender extends Component {
                 this.updateTenderDetails(formData, errors)
               }
             />
-            <AddItemCard addItem={(item) => this.addItem(item)} />
+            <AddItemCard
+              addItem={(item) => this.addItem(item)}
+              itemTypes={this.state.itemTypes}
+            />
             {formData.itemList.length === 0 ? (
               <h2>"no items added yet"</h2>
             ) : (

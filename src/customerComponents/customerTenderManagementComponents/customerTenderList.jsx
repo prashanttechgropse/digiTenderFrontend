@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import TenderListDisplayCard from "../../microComponents/customerTenderListDisplay";
 import httpService from "../../services/httpService";
 import { toast } from "react-toastify";
-import config from "../../config.json";
+
 class CustomerTenderList extends Component {
   state = {
     tenderList: null,

@@ -1,5 +1,6 @@
 import React from "react";
 import _ from "lodash";
+import { Link } from "react-router-dom";
 
 const Pagination = (props) => {
   const { currentPage, totalItemsCount, pageSize } = props;
@@ -10,36 +11,39 @@ const Pagination = (props) => {
   return (
     <nav aria-label="Page navigation example">
       <ul className="pagination">
-        <li class="page-item">
-          <a
-            class="page-link"
+        <li className="page-item">
+          <Link
+            to="#"
+            className="page-link"
             onClick={() =>
               props.onPageChange(
-                currentPage == 1 ? currentPage : currentPage - 1
+                currentPage === 1 ? currentPage : currentPage - 1
               )
             }
           >
             {"<"}
-          </a>
+          </Link>
         </li>
         {totalPages.map((pageNumber) => (
           <li
             key={pageNumber}
             className={
-              pageNumber == currentPage ? "page-item active" : "page-item"
+              pageNumber === currentPage ? "page-item active" : "page-item"
             }
           >
-            <a
+            <Link
+              to="#"
               className="page-link"
               onClick={() => props.onPageChange(pageNumber)}
             >
               {pageNumber}
-            </a>
+            </Link>
           </li>
         ))}
-        <li class="page-item">
-          <a
-            class="page-link"
+        <li className="page-item">
+          <Link
+            to="#"
+            className="page-link"
             onClick={() =>
               props.onPageChange(
                 currentPage !== totalPages.length
@@ -49,7 +53,7 @@ const Pagination = (props) => {
             }
           >
             {">"}
-          </a>
+          </Link>
         </li>
       </ul>
     </nav>

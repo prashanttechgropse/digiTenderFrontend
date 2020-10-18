@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import * as tenderService from "../../services/tenderService";
 import SupplierBidListForTender from "../supplierBidListForTender";
 import httpService from "../../services/httpService";
+import pad from "../../services/padding";
 import { toast } from "react-toastify";
-import config from "../../config.json";
+import { Link } from "react-router-dom";
 
 class TenderDetails extends Component {
   state = { tender: null };
@@ -37,8 +38,8 @@ class TenderDetails extends Component {
     return this.state.tender.itemList.map((item) => {
       srNo++;
       return (
-        <tr role="row">
-          <td>{`#Q000${srNo}`}</td>
+        <tr key={srNo} role="row">
+          <td>{pad(srNo, 3)}</td>
           <td>{item.category}</td>
           <td>{item.name}</td>
           <td>
@@ -55,21 +56,28 @@ class TenderDetails extends Component {
   };
 
   handleCancelTender = async () => {
-    await tenderService.cancelTender(this.state.tender._id);
-    return await this.props.history.push("/customer");
+    const { data } = await tenderService.cancelTender(this.state.tender._id);
+    if (data) {
+      await this.props.history.push("/customer");
+      window.location.reload();
+      return;
+    } else return;
   };
 
   handleCompleteTender = async () => {
-    return await this.props.history.push(
+    await this.props.history.push(
       `/customer/createDeliveryNote/${this.props.match.params.tenderId}/completed`
     );
+    window.location.reload();
+    return;
   };
 
   handleRejectTender = async () => {
-    return await this.props.history.push(
+    await this.props.history.push(
       `/customer/createDeliveryNote/${this.props.match.params.tenderId}/rejected`
     );
     window.location.reload();
+    return;
   };
 
   handlePublishTender = async () => {
@@ -95,37 +103,38 @@ class TenderDetails extends Component {
           href="#publishmodal"
           data-target="#publishmodal"
           data-toggle="modal"
-          class="btn btn-main-primary btn-block"
+          className="btn btn-main-primary btn-block"
         >
-          <i class="fa fa-times"></i> Cancel Tender
+          <i className="fa fa-times"></i> Cancel Tender
         </button>
-        <div class="modal show" id="publishmodal" aria-modal="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content tx-size-sm">
-              <div class="modal-body tx-center pd-y-20 pd-x-20 pl-4 pr-4">
+        <div className="modal show" id="publishmodal" aria-modal="true">
+          <div className="modal-dialog modal-dialog-centered" role="document">
+            <div className="modal-content tx-size-sm">
+              <div className="modal-body tx-center pd-y-20 pd-x-20 pl-4 pr-4">
                 <button
                   aria-label="Close"
-                  class="close"
+                  className="close"
                   data-dismiss="modal"
                   type="button"
                 >
                   <span aria-hidden="true">×</span>
                 </button>
-                <i class="fa fa-times-circle tx-100 tx-danger lh-1 mg-t-20 d-inline-block"></i>
-                <h4 class="tx-danger tx-semibold mg-b-20 mb-2">
+                <i className="fa fa-times-circle tx-100 tx-danger lh-1 mg-t-20 d-inline-block"></i>
+                <h4 className="tx-danger tx-semibold mg-b-20 mb-2">
                   Confirmation..!!
                 </h4>
                 <p>Do you really want to cancel this Tender ?</p>
-                <div class="text-center mt-4 mb-4">
-                  <a
-                    class="btn btn-primary mr-3"
+                <div className="text-center mt-4 mb-4">
+                  <Link
+                    to="#"
+                    className="btn btn-primary mr-3"
                     onClick={this.handleCancelTender}
                   >
                     Yes
-                  </a>
-                  <a class="btn btn-primary" data-dismiss="modal">
+                  </Link>
+                  <Link to="#" className="btn btn-primary" data-dismiss="modal">
                     No
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -145,33 +154,34 @@ class TenderDetails extends Component {
         >
           <i className="fa fa-check"></i> Complete Tender
         </button>
-        <div class="modal show" id="publishmodalComplete" aria-modal="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content tx-size-sm">
-              <div class="modal-body tx-center pd-y-20 pd-x-20 pl-4 pr-4">
+        <div className="modal show" id="publishmodalComplete" aria-modal="true">
+          <div className="modal-dialog modal-dialog-centered" role="document">
+            <div className="modal-content tx-size-sm">
+              <div className="modal-body tx-center pd-y-20 pd-x-20 pl-4 pr-4">
                 <button
                   aria-label="Close"
-                  class="close"
+                  className="close"
                   data-dismiss="modal"
                   type="button"
                 >
                   <span aria-hidden="true">×</span>
                 </button>
-                <i class="fa fa-check-circle tx-100 tx-success lh-1 mg-t-20 d-inline-block"></i>
-                <h4 class="tx-success tx-semibold mg-b-20 mb-2">
+                <i className="fa fa-check-circle tx-100 tx-success lh-1 mg-t-20 d-inline-block"></i>
+                <h4 className="tx-success tx-semibold mg-b-20 mb-2">
                   Confirmation..!!
                 </h4>
                 <p>Do you really want to complete this Tender ?</p>
-                <div class="text-center mt-4 mb-4">
-                  <a
-                    class="btn btn-primary mr-3"
+                <div className="text-center mt-4 mb-4">
+                  <Link
+                    to="#"
+                    className="btn btn-primary mr-3"
                     onClick={this.handleCompleteTender}
                   >
                     Yes
-                  </a>
-                  <a class="btn btn-primary" data-dismiss="modal">
+                  </Link>
+                  <Link to="#" className="btn btn-primary" data-dismiss="modal">
                     No
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -187,37 +197,38 @@ class TenderDetails extends Component {
           href="#publishmodalReject"
           data-target="#publishmodalReject"
           data-toggle="modal"
-          class="btn btn-danger btn-block"
+          className="btn btn-danger btn-block"
         >
-          <i class="fa fa-times"></i> Reject Tender
+          <i className="fa fa-times"></i> Reject Tender
         </button>
-        <div class="modal show" id="publishmodalReject" aria-modal="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content tx-size-sm">
-              <div class="modal-body tx-center pd-y-20 pd-x-20 pl-4 pr-4">
+        <div className="modal show" id="publishmodalReject" aria-modal="true">
+          <div className="modal-dialog modal-dialog-centered" role="document">
+            <div className="modal-content tx-size-sm">
+              <div className="modal-body tx-center pd-y-20 pd-x-20 pl-4 pr-4">
                 <button
                   aria-label="Close"
-                  class="close"
+                  className="close"
                   data-dismiss="modal"
                   type="button"
                 >
                   <span aria-hidden="true">×</span>
                 </button>
-                <i class="fa fa-times-circle tx-100 tx-danger lh-1 mg-t-20 d-inline-block"></i>
-                <h4 class="tx-danger tx-semibold mg-b-20 mb-2">
+                <i className="fa fa-times-circle tx-100 tx-danger lh-1 mg-t-20 d-inline-block"></i>
+                <h4 className="tx-danger tx-semibold mg-b-20 mb-2">
                   Confirmation..!!
                 </h4>
                 <p>Do you really want to Reject this Tender ?</p>
-                <div class="text-center mt-4 mb-4">
-                  <a
-                    class="btn btn-primary mr-3"
+                <div className="text-center mt-4 mb-4">
+                  <Link
+                    to="#"
+                    className="btn btn-primary mr-3"
                     onClick={this.handleRejectTender}
                   >
                     Yes
-                  </a>
-                  <a class="btn btn-primary" data-dismiss="modal">
+                  </Link>
+                  <Link to="#" className="btn btn-primary" data-dismiss="modal">
                     No
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -243,15 +254,15 @@ class TenderDetails extends Component {
           </div>
           <div className="d-flex my-xl-auto right-content">
             {this.props.match.path.includes("customer") &&
-            this.state.tender.status == "inProcess"
+            this.state.tender.status === "inProcess"
               ? this.renderCancelTenderButton()
               : ""}
             {this.props.match.path.includes("customer") &&
-            this.state.tender.status == "awarded"
+            this.state.tender.status === "awarded"
               ? this.renderCompleteTenderButton()
               : ""}
             {this.props.match.path.includes("customer") &&
-            this.state.tender.status == "awarded"
+            this.state.tender.status === "awarded"
               ? this.renderRejectTenderButton()
               : ""}
           </div>
@@ -381,7 +392,7 @@ class TenderDetails extends Component {
             bidClicked={(bidId) => this.props.bidClicked(bidId)}
           />
         ) : null}
-        {tender.status == "pending" ? (
+        {tender.status === "pending" ? (
           <React.Fragment>
             <div className="row">
               <div className="col-md-12">

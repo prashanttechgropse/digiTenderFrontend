@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import Form from "../macroComponents/form/form";
 import Joi from "joi-browser";
 class AddItemCard extends Form {
@@ -21,6 +21,11 @@ class AddItemCard extends Form {
 
   doSubmit = async () => {
     this.props.addItem(this.state.formData);
+    const formData = { ...this.state.formData };
+    for (let item in formData) {
+      formData[item] = "";
+    }
+    this.setState({ formData });
   };
 
   render() {
@@ -31,13 +36,11 @@ class AddItemCard extends Form {
             <div className="main-signup-header">
               <div className="row">
                 <div className="col-md-6">
-                  {this.renderSelect("category", "Select Category", [
-                    {
-                      _id: "mobile",
-                      name: "Mobile",
-                    },
-                    { _id: "laptop", name: "Laptop" },
-                  ])}
+                  {this.renderSelect(
+                    "category",
+                    "Select Category",
+                    this.props.itemTypes
+                  )}
                 </div>
                 <div className="col-md-6">
                   {this.renderInput("name", "Item Name")}

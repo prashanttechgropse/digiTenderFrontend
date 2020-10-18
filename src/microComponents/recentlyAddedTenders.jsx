@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import config from "../config.json";
+
 import httpService from "../services/httpService";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
-
+import pad from "../services/padding";
 class RecentlyAddedTenders extends Component {
   state = { tenders: "" };
 
@@ -37,11 +37,11 @@ class RecentlyAddedTenders extends Component {
       }
       return (
         <tr role="row" key={srNo}>
-          <td>{`#000${srNo}`}</td>
+          <td>{pad(srNo, 3)}</td>
           <td>
             <Link
               to={
-                tender.status == "inProcess"
+                tender.status === "inProcess"
                   ? `/supplier/tenderDetails/${tender._id}`
                   : `/supplier/myBidDetails/${tender._id}`
               }

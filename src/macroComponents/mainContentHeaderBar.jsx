@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import SearchBar from "../microComponents/searchBar";
 import ProfileDropDown from "../microComponents/profileDropDown";
 import SideBarToggleButton from "../microComponents/sideBarToggleButton";
+import { Link } from "react-router-dom";
 class MainContentHeaderBar extends Component {
   state = {};
   render() {
@@ -15,7 +16,7 @@ class MainContentHeaderBar extends Component {
             </div>
           </div>
           <div className="main-header-right">
-            <div className="nav nav-item navbar-nav-right ml-auto">
+            <div className="nav nav-item navbar-nav-right ml-auto ">
               <div className="nav-link" id="bs-example-navbar-collapse-1">
                 <form className="navbar-form" role="search">
                   <div className="input-group">
@@ -37,7 +38,7 @@ class MainContentHeaderBar extends Component {
                 </form>
               </div>
               <div className="nav-item full-screen fullscreen-button">
-                <a className="new nav-link full-screen-link" href="#">
+                <Link className="new nav-link full-screen-link" to="#">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="header-icon-svgs"
@@ -50,7 +51,7 @@ class MainContentHeaderBar extends Component {
                   >
                     <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
                   </svg>
-                </a>
+                </Link>
               </div>
               <ProfileDropDown user={this.props.user} />
             </div>

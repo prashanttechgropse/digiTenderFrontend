@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import httpService from "../../services/httpService";
-import config from "../../config.json";
+import pad from "../../services/padding";
+
 import { toast } from "react-toastify";
 import Pagination from "../../microComponents/pagination";
 import { paginate } from "../../utilities/paginate";
@@ -64,11 +65,11 @@ class TenderList extends Component {
 
       return (
         <tr role="row" key={srNo}>
-          <td>{`#000${srNo}`}</td>
+          <td>{pad(srNo, 3)}</td>
           <td>
             <Link
               to={
-                tender.status == "inProcess"
+                tender.status === "inProcess"
                   ? `/supplier/tenderDetails/${tender._id}`
                   : `/supplier/myBidDetails/${tender._id}`
               }

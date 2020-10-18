@@ -20,9 +20,7 @@ class ResetPassword extends Form {
   };
 
   doSubmit = async () => {
-    const { data, error } = await registerServices.resetPassword(
-      this.state.formData
-    );
+    const { data } = await registerServices.resetPassword(this.state.formData);
     if (data) {
       this.props.history.replace(`/login`);
     }

@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import Label from "./profileLabels";
+import { Link } from "react-router-dom";
+
 class SecondaryUserMyProfile extends Component {
   state = {};
   render() {
@@ -17,13 +19,13 @@ class SecondaryUserMyProfile extends Component {
           </div>
           <div className="d-flex my-xl-auto right-content">
             <div className="pr-1 mb-3 mb-xl-0">
-              <a
+              <Link
                 onClick={() => this.props.onClick("editProfile")}
                 type="button"
                 className="btn btn-primary "
               >
                 <i className="fa fa-edit"></i> Edit Profile
-              </a>
+              </Link>
             </div>
           </div>
         </div>

@@ -3055,12 +3055,22 @@ a.badge-dark.focus {
     border: 1px solid #000;
   }
 }
+.no-data-found {
+  color: #8e8e8e;
+  margin-top: 100px;
+  text-align: center;
+  font-size: 26px;
+  text-transform: capitalize;
+}
 
 .breadcrumb-header {
   display: flex;
-  margin-top: 24px;
+  margin-top: 80px;
   margin-bottom: 24px;
   width: 100%;
+}
+.jumps-prevent {
+  padding-top: 0px !important;
 }
 .breadcrumb-header .breadcrumb {
   background: transparent !important;
@@ -27545,7 +27555,7 @@ video {
 
 @media (min-width: 992px) {
   .main-content {
-    padding-top: 60px !important;
+    padding-top: 0 !important;
     margin-left: 240px;
   }
   .main-body.main-sidebar-hide .main-content {
@@ -73417,4 +73427,9 @@ a.text-dark:focus {
 }
 .detail-icons:hover {
   color: #ffffff;
+}
+
+.digi-toggleprofile:hover .digi-dropDown {
+  display: block;
+  top: 58px;
 }

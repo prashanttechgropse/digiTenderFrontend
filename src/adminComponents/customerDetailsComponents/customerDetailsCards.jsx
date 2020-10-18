@@ -19,8 +19,7 @@ class CutomerDetailsCards extends Component {
                     </h4>
                   </div>
                   <span className="float-right my-auto ml-auto">
-                    {" "}
-                    <i className="fa fa-user text-white f-24"></i>{" "}
+                    <i className="fa fa-user text-white f-24"></i>
                   </span>
                 </div>
               </div>
@@ -34,18 +33,17 @@ class CutomerDetailsCards extends Component {
           <div className="card overflow-hidden sales-card bg-danger-gradient">
             <div className="pl-3 pt-3 pr-3 pb-2 pt-0">
               <div className="">
-                <h6 className="mb-3 tx-12 text-white">Number Of Reveiver</h6>
+                <h6 className="mb-3 tx-12 text-white">Number Of Receiver</h6>
               </div>
               <div className="pb-0 mt-0">
                 <div className="d-flex">
                   <div className="">
                     <h4 className="tx-20 font-weight-bold mb-1 text-white">
-                      5 Reveiver
+                      {customer.receivers.length}
                     </h4>
                   </div>
                   <span className="float-right my-auto ml-auto">
-                    {" "}
-                    <i className="fa fa-users text-white f-24"></i>{" "}
+                    <i className="fa fa-users text-white f-24"></i>
                   </span>
                 </div>
               </div>
@@ -69,8 +67,7 @@ class CutomerDetailsCards extends Component {
                     </h4>
                   </div>
                   <span className="float-right my-auto ml-auto">
-                    {" "}
-                    <i className="fa fa-file text-white  f-24"></i>{" "}
+                    <i className="fa fa-file text-white  f-24"></i>
                   </span>
                 </div>
               </div>
@@ -94,8 +91,7 @@ class CutomerDetailsCards extends Component {
                     </h4>
                   </div>
                   <span className="float-right my-auto ml-auto">
-                    {" "}
-                    <i className="fa fa-money text-white f-24"></i>{" "}
+                    <i className="fa fa-money text-white f-24"></i>
                   </span>
                 </div>
               </div>

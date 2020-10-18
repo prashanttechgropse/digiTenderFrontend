@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Pagination from "./pagination";
 import { paginate } from "../utilities/paginate";
+import pad from "../services/padding";
 class TenderListDisplayCard extends Component {
   state = {
     displayTenderList: null,
@@ -43,8 +44,8 @@ class TenderListDisplayCard extends Component {
         styleOfBadge = "warning";
       }
       return (
-        <tr role="row">
-          <td>{`#000${srNo}`}</td>
+        <tr role="row" key={srNo}>
+          <td>{pad(srNo, 3)}</td>
           <td>
             <Link to={`/${this.props.profileType}/tenderDetails/${tender._id}`}>
               {tender._id.toString().substring(18, 24)}

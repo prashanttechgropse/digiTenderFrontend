@@ -5,12 +5,12 @@ class SideBarToggleButton extends Component {
   render() {
     return (
       <div className="app-sidebar__toggle" data-toggle="sidebar">
-        <a className="open-toggle">
+        <Link to="#" className="open-toggle">
           <i className="header-icon fa fa-align-left"></i>
-        </a>
-        <a className="close-toggle">
+        </Link>
+        <Link to="#" className="close-toggle">
           <i className="header-icons fa fa-times"></i>
-        </a>
+        </Link>
       </div>
     );
   }

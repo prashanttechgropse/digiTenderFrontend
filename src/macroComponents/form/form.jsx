@@ -96,13 +96,16 @@ class Form extends Component {
   renderButton = (
     label,
     handleSubmit,
-    buttonClassName = "btn btn-main-primary btn-block"
+    buttonClassName = "btn btn-main-primary btn-block",
+    disabled = this.validateOnSubmit,
+    name = "default"
   ) => {
     return (
       <button
         className={buttonClassName}
-        disabled={this.validateOnSubmit()}
+        disabled={disabled()}
         onClick={handleSubmit}
+        name={name}
       >
         {label}
       </button>

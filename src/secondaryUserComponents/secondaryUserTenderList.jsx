@@ -35,8 +35,8 @@ class SecondaryUserTenderList extends Component {
 
   render() {
     const { tenderList } = this.state;
-    if (tenderList === null || tenderList.length == 0)
-      return <h1>no tenders assigned yet</h1>;
+    if (tenderList === null || tenderList.length === 0)
+      return <h1 className="no-data-found">no tenders assigned yet</h1>;
     return (
       <div className="container-fluid">
         <div className="breadcrumb-header justify-content-between">

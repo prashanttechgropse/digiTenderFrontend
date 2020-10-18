@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import Pagination from "../../microComponents/pagination";
 import { paginate } from "../../utilities/paginate";
 import httpService from "../../services/httpService";
-import config from "../../config.json";
+
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
+import pad from "../../services/padding";
 class SupplierTransactionManagement extends Component {
   state = {
     tenderList: null,
@@ -65,8 +66,8 @@ class SupplierTransactionManagement extends Component {
         styleOfBadge = "danger";
       }
       return (
-        <tr role="row">
-          <td>{`000${srNo}`}</td>
+        <tr key={srNo} role="row">
+          <td>{pad(srNo, 3)}</td>
           <td>
             <Link to={`/supplier/tenderDetails/${tender._id}`}>
               {tender._id.toString().substring(18, 24)}

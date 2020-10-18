@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import RecentlyAddedTenders from "../../microComponents/recentlyAddedTenders";
 import httpService from "../../services/httpService";
 import { toast } from "react-toastify";
-import config from "../../config.json";
+
 class SupplierDashboardMainContent extends Component {
   state = {
     supplier: null,

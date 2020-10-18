@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import httpService from "../../services/httpService";
-import config from "../../config.json";
+import pad from "../../services/padding";
+
 import { toast } from "react-toastify";
 import Pagination from "../../microComponents/pagination";
 import { paginate } from "../../utilities/paginate";
@@ -63,6 +64,7 @@ class CustomerReceiverlist extends Component {
             }
           );
         }
+        return null;
       });
       await this.setState({ receiverList });
     } catch (error) {
@@ -78,8 +80,8 @@ class CustomerReceiverlist extends Component {
     return receiverList.map((receiver) => {
       srNo++;
       return (
-        <tr role="row">
-          <td>{`000${srNo}`}</td>
+        <tr key={srNo} role="row">
+          <td>{pad(srNo, 3)}</td>
           <td>{receiver.name}</td>
           <td>{receiver.contactNumber}</td>
           <td>{receiver.postalAddress}</td>
@@ -101,8 +103,8 @@ class CustomerReceiverlist extends Component {
 
   render() {
     if (this.state.receiverList === null) return null;
-    if (this.state.receiverList.length == 0) {
-      return <h1>you dont have any receivers yet</h1>;
+    if (this.state.receiverList.length === 0) {
+      return <h1 className="no-data-found">you dont have any receivers yet</h1>;
     }
     return (
       <div className="container-fluid">

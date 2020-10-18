@@ -1,8 +1,7 @@
 import React from "react";
 import Form from "./form/form";
 import Joi from "joi-browser";
-import config from "../config.json";
-import { toast } from "react-toastify";
+
 import * as registerServices from "../services/registerServices";
 import { Link } from "react-router-dom";
 class ForgotPassword extends Form {

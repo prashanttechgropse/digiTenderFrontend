@@ -1,8 +1,9 @@
 import React from "react";
 import Joi from "joi-browser";
 import * as registerService from "../services/registerServices";
-import { toast } from "react-toastify";
+
 import Form from "../macroComponents/form/form";
+import { Link } from "react-router-dom";
 class SecondaryUserProfileSetup extends Form {
   state = {
     formData: {
@@ -53,13 +54,13 @@ class SecondaryUserProfileSetup extends Form {
                       <div class="col-md-12 col-lg-12 col-xl-12 mx-auto">
                         <div class="card-sigin">
                           <div class="mb-2 d-flex">
-                            <a href="#">
+                            <Link to="#">
                               <img
                                 src="/common/img/logo/logo.png"
                                 class="sign-favicon"
                                 alt="logo"
                               />
-                            </a>
+                            </Link>
                           </div>
                           <div class="card-sigin">
                             <div class="main-signup-header">

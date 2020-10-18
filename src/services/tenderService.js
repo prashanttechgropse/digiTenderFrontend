@@ -54,15 +54,17 @@ export async function acceptTender(reqDetails) {
 
 export async function cancelTender(id) {
   try {
-    const { data } = await httpService.post(
+    const { data, error } = await httpService.post(
       `${process.env.REACT_APP_APIENDPOINT}/customer/cancelTender`,
       {
         tenderId: id,
       }
     );
-    toast.success(data.message);
-    if (!data.message) toast.success(data);
-    return;
+    if (data) {
+      toast.success(data.message);
+      if (!data.message) toast.success(data);
+      return { data: data };
+    } else return { error: error };
   } catch (error) {
     if (error.response) toast.error(error.response.data);
     return;

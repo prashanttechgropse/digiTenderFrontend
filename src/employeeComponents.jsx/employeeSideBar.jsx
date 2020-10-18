@@ -125,7 +125,7 @@ class EmployeeSideBar extends Component {
                   </Link>
                 </li>
                 <li className="slide">
-                  <a
+                  <Link
                     className="side-menu__item"
                     data-toggle="slide"
                     onClick={this.toggleTenderManagement}
@@ -133,7 +133,7 @@ class EmployeeSideBar extends Component {
                     <i className="fa fa-address-book"></i>
                     <span className="side-menu__label">Tender Management</span>
                     <i className="angle fa fa-angle-down"></i>
-                  </a>
+                  </Link>
                   {this.renderTenderManagement()}
                 </li>
                 <li className="slide">
@@ -146,7 +146,7 @@ class EmployeeSideBar extends Component {
                   </Link>
                 </li>
                 <li className="slide">
-                  <a
+                  <Link
                     className="side-menu__item"
                     data-toggle="slide"
                     onClick={this.toggleEmployeeSetting}
@@ -154,7 +154,7 @@ class EmployeeSideBar extends Component {
                     <i className="fa fa-cog"></i>
                     <span className="side-menu__label">Employee Setting</span>
                     <i className="angle fa fa-angle-down"></i>
-                  </a>
+                  </Link>
                   {this.renderEmployeeSetting()}
                 </li>
                 <li className="slide">

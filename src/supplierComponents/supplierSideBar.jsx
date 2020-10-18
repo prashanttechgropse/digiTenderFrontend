@@ -134,7 +134,8 @@ class SupplierSideBar extends Component {
                   </Link>
                 </li>
                 <li className="slide">
-                  <a
+                  <Link
+                    to="#"
                     className="side-menu__item active"
                     data-toggle="slide"
                     onClick={this.toggleTenderManagement}
@@ -142,7 +143,7 @@ class SupplierSideBar extends Component {
                     <i className="fa fa-address-book"></i>
                     <span className="side-menu__label">Tender Management</span>
                     <i className="angle fa fa-angle-down"></i>
-                  </a>
+                  </Link>
                   {this.renderTenderManagement()}
                 </li>
                 <li className="slide">
@@ -155,7 +156,8 @@ class SupplierSideBar extends Component {
                   </Link>
                 </li>
                 <li className="slide">
-                  <a
+                  <Link
+                    to="#"
                     className="side-menu__item"
                     data-toggle="slide"
                     onClick={this.toggleAdminFunctions}
@@ -163,7 +165,7 @@ class SupplierSideBar extends Component {
                     <i className="fa fa-cog"></i>
                     <span className="side-menu__label">Admin Functions</span>
                     <i className="angle fa fa-angle-down"></i>
-                  </a>
+                  </Link>
                   {this.renderAdminFunctions()}
                 </li>
                 <li className="slide">

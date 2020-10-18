@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import httpService from "../services/httpService";
-import config from ".././config.json";
+
 import { toast } from "react-toastify";
 import BidItemListRow from "../microComponents/bidItemList";
 import { acceptTender } from "../services/tenderService";
@@ -38,31 +38,31 @@ class SupplierQuotationDetails extends Component {
     if (bid === null) return null;
     return (
       <React.Fragment>
-        <div class="container-fluid">
-          <div class="breadcrumb-header justify-content-between">
-            <div class="my-auto">
-              <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">Tender</h4>
-                <span class="text-muted mt-1 tx-13 ml-2 mb-0">
+        <div className="container-fluid">
+          <div className="breadcrumb-header justify-content-between">
+            <div className="my-auto">
+              <div className="d-flex">
+                <h4 className="content-title mb-0 my-auto">Tender</h4>
+                <span className="text-muted mt-1 tx-13 ml-2 mb-0">
                   / Supplier Quotation
                 </span>
               </div>
             </div>
           </div>
-          <div class="row row-sm">
-            <div class="col-lg-6 col-xl-4 col-md-6 col-12">
-              <div class="card bg-primary-gradient text-white">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-4">
-                      <div class="icon1 mt-2 text-center">
-                        <i class="fa fa-list tx-30"></i>
+          <div className="row row-sm">
+            <div className="col-lg-6 col-xl-4 col-md-6 col-12">
+              <div className="card bg-primary-gradient text-white">
+                <div className="card-body">
+                  <div className="row">
+                    <div className="col-4">
+                      <div className="icon1 mt-2 text-center">
+                        <i className="fa fa-list tx-30"></i>
                       </div>
                     </div>
-                    <div class="col-8">
-                      <div class="mt-0 text-right">
-                        <span class="text-white">Tender Ref No</span>
-                        <h2 class="text-white mb-0 tx-20">
+                    <div className="col-8">
+                      <div className="mt-0 text-right">
+                        <span className="text-white">Tender Ref No</span>
+                        <h2 className="text-white mb-0 tx-20">
                           {bid.tender._id.toString().substring(18, 24)}
                         </h2>
                       </div>
@@ -71,19 +71,19 @@ class SupplierQuotationDetails extends Component {
                 </div>
               </div>
             </div>
-            <div class="col-lg-6 col-xl-4 col-md-6 col-12">
-              <div class="card bg-danger-gradient text-white">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-4">
-                      <div class="icon1 mt-2 text-center">
-                        <i class="fa fa-calendar tx-30"></i>
+            <div className="col-lg-6 col-xl-4 col-md-6 col-12">
+              <div className="card bg-danger-gradient text-white">
+                <div className="card-body">
+                  <div className="row">
+                    <div className="col-4">
+                      <div className="icon1 mt-2 text-center">
+                        <i className="fa fa-calendar tx-30"></i>
                       </div>
                     </div>
-                    <div class="col-8">
-                      <div class="mt-0 text-right">
-                        <span class="text-white">Closing Date</span>
-                        <h2 class="text-white mb-0 tx-20">
+                    <div className="col-8">
+                      <div className="mt-0 text-right">
+                        <span className="text-white">Closing Date</span>
+                        <h2 className="text-white mb-0 tx-20">
                           {bid.tender.closingDate.toString().substring(0, 10)}
                         </h2>
                       </div>
@@ -92,19 +92,19 @@ class SupplierQuotationDetails extends Component {
                 </div>
               </div>
             </div>
-            <div class="col-lg-6 col-xl-4 col-md-6 col-12">
-              <div class="card bg-warning-gradient text-white">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-4">
-                      <div class="icon1 mt-2 text-center">
-                        <i class="fa fa-map-marker tx-30"></i>
+            <div className="col-lg-6 col-xl-4 col-md-6 col-12">
+              <div className="card bg-warning-gradient text-white">
+                <div className="card-body">
+                  <div className="row">
+                    <div className="col-4">
+                      <div className="icon1 mt-2 text-center">
+                        <i className="fa fa-map-marker tx-30"></i>
                       </div>
                     </div>
-                    <div class="col-8">
-                      <div class="mt-0 text-right">
-                        <span class="text-white">Delivery Location</span>
-                        <h2 class="text-white mb-0 tx-20">
+                    <div className="col-8">
+                      <div className="mt-0 text-right">
+                        <span className="text-white">Delivery Location</span>
+                        <h2 className="text-white mb-0 tx-20">
                           {bid.tender.deliveryLocation}
                         </h2>
                       </div>
@@ -113,19 +113,19 @@ class SupplierQuotationDetails extends Component {
                 </div>
               </div>
             </div>
-            <div class="col-lg-6 col-xl-4 col-md-6 col-12">
-              <div class="card bg-success-gradient text-white">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-4">
-                      <div class="icon1 mt-2 text-center">
-                        <i class="fa fa-user tx-30"></i>
+            <div className="col-lg-6 col-xl-4 col-md-6 col-12">
+              <div className="card bg-success-gradient text-white">
+                <div className="card-body">
+                  <div className="row">
+                    <div className="col-4">
+                      <div className="icon1 mt-2 text-center">
+                        <i className="fa fa-user tx-30"></i>
                       </div>
                     </div>
-                    <div class="col-8">
-                      <div class="mt-0 text-right">
-                        <span class="text-white">Supplier Name</span>
-                        <h2 class="text-white mb-0 tx-20">
+                    <div className="col-8">
+                      <div className="mt-0 text-right">
+                        <span className="text-white">Supplier Name</span>
+                        <h2 className="text-white mb-0 tx-20">
                           {bid.createdBy.firstName}
                         </h2>
                       </div>
@@ -134,19 +134,19 @@ class SupplierQuotationDetails extends Component {
                 </div>
               </div>
             </div>
-            <div class="col-lg-6 col-xl-4 col-md-6 col-12">
-              <div class="card bg-purple-gradient text-white">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-4">
-                      <div class="icon1 mt-2 text-center">
-                        <i class="fa fa-phone tx-30"></i>
+            <div className="col-lg-6 col-xl-4 col-md-6 col-12">
+              <div className="card bg-purple-gradient text-white">
+                <div className="card-body">
+                  <div className="row">
+                    <div className="col-4">
+                      <div className="icon1 mt-2 text-center">
+                        <i className="fa fa-phone tx-30"></i>
                       </div>
                     </div>
-                    <div class="col-8">
-                      <div class="mt-0 text-right">
-                        <span class="text-white">Supplier Contact</span>
-                        <h2 class="text-white mb-0 tx-20">
+                    <div className="col-8">
+                      <div className="mt-0 text-right">
+                        <span className="text-white">Supplier Contact</span>
+                        <h2 className="text-white mb-0 tx-20">
                           {bid.createdBy.contactNumber}
                         </h2>
                       </div>
@@ -157,30 +157,30 @@ class SupplierQuotationDetails extends Component {
             </div>
           </div>
 
-          <div class="row row-sm">
-            <div class="col-xl-12">
-              <div class="card">
-                <div class="card-header pb-0">
-                  <div class="d-flex justify-content-between">
-                    <h4 class="card-title mg-b-0 datatable-link">
+          <div className="row row-sm">
+            <div className="col-xl-12">
+              <div className="card">
+                <div className="card-header pb-0">
+                  <div className="d-flex justify-content-between">
+                    <h4 className="card-title mg-b-0 datatable-link">
                       Suppliers Quotation For Tender
                     </h4>
                   </div>
-                  <p class="tx-12 tx-gray-500 mb-2">
+                  <p className="tx-12 tx-gray-500 mb-2">
                     Lorem Ipsum is simply dummy text of the printing and
                     typesetting industry.
                   </p>
                 </div>
-                <div class="card-body">
-                  <div class="table-responsive">
+                <div className="card-body">
+                  <div className="table-responsive">
                     <div
                       id="example1_wrapper"
-                      class="dataTables_wrapper dt-bootstrap4"
+                      className="dataTables_wrapper dt-bootstrap4"
                     >
-                      <div class="row">
-                        <div class="col-sm-12">
+                      <div className="row">
+                        <div className="col-sm-12">
                           <table
-                            class="table text-md-nowrap dataTable"
+                            className="table text-md-nowrap dataTable"
                             id="example1"
                           >
                             <thead>
@@ -214,16 +214,16 @@ class SupplierQuotationDetails extends Component {
             </div>
 
             {bid.tender.status === "inProcess" ? (
-              <div class="col-lg-12 col-md-12">
-                <div class="card" id="button33">
-                  <div class="card-body">
-                    <div class="text-wrap">
-                      <div class="row">
-                        <div class="col-sm-12 col-md-12">
+              <div className="col-lg-12 col-md-12">
+                <div className="card" id="button33">
+                  <div className="card-body">
+                    <div className="text-wrap">
+                      <div className="row">
+                        <div className="col-sm-12 col-md-12">
                           <button
                             data-target="#tenderaccept"
                             data-toggle="modal"
-                            class="btn btn-primary-gradient btn-block"
+                            className="btn btn-primary-gradient btn-block"
                             disabled={bid.tender.status !== "inProcess"}
                           >
                             Accept Tender
@@ -238,30 +238,30 @@ class SupplierQuotationDetails extends Component {
               ""
             )}
           </div>
-          <div class="modal" id="tenderaccept">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-              <div class="modal-content tx-size-sm">
-                <div class="modal-body tx-center pd-y-20 pd-x-20">
+          <div className="modal" id="tenderaccept">
+            <div className="modal-dialog modal-dialog-centered" role="document">
+              <div className="modal-content tx-size-sm">
+                <div className="modal-body tx-center pd-y-20 pd-x-20">
                   <button
                     aria-label="Close"
-                    class="close"
+                    className="close"
                     data-dismiss="modal"
                     type="button"
                   >
                     <span aria-hidden="true">×</span>
                   </button>{" "}
-                  <i class="fa fa-check-circle tx-100 tx-orange lh-1 mg-t-20 d-inline-block"></i>
-                  <h4 class="tx-orange tx-semibold mg-b-20">
+                  <i className="fa fa-check-circle tx-100 tx-orange lh-1 mg-t-20 d-inline-block"></i>
+                  <h4 className="tx-orange tx-semibold mg-b-20">
                     Congratulations !
                   </h4>
-                  <p class="mg-b-20 mg-x-20">
+                  <p className="mg-b-20 mg-x-20">
                     There are many variations of passages of Lorem Ipsum
                     available, but the majority have suffered alteration.
                   </p>
                   <button
                     onClick={this.tenderAccept}
                     aria-label="Close"
-                    class="btn ripple btn-success pd-x-25"
+                    className="btn ripple btn-success pd-x-25"
                     data-dismiss="modal"
                     type="button"
                   >

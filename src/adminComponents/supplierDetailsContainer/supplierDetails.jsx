@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import httpService from "../../services/httpService";
+import pad from "../../services/padding";
 import { toast } from "react-toastify";
 
 class SupplierDetails extends Component {
@@ -41,19 +42,14 @@ class SupplierDetails extends Component {
     if (!this.props.supplier.tendersAwarded) return null;
 
     let srNo = 0;
-    let styleOfBadge;
+
     let tenderList = this.props.supplier.tendersAwarded;
     return tenderList.map((tender) => {
       srNo++;
-      if (tender.status === "paid") styleOfBadge = "success";
-      else if (tender.status === "cancelled") styleOfBadge = "danger";
-      else if (tender.status === "awarded") styleOfBadge = "primary";
-      else {
-        styleOfBadge = "warning";
-      }
+
       return (
-        <tr role="row">
-          <td>{`#00${srNo}`}</td>
+        <tr role="row" key={srNo}>
+          <td>{pad(srNo, 3)}</td>
           <td>{tender.createdBy.firstName}</td>
           <td>{tender._id.toString().substring(18, 24)}</td>
           <td>{tender.deliveryDate.toString().substring(0, 10)}</td>
@@ -249,9 +245,9 @@ class SupplierDetails extends Component {
                               <div>
                                 <label>Supplier Documnet</label>{" "}
                                 <span className="tx-medium">
-                                  <a href="#">
+                                  <Link to="#">
                                     <i className="fa fa-file"></i> Download
-                                  </a>
+                                  </Link>
                                 </span>
                               </div>
                             </div>
@@ -334,9 +330,9 @@ class SupplierDetails extends Component {
                               <div>
                                 <label>Attach Documnet</label>{" "}
                                 <span className="tx-medium">
-                                  <a href="#">
+                                  <Link to="#">
                                     <i className="fa fa-file"></i> Download
-                                  </a>
+                                  </Link>
                                 </span>
                               </div>
                             </div>
@@ -431,12 +427,13 @@ class SupplierDetails extends Component {
                                     <td>Mo Danish</td>
                                     <td>$1200</td>
                                     <td>
-                                      <a
+                                      <Link
+                                        to="#"
                                         href="/admin/supplier-payment-detail"
                                         className="detail-icons"
                                       >
                                         <i className="fa fa-eye"></i>
-                                      </a>
+                                      </Link>
                                     </td>
                                   </tr>
                                   <tr role="row">
@@ -447,12 +444,12 @@ class SupplierDetails extends Component {
                                     <td>Mo Danish</td>
                                     <td>$1200</td>
                                     <td>
-                                      <a
-                                        href="/admin/supplier-payment-detail"
+                                      <Link
+                                        to={"/admin/supplier-payment-detail"}
                                         className="detail-icons"
                                       >
                                         <i className="fa fa-eye"></i>
-                                      </a>
+                                      </Link>
                                     </td>
                                   </tr>
                                   <tr role="row">
@@ -463,12 +460,12 @@ class SupplierDetails extends Component {
                                     <td>Mo Danish</td>
                                     <td>$1200</td>
                                     <td>
-                                      <a
-                                        href="/admin/supplier-payment-detail"
+                                      <Link
+                                        to="/admin/supplier-payment-detail"
                                         className="detail-icons"
                                       >
                                         <i className="fa fa-eye"></i>
-                                      </a>
+                                      </Link>
                                     </td>
                                   </tr>
                                   <tr role="row">
@@ -479,12 +476,13 @@ class SupplierDetails extends Component {
                                     <td>Mo Danish</td>
                                     <td>$1200</td>
                                     <td>
-                                      <a
+                                      <Link
+                                        to="#"
                                         href="/admin/supplier-payment-detail"
                                         className="detail-icons"
                                       >
                                         <i className="fa fa-eye"></i>
-                                      </a>
+                                      </Link>
                                     </td>
                                   </tr>
                                 </tbody>

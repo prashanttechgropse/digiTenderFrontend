@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import Form from "../macroComponents/form/form";
 import Joi from "joi-browser";
 import * as registerServices from "../services/registerServices";
@@ -65,9 +65,7 @@ class ChangePassword extends Form {
   };
 
   doSubmit = async () => {
-    const { data, error } = await registerServices.changePassword(
-      this.state.formData
-    );
+    const { data } = await registerServices.changePassword(this.state.formData);
     if (data) {
       this.props.history.replace(`/login`);
     }

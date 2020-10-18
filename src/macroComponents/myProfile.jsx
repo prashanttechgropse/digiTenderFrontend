@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Label from "../microComponents/profileLabels";
+import { Link } from "react-router-dom";
 class MyProfile extends Component {
   state = {};
   render() {
@@ -17,13 +18,14 @@ class MyProfile extends Component {
           </div>
           <div className="d-flex my-xl-auto right-content">
             <div className="pr-1 mb-3 mb-xl-0">
-              <a
-                onClick={() => this.props.onClick("editProfile")}
+              <Link
+                to="#"
+                onClick={() => this.props.history.push(`editProfile`)}
                 type="button"
                 className="btn btn-primary "
               >
                 <i className="fa fa-edit"></i> Edit Profile
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -41,7 +43,7 @@ class MyProfile extends Component {
                       <div className="ml-auto">
                         <h5 className="tx-13">No Of Tenders</h5>
                         <h2 className="mb-0 tx-22 mb-1 mt-1">
-                          {user.profileType == "customer"
+                          {user.profileType === "customer"
                             ? user.details.tenders.length
                             : user.details.tendersAwarded.length}
                         </h2>
@@ -59,12 +61,12 @@ class MyProfile extends Component {
                       </div>
                       <div className="ml-auto">
                         <h5 className="tx-13">{`No Of ${
-                          user.profileType == "customer"
+                          user.profileType === "customer"
                             ? "Receivers"
                             : "Employees"
                         }`}</h5>
                         <h2 className="mb-0 tx-22 mb-1 mt-1">
-                          {user.profileType == "customer"
+                          {user.profileType === "customer"
                             ? user.details.receivers.length
                             : user.details.employees.length}
                         </h2>
@@ -185,7 +187,7 @@ class MyProfile extends Component {
                             />
                             <Label
                               name="Website"
-                              value={<a href="">{user.details.website}</a>}
+                              value={<Link to="#">{user.details.website}</Link>}
                             />
                           </div>
                         </div>
@@ -218,18 +220,18 @@ class MyProfile extends Component {
                             <Label
                               name="Document uploaded by Suplier"
                               value={
-                                <a href="">
+                                <Link to="#">
                                   <i className="fa fa-file"></i> Download File
-                                </a>
+                                </Link>
                               }
                             />
 
                             <Label
                               name="VAT Document uploaded by Suplier"
                               value={
-                                <a href="">
+                                <Link to="#">
                                   <i className="fa fa-file"></i> Download File
-                                </a>
+                                </Link>
                               }
                             />
                           </div>
@@ -269,9 +271,9 @@ class MyProfile extends Component {
                             <Label
                               name="Upload Document"
                               value={
-                                <a href="">
+                                <Link to="#">
                                   <i className="fa fa-file"></i> Download File
-                                </a>
+                                </Link>
                               }
                             />
                           </div>

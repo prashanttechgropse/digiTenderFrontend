@@ -1,7 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
 import Form from "./form/form";
 import Joi from "joi-browser";
 import * as registerServices from "../services/registerServices";
+import { Link } from "react-router-dom";
 
 class BankDetails extends Form {
   state = {
@@ -44,6 +45,11 @@ class BankDetails extends Form {
   onFileChange = (event) => {
     // Update the state
     this.setState({ selectedFile: event.target.files[0] });
+    const errors = { ...this.state.errors };
+    if (errors.selectedFile) {
+      delete errors.selectedFile;
+    }
+    this.setState({ errors });
   };
 
   doSubmit = async () => {
@@ -84,13 +90,13 @@ class BankDetails extends Form {
                       <div className="col-md-12 col-lg-12 col-xl-12 mx-auto">
                         <div className="card-sigin">
                           <div className="mb-2 d-flex">
-                            <a href="#">
+                            <Link>
                               <img
                                 src="/common/img/logo/logo.png"
                                 className="sign-favicon"
                                 alt="logo"
                               />
-                            </a>
+                            </Link>
                           </div>
                           <div className="card-sigin">
                             <div className="main-signup-header">
@@ -137,6 +143,11 @@ class BankDetails extends Form {
                                         onChange={this.onFileChange}
                                       />
                                     </div>
+                                    {this.state.errors.selectedFile && (
+                                      <div className="alert alert-danger">
+                                        {this.state.errors.selectedFile}
+                                      </div>
+                                    )}
                                   </div>
                                 </div>
                                 <div className="row">
@@ -198,9 +209,12 @@ class BankDetails extends Form {
               </div>
               <div className="modal-footer">
                 {this.renderButton(
-                  "Go to Home",
+                  "verify",
                   this.handleSubmit,
-                  "btn ripple btn-primary btn-block"
+                  "btn ripple btn-primary btn-block",
+                  () => {
+                    return false;
+                  }
                 )}
               </div>
             </div>

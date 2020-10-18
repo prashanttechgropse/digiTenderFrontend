@@ -59,7 +59,7 @@ class ProfileSetup extends Form {
       );
       let organisationTypes = await data.organisationType.map(
         (organisationType) => {
-          return { id: organisationType, name: organisationType };
+          return { _id: organisationType, name: organisationType };
         }
       );
       await this.setState({ organisationTypes });
@@ -72,7 +72,11 @@ class ProfileSetup extends Form {
     let acceptTermsConditions = this.state.acceptTermsConditions;
     acceptTermsConditions = !acceptTermsConditions;
     await this.setState({ acceptTermsConditions });
-    console.log(this.state.acceptTermsConditions);
+    const errors = { ...this.state.errors };
+    if (errors.acceptTermsConditions) {
+      delete errors.acceptTermsConditions;
+    }
+    this.setState({ errors });
   };
 
   validateOnSubmit = () => {
@@ -94,7 +98,7 @@ class ProfileSetup extends Form {
     }
     if (this.state.selectedFile1 === null) {
       const errors = {};
-      errors.selectedFile1 = "upload file";
+      errors.selectedFile1 = "file is not yet uploaded";
       return errors;
     }
     if (this.state.acceptTermsConditions === false) {
@@ -107,6 +111,11 @@ class ProfileSetup extends Form {
   onFileChange1 = (event) => {
     // Update the state
     this.setState({ selectedFile1: event.target.files[0] });
+    const errors = { ...this.state.errors };
+    if (errors.selectedFile1) {
+      delete errors.selectedFile1;
+    }
+    this.setState({ errors });
   };
   onFileChange2 = (event) => {
     // Update the state
@@ -149,35 +158,35 @@ class ProfileSetup extends Form {
   render() {
     if (this.state.organisationTypes === "") return null;
     return (
-      <div class="page">
-        <div class="container-fluid">
-          <div class="row no-gutter">
-            <div class="col-md-12 col-lg-12 col-xl-12 bg-white">
-              <div class="login d-flex align-items-center py-2 p-top-50">
-                <div class="container p-0">
-                  <div class="row">
-                    <div class="col-md-12 col-lg-12 col-xl-12 mx-auto">
-                      <div class="card-sigin">
-                        <div class="mb-2 d-flex">
+      <div className="page">
+        <div className="container-fluid">
+          <div className="row no-gutter">
+            <div className="col-md-12 col-lg-12 col-xl-12 bg-white">
+              <div className="login d-flex align-items-center py-2 p-top-50">
+                <div className="container p-0">
+                  <div className="row">
+                    <div className="col-md-12 col-lg-12 col-xl-12 mx-auto">
+                      <div className="card-sigin">
+                        <div className="mb-2 d-flex">
                           <Link to="#">
                             <img
                               src="/common/img/logo/logo.png"
-                              class="sign-favicon"
+                              className="sign-favicon"
                               alt="logo"
                             />
                           </Link>
                         </div>
-                        <div class="card-sigin">
-                          <div class="main-signup-header">
+                        <div className="card-sigin">
+                          <div className="main-signup-header">
                             <h2>Profile Setup</h2>
-                            <h5 class="font-weight-semibold mb-4">
+                            <h5 className="font-weight-semibold mb-4">
                               Lorem Ipsum is simply dummy text of the printing
                               and typesetting industry. Lorem Ipsum has been the
                               industry's standard dummy text
                             </h5>
                             <form>
-                              <div class="row">
-                                <div class="col-md-6">
+                              <div className="row">
+                                <div className="col-md-6">
                                   {this.renderSelect(
                                     "profileType",
                                     "Profile Type",
@@ -187,7 +196,7 @@ class ProfileSetup extends Form {
                                     ]
                                   )}
                                 </div>
-                                <div class="col-md-6">
+                                <div className="col-md-6">
                                   {this.renderSelect(
                                     "organisationType",
                                     "Organisation Type",
@@ -195,41 +204,41 @@ class ProfileSetup extends Form {
                                   )}
                                 </div>
                               </div>
-                              <div class="row">
-                                <div class="col-md-6">
+                              <div className="row">
+                                <div className="col-md-6">
                                   {this.renderInput("firstName", "First Name")}
                                 </div>
-                                <div class="col-md-6">
+                                <div className="col-md-6">
                                   {this.renderInput("lastName", "Last Name")}
                                 </div>
                               </div>
-                              <div class="row">
-                                <div class="col-md-6">
+                              <div className="row">
+                                <div className="col-md-6">
                                   {this.renderInput("idNumber", "Id Number")}
                                 </div>
-                                <div class="col-md-6">
+                                <div className="col-md-6">
                                   {this.renderInput(
                                     "contactNumber",
                                     "Contact Number"
                                   )}
                                 </div>
                               </div>
-                              <div class="row">
-                                <div class="col-md-6">
+                              <div className="row">
+                                <div className="col-md-6">
                                   {this.renderInput(
                                     "companyName",
                                     "Company Name"
                                   )}
                                 </div>
-                                <div class="col-md-6">
+                                <div className="col-md-6">
                                   {this.renderInput(
                                     "entityRegistrationNo",
                                     "Entity Registration No"
                                   )}
                                 </div>
                               </div>
-                              <div class="row">
-                                <div class="col-md-6">
+                              <div className="row">
+                                <div className="col-md-6">
                                   {this.renderSelect(
                                     "vatRegistration",
                                     "Vat Registration",
@@ -239,73 +248,81 @@ class ProfileSetup extends Form {
                                     ]
                                   )}
                                 </div>
-                                <div class="col-md-6">
+                                <div className="col-md-6">
                                   {this.renderInput("vatNumber", "Vat Number")}
                                 </div>
                               </div>
-                              <div class="row">
-                                <div class="col-md-6">
+                              <div className="row">
+                                <div className="col-md-6">
                                   {this.renderInput("tradingAs", "Trading As")}
                                 </div>
-                                <div class="col-md-6">
+                                <div className="col-md-6">
                                   {this.renderInput("website", "Website")}
                                 </div>
                               </div>
-                              <div class="row">
-                                <div class="col-md-6">
+                              <div className="row">
+                                <div className="col-md-6">
                                   {this.renderInput(
                                     "physicalAddress",
                                     "Physical Address"
                                   )}
                                 </div>
-                                <div class="col-md-6">
+                                <div className="col-md-6">
                                   {this.renderInput(
                                     "postalAddress",
                                     "Postal Address"
                                   )}
                                 </div>
                               </div>
-                              <div class="row">
-                                <div class="col-md-6">
+                              <div className="row">
+                                <div className="col-md-6">
                                   {this.renderInput(
                                     "contactPerson",
                                     "Contact Person"
                                   )}
                                 </div>
-                                <div class="col-md-6">
+                                <div className="col-md-6">
                                   {this.renderInput("contactNo", "Contact No")}
                                 </div>
                               </div>
-                              <div class="row">
-                                <div class="col-md-12">
-                                  <div class="form-group">
+                              <div className="row">
+                                <div className="col-md-12">
+                                  <div className="form-group">
                                     <label>File Upload</label>
                                     <input
                                       type="file"
-                                      class="dropify"
+                                      className="dropify"
                                       data-height="200"
                                       onChange={this.onFileChange1}
                                     />
+                                    {this.state.errors.selectedFile1 && (
+                                      <div className="alert alert-danger">
+                                        {this.state.errors.selectedFile1}
+                                      </div>
+                                    )}
                                   </div>
                                 </div>
                               </div>
-                              <div class="row">
-                                <div class="col-md-12">
-                                  <div class="form-group">
+                              <div className="row">
+                                <div className="col-md-12">
+                                  <div className="form-group">
                                     <label>VAT Document (if applicable)</label>
                                     <input
                                       type="file"
-                                      class="dropify"
+                                      className="dropify"
                                       data-height="200"
                                       onChange={this.onFileChange2}
                                     />
                                   </div>
                                 </div>
                               </div>
-                              <div class="row">
-                                <div class="col-md-12">
-                                  <div class="parsley-checkbox" id="cbWrapper">
-                                    <label class="ckbox">
+                              <div className="row">
+                                <div className="col-md-12">
+                                  <div
+                                    className="parsley-checkbox"
+                                    id="cbWrapper"
+                                  >
+                                    <label className="ckbox">
                                       <input
                                         name="browser[]"
                                         type="checkbox"
@@ -316,20 +333,33 @@ class ProfileSetup extends Form {
                                         <Link to="#">Terms and Condition</Link>
                                       </span>
                                     </label>
+                                    {this.state.errors
+                                      .acceptTermsConditions && (
+                                      <div className="alert alert-danger">
+                                        {
+                                          this.state.errors
+                                            .acceptTermsConditions
+                                        }
+                                      </div>
+                                    )}
                                   </div>
                                 </div>
                               </div>
-                              <div class="row">
-                                <div class="col-md-12">
+                              <div className="row">
+                                <div className="col-md-12">
                                   {this.renderButton(
                                     "Save & Next",
-                                    this.handleSubmit
+                                    this.handleSubmit,
+                                    "btn btn-main-primary btn-block",
+                                    () => {
+                                      return false;
+                                    }
                                   )}
                                 </div>
                               </div>
                             </form>
-                            <div class="main-signin-footer mt-5">
-                              <p class="text-center">
+                            <div className="main-signin-footer mt-5">
+                              <p className="text-center">
                                 Already have an account?
                                 <Link to="/login">Sign In</Link>
                               </p>

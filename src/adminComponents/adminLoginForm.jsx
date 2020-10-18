@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import * as registerService from "../services/registerServices";
-import { toast } from "react-toastify";
+
 import Form from "../macroComponents/form/form";
 import Joi from "joi-browser";
 class AdminLogIn extends Form {
@@ -33,39 +33,39 @@ class AdminLogIn extends Form {
 
   render() {
     return (
-      <div class="page">
-        <div class="container-fluid">
-          <div class="row no-gutter">
-            <div class="col-md-6 col-lg-6 col-xl-7 d-none d-md-flex bg-primary-transparent">
-              <div class="row wd-100p mx-auto text-center">
-                <div class="col-md-12 col-lg-12 col-xl-12 my-auto mx-auto wd-100p">
+      <div className="page">
+        <div className="container-fluid">
+          <div className="row no-gutter">
+            <div className="col-md-6 col-lg-6 col-xl-7 d-none d-md-flex bg-primary-transparent">
+              <div className="row wd-100p mx-auto text-center">
+                <div className="col-md-12 col-lg-12 col-xl-12 my-auto mx-auto wd-100p">
                   <img
                     src="/common/img/backgrounds/login.png"
-                    class="my-auto ht-xl-80p wd-md-100p wd-xl-80p mx-auto"
+                    className="my-auto ht-xl-80p wd-md-100p wd-xl-80p mx-auto"
                     alt="logo"
                   />
                 </div>
               </div>
             </div>
-            <div class="col-md-6 col-lg-6 col-xl-5 bg-white">
-              <div class="login d-flex align-items-center py-2">
-                <div class="container p-0">
-                  <div class="row">
-                    <div class="col-md-10 col-lg-10 col-xl-9 mx-auto">
-                      <div class="card-sigin">
-                        <div class="mb-2 d-flex">
-                          <a href="#">
+            <div className="col-md-6 col-lg-6 col-xl-5 bg-white">
+              <div className="login d-flex align-items-center py-2">
+                <div className="container p-0">
+                  <div className="row">
+                    <div className="col-md-10 col-lg-10 col-xl-9 mx-auto">
+                      <div className="card-sigin">
+                        <div className="mb-2 d-flex">
+                          <Link to="#">
                             <img
                               src="/common/img/logo/logo.png"
-                              class="sign-favicon "
+                              className="sign-favicon "
                               alt="logo"
                             />
-                          </a>
+                          </Link>
                         </div>
-                        <div class="card-sigin">
-                          <div class="main-signup-header">
+                        <div className="card-sigin">
+                          <div className="main-signup-header">
                             <h2>Welcome Admin!</h2>
-                            <h5 class="font-weight-semibold mb-4">
+                            <h5 className="font-weight-semibold mb-4">
                               Please sign in to continue.
                             </h5>
                             <form action="/admin/dashboard">
@@ -77,7 +77,7 @@ class AdminLogIn extends Form {
                               )}
                               {this.renderButton("Sign In", this.handleSubmit)}
                             </form>
-                            <div class="main-signin-footer mt-5">
+                            <div className="main-signin-footer mt-5">
                               <p>
                                 <Link to="/forgotPassword">
                                   Forgot password?

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import Form from "../macroComponents/form/form";
 import Joi from "joi-browser";
 class EditTenderDetailsCards extends Form {

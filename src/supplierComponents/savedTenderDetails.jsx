@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import httpService from "../services/httpService";
-import config from "../config.json";
+
 import { toast } from "react-toastify";
 import SupplierBidCards from "./supplierBidCards";
 
 import Joi from "joi-browser";
 import { Link } from "react-router-dom";
-import SupplierTenderBidRow from "./supplierTenderBidRow";
 
 import { createBid } from "../services/bidService";
 import SupplierSavedTenderDetailsRow from "./supplierSavedTenderDetailsRow";

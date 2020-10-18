@@ -1,17 +1,18 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import pad from "../../services/padding";
 class AdminDashBoardRecentlyAddedCustomers extends Component {
   state = {};
 
   renderCustomerList = () => {
     let srNo = 0;
-    if (this.props.customerList === "") return;
+    if (this.props.customerList.length === 0) return null;
     return this.props.customerList.map((customer) => {
       srNo++;
       if (srNo <= 5) {
         return (
-          <tr role="row">
-            <td>{`#000${srNo}`}</td>
+          <tr role="row" key={srNo}>
+            <td>{pad(srNo, 3)}</td>
             <td>{customer.firstName}</td>
             <td>{customer.entityRegistrationNo}</td>
             <td>{customer.contactNumber}</td>
@@ -29,7 +30,7 @@ class AdminDashBoardRecentlyAddedCustomers extends Component {
             </td>
           </tr>
         );
-      }
+      } else return null;
     });
   };
 
@@ -66,7 +67,7 @@ class AdminDashBoardRecentlyAddedCustomers extends Component {
                             <th>Action</th>
                           </tr>
                         </thead>
-                        <tbody>{this.renderCustomerList()} </tbody>
+                        <tbody>{this.renderCustomerList()}</tbody>
                       </table>
                     </div>
                   </div>

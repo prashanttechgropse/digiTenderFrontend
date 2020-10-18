@@ -65,7 +65,7 @@ class CreateAccountReceiver extends Form {
   };
 
   doSubmit = async () => {
-    const { data, error } = await registerService.createAccountSecondaryUser(
+    const { error } = await registerService.createAccountSecondaryUser(
       this.state.formData
     );
     if (error) return;

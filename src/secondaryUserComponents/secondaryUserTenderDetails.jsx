@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import httpService from "../services/httpService";
-import * as tenderService from "../services/tenderService";
-import { toast } from "react-toastify";
-import config from "../config.json";
 
+import { toast } from "react-toastify";
+
+import pad from "../services/padding";
+import { Link } from "react-router-dom";
 class SecondaryUserTenderDetails extends Component {
   state = { tender: null, profileType: "" };
 
@@ -40,8 +41,8 @@ class SecondaryUserTenderDetails extends Component {
     return this.state.tender.itemList.map((item) => {
       srNo++;
       return (
-        <tr role="row">
-          <td>{`000${srNo}`}</td>
+        <tr role="row" key={srNo}>
+          <td>{pad(srNo, 3)}</td>
           <td>{item.category}</td>
           <td>{item.name}</td>
           <td>
@@ -80,33 +81,34 @@ class SecondaryUserTenderDetails extends Component {
         >
           <i className="fa fa-check"></i> Complete Tender
         </button>
-        <div class="modal show" id="publishmodalComplete" aria-modal="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content tx-size-sm">
-              <div class="modal-body tx-center pd-y-20 pd-x-20 pl-4 pr-4">
+        <div className="modal show" id="publishmodalComplete" aria-modal="true">
+          <div className="modal-dialog modal-dialog-centered" role="document">
+            <div className="modal-content tx-size-sm">
+              <div className="modal-body tx-center pd-y-20 pd-x-20 pl-4 pr-4">
                 <button
                   aria-label="Close"
-                  class="close"
+                  className="close"
                   data-dismiss="modal"
                   type="button"
                 >
                   <span aria-hidden="true">×</span>
                 </button>
-                <i class="fa fa-check-circle tx-100 tx-success lh-1 mg-t-20 d-inline-block"></i>
-                <h4 class="tx-success tx-semibold mg-b-20 mb-2">
+                <i className="fa fa-check-circle tx-100 tx-success lh-1 mg-t-20 d-inline-block"></i>
+                <h4 className="tx-success tx-semibold mg-b-20 mb-2">
                   Confirmation..!!
                 </h4>
                 <p>Do you really want to complete this Tender ?</p>
-                <div class="text-center mt-4 mb-4">
-                  <a
-                    class="btn btn-primary mr-3"
+                <div className="text-center mt-4 mb-4">
+                  <Link
+                    to="#"
+                    className="btn btn-primary mr-3"
                     onClick={this.handleCompleteTender}
                   >
                     Yes
-                  </a>
-                  <a class="btn btn-primary" data-dismiss="modal">
+                  </Link>
+                  <Link to="#" className="btn btn-primary" data-dismiss="modal">
                     No
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -122,37 +124,38 @@ class SecondaryUserTenderDetails extends Component {
           href="#publishmodalReject"
           data-target="#publishmodalReject"
           data-toggle="modal"
-          class="btn btn-danger btn-block"
+          className="btn btn-danger btn-block"
         >
-          <i class="fa fa-times"></i> Reject Tender
+          <i className="fa fa-times"></i> Reject Tender
         </button>
-        <div class="modal show" id="publishmodalReject" aria-modal="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content tx-size-sm">
-              <div class="modal-body tx-center pd-y-20 pd-x-20 pl-4 pr-4">
+        <div className="modal show" id="publishmodalReject" aria-modal="true">
+          <div className="modal-dialog modal-dialog-centered" role="document">
+            <div className="modal-content tx-size-sm">
+              <div className="modal-body tx-center pd-y-20 pd-x-20 pl-4 pr-4">
                 <button
                   aria-label="Close"
-                  class="close"
+                  className="close"
                   data-dismiss="modal"
                   type="button"
                 >
                   <span aria-hidden="true">×</span>
                 </button>
-                <i class="fa fa-times-circle tx-100 tx-danger lh-1 mg-t-20 d-inline-block"></i>
-                <h4 class="tx-danger tx-semibold mg-b-20 mb-2">
+                <i className="fa fa-times-circle tx-100 tx-danger lh-1 mg-t-20 d-inline-block"></i>
+                <h4 className="tx-danger tx-semibold mg-b-20 mb-2">
                   Confirmation..!!
                 </h4>
                 <p>Do you really want to Reject this Tender ?</p>
-                <div class="text-center mt-4 mb-4">
-                  <a
-                    class="btn btn-primary mr-3"
+                <div className="text-center mt-4 mb-4">
+                  <Link
+                    to="#"
+                    className="btn btn-primary mr-3"
                     onClick={this.handleRejectTender}
                   >
                     Yes
-                  </a>
-                  <a class="btn btn-primary" data-dismiss="modal">
+                  </Link>
+                  <Link to="#" className="btn btn-primary" data-dismiss="modal">
                     No
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -177,12 +180,12 @@ class SecondaryUserTenderDetails extends Component {
             </div>
           </div>
           <div className="d-flex my-xl-auto right-content">
-            {this.state.profileType == "receiver" &&
-            this.state.tender.status == "awarded"
+            {this.state.profileType === "receiver" &&
+            this.state.tender.status === "awarded"
               ? this.renderCompleteTenderButton()
               : ""}
-            {this.state.profileType == "receiver" &&
-            this.state.tender.status == "awarded"
+            {this.state.profileType === "receiver" &&
+            this.state.tender.status === "awarded"
               ? this.renderRejectTenderButton()
               : ""}
           </div>

@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import SupplierDetailsCards from "./supplierDetailsCards";
 import SupplierDetails from "./supplierDetails";
 import httpService from "../../services/httpService";
-import config from "../../config.json";
+
 import { toast } from "react-toastify";
 
 class SupplierDetailsContainer extends Component {
@@ -38,7 +38,7 @@ class SupplierDetailsContainer extends Component {
         isApproved = true;
       } else isApproved = false;
       this.setState({ userCurrentStatus: isApproved });
-      const { data, error } = await httpService.post(
+      const { data } = await httpService.post(
         `${process.env.REACT_APP_APIENDPOINT}/admin/userChangeStatus`,
         {
           userId: this.state.supplier.user._id,
@@ -68,10 +68,10 @@ class SupplierDetailsContainer extends Component {
           </div>
         </div>
         <SupplierDetailsCards supplier={this.state.supplier} />
-        <div class="breadcrumb-header justify-content-between">
-          <div class="my-auto">
-            <div class="d-flex">
-              <h4 class="content-title mb-0 my-auto">Status :</h4>
+        <div className="breadcrumb-header justify-content-between">
+          <div className="my-auto">
+            <div className="d-flex">
+              <h4 className="content-title mb-0 my-auto">Status :</h4>
             </div>
           </div>
           <div className="d-flex my-xl-auto right-content">

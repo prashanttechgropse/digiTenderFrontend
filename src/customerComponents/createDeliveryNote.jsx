@@ -1,7 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 import Form from "../macroComponents/form/form";
 import httpService from "../services/httpService";
-import config from "../config.json";
 import { toast } from "react-toastify";
 import Joi from "joi-browser";
 import { createDeliveryNote } from "../services/deliveryNoteService";
@@ -79,100 +78,100 @@ class CreateDeliveryNote extends Form {
   render() {
     const { formData: deliveryNote } = this.state;
     return (
-      <div class="container-fluid">
-        <div class="breadcrumb-header justify-content-between">
-          <div class="my-auto">
-            <div class="d-flex">
-              <h4 class="content-title mb-0 my-auto">Delivery Notes</h4>
-              <span class="text-muted mt-1 tx-13 ml-2 mb-0">
+      <div className="container-fluid">
+        <div className="breadcrumb-header justify-content-between">
+          <div className="my-auto">
+            <div className="d-flex">
+              <h4 className="content-title mb-0 my-auto">Delivery Notes</h4>
+              <span className="text-muted mt-1 tx-13 ml-2 mb-0">
                 / Create Notes
               </span>
             </div>
           </div>
         </div>
 
-        <div class="row row-sm">
-          <div class="col-xl-12">
-            <div class="card">
-              <div class="card-header pb-0">
-                <div class="d-flex justify-content-between">
-                  <h4 class="card-title mg-b-0 datatable-link">
+        <div className="row row-sm">
+          <div className="col-xl-12">
+            <div className="card">
+              <div className="card-header pb-0">
+                <div className="d-flex justify-content-between">
+                  <h4 className="card-title mg-b-0 datatable-link">
                     Tender Detail
                   </h4>
                 </div>
-                <p class="tx-12 tx-gray-500 mb-2">
+                <p className="tx-12 tx-gray-500 mb-2">
                   Lorem Ipsum is simply dummy text of the printing and simply
                   dummy text of the printing and typesetting industry.
                 </p>
               </div>
-              <div class="card-body">
-                <div class="card-sigin">
-                  <div class="main-signup-header">
-                    <div class="row">
-                      <div class="col-md-4">
-                        <div class="form-group">
+              <div className="card-body">
+                <div className="card-sigin">
+                  <div className="main-signup-header">
+                    <div className="row">
+                      <div className="col-md-4">
+                        <div className="form-group">
                           <label>Delivery Note No</label>
                           <input
-                            class="form-control"
+                            className="form-control"
                             type="text"
                             value={deliveryNote.deliveryNoteNo}
-                            readonly
+                            readOnly
                             disabled
                           />
                         </div>
                       </div>
-                      <div class="col-md-4">
-                        <div class="form-group">
+                      <div className="col-md-4">
+                        <div className="form-group">
                           <label>Customer Name</label>
                           <input
-                            class="form-control"
+                            className="form-control"
                             type="text"
                             value={deliveryNote.customerName}
-                            readonly
+                            readOnly
                             disabled
                           />
                         </div>
                       </div>
-                      <div class="col-md-4">
-                        <div class="form-group">
+                      <div className="col-md-4">
+                        <div className="form-group">
                           <label>Supplier Name</label>
                           <input
-                            class="form-control"
+                            className="form-control"
                             type="text"
                             value={deliveryNote.supplierName}
-                            readonly
+                            readOnly
                             disabled
                           />
                         </div>
                       </div>
                     </div>
-                    <div class="row">
-                      <div class="col-md-4">
-                        <div class="form-group">
+                    <div className="row">
+                      <div className="col-md-4">
+                        <div className="form-group">
                           <label>Tender Reference Number</label>
                           <input
-                            class="form-control"
+                            className="form-control"
                             type="text"
                             value={deliveryNote.tenderRefNo}
-                            readonly
+                            readOnly
                             disabled
                           />
                         </div>
                       </div>
-                      <div class="col-md-4">
-                        <div class="form-group">
+                      <div className="col-md-4">
+                        <div className="form-group">
                           <label>Delivery Address</label>
                           <input
-                            class="form-control"
+                            className="form-control"
                             type="text"
                             value={deliveryNote.deliveryLocation}
-                            readonly
+                            readOnly
                             disabled
                           />
                         </div>
                       </div>
-                      <div class="col-md-4">
-                        <div class="form-group">
+                      <div className="col-md-4">
+                        <div className="form-group">
                           {this.renderInput(
                             "deliveryDate",
                             "Delivery Date",
@@ -185,21 +184,23 @@ class CreateDeliveryNote extends Form {
                 </div>
               </div>
             </div>
-            <div class="card">
-              <div class="card-header pb-0">
-                <div class="d-flex justify-content-between">
-                  <h4 class="card-title mg-b-0 datatable-link">Your Notes</h4>
+            <div className="card">
+              <div className="card-header pb-0">
+                <div className="d-flex justify-content-between">
+                  <h4 className="card-title mg-b-0 datatable-link">
+                    Your Notes
+                  </h4>
                 </div>
-                <p class="tx-12 tx-gray-500 mb-2">
+                <p className="tx-12 tx-gray-500 mb-2">
                   Lorem Ipsum is simply dummy text of the printing and simply
                   dummy text of the printing and typesetting industry.
                 </p>
               </div>
-              <div class="card-body">
-                <div class="card-sigin">
-                  <div class="main-signup-header">
-                    <div class="row">
-                      <div class="col-md-6">
+              <div className="card-body">
+                <div className="card-sigin">
+                  <div className="main-signup-header">
+                    <div className="row">
+                      <div className="col-md-6">
                         {this.renderSelect("reason", "Select Reason", [
                           { _id: "All Good", name: "All Good" },
                           {
@@ -210,7 +211,7 @@ class CreateDeliveryNote extends Form {
                           { _id: "other reasons", name: "other reasons " },
                         ])}
                       </div>
-                      <div class="col-md-6">
+                      <div className="col-md-6">
                         {this.renderSelect("rating", "Select Rating", [
                           { _id: 1, name: "1 Rating " },
                           { _id: 2, name: "2 Rating " },
@@ -220,9 +221,9 @@ class CreateDeliveryNote extends Form {
                         ])}
                       </div>
                     </div>
-                    <div class="row">
-                      <div class="col-md-12">
-                        <div class="form-group">
+                    <div className="row">
+                      <div className="col-md-12">
+                        <div className="form-group">
                           {this.renderTextArea("message", "Write Your Messege")}
                         </div>
                       </div>
@@ -231,14 +232,14 @@ class CreateDeliveryNote extends Form {
                 </div>
               </div>
             </div>
-            <div class="card">
-              <div class="card-body">
-                <div class="card-sigin">
-                  <div class="main-signup-header">
-                    <div class="row">
-                      <div class="col-md-12">
+            <div className="card">
+              <div className="card-body">
+                <div className="card-sigin">
+                  <div className="main-signup-header">
+                    <div className="row">
+                      <div className="col-md-12">
                         <button
-                          class="btn btn-warning-gradient btn-block"
+                          className="btn btn-warning-gradient btn-block"
                           disabled={this.validateOnSubmit()}
                           data-target="#publishmodal"
                           data-toggle="modal"
@@ -253,29 +254,29 @@ class CreateDeliveryNote extends Form {
             </div>
           </div>
         </div>
-        <div class="modal" id="publishmodal">
-          <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content tx-size-sm">
-              <div class="modal-body tx-center pd-y-20 pd-x-20">
+        <div className="modal" id="publishmodal">
+          <div className="modal-dialog modal-dialog-centered" role="document">
+            <div className="modal-content tx-size-sm">
+              <div className="modal-body tx-center pd-y-20 pd-x-20">
                 <button
                   aria-label="Close"
-                  class="close"
+                  className="close"
                   data-dismiss="modal"
                   type="button"
                 >
                   <span aria-hidden="true">×</span>
                 </button>
-                <i class="fa fa-upload tx-100 tx-orange lh-1 mg-t-20 d-inline-block"></i>
-                <h4 class="tx-orange tx-semibold mg-b-20">
+                <i className="fa fa-upload tx-100 tx-orange lh-1 mg-t-20 d-inline-block"></i>
+                <h4 className="tx-orange tx-semibold mg-b-20">
                   Are you sure u want to publish?
                 </h4>
-                <p class="mg-b-20 mg-x-20">
+                <p className="mg-b-20 mg-x-20">
                   There are many variations of passages of Lorem Ipsum
                   available, but the majority have suffered alteration.
                 </p>
                 <button
                   aria-label="Close"
-                  class="btn ripple btn-success pd-x-25"
+                  className="btn ripple btn-success pd-x-25"
                   data-dismiss="modal"
                   type="button"
                   onClick={this.handleSubmit}

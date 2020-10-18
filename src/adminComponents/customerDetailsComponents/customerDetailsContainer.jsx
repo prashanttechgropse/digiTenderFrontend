@@ -38,7 +38,7 @@ class CustomerDetailsContainer extends Component {
         isApproved = true;
       } else isApproved = false;
       this.setState({ userCurrentStatus: isApproved });
-      const { data, error } = await httpService.post(
+      const { data } = await httpService.post(
         `${process.env.REACT_APP_APIENDPOINT}/admin/userChangeStatus`,
         {
           userId: this.state.customer.user._id,
@@ -70,10 +70,10 @@ class CustomerDetailsContainer extends Component {
           </div>
         </div>
         <CustomerDetailsCards customer={this.state.customer} />
-        <div class="breadcrumb-header justify-content-between">
-          <div class="my-auto">
-            <div class="d-flex">
-              <h4 class="content-title mb-0 my-auto">Status :</h4>
+        <div className="breadcrumb-header justify-content-between">
+          <div className="my-auto">
+            <div className="d-flex">
+              <h4 className="content-title mb-0 my-auto">Status :</h4>
             </div>
           </div>
           <div className="d-flex my-xl-auto right-content">

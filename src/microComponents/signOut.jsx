@@ -1,11 +1,12 @@
-import React, { Component } from "react";
+import { Component } from "react";
+
 class SignOut extends Component {
-  signOut() {
+  componentDidMount = async () => {
     localStorage.removeItem("token");
     return this.props.history.push("/login");
-  }
+  };
   render() {
-    return <div>{this.signOut()}</div>;
+    return null;
   }
 }
 

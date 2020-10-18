@@ -4,7 +4,7 @@ import Pagination from "../../microComponents/pagination";
 import { paginate } from "../../utilities/paginate";
 import httpService from "../../services/httpService";
 import { toast } from "react-toastify";
-import config from "../../config.json";
+import pad from "../../services/padding";
 
 class AdminSupplierList extends Component {
   state = {
@@ -57,8 +57,8 @@ class AdminSupplierList extends Component {
     return this.state.displaySupplierList.map((supplier) => {
       srNo++;
       return (
-        <tr role="row">
-          <td>{`#000${srNo}`}</td>
+        <tr role="row" key={srNo}>
+          <td>{pad(srNo, 3)}</td>
           <td>{supplier.firstName}</td>
           <td>{supplier.entityRegistrationNo}</td>
           <td>{supplier.contactNumber}</td>
@@ -131,7 +131,7 @@ class AdminSupplierList extends Component {
                               <th>Action</th>
                             </tr>
                           </thead>
-                          <tbody>{this.renderSupplierList()} </tbody>
+                          <tbody>{this.renderSupplierList()}</tbody>
                         </table>
                       </div>
                     </div>

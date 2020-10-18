@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 import Pagination from "../../microComponents/pagination";
 import { toast } from "react-toastify";
 import { paginate } from "../../utilities/paginate";
-import config from "../../config.json";
+
 import httpService from "../../services/httpService";
+import pad from "../../services/padding";
 class DeliveryNoteMainContent extends Component {
   state = {
     profileType: "",
@@ -85,11 +86,13 @@ class DeliveryNoteMainContent extends Component {
     return tenderList.map((tender) => {
       srNo++;
       return (
-        <tr role="row">
+        <tr key={srNo} role="row">
           <td>
             <Link
               to={`/${this.state.profileType}/deliveryNoteDetails/${tender._id}`}
-            >{`0000${srNo}`}</Link>
+            >
+              {pad(srNo, 3)}
+            </Link>
           </td>
           <td>
             <Link to={`/${this.state.profileType}/tenderDetails/${tender._id}`}>
@@ -109,7 +112,7 @@ class DeliveryNoteMainContent extends Component {
           <td>
             <span
               className={`badge badge-${
-                tender.status == "completed" ? "success" : "danger"
+                tender.status === "completed" ? "success" : "danger"
               } f-14`}
             >
               {tender.status}
@@ -122,7 +125,7 @@ class DeliveryNoteMainContent extends Component {
   render() {
     if (this.state.tenderList === null) return null;
     if (this.state.tenderList.length === 0) {
-      return <h1>No completed Tenders yet</h1>;
+      return <h1 className="no-data-found">No completed Tenders yet</h1>;
     }
     return (
       <div className="container-fluid">

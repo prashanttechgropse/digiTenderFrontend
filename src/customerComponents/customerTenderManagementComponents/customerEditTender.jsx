@@ -5,11 +5,11 @@ import DisplayTenderItemList from "../../microComponents/displayTenderItemList";
 import AddItemCard from "../../microComponents/addItemCard";
 import UploadTenderTermsAndConditions from "../../microComponents/uploadTenderTermsAndConditions";
 
-import { createTender, editSavedTender } from "../../services/tenderService";
+import { editSavedTender } from "../../services/tenderService";
 
 import httpService from "../../services/httpService";
 import { toast } from "react-toastify";
-import config from "../../config.json";
+
 import EditTenderDetailsCard from "../../microComponents/editTenderDetailsCard";
 
 class CustomerEditTender extends Component {
@@ -58,7 +58,7 @@ class CustomerEditTender extends Component {
         formData[item] = this.state.tender[item];
       }
       formData.itemList.map((itemObject) => {
-        delete itemObject._id;
+        return delete itemObject._id;
       });
       await this.setState({ formData });
     } catch (error) {
@@ -152,7 +152,7 @@ class CustomerEditTender extends Component {
 
   render() {
     const { formData } = this.state;
-    if (formData.closingDate == "") {
+    if (formData.closingDate === "") {
       return null;
     }
     return (

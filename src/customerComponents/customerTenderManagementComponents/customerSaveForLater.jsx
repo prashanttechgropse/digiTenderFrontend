@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import httpService from "../../services/httpService";
-import config from "../../config.json";
+
 import { toast } from "react-toastify";
 import Pagination from "../../microComponents/pagination";
 import { paginate } from "../../utilities/paginate";
+import pad from "../../services/padding";
 import { Link } from "react-router-dom";
 class CustomerSaveForLater extends Component {
   state = {
@@ -56,8 +57,8 @@ class CustomerSaveForLater extends Component {
     return tenderList.map((tender) => {
       srNo++;
       return (
-        <tr role="row">
-          <td>{`#000${srNo}`}</td>
+        <tr key={srNo} role="row">
+          <td>{pad(srNo, 3)}</td>
           <td>
             <Link to={`/customer/tenderDetails/${tender._id}`}>
               {tender._id.toString().substring(18, 24)}
@@ -77,8 +78,10 @@ class CustomerSaveForLater extends Component {
 
   render() {
     if (this.state.tenderList === null) return null;
-    if (this.state.tenderList.length == 0) {
-      return <h1>you dont have any saved tenders yet</h1>;
+    if (this.state.tenderList.length === 0) {
+      return (
+        <h1 className="no-data-found">you dont have any saved tenders yet</h1>
+      );
     }
     return (
       <div className="container-fluid">

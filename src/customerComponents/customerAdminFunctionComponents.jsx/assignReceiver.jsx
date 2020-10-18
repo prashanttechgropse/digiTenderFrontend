@@ -1,6 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 import httpService from "../../services/httpService";
-import config from "../../config.json";
+import pad from "../../services/padding";
+
 import { toast } from "react-toastify";
 import Pagination from "../../microComponents/pagination";
 import { paginate } from "../../utilities/paginate";
@@ -16,7 +17,7 @@ class AssignReceiver extends Form {
     currentPage: null,
     pageSize: null,
     formData: {
-      receiverId: null,
+      receiverId: "",
       tenderId: null,
     },
     errors: {},
@@ -86,19 +87,13 @@ class AssignReceiver extends Form {
     const tenderList = this.state.displayTenderList;
     if (tenderList === null) return null;
     let srNo = (this.state.currentPage - 1) * this.state.pageSize;
-    let styleOfBadge;
+
     return tenderList.map((tender) => {
       srNo++;
-      if (tender.status === "completed") styleOfBadge = "success";
-      else if (tender.status === "cancelled") styleOfBadge = "danger";
-      else if (tender.status === "awarded") styleOfBadge = "primary";
-      else {
-        styleOfBadge = "warning";
-      }
 
       return (
-        <tr role="row">
-          <td>{`000${srNo}`}</td>
+        <tr key={srNo} role="row">
+          <td>{pad(srNo, 3)}</td>
           <td>
             <Link to={`/customer/tenderDetails/${tender._id}`}>
               {tender._id.toString().substring(18, 24)}
@@ -131,7 +126,9 @@ class AssignReceiver extends Form {
   render() {
     if (this.state.tenderList === null) return null;
     if (this.state.tenderList.length === 0) {
-      return <h1>you dont have any awarded tenders yet</h1>;
+      return (
+        <h1 className="no-data-found">you dont have any awarded tenders yet</h1>
+      );
     }
     return (
       <div className="container-fluid">
@@ -221,7 +218,7 @@ class AssignReceiver extends Form {
                       action=""
                       id="selectForm"
                       name="selectForm"
-                      novalidate=""
+                      noValidate=""
                       data-select2-id="selectForm"
                     >
                       <div className="row">

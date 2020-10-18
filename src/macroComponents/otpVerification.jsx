@@ -1,12 +1,10 @@
 import React from "react";
 import Form from "./form/form";
 import Joi from "joi-browser";
-import config from "../config.json";
-import { toast } from "react-toastify";
+
 import { Link } from "react-router-dom";
-import http from "../services/httpService";
+
 import * as registerService from "../services/registerServices";
-import ForgotPassword from "./forgotPasswordForm";
 
 class OtpVerificationForm extends Form {
   state = {
@@ -34,10 +32,10 @@ class OtpVerificationForm extends Form {
         return await this.props.history.push("/forgotPassword/resetPassword");
       } else {
         if (data.isregistered === false) {
-          if (data.profileType == "primaryUser") {
+          if (data.profileType === "primaryUser") {
             return await this.props.history.push("/register/profileSetup");
           }
-          if (data.profileType == "secondaryUser") {
+          if (data.profileType === "secondaryUser") {
             return await this.props.history.push(
               "/register/secondaryUserProfileSetup"
             );

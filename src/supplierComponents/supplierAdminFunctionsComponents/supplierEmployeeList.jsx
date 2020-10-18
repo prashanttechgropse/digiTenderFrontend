@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import httpService from "../../services/httpService";
-import config from "../../config.json";
+
 import { toast } from "react-toastify";
 import Pagination from "../../microComponents/pagination";
 import { paginate } from "../../utilities/paginate";
+import pad from "../../services/padding";
 class SupplierEmployeeList extends Component {
   state = {
     employeeList: null,
@@ -62,6 +63,7 @@ class SupplierEmployeeList extends Component {
             }
           );
         }
+        return null;
       });
       await this.setState({ employeeList });
     } catch (error) {
@@ -77,8 +79,8 @@ class SupplierEmployeeList extends Component {
     return employeeList.map((employee) => {
       srNo++;
       return (
-        <tr role="row">
-          <td>{`000${srNo}`}</td>
+        <tr role="row" key={srNo}>
+          <td>{pad(srNo, 3)}</td>
           <td>{employee.name}</td>
           <td>{employee.contactNumber}</td>
           <td>{employee.postalAddress}</td>
@@ -100,8 +102,8 @@ class SupplierEmployeeList extends Component {
 
   render() {
     if (this.state.employeeList === null) return null;
-    if (this.state.employeeList.length == 0) {
-      return <h1>you dont have any employees yet</h1>;
+    if (this.state.employeeList.length === 0) {
+      return <h1 className="no-data-found">you dont have any employees yet</h1>;
     }
     return (
       <div className="container-fluid">

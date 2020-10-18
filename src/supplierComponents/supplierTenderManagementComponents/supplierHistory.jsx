@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import Pagination from "../../microComponents/pagination";
 import { paginate } from "../../utilities/paginate";
 import httpService from "../../services/httpService";
-import config from "../../config.json";
+
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
+import pad from "../../services/padding";
 class SupplierHistory extends Component {
   state = {
     tenderList: null,
@@ -58,11 +59,11 @@ class SupplierHistory extends Component {
 
       return (
         <tr role="row" key={srNo}>
-          <td>{`#000${srNo}`}</td>
+          <td>{pad(srNo, 3)}</td>
           <td>
             <Link
               to={
-                tender.status == "inProcess"
+                tender.status === "inProcess"
                   ? `/supplier/tenderDetails/${tender._id}`
                   : `/supplier/myBidDetails/${tender._id}`
               }
@@ -85,7 +86,11 @@ class SupplierHistory extends Component {
   render() {
     if (this.state.tenderList === null) return null;
     if (this.state.tenderList.length === 0)
-      return <h1>you dont have any completed tenders yet</h1>;
+      return (
+        <h1 className="no-data-found">
+          you dont have any completed tenders yet
+        </h1>
+      );
     return (
       <div className="container-fluid">
         <div className="breadcrumb-header justify-content-between">
@@ -129,7 +134,7 @@ class SupplierHistory extends Component {
                               <th>Status</th>
                             </tr>
                           </thead>
-                          <tbody>{this.renderTenderList()} </tbody>
+                          <tbody>{this.renderTenderList()}</tbody>
                         </table>
                         <div className="row">
                           <div className="col-sm-12">

@@ -1,17 +1,18 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import pad from "../../services/padding";
 class AdminRecentlyAddedSupplierList extends Component {
   state = {};
 
   renderSupplierList = () => {
     let srNo = 0;
-    if (this.props.supplierList === "") return;
+    if (this.props.supplierList === "") return null;
     return this.props.supplierList.map((supplier) => {
       srNo++;
       if (srNo <= 5) {
         return (
-          <tr role="row">
-            <td>{`#000${srNo}`}</td>
+          <tr role="row" key={srNo}>
+            <td>{pad(srNo, 3)}</td>
             <td>{supplier.firstName}</td>
             <td>{supplier.entityRegistrationNo}</td>
             <td>{supplier.contactNumber}</td>
@@ -29,7 +30,7 @@ class AdminRecentlyAddedSupplierList extends Component {
             </td>
           </tr>
         );
-      }
+      } else return null;
     });
   };
 
@@ -66,7 +67,7 @@ class AdminRecentlyAddedSupplierList extends Component {
                             <th>Action</th>
                           </tr>
                         </thead>
-                        <tbody>{this.renderSupplierList()} </tbody>
+                        <tbody>{this.renderSupplierList()}</tbody>
                       </table>
                     </div>
                   </div>
