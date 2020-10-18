@@ -1,7 +1,28 @@
 import React, { Component } from "react";
+import httpService from "../services/httpService";
+import { toast } from "react-toastify";
 class TermsConditions extends Component {
-  state = {};
+  state = {
+    termsConditions: "",
+    ourPolicy: "",
+    customerPaymentPolicy: "",
+  };
+  componentDidMount = async () => {
+    try {
+      const { data } = await httpService.get(
+        `${process.env.REACT_APP_APIENDPOINT}/termsConditions`
+      );
+      this.setState({
+        termsConditions: data.termsConditions,
+        ourPolicy: data.ourPolicy,
+        customerPaymentPolicy: data.customerPaymentPolicy,
+      });
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
   render() {
+    const { termsConditions, ourPolicy, customerPaymentPolicy } = this.state;
     return (
       <div className="container-fluid">
         <div className="breadcrumb-header justify-content-between">
@@ -22,119 +43,13 @@ class TermsConditions extends Component {
                 <h4 className="font-weight-semibold tx-15">
                   Terms & Condition
                 </h4>
-                <p className="text-muted  tx-13">
-                  I must explain to you how all this mistaken idea of denouncing
-                  pleasure and praising pain was born and I will give you a
-                  complete account of the system, and expound the actual
-                  teachings of the great explorer of the truth, the
-                  master-builder of human happiness. No one rejects, dislikes,
-                  or avoids pleasure itself, because it is pleasure, but because
-                  those who do not know how to pursue pleasure rationally
-                  encounter consequences
-                </p>
-                <p className="text-muted  tx-13">
-                  I must explain to you how all this mistaken idea of denouncing
-                  pleasure and praising pain was born and I will give you a
-                  complete account of the system, and expound the actual
-                  teachings of the great explorer of the truth, the
-                  master-builder of human happiness. No one rejects, dislikes,
-                  or avoids pleasure itself, because it is pleasure, but because
-                  those who do not know how to pursue pleasure rationally
-                  encounter consequences I must explain to you how all this
-                  mistaken idea of denouncing pleasure and praising pain was
-                  born and I will give you a complete account of the system, and
-                  expound the actual teachings of the great explorer of the
-                  truth, the master-builder of human happiness. No one rejects,
-                  dislikes, or avoids pleasure itself, because it is pleasure,
-                  but because those who do not know how to pursue pleasure
-                  rationally encounter consequences
-                </p>
+                <p className="text-muted  tx-13">{termsConditions}</p>
                 <h4 className="font-weight-semibold tx-15">Our Policy</h4>
-                <p className="text-muted  tx-13">
-                  I must explain to you how all this mistaken idea of denouncing
-                  pleasure and praising pain was born and I will give you a
-                  complete account of the system, and expound the actual
-                  teachings of the great explorer of the truth, the
-                  master-builder of human happiness. No one rejects, dislikes,
-                  or avoids pleasure itself, because it is pleasure, but because
-                  those who do not know how to pursue pleasure rationally
-                  encounter consequences I must explain to you how all this
-                  mistaken idea of denouncing pleasure and praising pain was
-                  born and I will give you a complete account of the system, and
-                  expound the actual teachings of the great explorer of the
-                  truth, the master-builder of human happiness. No one rejects,
-                  dislikes, or avoids pleasure itself, because it is pleasure,
-                  but because those who do not know how to pursue pleasure
-                  rationally encounter consequences I must explain to you how
-                  all this mistaken idea of denouncing pleasure and praising
-                  pain was born and I will give you a complete account of the
-                  system, and expound the actual teachings of the great explorer
-                  of the truth, the master-builder of human happiness. No one
-                  rejects, dislikes, or avoids pleasure itself, because it is
-                  pleasure, but because those who do not know how to pursue
-                  pleasure rationally encounter consequences
-                </p>
-                <p className="text-muted  tx-13">
-                  I must explain to you how all this mistaken idea of denouncing
-                  pleasure and praising pain was born and I will give you a
-                  complete account of the system, and expound the actual
-                  teachings of the great explorer of the truth, the
-                  master-builder of human happiness. No one rejects, dislikes,
-                  or avoids pleasure itself, because it is pleasure, but because
-                  those who do not know how to pursue pleasure rationally
-                  encounter consequences I must explain to you how all this
-                  mistaken idea of denouncing pleasure and praising pain was
-                  born and I will give you a complete account of the system, and
-                  expound the actual teachings of the great explorer of the
-                  truth, the master-builder of human happiness. No one rejects,
-                  dislikes, or avoids pleasure itself, because it is pleasure,
-                  but because those who do not know how to pursue pleasure
-                  rationally encounter consequences
-                </p>
+                <p className="text-muted  tx-13">{ourPolicy}</p>
                 <h4 className="font-weight-semibold tx-15">
                   Customer Payment Policy
                 </h4>
-                <p className="text-muted  tx-13">
-                  I must explain to you how all this mistaken idea of denouncing
-                  pleasure and praising pain was born and I will give you a
-                  complete account of the system, and expound the actual
-                  teachings of the great explorer of the truth, the
-                  master-builder of human happiness. No one rejects, dislikes,
-                  or avoids pleasure itself, because it is pleasure, but because
-                  those who do not know how to pursue pleasure rationally
-                  encounter consequences I must explain to you how all this
-                  mistaken idea of denouncing pleasure and praising pain was
-                  born and I will give you a complete account of the system, and
-                  expound the actual teachings of the great explorer of the
-                  truth, the master-builder of human happiness. No one rejects,
-                  dislikes, or avoids pleasure itself, because it is pleasure,
-                  but because those who do not know how to pursue pleasure
-                  rationally encounter consequences I must explain to you how
-                  all this mistaken idea of denouncing pleasure and praising
-                  pain was born and I will give you a complete account of the
-                  system, and expound the actual teachings of the great explorer
-                  of the truth, the master-builder of human happiness. No one
-                  rejects, dislikes, or avoids pleasure itself, because it is
-                  pleasure, but because those who do not know how to pursue
-                  pleasure rationally encounter consequences
-                </p>
-                <p className="text-muted  tx-13">
-                  I must explain to you how all this mistaken idea of denouncing
-                  pleasure and praising pain was born and I will give you a
-                  complete account of the system, and expound the actual
-                  teachings of the great explorer of the truth, the
-                  master-builder of human happiness. No one rejects, dislikes,
-                  or avoids pleasure itself, because it is pleasure, but because
-                  those who do not know how to pursue pleasure rationally
-                  encounter consequences I must explain to you how all this
-                  mistaken idea of denouncing pleasure and praising pain was
-                  born and I will give you a complete account of the system, and
-                  expound the actual teachings of the great explorer of the
-                  truth, the master-builder of human happiness. No one rejects,
-                  dislikes, or avoids pleasure itself, because it is pleasure,
-                  but because those who do not know how to pursue pleasure
-                  rationally encounter consequences
-                </p>
+                <p className="text-muted  tx-13">{customerPaymentPolicy}</p>
               </div>
             </div>
           </div>

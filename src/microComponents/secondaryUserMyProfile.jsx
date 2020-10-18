@@ -20,7 +20,7 @@ class SecondaryUserMyProfile extends Component {
           <div className="d-flex my-xl-auto right-content">
             <div className="pr-1 mb-3 mb-xl-0">
               <Link
-                onClick={() => this.props.onClick("editProfile")}
+                onClick={() => this.props.history.push("editProfile")}
                 type="button"
                 className="btn btn-primary "
               >

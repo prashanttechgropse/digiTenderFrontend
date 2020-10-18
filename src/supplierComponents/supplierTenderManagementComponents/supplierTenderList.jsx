@@ -8,7 +8,7 @@ import { paginate } from "../../utilities/paginate";
 import { Link } from "react-router-dom";
 class TenderList extends Component {
   state = {
-    tenderList: null,
+    tenderList: [],
     displayTenderList: null,
     currentPage: null,
     pageSize: null,
@@ -95,7 +95,8 @@ class TenderList extends Component {
   };
 
   render() {
-    if (this.state.tenderList === null) return null;
+    if (this.state.tenderList.length === 0)
+      return <h1 className="no-data-found">No Tenders Yet</h1>;
     return (
       <div className="container-fluid">
         <div className="breadcrumb-header justify-content-between">

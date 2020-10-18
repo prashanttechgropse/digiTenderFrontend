@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import pad from "../../services/padding";
 class SupplierSaveForLater extends Component {
   state = {
-    tenderList: null,
+    tenderList: [],
     displayTenderList: null,
     currentPage: null,
     pageSize: null,
@@ -93,7 +93,8 @@ class SupplierSaveForLater extends Component {
   };
 
   render() {
-    if (this.state.tenderList === null) return null;
+    if (this.state.tenderList.length === 0)
+      return <h1 className="no-data-found">No Saved Tenders Yet</h1>;
     return (
       <div className="container-fluid">
         <div className="breadcrumb-header justify-content-between">

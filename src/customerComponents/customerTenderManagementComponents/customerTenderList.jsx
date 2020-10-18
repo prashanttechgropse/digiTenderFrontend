@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 
 class CustomerTenderList extends Component {
   state = {
-    tenderList: null,
+    tenderList: [],
   };
 
   async componentDidMount() {
@@ -24,7 +24,12 @@ class CustomerTenderList extends Component {
 
   render() {
     const { tenderList } = this.state;
-    if (tenderList === null) return null;
+    if (tenderList.length === 0)
+      return (
+        <h1 className="no-data-found">
+          You Dont Have Any Published Tenders Yet
+        </h1>
+      );
     return (
       <div className="container-fluid">
         <div className="breadcrumb-header justify-content-between">

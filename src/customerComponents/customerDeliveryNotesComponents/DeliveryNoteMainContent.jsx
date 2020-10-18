@@ -125,7 +125,9 @@ class DeliveryNoteMainContent extends Component {
   render() {
     if (this.state.tenderList === null) return null;
     if (this.state.tenderList.length === 0) {
-      return <h1 className="no-data-found">No completed Tenders yet</h1>;
+      return (
+        <h1 className="no-data-found">You Dont Have Any Delivery Notes yet</h1>
+      );
     }
     return (
       <div className="container-fluid">

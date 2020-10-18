@@ -6,7 +6,6 @@ import MainContentHeaderBar from "../macroComponents/mainContentHeaderBar";
 import HelpSupport from "../macroComponents/helpSupport";
 import TermsConditions from "../macroComponents/termsConditions";
 
-import EditProfile from "../macroComponents/editProfile";
 import ChangePassword from "../userComponents/changePassword";
 
 import httpService from "../services/httpService";
@@ -21,6 +20,7 @@ import SecondaryUserTenderDetails from "../secondaryUserComponents/secondaryUser
 import SecondaryUserTenderList from "../secondaryUserComponents/secondaryUserTenderList";
 import DeliveryNoteMainContent from "../customerComponents/customerDeliveryNotesComponents/DeliveryNoteMainContent";
 import DeliveryNoteDetails from "../customerComponents/customerDeliveryNotesComponents/DeliveryNoteDetails";
+import SecondaryUserEditProfile from "../secondaryUserComponents/secondaryUserEditProfile";
 
 class EmployeeApp extends Component {
   state = {
@@ -94,7 +94,11 @@ class EmployeeApp extends Component {
               path="/employee/termsConditions"
               component={TermsConditions}
             />
-            <Route exact path="/employee/editProfile" component={EditProfile} />
+            <Route
+              exact
+              path="/receiver/editProfile"
+              component={SecondaryUserEditProfile}
+            />
             <Route exact path="/employee/helpSupport" component={HelpSupport} />
 
             <Route

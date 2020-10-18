@@ -105,7 +105,7 @@ class EditProfile extends Form {
                           <input
                             className="form-control"
                             type="text"
-                            placeholder={user.firstName}
+                            value={user.firstName}
                           />
                         </div>
                       </div>
@@ -115,7 +115,7 @@ class EditProfile extends Form {
                           <input
                             className="form-control"
                             type="text"
-                            placeholder={user.lastName}
+                            value={user.lastName}
                           />
                         </div>
                       </div>
@@ -127,7 +127,7 @@ class EditProfile extends Form {
                           <input
                             className="form-control"
                             type="text"
-                            placeholder={email}
+                            value={email}
                             disabled
                           />
                         </div>
@@ -138,7 +138,7 @@ class EditProfile extends Form {
                           <input
                             className="form-control"
                             type="text"
-                            placeholder={user.contactNo}
+                            value={user.contactNo}
                           />
                         </div>
                       </div>
@@ -165,7 +165,7 @@ class EditProfile extends Form {
                           <input
                             className="form-control"
                             type="text"
-                            placeholder={user.companyName}
+                            value={user.companyName}
                           />
                         </div>
                       </div>
@@ -175,7 +175,7 @@ class EditProfile extends Form {
                           <input
                             className="form-control"
                             type="text"
-                            placeholder={user.entityRegistrationNo}
+                            value={user.entityRegistrationNo}
                           />
                         </div>
                       </div>
@@ -201,7 +201,7 @@ class EditProfile extends Form {
                           <label>VAT Number</label>
                           <input
                             className="form-control"
-                            placeholder={user.vatNumber}
+                            value={user.vatNumber}
                             type="text"
                           />
                         </div>
@@ -213,7 +213,7 @@ class EditProfile extends Form {
                           <label>Trading as</label>
                           <input
                             className="form-control"
-                            placeholder={user.tradingAs}
+                            value={user.tradingAs}
                             type="text"
                           />
                         </div>
@@ -223,7 +223,7 @@ class EditProfile extends Form {
                           <label>Website</label>
                           <input
                             className="form-control"
-                            placeholder={user.website}
+                            value={user.website}
                             type="text"
                           />
                         </div>
@@ -235,7 +235,7 @@ class EditProfile extends Form {
                           <label>Physical Address</label>
                           <input
                             className="form-control"
-                            placeholder={user.physicalAddress}
+                            value={user.physicalAddress}
                             type="text"
                           />
                         </div>
@@ -245,7 +245,7 @@ class EditProfile extends Form {
                           <label>Postal Address</label>
                           <input
                             className="form-control"
-                            placeholder={user.postalAddress}
+                            value={user.postalAddress}
                             type="text"
                           />
                         </div>
@@ -257,7 +257,7 @@ class EditProfile extends Form {
                           <label>Contact Person</label>
                           <input
                             className="form-control"
-                            placeholder={user.contactPerson}
+                            value={user.contactPerson}
                             type="text"
                           />
                         </div>
@@ -267,7 +267,7 @@ class EditProfile extends Form {
                           <label>Contact No</label>
                           <input
                             className="form-control"
-                            placeholder={user.contactNo}
+                            value={user.contactNo}
                             type="text"
                           />
                         </div>
@@ -318,7 +318,7 @@ class EditProfile extends Form {
                           <label>Bank Name</label>
                           <input
                             className="form-control"
-                            placeholder={user.bankName}
+                            value={user.bankName}
                             type="text"
                           />
                         </div>
@@ -328,7 +328,7 @@ class EditProfile extends Form {
                           <label>Account No.</label>
                           <input
                             className="form-control"
-                            placeholder={user.accountNo}
+                            value={user.accountNo}
                             type="text"
                           />
                         </div>
@@ -340,7 +340,7 @@ class EditProfile extends Form {
                           <label>Account Type</label>
                           <input
                             className="form-control"
-                            placeholder={user.accountType}
+                            value={user.accountType}
                             type="text"
                           />
                         </div>
@@ -350,7 +350,7 @@ class EditProfile extends Form {
                           <label>Branch Code</label>
                           <input
                             className="form-control"
-                            placeholder={user.branchCode}
+                            value={user.branchCode}
                             type="text"
                           />
                         </div>

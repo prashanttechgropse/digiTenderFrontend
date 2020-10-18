@@ -6,7 +6,6 @@ import MainContentHeaderBar from "../macroComponents/mainContentHeaderBar";
 import HelpSupport from "../macroComponents/helpSupport";
 import TermsConditions from "../macroComponents/termsConditions";
 
-import EditProfile from "../macroComponents/editProfile";
 import ChangePassword from "../userComponents/changePassword";
 
 import httpService from "../services/httpService";
@@ -21,6 +20,7 @@ import DeliveryNoteMainContent from "../customerComponents/customerDeliveryNotes
 import DeliveryNoteDetails from "../customerComponents/customerDeliveryNotesComponents/DeliveryNoteDetails";
 import SecondaryUserTenderDetails from "../secondaryUserComponents/secondaryUserTenderDetails";
 import SecondaryUserTenderList from "../secondaryUserComponents/secondaryUserTenderList";
+import SecondaryUserEditProfile from "../secondaryUserComponents/secondaryUserEditProfile";
 
 class ReceiverApp extends Component {
   state = {
@@ -61,7 +61,10 @@ class ReceiverApp extends Component {
             <MainContentHeaderBar user={this.state.receiver} />
 
             <Route exact path="/receiver/myProfile">
-              <SecondaryUserMyProfile user={this.state.receiver} />
+              <SecondaryUserMyProfile
+                user={this.state.receiver}
+                {...this.props}
+              />
             </Route>
             <Route
               exact
@@ -98,7 +101,11 @@ class ReceiverApp extends Component {
               path="/receiver/termsConditions"
               component={TermsConditions}
             />
-            <Route exact path="/receiver/editProfile" component={EditProfile} />
+            <Route
+              exact
+              path="/receiver/editProfile"
+              component={SecondaryUserEditProfile}
+            />
             <Route exact path="/receiver/helpSupport" component={HelpSupport} />
 
             <Route
