@@ -117,6 +117,7 @@ class ProfileSetup extends Form {
     }
     this.setState({ errors });
   };
+
   onFileChange2 = (event) => {
     // Update the state
     this.setState({ selectedFile2: event.target.files[0] });
@@ -288,7 +289,9 @@ class ProfileSetup extends Form {
                               <div className="row">
                                 <div className="col-md-12">
                                   <div className="form-group">
-                                    <label>File Upload</label>
+                                    <label className="m-2">
+                                      {"File Upload"}
+                                    </label>
                                     <input
                                       type="file"
                                       className="dropify"
@@ -306,7 +309,9 @@ class ProfileSetup extends Form {
                               <div className="row">
                                 <div className="col-md-12">
                                   <div className="form-group">
-                                    <label>VAT Document (if applicable)</label>
+                                    <label className="m-2">
+                                      {"VAT Document (if applicable)"}
+                                    </label>
                                     <input
                                       type="file"
                                       className="dropify"

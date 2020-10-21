@@ -6,13 +6,13 @@ class ProfileDropDown extends Component {
     return (
       <div className="dropdown main-profile-menu nav nav-item nav-link digi-toggleprofile">
         <Link to="#" className="profile-user d-flex">
-          <img src={"/common/img/customer/01.jpg"} alt={"C"} />
+          <img src={"/common/img/customer/place_holder.png"} alt={"C"} />
         </Link>
         <div className="dropdown-menu digi-dropDown">
           <div className="main-header-profile bg-primary p-3">
             <div className="d-flex wd-100p">
               <div className="main-img-user">
-                <img src={"/common/img/customer/01.jpg"} alt={"C"} />
+                <img src={"/common/img/customer/place_holder.png"} alt={"C"} />
               </div>
               <div className="ml-3 my-auto">
                 <h6>

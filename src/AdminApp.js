@@ -22,6 +22,7 @@ import SupplierQuotationDetails from "./customerComponents/supllierQuotationDeta
 import TenderDetails from "./customerComponents/customerTenderManagementComponents/TenderDetails";
 import DeliveryNoteMainContent from "./customerComponents/customerDeliveryNotesComponents/DeliveryNoteMainContent";
 import DeliveryNoteDetails from "./customerComponents/customerDeliveryNotesComponents/DeliveryNoteDetails";
+import AdminComplaintDetails from "./adminComponents/adminAdminFunctionComponents/adminComplainDetails";
 
 class AdminApp extends Component {
   state = {
@@ -132,6 +133,11 @@ class AdminApp extends Component {
               exact
               path="/admin/supplierDetails/:supplierId"
               component={SupplierDetailsContainer}
+            />
+            <Route
+              exact
+              path="/admin/complainDetail/:complainId"
+              component={AdminComplaintDetails}
             />
 
             <Route

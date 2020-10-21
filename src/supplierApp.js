@@ -28,6 +28,7 @@ import DeliveryNoteMainContent from "./customerComponents/customerDeliveryNotesC
 import DeliveryNoteDetails from "./customerComponents/customerDeliveryNotesComponents/DeliveryNoteDetails";
 
 import AssignEmployee from "./supplierComponents/assignEmployee";
+import UserComplainDetails from "./macroComponents/userComplaindetails";
 
 class SupplierApp extends Component {
   state = { supplier: "", displayTenderDetailsId: null };
@@ -91,6 +92,11 @@ class SupplierApp extends Component {
             <Route exact path="/supplier/helpSupport">
               <HelpSupport />
             </Route>
+            <Route
+              exact
+              path="/supplier/complain-detail/:complainId"
+              component={UserComplainDetails}
+            />
             <Route exact path="/supplier/termsConditions">
               <TermsConditions />;
             </Route>

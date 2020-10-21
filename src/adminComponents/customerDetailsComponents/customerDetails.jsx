@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import httpService from "../../services/httpService";
 import pad from "../../services/padding";
 import { toast } from "react-toastify";
+const fileDownload = require("js-file-download");
 class CustomerDetails extends Component {
   state = { receiverList: "" };
 
@@ -14,6 +15,53 @@ class CustomerDetails extends Component {
       const { receiversList: receiverList } = data;
       await this.setState({ receiverList });
       console.log(this.state.receiverList);
+    } catch (error) {
+      toast.error(error.message);
+      return;
+    }
+  };
+
+  downloadProfileDoc = async () => {
+    try {
+      const { data } = await httpService.get(
+        `${process.env.REACT_APP_APIENDPOINT}/admin/registrationDocuments/${this.props.customer.user._id}/${this.props.customer.profileDoc}`,
+        {
+          responseType: "blob",
+        }
+      );
+      await fileDownload(data, `${this.props.customer.profileDoc}`);
+    } catch (error) {
+      toast.error(error.message);
+      return;
+    }
+  };
+
+  downloadVatDoc = async () => {
+    if (this.props.customer.vatDoc) {
+      try {
+        const { data } = await httpService.get(
+          `${process.env.REACT_APP_APIENDPOINT}/admin/registrationDocuments/${this.props.customer.user._id}/${this.props.customer.vatDoc}`,
+          {
+            responseType: "blob",
+          }
+        );
+        await fileDownload(data, `${this.props.customer.vatDoc}`);
+      } catch (error) {
+        toast.error(error.message);
+        return;
+      }
+    } else return;
+  };
+
+  downloadBankDoc = async () => {
+    try {
+      const { data } = await httpService.get(
+        `${process.env.REACT_APP_APIENDPOINT}/admin/bankDocuments/${this.props.customer.user._id}/${this.props.customer.bankDetails.bankDoc}`,
+        {
+          responseType: "blob",
+        }
+      );
+      await fileDownload(data, `${this.props.customer.bankDetails.bankDoc}`);
     } catch (error) {
       toast.error(error.message);
       return;
@@ -151,7 +199,7 @@ class CustomerDetails extends Component {
                                 </span>
                               </div>
                               <div>
-                                <label>Last Name</label>{" "}
+                                <label>Last Name</label>
                                 <span className="tx-medium">
                                   {customer.lastName}
                                 </span>
@@ -161,13 +209,13 @@ class CustomerDetails extends Component {
                           <div className="media">
                             <div className="media-body">
                               <div>
-                                <label> Organization Type</label>{" "}
+                                <label> Organization Type</label>
                                 <span className="tx-medium">
                                   {customer.organisationType}
                                 </span>
                               </div>
                               <div>
-                                <label>ID Number</label>{" "}
+                                <label>ID Number</label>
                                 <span className="tx-medium">
                                   {customer.idNumber}
                                 </span>
@@ -177,13 +225,13 @@ class CustomerDetails extends Component {
                           <div className="media">
                             <div className="media-body">
                               <div>
-                                <label> Company Name</label>{" "}
+                                <label> Company Name</label>
                                 <span className="tx-medium">
                                   {customer.companyName}
                                 </span>
                               </div>
                               <div>
-                                <label>Entity Registration No</label>{" "}
+                                <label>Entity Registration No</label>
                                 <span className="tx-medium">
                                   {customer.entityRegistrationNo}
                                 </span>
@@ -193,13 +241,13 @@ class CustomerDetails extends Component {
                           <div className="media">
                             <div className="media-body">
                               <div>
-                                <label> VAT Registration</label>{" "}
+                                <label> VAT Registration</label>
                                 <span className="tx-medium">
                                   {customer.vatRegistration}
                                 </span>
                               </div>
                               <div>
-                                <label>VAT Number</label>{" "}
+                                <label>VAT Number</label>
                                 <span className="tx-medium">
                                   {customer.vatNumber}
                                 </span>
@@ -209,13 +257,13 @@ class CustomerDetails extends Component {
                           <div className="media">
                             <div className="media-body">
                               <div>
-                                <label> Trading As</label>{" "}
+                                <label> Trading As</label>
                                 <span className="tx-medium">
                                   {customer.tradingAs}
                                 </span>
                               </div>
                               <div>
-                                <label>Website </label>{" "}
+                                <label>Website </label>
                                 <span className="tx-medium">
                                   {customer.website}
                                 </span>
@@ -225,7 +273,7 @@ class CustomerDetails extends Component {
                           <div className="media">
                             <div className="media-body">
                               <div>
-                                <label> Contact Number</label>{" "}
+                                <label> Contact Number</label>
                                 <span className="tx-medium">
                                   {customer.contactNo}
                                 </span>
@@ -241,7 +289,34 @@ class CustomerDetails extends Component {
                               <div>
                                 <label>Customer Document</label>
                                 <span className="tx-medium">
-                                  <Link to="#">
+                                  <Link
+                                    to="#"
+                                    onClick={this.downloadProfileDoc}
+                                  >
+                                    <i className="fa fa-file"></i> Download
+                                  </Link>
+                                </span>
+                              </div>
+                            </div>
+                            {this.props.customer.vatDoc ? (
+                              <div className="media-body">
+                                <div>
+                                  <label>Customer Vat Document</label>
+                                  <span className="tx-medium">
+                                    <Link to="#" onClick={this.downloadVatDoc}>
+                                      <i className="fa fa-file"></i> Download
+                                    </Link>
+                                  </span>
+                                </div>
+                              </div>
+                            ) : (
+                              ""
+                            )}
+                            <div className="media-body">
+                              <div>
+                                <label>Customer Vat Document</label>
+                                <span className="tx-medium">
+                                  <Link to="#" onClick={this.downloadVatDoc}>
                                     <i className="fa fa-file"></i> Download
                                   </Link>
                                 </span>
@@ -270,13 +345,13 @@ class CustomerDetails extends Component {
                           <div className="media">
                             <div className="media-body">
                               <div>
-                                <label>Email Id</label>{" "}
+                                <label>Email Id</label>
                                 <span className="tx-medium">
                                   {customer.user.email}
                                 </span>
                               </div>
                               <div>
-                                <label>Bank Name</label>{" "}
+                                <label>Bank Name</label>
                                 <span className="tx-medium">
                                   {customer.bankDetails.bankName}
                                 </span>
@@ -308,9 +383,9 @@ class CustomerDetails extends Component {
                                 </span>
                               </div>
                               <div>
-                                <label>Attach Documnet</label>{" "}
+                                <label>Attach Documnet</label>
                                 <span className="tx-medium">
-                                  <Link to="#">
+                                  <Link to="#" onClick={this.downloadBankDoc}>
                                     <i className="fa fa-file"></i> Download
                                   </Link>
                                 </span>

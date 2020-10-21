@@ -97,7 +97,7 @@ class OtpVerificationForm extends Form {
                               <p>
                                 Click here to
                                 <Link to="#" onClick={this.resendOtp}>
-                                  Resend OTP
+                                  {" Resend OTP"}
                                 </Link>
                               </p>
                             </div>

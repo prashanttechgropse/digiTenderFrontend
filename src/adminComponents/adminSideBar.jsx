@@ -153,7 +153,7 @@ class AdminSideBar extends Component {
                     <img
                       alt="user-img"
                       className="avatar avatar-xl brround mCS_img_loaded"
-                      src="/common/img/customer/01.jpg"
+                      src="/common/img/customer/place_holder.png"
                     />
                     <span className="avatar-status profile-status bg-green"></span>
                   </div>

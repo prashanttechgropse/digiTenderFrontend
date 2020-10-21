@@ -26,6 +26,7 @@ import AssignReceiver from "./customerComponents/customerAdminFunctionComponents
 import CreateDeliveryNote from "./customerComponents/createDeliveryNote";
 import DeliveryNoteMainContent from "./customerComponents/customerDeliveryNotesComponents/DeliveryNoteMainContent";
 import DeliveryNoteDetails from "./customerComponents/customerDeliveryNotesComponents/DeliveryNoteDetails";
+import UserComplainDetails from "./macroComponents/userComplaindetails";
 
 class CustomerApp extends Component {
   state = {
@@ -117,6 +118,11 @@ class CustomerApp extends Component {
               <EditProfile user={this.state.customer} {...this.props} />
             </Route>
             <Route exact path="/customer/helpSupport" component={HelpSupport} />
+            <Route
+              exact
+              path="/customer/complain-detail/:complainId"
+              component={UserComplainDetails}
+            />
             <Route
               exact
               path="/customer/assignReceiver"

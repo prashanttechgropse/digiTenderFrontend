@@ -10,7 +10,6 @@ const TextArea = ({ name, value, error, label, ...rest }) => {
         name={name}
         className="form-control"
         placeholder={`write your ${name}`}
-        rows="5"
       />
       {error && <div className="alert alert-danger">{error}</div>}
     </div>

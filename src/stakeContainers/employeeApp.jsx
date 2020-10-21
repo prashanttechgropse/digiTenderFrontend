@@ -21,6 +21,7 @@ import SecondaryUserTenderList from "../secondaryUserComponents/secondaryUserTen
 import DeliveryNoteMainContent from "../customerComponents/customerDeliveryNotesComponents/DeliveryNoteMainContent";
 import DeliveryNoteDetails from "../customerComponents/customerDeliveryNotesComponents/DeliveryNoteDetails";
 import SecondaryUserEditProfile from "../secondaryUserComponents/secondaryUserEditProfile";
+import UserComplainDetails from "../macroComponents/userComplaindetails";
 
 class EmployeeApp extends Component {
   state = {
@@ -61,7 +62,10 @@ class EmployeeApp extends Component {
             <MainContentHeaderBar user={this.state.employee} />
 
             <Route exact path="/employee/myProfile">
-              <SecondaryUserMyProfile user={this.state.employee} />
+              <SecondaryUserMyProfile
+                user={this.state.employee}
+                {...this.props}
+              />
             </Route>
             <Route
               exact
@@ -94,12 +98,18 @@ class EmployeeApp extends Component {
               path="/employee/termsConditions"
               component={TermsConditions}
             />
+            <Route exact path="/employee/editProfile">
+              <SecondaryUserEditProfile
+                user={this.state.employee}
+                {...this.props}
+              />
+            </Route>
+            <Route exact path="/employee/helpSupport" component={HelpSupport} />
             <Route
               exact
-              path="/receiver/editProfile"
-              component={SecondaryUserEditProfile}
+              path="/employee/complain-detail/:complainId"
+              component={UserComplainDetails}
             />
-            <Route exact path="/employee/helpSupport" component={HelpSupport} />
 
             <Route
               exact

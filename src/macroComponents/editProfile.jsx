@@ -1,6 +1,7 @@
 import React from "react";
 import Joi from "joi-browser";
 import Form from "./form/form";
+import * as registerService from "../services/registerServices";
 class EditProfile extends Form {
   state = {
     email: "",
@@ -23,6 +24,10 @@ class EditProfile extends Form {
       accountType: "",
       branchCode: "",
     },
+    selectedFile1: null,
+    selectedFile2: null,
+    selectedFile3: null,
+    errors: {},
   };
 
   constructor(props) {
@@ -31,8 +36,8 @@ class EditProfile extends Form {
     const { user } = this.props;
     this.state.email = user.email;
     formData.firstName = user.details.firstName;
-    formData.lastName = user.details.firstName;
-    formData.contactNumber = user.details.contactNumber;
+    formData.lastName = user.details.lastName;
+    formData.contactNumber = parseInt(user.details.contactNumber);
     formData.companyName = user.details.companyName;
     formData.entityRegistrationNo = user.details.entityRegistrationNo;
     formData.vatRegistration = user.details.vatRegistration;
@@ -42,7 +47,7 @@ class EditProfile extends Form {
     formData.physicalAddress = user.details.physicalAddress;
     formData.postalAddress = user.details.postalAddress;
     formData.contactPerson = user.details.contactPerson;
-    formData.contactNo = user.details.contactNo;
+    formData.contactNo = parseInt(user.details.contactNo);
     formData.bankName = user.bankDetails.bankName;
     formData.accountNo = user.bankDetails.accountNo;
     formData.accountType = user.bankDetails.accountType;
@@ -52,22 +57,78 @@ class EditProfile extends Form {
   schema = {
     firstName: Joi.string().required().min(5),
     lastName: Joi.string().required().min(5),
-    idNumber: Joi.string().required().min(5),
     contactNumber: Joi.number().min(5).required(),
     companyName: Joi.string().required().min(5),
     entityRegistrationNo: Joi.string().required().min(5),
-    vatRegistration: Joi.string().required(),
+    vatRegistration: Joi.number().required(),
     vatNumber: Joi.string().required().min(5),
     tradingAs: Joi.string().required().min(5),
     website: Joi.string().required().min(5),
     physicalAddress: Joi.string().required().min(5),
     postalAddress: Joi.string().required().min(5),
     contactPerson: Joi.string().required().min(5),
-    contactNo: Joi.number().required().min(5),
+    contactNo: Joi.number().min(5).required(),
     bankName: Joi.string().required(),
     accountNo: Joi.string().required(),
     accountType: Joi.string().required(),
     branchCode: Joi.string().required(),
+  };
+
+  onFileChange1 = (event) => {
+    // Update the state
+    this.setState({ selectedFile1: event.target.files[0] });
+    const errors = { ...this.state.errors };
+    if (errors.selectedFile1) {
+      delete errors.selectedFile1;
+    }
+    this.setState({ errors });
+  };
+
+  onFileChange2 = (event) => {
+    // Update the state
+    this.setState({ selectedFile2: event.target.files[0] });
+  };
+  onFileChange3 = (event) => {
+    // Update the state
+    this.setState({ selectedFile3: event.target.files[0] });
+  };
+
+  doSubmit = async () => {
+    const formData = new FormData();
+    for (const item in this.state.formData) {
+      formData.append(item, this.state.formData[item]);
+    }
+
+    if (this.state.selectedFile1 !== null) {
+      formData.append(
+        "profileDoc",
+        this.state.selectedFile1,
+        this.state.selectedFile1.name
+      );
+    }
+
+    if (this.state.selectedFile2 !== null) {
+      formData.append(
+        "vatDoc",
+        this.state.selectedFile2,
+        this.state.selectedFile2.name
+      );
+    }
+
+    if (this.state.selectedFile3 !== null) {
+      formData.append(
+        "bankDoc",
+        this.state.selectedFile3,
+        this.state.selectedFile3.name
+      );
+    }
+    const { data, error } = await registerService.editProfileService(formData);
+    if (data) {
+      window.location.reload();
+    }
+    if (error) {
+      return;
+    }
   };
 
   render() {
@@ -100,24 +161,10 @@ class EditProfile extends Form {
                   <div className="main-signup-header">
                     <div className="row">
                       <div className="col-md-6">
-                        <div className="form-group">
-                          <label>First Name</label>
-                          <input
-                            className="form-control"
-                            type="text"
-                            value={user.firstName}
-                          />
-                        </div>
+                        {this.renderInput("firstName", "First Name")}
                       </div>
                       <div className="col-md-6">
-                        <div className="form-group">
-                          <label>Last Name</label>
-                          <input
-                            className="form-control"
-                            type="text"
-                            value={user.lastName}
-                          />
-                        </div>
+                        {this.renderInput("lastName", "Last Name")}
                       </div>
                     </div>
                     <div className="row">
@@ -133,14 +180,7 @@ class EditProfile extends Form {
                         </div>
                       </div>
                       <div className="col-md-6">
-                        <div className="form-group">
-                          <label>Contact No</label>
-                          <input
-                            className="form-control"
-                            type="text"
-                            value={user.contactNo}
-                          />
-                        </div>
+                        {this.renderInput("contactNumber", "Contact Number")}
                       </div>
                     </div>
                   </div>
@@ -160,117 +200,56 @@ class EditProfile extends Form {
                   <div className="main-signup-header">
                     <div className="row">
                       <div className="col-md-6">
-                        <div className="form-group">
-                          <label>Company Name</label>
-                          <input
-                            className="form-control"
-                            type="text"
-                            value={user.companyName}
-                          />
-                        </div>
+                        {this.renderInput("companyName", "Company Name")}
                       </div>
                       <div className="col-md-6">
-                        <div className="form-group">
-                          <label>Registration No</label>
-                          <input
-                            className="form-control"
-                            type="text"
-                            value={user.entityRegistrationNo}
-                          />
-                        </div>
+                        {this.renderInput(
+                          "entityRegistrationNo",
+                          "Registration No"
+                        )}
                       </div>
                     </div>
                     <div className="row">
                       <div className="col-md-6">
-                        <label>VAT Registration</label>
-                        <select className="form-control select2-no-search ">
-                          <option
-                            selected={user.vatRegistration === 1 ? true : false}
-                          >
-                            Option 1
-                          </option>
-                          <option
-                            selected={user.vatRegistration === 2 ? true : false}
-                          >
-                            Option 2
-                          </option>
-                        </select>
+                        {this.renderSelect(
+                          "vatRegistration",
+                          "Vat Registration",
+                          [
+                            { _id: 1, name: "option 1" },
+                            { _id: 2, name: "option 2" },
+                          ],
+                          user.vatRegistration
+                        )}
                       </div>
                       <div className="col-md-6">
-                        <div className="form-group">
-                          <label>VAT Number</label>
-                          <input
-                            className="form-control"
-                            value={user.vatNumber}
-                            type="text"
-                          />
-                        </div>
+                        {this.renderInput("vatNumber", "VAT Number")}
                       </div>
                     </div>
                     <div className="row">
                       <div className="col-md-6">
-                        <div className="form-group">
-                          <label>Trading as</label>
-                          <input
-                            className="form-control"
-                            value={user.tradingAs}
-                            type="text"
-                          />
-                        </div>
+                        {this.renderInput("tradingAs", "Trading as")}
                       </div>
                       <div className="col-md-6">
-                        <div className="form-group">
-                          <label>Website</label>
-                          <input
-                            className="form-control"
-                            value={user.website}
-                            type="text"
-                          />
-                        </div>
+                        {this.renderInput("website", "Website")}
                       </div>
                     </div>
                     <div className="row">
                       <div className="col-md-6">
-                        <div className="form-group">
-                          <label>Physical Address</label>
-                          <input
-                            className="form-control"
-                            value={user.physicalAddress}
-                            type="text"
-                          />
-                        </div>
+                        {this.renderInput(
+                          "physicalAddress",
+                          "Physical Address"
+                        )}
                       </div>
                       <div className="col-md-6">
-                        <div className="form-group">
-                          <label>Postal Address</label>
-                          <input
-                            className="form-control"
-                            value={user.postalAddress}
-                            type="text"
-                          />
-                        </div>
+                        {this.renderInput("postalAddress", "Postal Address")}
                       </div>
                     </div>
                     <div className="row">
                       <div className="col-md-6">
-                        <div className="form-group">
-                          <label>Contact Person</label>
-                          <input
-                            className="form-control"
-                            value={user.contactPerson}
-                            type="text"
-                          />
-                        </div>
+                        {this.renderInput("contactPerson", "Contact Person")}
                       </div>
                       <div className="col-md-6">
-                        <div className="form-group">
-                          <label>Contact No</label>
-                          <input
-                            className="form-control"
-                            value={user.contactNo}
-                            type="text"
-                          />
-                        </div>
+                        {this.renderInput("contactNo", "Contact No")}
                       </div>
                     </div>
                     <div className="row">
@@ -281,6 +260,7 @@ class EditProfile extends Form {
                             type="file"
                             className="dropify"
                             data-height="200"
+                            onChange={this.onFileChange1}
                           />
                         </div>
                       </div>
@@ -293,6 +273,7 @@ class EditProfile extends Form {
                             type="file"
                             className="dropify"
                             data-height="200"
+                            onChange={this.onFileChange2}
                           />
                         </div>
                       </div>
@@ -314,46 +295,18 @@ class EditProfile extends Form {
                   <div className="main-signup-header">
                     <div className="row">
                       <div className="col-md-6">
-                        <div className="form-group">
-                          <label>Bank Name</label>
-                          <input
-                            className="form-control"
-                            value={user.bankName}
-                            type="text"
-                          />
-                        </div>
+                        {this.renderInput("bankName", "Bank Name")}
                       </div>
                       <div className="col-md-6">
-                        <div className="form-group">
-                          <label>Account No.</label>
-                          <input
-                            className="form-control"
-                            value={user.accountNo}
-                            type="text"
-                          />
-                        </div>
+                        {this.renderInput("accountNo", "Account No.")}
                       </div>
                     </div>
                     <div className="row">
                       <div className="col-md-6">
-                        <div className="form-group">
-                          <label>Account Type</label>
-                          <input
-                            className="form-control"
-                            value={user.accountType}
-                            type="text"
-                          />
-                        </div>
+                        {this.renderInput("accountType", "Account Type")}
                       </div>
                       <div className="col-md-6">
-                        <div className="form-group">
-                          <label>Branch Code</label>
-                          <input
-                            className="form-control"
-                            value={user.branchCode}
-                            type="text"
-                          />
-                        </div>
+                        {this.renderInput("branchCode", "Branch Code")}
                       </div>
                     </div>
                     <div className="row">
@@ -364,19 +317,21 @@ class EditProfile extends Form {
                             type="file"
                             className="dropify"
                             data-height="200"
+                            onChange={this.onFileChange3}
                           />
                         </div>
                       </div>
                     </div>
                     <div className="row">
                       <div className="col-md-12">
-                        <a
-                          href="#setupprofile"
-                          className="btn btn-main-primary btn-block"
-                          data-toggle="modal"
-                        >
-                          Update Profile
-                        </a>
+                        {this.renderButton(
+                          "Update Profile",
+                          this.handleSubmit,
+                          "btn btn-main-primary btn-block",
+                          () => {
+                            return false;
+                          }
+                        )}
                       </div>
                     </div>
                   </div>

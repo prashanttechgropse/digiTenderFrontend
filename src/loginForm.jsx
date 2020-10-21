@@ -34,15 +34,22 @@ class LoginForm extends Form {
       return await this.props.history.push(`/${stake.toLowerCase()}`);
     } else {
       toast.error(data.message);
-      if (!data.bankDetailsStatus) {
-        return await this.props.history.push("/register/uploadBankDetails");
+      if (!data.isVerified) {
+        const { error: ex } = await registerService.otpGeneration(
+          this.state.formData.email
+        );
+        if (ex) return;
+        this.props.submitEmail(this.state.formData.email);
+        return await this.props.history.push("/verify");
       }
-      const { error: ex } = await registerService.otpGeneration(
-        this.state.formData.email
-      );
-      if (ex) return;
-      this.props.submitEmail(this.state.formData.email);
-      return await this.props.history.push("/verify");
+      if (!data.isRegistered) {
+        return await this.props.history.push("/register/profileSetup");
+      }
+      if (!data.bankDetailsStatus) {
+        return await this.props.history.push(
+          `/register/uploadBankDetails/${data.profileType}/${data.organisationType}`
+        );
+      }
     }
   };
 

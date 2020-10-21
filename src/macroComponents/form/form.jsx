@@ -65,7 +65,7 @@ class Form extends Component {
       />
     );
   };
-  renderTextArea = (name, label, type = "text") => {
+  renderTextArea = (name, label, type = "text", rows = "4") => {
     const { formData, errors } = this.state;
     return (
       <TextArea
@@ -75,11 +75,12 @@ class Form extends Component {
         name={name}
         error={errors[name]}
         type={type}
+        rows={rows}
       />
     );
   };
 
-  renderSelect = (name, label, options) => {
+  renderSelect = (name, label, options, selected_id = false) => {
     const { formData, errors } = this.state;
     return (
       <Select
@@ -89,6 +90,7 @@ class Form extends Component {
         options={options}
         name={name}
         error={errors[name]}
+        selected_id={selected_id}
       />
     );
   };

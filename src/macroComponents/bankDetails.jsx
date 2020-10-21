@@ -209,7 +209,7 @@ class BankDetails extends Form {
               </div>
               <div className="modal-footer">
                 {this.renderButton(
-                  "verify",
+                  "Confirm",
                   this.handleSubmit,
                   "btn ripple btn-primary btn-block",
                   () => {

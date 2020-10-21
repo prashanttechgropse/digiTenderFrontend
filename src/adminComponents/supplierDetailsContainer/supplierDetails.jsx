@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import httpService from "../../services/httpService";
 import pad from "../../services/padding";
 import { toast } from "react-toastify";
+const fileDownload = require("js-file-download");
 
 class SupplierDetails extends Component {
   state = { employeesList: "" };
@@ -14,6 +15,53 @@ class SupplierDetails extends Component {
       );
       const { employeesList } = data;
       await this.setState({ employeesList });
+    } catch (error) {
+      toast.error(error.message);
+      return;
+    }
+  };
+
+  downloadProfileDoc = async () => {
+    try {
+      const { data } = await httpService.get(
+        `${process.env.REACT_APP_APIENDPOINT}/admin/registrationDocuments/${this.props.supplier.user._id}/${this.props.supplier.profileDoc}`,
+        {
+          responseType: "blob",
+        }
+      );
+      await fileDownload(data, `${this.props.supplier.profileDoc}`);
+    } catch (error) {
+      toast.error(error.message);
+      return;
+    }
+  };
+
+  downloadVatDoc = async () => {
+    if (this.props.supplier.vatDoc) {
+      try {
+        const { data } = await httpService.get(
+          `${process.env.REACT_APP_APIENDPOINT}/admin/registrationDocuments/${this.props.supplier.user._id}/${this.props.supplier.vatDoc}`,
+          {
+            responseType: "blob",
+          }
+        );
+        await fileDownload(data, `${this.props.supplier.vatDoc}`);
+      } catch (error) {
+        toast.error(error.message);
+        return;
+      }
+    } else return;
+  };
+
+  downloadBankDoc = async () => {
+    try {
+      const { data } = await httpService.get(
+        `${process.env.REACT_APP_APIENDPOINT}/admin/bankDocuments/${this.props.supplier.user._id}/${this.props.supplier.bankDetails.bankDoc}`,
+        {
+          responseType: "blob",
+        }
+      );
+      await fileDownload(data, `${this.props.supplier.bankDetails.bankDoc}`);
     } catch (error) {
       toast.error(error.message);
       return;
@@ -149,13 +197,13 @@ class SupplierDetails extends Component {
                           <div className="media">
                             <div className="media-body">
                               <div>
-                                <label> Name</label>{" "}
+                                <label> Name</label>
                                 <span className="tx-medium">
                                   {supplier.firstName}
                                 </span>
                               </div>
                               <div>
-                                <label>Reference Number</label>{" "}
+                                <label>Reference Number</label>
                                 <span className="tx-medium">
                                   {supplier.idNumber}
                                 </span>
@@ -165,13 +213,13 @@ class SupplierDetails extends Component {
                           <div className="media">
                             <div className="media-body">
                               <div>
-                                <label> Organization Type</label>{" "}
+                                <label> Organization Type</label>
                                 <span className="tx-medium">
                                   {supplier.organisationType}
                                 </span>
                               </div>
                               <div>
-                                <label>ID Number</label>{" "}
+                                <label>ID Number</label>
                                 <span className="tx-medium">
                                   {supplier.idNumber}
                                 </span>
@@ -181,13 +229,13 @@ class SupplierDetails extends Component {
                           <div className="media">
                             <div className="media-body">
                               <div>
-                                <label> Company Name</label>{" "}
+                                <label> Company Name</label>
                                 <span className="tx-medium">
                                   {supplier.companyName}
                                 </span>
                               </div>
                               <div>
-                                <label>Entity Registration No</label>{" "}
+                                <label>Entity Registration No</label>
                                 <span className="tx-medium">
                                   {supplier.entityRegistrationNo}
                                 </span>
@@ -219,7 +267,7 @@ class SupplierDetails extends Component {
                                 </span>
                               </div>
                               <div>
-                                <label>Website </label>{" "}
+                                <label>Website </label>
                                 <span className="tx-medium">
                                   {supplier.website}
                                 </span>
@@ -229,13 +277,13 @@ class SupplierDetails extends Component {
                           <div className="media">
                             <div className="media-body">
                               <div>
-                                <label> Contact Number</label>{" "}
+                                <label> Contact Number</label>
                                 <span className="tx-medium">
                                   {supplier.contactNo}
                                 </span>
                               </div>
                               <div>
-                                <label>Average Ratting </label>{" "}
+                                <label>Average Ratting </label>
                                 <span className="tx-medium">5</span>
                               </div>
                             </div>
@@ -243,9 +291,36 @@ class SupplierDetails extends Component {
                           <div className="media">
                             <div className="media-body">
                               <div>
-                                <label>Supplier Documnet</label>{" "}
+                                <label>Supplier profile Documnet</label>
                                 <span className="tx-medium">
-                                  <Link to="#">
+                                  <Link
+                                    to="#"
+                                    onClick={this.downloadProfileDoc}
+                                  >
+                                    <i className="fa fa-file"></i> Download
+                                  </Link>
+                                </span>
+                              </div>
+                            </div>
+                            {this.props.supplier.vatDoc ? (
+                              <div className="media-body">
+                                <div>
+                                  <label>Supplier Vat Documnet</label>
+                                  <span className="tx-medium">
+                                    <Link to="#" onClick={this.downloadVatDoc}>
+                                      <i className="fa fa-file"></i> Download
+                                    </Link>
+                                  </span>
+                                </div>
+                              </div>
+                            ) : (
+                              ""
+                            )}
+                            <div className="media-body">
+                              <div>
+                                <label>Supplier Vat Documnet</label>
+                                <span className="tx-medium">
+                                  <Link to="#" onClick={this.downloadVatDoc}>
                                     <i className="fa fa-file"></i> Download
                                   </Link>
                                 </span>
@@ -274,29 +349,13 @@ class SupplierDetails extends Component {
                           <div className="media">
                             <div className="media-body">
                               <div>
-                                <label>Supplier Name</label>{" "}
+                                <label>Email Id</label>
                                 <span className="tx-medium">
-                                  {supplier.firstName}
+                                  {supplier.user.email}
                                 </span>
                               </div>
                               <div>
-                                <label>Contact Number</label>{" "}
-                                <span className="tx-medium">
-                                  {supplier.contactNo}
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="media">
-                            <div className="media-body">
-                              <div>
-                                <label>Email Id</label>{" "}
-                                <span className="tx-medium">
-                                  {supplier.user.emailId}
-                                </span>
-                              </div>
-                              <div>
-                                <label>Bank Name</label>{" "}
+                                <label>Bank Name</label>
                                 <span className="tx-medium">
                                   {supplier.bankDetails.bankName}
                                 </span>
@@ -322,15 +381,15 @@ class SupplierDetails extends Component {
                           <div className="media">
                             <div className="media-body">
                               <div>
-                                <label> Branch Code</label>{" "}
+                                <label> Branch Code</label>
                                 <span className="tx-medium">
                                   {supplier.bankDetails.branchCode}
                                 </span>
                               </div>
                               <div>
-                                <label>Attach Documnet</label>{" "}
+                                <label>Attach Documnet</label>
                                 <span className="tx-medium">
-                                  <Link to="#">
+                                  <Link to="#" onClick={this.downloadBankDoc}>
                                     <i className="fa fa-file"></i> Download
                                   </Link>
                                 </span>

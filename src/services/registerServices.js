@@ -58,6 +58,21 @@ export async function setUpProfileService(formData) {
   }
 }
 
+export async function editProfileService(formData) {
+  try {
+    const { data } = await httpService.post(
+      `${process.env.REACT_APP_APIENDPOINT}/editProfile`,
+      formData
+    );
+    toast.success(data.message);
+    if (!data.message) toast.success(data);
+    return { data };
+  } catch (error) {
+    if (error.response) toast.error(error.response.data);
+    return { error };
+  }
+}
+
 export async function setUpSecondarUserProfileService(formData) {
   try {
     const { data } = await httpService.post(

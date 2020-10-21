@@ -21,6 +21,7 @@ import DeliveryNoteDetails from "../customerComponents/customerDeliveryNotesComp
 import SecondaryUserTenderDetails from "../secondaryUserComponents/secondaryUserTenderDetails";
 import SecondaryUserTenderList from "../secondaryUserComponents/secondaryUserTenderList";
 import SecondaryUserEditProfile from "../secondaryUserComponents/secondaryUserEditProfile";
+import UserComplainDetails from "../macroComponents/userComplaindetails";
 
 class ReceiverApp extends Component {
   state = {
@@ -101,12 +102,18 @@ class ReceiverApp extends Component {
               path="/receiver/termsConditions"
               component={TermsConditions}
             />
+            <Route exact path="/receiver/editProfile">
+              <SecondaryUserEditProfile
+                user={this.state.receiver}
+                {...this.props}
+              />
+            </Route>
+            <Route exact path="/receiver/helpSupport" component={HelpSupport} />
             <Route
               exact
-              path="/receiver/editProfile"
-              component={SecondaryUserEditProfile}
+              path="/receiver/complain-detail/:complainId"
+              component={UserComplainDetails}
             />
-            <Route exact path="/receiver/helpSupport" component={HelpSupport} />
 
             <Route
               exact

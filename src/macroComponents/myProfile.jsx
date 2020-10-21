@@ -1,8 +1,59 @@
 import React, { Component } from "react";
 import Label from "../microComponents/profileLabels";
 import { Link } from "react-router-dom";
+import httpService from "../services/httpService";
+import { toast } from "react-toastify";
+const fileDownload = require("js-file-download");
 class MyProfile extends Component {
   state = {};
+
+  downloadProfileDoc = async () => {
+    try {
+      const { data } = await httpService.get(
+        `${process.env.REACT_APP_APIENDPOINT}/registrationDocuments/${this.props.user.details.profileDoc}`,
+        {
+          responseType: "blob",
+        }
+      );
+      await fileDownload(data, `${this.props.user.details.profileDoc}`);
+    } catch (error) {
+      toast.error(error.message);
+      return;
+    }
+  };
+
+  downloadVatDoc = async () => {
+    if (this.props.user.details.vatDoc) {
+      try {
+        const { data } = await httpService.get(
+          `${process.env.REACT_APP_APIENDPOINT}/registrationDocuments/${this.props.user.details.vatDoc}`,
+          {
+            responseType: "blob",
+          }
+        );
+        await fileDownload(data, `${this.props.user.details.vatDoc}`);
+      } catch (error) {
+        toast.error(error.message);
+        return;
+      }
+    } else return;
+  };
+
+  downloadBankDoc = async () => {
+    try {
+      const { data } = await httpService.get(
+        `${process.env.REACT_APP_APIENDPOINT}/bankDocuments/${this.props.user.bankDetails.bankDoc}`,
+        {
+          responseType: "blob",
+        }
+      );
+      await fileDownload(data, `${this.props.user.bankDetails.bankDoc}`);
+    } catch (error) {
+      toast.error(error.message);
+      return;
+    }
+  };
+
   render() {
     const { user } = this.props;
     return (
@@ -218,22 +269,26 @@ class MyProfile extends Component {
                         <div className="media mb-0">
                           <div className="media-body">
                             <Label
-                              name="Document uploaded by Suplier"
+                              name="Document uploaded by user"
                               value={
-                                <Link to="#">
-                                  <i className="fa fa-file"></i> Download File
+                                <Link onClick={this.downloadProfileDoc}>
+                                  <i className="fa fa-file"></i>
+                                  Download File
                                 </Link>
                               }
                             />
-
-                            <Label
-                              name="VAT Document uploaded by Suplier"
-                              value={
-                                <Link to="#">
-                                  <i className="fa fa-file"></i> Download File
-                                </Link>
-                              }
-                            />
+                            {user.details.vatDoc ? (
+                              <Label
+                                name="VAT Document uploaded by Suplier"
+                                value={
+                                  <Link onClick={this.downloadVatDoc}>
+                                    <i className="fa fa-file"></i> Download File
+                                  </Link>
+                                }
+                              />
+                            ) : (
+                              ""
+                            )}
                           </div>
                         </div>
                       </div>
@@ -271,7 +326,7 @@ class MyProfile extends Component {
                             <Label
                               name="Upload Document"
                               value={
-                                <Link to="#">
+                                <Link onClick={this.downloadBankDoc}>
                                   <i className="fa fa-file"></i> Download File
                                 </Link>
                               }
