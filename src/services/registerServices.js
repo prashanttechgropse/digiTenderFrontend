@@ -193,7 +193,6 @@ export async function changePassword(formData) {
 
 export async function adminAuthentication(formData) {
   try {
-    console.log(process.env);
     const { data, headers } = await httpService.post(
       `${process.env.REACT_APP_APIENDPOINT}/admin/login`,
       {

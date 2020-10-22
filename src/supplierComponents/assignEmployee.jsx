@@ -40,7 +40,6 @@ class AssignEmployee extends Form {
         );
         const { employeeList } = data;
         await this.setState({ employeeList });
-        console.log(this.state.employeeList);
       }
       const { data } = await httpService.get(
         `${process.env.REACT_APP_APIENDPOINT}/supplier/myTenderList`

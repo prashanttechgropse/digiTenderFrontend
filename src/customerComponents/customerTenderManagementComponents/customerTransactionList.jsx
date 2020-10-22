@@ -27,7 +27,7 @@ class CustomerTransactionList extends Component {
       );
       const { tenderList } = data;
       await this.setState({ tenderList });
-      console.log(tenderList);
+
       const displayTenderList = paginate(
         this.state.tenderList,
         this.state.currentPage,
@@ -70,13 +70,7 @@ class CustomerTransactionList extends Component {
           <td>{tender.deliveryLocation}</td>
           <td>{`${tender.budgetAmount}.00 USD`}</td>
           <td>
-            <span
-              className={`badge badge-${
-                tender.paymentStatus === "paid" ? "success" : "danger"
-              } f-14`}
-            >
-              {tender.paymentStatus}
-            </span>
+            <span>"hard coded"</span>
           </td>
         </tr>
       );

@@ -96,7 +96,7 @@ class CustomerEditTender extends Component {
     const result = Joi.validate(this.state.formData, this.schema, {
       abortEarly: false,
     });
-    console.log(result.error);
+
     if (!result.error) return null;
     const errors = {};
     if (result.error) {

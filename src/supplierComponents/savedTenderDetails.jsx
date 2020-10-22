@@ -94,7 +94,6 @@ class SavedTenderDetails extends Component {
 
     if (errors) return;
 
-    console.log(this.state.bid);
     let bid = { ...this.state.bid };
     if (e.currentTarget.name === "submit") {
       bid.isPublished = true;
@@ -110,7 +109,6 @@ class SavedTenderDetails extends Component {
       );
 
     await this.setState({ bid });
-    console.log(this.state.bid);
 
     await this.doSubmit();
   };

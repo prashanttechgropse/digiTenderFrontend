@@ -23,6 +23,9 @@ import TenderDetails from "./customerComponents/customerTenderManagementComponen
 import DeliveryNoteMainContent from "./customerComponents/customerDeliveryNotesComponents/DeliveryNoteMainContent";
 import DeliveryNoteDetails from "./customerComponents/customerDeliveryNotesComponents/DeliveryNoteDetails";
 import AdminComplaintDetails from "./adminComponents/adminAdminFunctionComponents/adminComplainDetails";
+import CustomerPaymentDetails from "./adminComponents/adminPaymentManagementComponents/adminCustomerPaymentDetails";
+import SupplierPaymentDetails from "./adminComponents/adminPaymentManagementComponents/adminSupplierPaymentDetails";
+import CommissionDetails from "./adminComponents/adminPaymentManagementComponents/adminCommissionDetails";
 
 class AdminApp extends Component {
   state = {
@@ -30,6 +33,11 @@ class AdminApp extends Component {
     customerList: "",
     supplierList: "",
     tenderList: "",
+    totalCommissionEarned: "",
+    totalAmountPaidToSupplier: "",
+    totalAmountPaidByCustomer: "",
+    totalReceivers: "",
+    totalDeliveryNotes: "",
   };
 
   componentDidMount = async () => {
@@ -39,17 +47,28 @@ class AdminApp extends Component {
       );
       if (data) {
         if (data.user.profileType.toLowerCase() === "admin") {
-          const admin = data.user;
-          this.setState({ admin: admin });
-
-          const customerList = data.customerList;
-          this.setState({ customerList });
-
-          const supplierList = data.supplierList;
-          this.setState({ supplierList });
-
-          const tenderList = data.tenderList;
-          this.setState({ tenderList });
+          const {
+            user: admin,
+            customerList,
+            supplierList,
+            tenderList,
+            totalCommissionEarned,
+            totalAmountPaidToSupplier,
+            totalAmountPaidByCustomer,
+            totalReceivers,
+            totalDeliveryNotes,
+          } = data;
+          this.setState({
+            admin,
+            customerList,
+            supplierList,
+            tenderList,
+            totalCommissionEarned,
+            totalAmountPaidToSupplier,
+            totalAmountPaidByCustomer,
+            totalReceivers,
+            totalDeliveryNotes,
+          });
         } else {
           return await this.props.history.push(`/${data.user.profileType}`);
         }
@@ -116,6 +135,21 @@ class AdminApp extends Component {
               path="/admin/termsConditions"
               component={AdminTermsConditions}
             />
+            <Route
+              exact
+              path="/admin/customer-payment-detail/:paymentId"
+              component={CustomerPaymentDetails}
+            />
+            <Route
+              exact
+              path="/admin/supplier-payment-detail/:paymentId"
+              component={SupplierPaymentDetails}
+            />
+            <Route
+              exact
+              path="/admin/commission-detail/:paymentId"
+              component={CommissionDetails}
+            />
 
             <Route
               exact
@@ -157,6 +191,11 @@ class AdminApp extends Component {
                 tenderList={this.state.tenderList}
                 customerList={this.state.customerList}
                 supplierList={this.state.supplierList}
+                totalCommissionEarned={this.state.totalCommissionEarned}
+                totalAmountPaidToSupplier={this.state.totalAmountPaidToSupplier}
+                totalAmountPaidByCustomer={this.state.totalAmountPaidByCustomer}
+                totalReceivers={this.state.totalReceivers}
+                totalDeliveryNotes={this.state.totalDeliveryNotes}
               />
             </Route>
           </div>

@@ -21,6 +21,11 @@ class AdminDashboardMainContent extends Component {
           tenderList={this.props.tenderList}
           customerList={this.props.customerList}
           supplierList={this.props.supplierList}
+          totalCommissionEarned={this.props.totalCommissionEarned}
+          totalAmountPaidToSupplier={this.props.totalAmountPaidToSupplier}
+          totalAmountPaidByCustomer={this.props.totalAmountPaidByCustomer}
+          totalReceivers={this.props.totalReceivers}
+          totalDeliveryNotes={this.props.totalDeliveryNotes}
         />
         <AdminDashBoardRecentlyAddedCustomers
           customerList={this.props.customerList}

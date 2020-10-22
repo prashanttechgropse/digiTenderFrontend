@@ -25,9 +25,7 @@ class TenderDetails extends Component {
       }
 
       await this.setState({ tender: data.data.tender });
-      console.log(this.state.tender);
     } catch (error) {
-      console.log(error);
       toast.error(error.message);
       return;
     }

@@ -82,9 +82,7 @@ class SupplierSaveForLater extends Component {
           <td>{`${tender.budgetAmount} USD`}</td>
           <td>
             <span className={`badge badge-${styleOfBadge} f-14`}>
-              {tender.status === "completed"
-                ? tender.paymentStatus
-                : tender.status}
+              {tender.status === "completed" ? "hard coded" : tender.status}
             </span>
           </td>
         </tr>

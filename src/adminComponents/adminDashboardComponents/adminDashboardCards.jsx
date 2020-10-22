@@ -86,11 +86,10 @@ class AdminDashBoardCards extends Component {
                 <div className="d-flex">
                   <div className="">
                     <h4 className="tx-20 font-weight-bold mb-1 text-white">
-                      17 Notes
+                      {this.props.totalDeliveryNotes} Notes
                     </h4>
                   </div>
                   <span className="float-right my-auto ml-auto">
-                    {" "}
                     <i className="fa fa-file text-white f-24"></i>{" "}
                   </span>
                 </div>
@@ -111,11 +110,10 @@ class AdminDashBoardCards extends Component {
                 <div className="d-flex">
                   <div className="">
                     <h4 className="tx-20 font-weight-bold mb-1 text-white">
-                      8 Receiver
+                      {this.props.totalReceivers} Receiver
                     </h4>
                   </div>
                   <span className="float-right my-auto ml-auto">
-                    {" "}
                     <i className="fa fa-user text-white  f-24"></i>{" "}
                   </span>
                 </div>
@@ -138,11 +136,10 @@ class AdminDashBoardCards extends Component {
                 <div className="d-flex">
                   <div className="">
                     <h4 className="tx-20 font-weight-bold mb-1 text-white">
-                      $4,820.50
+                      ${this.props.totalCommissionEarned}
                     </h4>
                   </div>
                   <span className="float-right my-auto ml-auto">
-                    {" "}
                     <i className="fa fa-money text-white f-24"></i>{" "}
                   </span>
                 </div>
@@ -165,11 +162,10 @@ class AdminDashBoardCards extends Component {
                 <div className="d-flex">
                   <div className="">
                     <h4 className="tx-20 font-weight-bold mb-1 text-white">
-                      $1,820.50
+                      ${this.props.totalAmountPaidToSupplier}
                     </h4>
                   </div>
                   <span className="float-right my-auto ml-auto">
-                    {" "}
                     <i className="fa fa-money text-white f-24"></i>{" "}
                   </span>
                 </div>
@@ -192,11 +188,10 @@ class AdminDashBoardCards extends Component {
                 <div className="d-flex">
                   <div className="">
                     <h4 className="tx-20 font-weight-bold mb-1 text-white">
-                      $7,820.50
+                      ${this.props.totalAmountPaidByCustomer}
                     </h4>
                   </div>
                   <span className="float-right my-auto ml-auto">
-                    {" "}
                     <i className="fa fa-money text-white f-24"></i>{" "}
                   </span>
                 </div>

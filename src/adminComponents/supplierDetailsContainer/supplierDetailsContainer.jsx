@@ -24,7 +24,6 @@ class SupplierDetailsContainer extends Component {
         userCurrentStatus: data.data.supplier.user.isApproved,
       });
     } catch (error) {
-      console.log(error);
       toast.error(error.message);
       return;
     }

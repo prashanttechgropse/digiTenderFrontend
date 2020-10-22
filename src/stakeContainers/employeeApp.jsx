@@ -33,7 +33,7 @@ class EmployeeApp extends Component {
       const { data } = await httpService.get(
         `${process.env.REACT_APP_APIENDPOINT}/employee/myData`
       );
-      console.log(data);
+
       if (data) {
         if (data.user.profileType.toLowerCase() === "employee") {
           const employee = data.user;

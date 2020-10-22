@@ -19,7 +19,6 @@ class SupplierBidDetails extends Component {
         await this.setState({ bidNotFound: bidNotFound });
       }
     } catch (error) {
-      console.log(error);
       toast.error(error.message);
       return;
     }

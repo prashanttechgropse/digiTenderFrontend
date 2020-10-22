@@ -49,7 +49,7 @@ class CreateDeliveryNote extends Form {
         );
       }
       const { tender } = res.data;
-      console.log(tender);
+
       let formData = {};
       formData.deliveryNoteNo = `DN${tender.tenderRefNo}`;
       formData.customerName = tender.createdBy.firstName;

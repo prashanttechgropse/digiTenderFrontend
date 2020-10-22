@@ -22,7 +22,6 @@ class RegisterContainer extends Component {
   getProfileDetails = async (formData) => {
     const register = formData;
     this.setState({ register: register });
-    console.log(this.state);
   };
   render() {
     return (

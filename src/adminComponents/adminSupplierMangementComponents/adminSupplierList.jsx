@@ -35,7 +35,6 @@ class AdminSupplierList extends Component {
       );
       this.setState({ displaySupplierList });
     } catch (error) {
-      console.log(error);
       toast.error(error.message);
       return;
     }

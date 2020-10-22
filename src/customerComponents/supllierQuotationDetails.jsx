@@ -8,7 +8,6 @@ class SupplierQuotationDetails extends Component {
   state = { bid: null };
 
   async componentDidMount() {
-    console.log(this.props.match.params.bidId);
     if (!this.props.match.params.bidId) return;
     try {
       const { data } = await httpService.get(

@@ -44,10 +44,8 @@ class DeliveryNoteDetails extends Component {
           `${process.env.REACT_APP_APIENDPOINT}/employee/myDeliveryNote/${this.props.match.params.tenderId}`
         );
       }
-      console.log(res);
       const { deliveryNote } = res.data;
       await this.setState({ deliveryNote });
-      console.log(this.state.deliveryNote);
     } catch (error) {
       toast.error(error);
     }

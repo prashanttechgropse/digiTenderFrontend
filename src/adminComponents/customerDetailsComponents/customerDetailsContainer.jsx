@@ -24,7 +24,6 @@ class CustomerDetailsContainer extends Component {
         userCurrentStatus: data.data.customer.user.isApproved,
       });
     } catch (error) {
-      console.log(error);
       toast.error(error.message);
       return;
     }

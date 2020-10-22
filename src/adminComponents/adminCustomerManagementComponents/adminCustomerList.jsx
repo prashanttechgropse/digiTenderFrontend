@@ -32,7 +32,6 @@ class AdminCustomerList extends Component {
 
       await this.setState({ displayCustomerList });
     } catch (error) {
-      console.log(error);
       toast.error(error.message);
       return;
     }

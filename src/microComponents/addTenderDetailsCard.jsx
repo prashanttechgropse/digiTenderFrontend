@@ -22,7 +22,6 @@ class AddTenderDetailsCard extends Form {
     let obj = { [input.name]: input.value };
     let subSchema;
     if (`${[input.name]}` === "deliveryDate") {
-      console.log(this.state.formData.closingDate);
       obj = {
         closingDate: this.state.formData.closingDate,
         [input.name]: input.value,

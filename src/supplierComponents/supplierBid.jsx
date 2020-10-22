@@ -27,7 +27,7 @@ class SupllierBid extends Component {
       const { data } = await httpService.get(
         `${process.env.REACT_APP_APIENDPOINT}/supplier/checkIfBidCreated/${this.props.match.params.tenderId}`
       );
-      console.log(data);
+
       if (!data.bidAlreadyExists) {
         const { data } = await httpService.get(
           `${process.env.REACT_APP_APIENDPOINT}/tenders/${this.props.match.params.tenderId}`
@@ -84,7 +84,6 @@ class SupllierBid extends Component {
     let acceptTermsConditions = this.state.acceptTermsConditions;
     acceptTermsConditions = !acceptTermsConditions;
     await this.setState({ acceptTermsConditions });
-    console.log(this.state.acceptTermsConditions);
   };
 
   validateOnSubmit = () => {
@@ -104,7 +103,6 @@ class SupllierBid extends Component {
 
     const errors = this.validateOnSubmit();
     this.setState({ errors: errors || {} });
-    console.log(errors);
 
     if (errors) return;
 
@@ -123,7 +121,6 @@ class SupllierBid extends Component {
           return parseInt(item.price) * parseInt(item.quantity);
         })
       );
-    console.log(bid.totalAmount);
 
     await this.setState({ bid });
 

@@ -26,7 +26,7 @@ class CustomerReceiverlist extends Component {
       );
       const { receiversList: receiverList } = data;
       await this.setState({ receiverList });
-      console.log(this.state.receiverList);
+
       const displayReceiverList = paginate(
         this.state.receiverList,
         this.state.currentPage,

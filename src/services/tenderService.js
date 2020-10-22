@@ -2,9 +2,6 @@ import httpService from "./httpService";
 import { toast } from "react-toastify";
 
 export async function createTender(formData) {
-  for (var pair of formData.entries()) {
-    console.log(pair[0] + ", " + pair[1]);
-  }
   try {
     const { data } = await httpService.post(
       `${process.env.REACT_APP_APIENDPOINT}/customer/createTender`,
@@ -20,9 +17,6 @@ export async function createTender(formData) {
 }
 
 export async function editSavedTender(formData) {
-  for (var pair of formData.entries()) {
-    console.log(pair[0] + ", " + pair[1]);
-  }
   try {
     const { data } = await httpService.post(
       `${process.env.REACT_APP_APIENDPOINT}/customer/editSavedTender`,

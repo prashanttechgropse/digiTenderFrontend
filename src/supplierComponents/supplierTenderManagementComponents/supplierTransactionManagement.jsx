@@ -21,13 +21,12 @@ class SupplierTransactionManagement extends Component {
   }
 
   async componentDidMount() {
-    console.log("in component did mount");
     try {
       const { data } = await httpService.get(
         `${process.env.REACT_APP_APIENDPOINT}/supplier/myTenderList/completed`
       );
       const { tenderList } = data;
-      console.log();
+
       await this.setState({ tenderList });
       const displayTenderList = paginate(
         this.state.tenderList,
@@ -61,7 +60,7 @@ class SupplierTransactionManagement extends Component {
     let styleOfBadge;
     return tenderList.map((tender) => {
       srNo++;
-      if (tender.paymentstatus === "paid") styleOfBadge = "success";
+      if (tender) styleOfBadge = "success";
       else {
         styleOfBadge = "danger";
       }
@@ -79,7 +78,7 @@ class SupplierTransactionManagement extends Component {
           <td>{`${tender.budgetAmount}.00 USD`}</td>
           <td>
             <span className={`badge badge-${styleOfBadge} f-14`}>
-              {tender.paymentStatus}
+              "hard coded"
             </span>
           </td>
         </tr>

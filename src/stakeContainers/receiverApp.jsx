@@ -33,7 +33,7 @@ class ReceiverApp extends Component {
       const { data } = await httpService.get(
         `${process.env.REACT_APP_APIENDPOINT}/receiver/myData`
       );
-      console.log(data);
+
       if (data) {
         if (data.user.profileType.toLowerCase() === "receiver") {
           const receiver = data.user;

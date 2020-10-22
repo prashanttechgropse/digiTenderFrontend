@@ -13,7 +13,6 @@ class AdminHelpSupport extends Component {
         `${process.env.REACT_APP_APIENDPOINT}/admin/complainList`
       );
       this.setState({ complainList: data.complainList });
-      console.log(data.complainList);
     } catch (error) {
       toast.error(error.message);
     }
