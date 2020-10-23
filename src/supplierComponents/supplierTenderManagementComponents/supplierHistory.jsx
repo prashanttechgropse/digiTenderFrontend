@@ -75,7 +75,7 @@ class SupplierHistory extends Component {
           <td>{`${tender.createdBy.firstName}`}</td>
           <td>{tender.deliveryLocation}</td>
 
-          <td>{`${tender.budgetAmount} USD`}</td>
+          <td>{`${tender.acceptedBidAmount} USD`}</td>
           <td>
             <span className="badge badge-success f-14">{`${tender.status}`}</span>
           </td>

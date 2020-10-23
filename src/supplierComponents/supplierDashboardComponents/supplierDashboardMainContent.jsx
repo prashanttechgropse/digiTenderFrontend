@@ -9,6 +9,8 @@ class SupplierDashboardMainContent extends Component {
     increaseInTenders: "",
     increaseInOngoingTenders: "",
     increaseInCompletedTenders: "",
+    earningsThisMonth: "",
+    increaseInEarnings: "",
   };
 
   async componentDidMount() {
@@ -25,6 +27,12 @@ class SupplierDashboardMainContent extends Component {
         });
         this.setState({
           increaseInCompletedTenders: data.increaseInCompletedTenders,
+        });
+        this.setState({
+          earningsThisMonth: data.earningsThisMonth,
+        });
+        this.setState({
+          increaseInEarnings: data.increaseInEarnings,
         });
       } else return await this.props.history.push(`/${data.user.profileType}`);
     } catch (error) {
@@ -189,16 +197,21 @@ class SupplierDashboardMainContent extends Component {
                   <div className="d-flex">
                     <div className="">
                       <h4 className="tx-20 font-weight-bold mb-1 text-white">
-                        4,820.50USD
+                        $ {this.state.earningsThisMonth}
                       </h4>
                       <p className="mb-0 tx-12 text-white op-7">
                         Compared to last month
                       </p>
                     </div>
                     <span className="float-right my-auto ml-auto">
-                      {" "}
-                      <i className="fa fa-arrow-circle-down text-white"></i>{" "}
-                      <span className="text-white op-7"> 24%</span>{" "}
+                      <i
+                        className={`fa fa-arrow-circle-${
+                          this.state.increaseInEarnings > 0 ? "up" : "down"
+                        } text-white`}
+                      ></i>
+                      <span className="text-white op-7">
+                        {this.state.increaseInEarnings}
+                      </span>
                     </span>
                   </div>
                 </div>

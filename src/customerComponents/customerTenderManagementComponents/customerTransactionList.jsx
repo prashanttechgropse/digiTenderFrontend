@@ -23,7 +23,7 @@ class CustomerTransactionList extends Component {
   async componentDidMount() {
     try {
       const { data } = await httpService.get(
-        `${process.env.REACT_APP_APIENDPOINT}/customer/tenderList/completed`
+        `${process.env.REACT_APP_APIENDPOINT}/customer/transactionList`
       );
       const { tenderList } = data;
       await this.setState({ tenderList });
@@ -54,9 +54,15 @@ class CustomerTransactionList extends Component {
     const tenderList = this.state.displayTenderList;
     if (tenderList === null) return null;
     let srNo = (this.state.currentPage - 1) * this.state.pageSize;
-
+    let styleOfBadge;
     return tenderList.map((tender) => {
       srNo++;
+      if (tender.status === "completed") styleOfBadge = "success";
+      else if (tender.status === "rejected") styleOfBadge = "danger";
+      else if (tender.status === "awarded") styleOfBadge = "primary";
+      else {
+        styleOfBadge = "warning";
+      }
       return (
         <tr key={srNo} role="row">
           <td>{pad(srNo, 3)}</td>
@@ -65,12 +71,33 @@ class CustomerTransactionList extends Component {
               {tender._id.toString().substring(18, 24)}
             </Link>
           </td>
-          <td>"hard coded"</td>
+          <td>
+            <span
+              className={`badge ${
+                tender.payment.paidByCustomer ? "badge-success" : "badge-danger"
+              } f-14`}
+            >
+              {tender.payment.paidByCustomer
+                ? tender.payment.paidByCustomerDate.toString().substring(0, 10)
+                : "transaction not made yet"}
+            </span>
+          </td>
           <td>{tender.createdBy.firstName}</td>
           <td>{tender.deliveryLocation}</td>
-          <td>{`${tender.budgetAmount}.00 USD`}</td>
+          <td>{`$${tender.payment.tenderAmount} `}</td>
           <td>
-            <span>"hard coded"</span>
+            <span className={`badge badge-${styleOfBadge} f-14`}>
+              {tender.status}
+            </span>
+          </td>
+          <td>
+            <span
+              className={`badge ${
+                tender.payment.paidByCustomer ? "badge-success" : "badge-danger"
+              } f-14`}
+            >
+              {tender.payment.paidByCustomer ? "paid" : "Not Paid"}
+            </span>
           </td>
         </tr>
       );
@@ -121,11 +148,12 @@ class CustomerTransactionList extends Component {
                             <tr role="row">
                               <th>Sr No</th>
                               <th>Tender I'D</th>
-                              <th>Transaction Date</th>
+                              <th>Payment Transaction Date</th>
                               <th>Customer Name</th>
                               <th>Location</th>
                               <th>Amount</th>
-                              <th>Status</th>
+                              <th>Tender Status</th>
+                              <th>Payment Status</th>
                             </tr>
                           </thead>
                           <tbody>{this.renderTenderList()}</tbody>

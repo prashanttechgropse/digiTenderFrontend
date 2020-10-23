@@ -23,7 +23,7 @@ class SupplierTransactionManagement extends Component {
   async componentDidMount() {
     try {
       const { data } = await httpService.get(
-        `${process.env.REACT_APP_APIENDPOINT}/supplier/myTenderList/completed`
+        `${process.env.REACT_APP_APIENDPOINT}/supplier/myTransactionList`
       );
       const { tenderList } = data;
 
@@ -60,25 +60,46 @@ class SupplierTransactionManagement extends Component {
     let styleOfBadge;
     return tenderList.map((tender) => {
       srNo++;
-      if (tender) styleOfBadge = "success";
+      if (tender.status === "completed") styleOfBadge = "success";
+      else if (tender.status === "rejected") styleOfBadge = "danger";
+      else if (tender.status === "awarded") styleOfBadge = "primary";
       else {
-        styleOfBadge = "danger";
+        styleOfBadge = "warning";
       }
       return (
         <tr key={srNo} role="row">
           <td>{pad(srNo, 3)}</td>
           <td>
             <Link to={`/supplier/tenderDetails/${tender._id}`}>
-              {tender._id.toString().substring(18, 24)}
+              {tender.tenderRefNo}
             </Link>
           </td>
-          <td>"hard coded"</td>
+          <td>
+            <span
+              className={`badge ${
+                tender.payment.paidByAdmin ? "badge-success" : "badge-danger"
+              } f-14`}
+            >
+              {tender.payment.paidByAdmin
+                ? tender.payment.paidByAdminDate.toString().substring(0, 10)
+                : "transaction not made yet"}
+            </span>
+          </td>
           <td>{`${tender.createdBy.firstName}`}</td>
           <td>{`${tender.deliveryLocation}`}</td>
-          <td>{`${tender.budgetAmount}.00 USD`}</td>
+          <td>{`$${tender.payment.tenderAmount}`}</td>
           <td>
             <span className={`badge badge-${styleOfBadge} f-14`}>
-              "hard coded"
+              {tender.status}
+            </span>
+          </td>
+          <td>
+            <span
+              className={`badge ${
+                tender.payment.paidByAdmin ? "badge-success" : "badge-danger"
+              } f-14`}
+            >
+              {tender.payment.paidByAdmin ? "paid" : "Not Paid"}
             </span>
           </td>
         </tr>
@@ -131,12 +152,13 @@ class SupplierTransactionManagement extends Component {
                           <thead>
                             <tr role="row">
                               <th>Sr No</th>
-                              <th>Tender I'D</th>
+                              <th>Tender Reference number</th>
                               <th>Transaction Date</th>
                               <th>Customer Name</th>
                               <th>Location</th>
-                              <th>Amount</th>
-                              <th>Status</th>
+                              <th>Tender Amount</th>
+                              <th>Tender Status</th>
+                              <th>Payment Status</th>
                             </tr>
                           </thead>
                           <tbody>{this.renderTenderList()} </tbody>

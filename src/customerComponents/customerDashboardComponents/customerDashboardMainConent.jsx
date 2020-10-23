@@ -9,6 +9,8 @@ class CustomerDashboardMainContent extends Component {
     increaseInTenders: "",
     increaseInOngoingTenders: "",
     increaseInCompletedTenders: "",
+    paymentsThisMonth: "",
+    increaseInPayments: "",
   };
 
   async componentDidMount() {
@@ -26,6 +28,12 @@ class CustomerDashboardMainContent extends Component {
           });
           this.setState({
             increaseInCompletedTenders: data.increaseInCompletedTenders,
+          });
+          this.setState({
+            paymentsThisMonth: data.paymentsThisMonth,
+          });
+          this.setState({
+            increaseInPayments: data.increaseInPayments,
           });
           return;
         } else {
@@ -52,7 +60,7 @@ class CustomerDashboardMainContent extends Component {
   calculateCompletedTenders = () => {
     const { tenders } = this.state.customer.details;
     const temp = tenders.filter(
-      (tender) => tender.status.toLowerCase() === "paid"
+      (tender) => tender.status.toLowerCase() === "completed"
     );
     return temp.length;
   };
@@ -197,15 +205,21 @@ class CustomerDashboardMainContent extends Component {
                   <div className="d-flex">
                     <div className="">
                       <h4 className="tx-20 font-weight-bold mb-1 text-white">
-                        $4,820.50
+                        ${this.state.paymentsThisMonth}
                       </h4>
                       <p className="mb-0 tx-12 text-white op-7">
                         Compared to last month
                       </p>
                     </div>
                     <span className="float-right my-auto ml-auto">
-                      <i className="fa fa-arrow-circle-down text-white"></i>
-                      <span className="text-white op-7"> 24%</span>
+                      <i
+                        className={`fa fa-arrow-circle-${
+                          this.state.increaseInPayments > 0 ? "up" : "down"
+                        } text-white`}
+                      ></i>
+                      <span className="text-white op-7">
+                        {this.state.increaseInPayments}
+                      </span>
                     </span>
                   </div>
                 </div>
