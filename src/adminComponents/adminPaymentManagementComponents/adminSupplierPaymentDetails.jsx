@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import httpService from "../../services/httpService";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 class SupplierPaymentDetails extends Component {
   state = { paymentDetails: "" };
 
@@ -11,7 +12,30 @@ class SupplierPaymentDetails extends Component {
     this.setState({ paymentDetails: data.paymentDetails });
   };
 
+  handlePaidByAdmin = async () => {
+    let previousPaymentDetails = { ...this.state.paymentDetails };
+    try {
+      const {
+        data,
+      } = await httpService.post(
+        `${process.env.REACT_APP_APIENDPOINT}/admin/paymentToSupplier/${this.props.match.params.paymentId}`,
+        { paidByAdmin: true }
+      );
+      if (data) {
+        const paymentDetails = { ...this.state.paymentDetails };
+        paymentDetails.paidByAdmin = true;
+        this.setState({ paymentDetails });
+        toast.success(data.message);
+        window.location.reload();
+      }
+    } catch (Error) {
+      toast.error(Error.message);
+      this.setState({ paymentDetails: previousPaymentDetails });
+    }
+  };
+
   renderPaymentDoneToSupplierButton = () => {
+    if (this.state.paymentDetails.paidByAdmin) return null;
     return (
       <div className="pr-1 mb-3 mb-xl-0">
         <button
@@ -40,7 +64,12 @@ class SupplierPaymentDetails extends Component {
                 </h4>
                 <p>are you sure ?</p>
                 <div className="text-center mt-4 mb-4">
-                  <Link to="#" className="btn btn-primary mr-3">
+                  <Link
+                    to="#"
+                    className="btn btn-primary mr-3"
+                    onClick={this.handlePaidByAdmin}
+                    data-dismiss="modal"
+                  >
                     Yes
                   </Link>
                   <Link to="#" className="btn btn-primary" data-dismiss="modal">
@@ -129,6 +158,16 @@ class SupplierPaymentDetails extends Component {
                           <label>Tender Status</label>
                           <span className="tx-medium">
                             {paymentDetails.tender.status}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="media">
+                      <div className="media-body">
+                        <div>
+                          <label>Payment Made To Supplier</label>
+                          <span className="tx-medium">
+                            {paymentDetails.paidByAdmin ? "Paid" : "Not Paid"}
                           </span>
                         </div>
                       </div>

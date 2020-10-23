@@ -26,6 +26,7 @@ class CustomerPaymentDetails extends Component {
         paymentDetails.commissionPaid = true;
         this.setState({ paymentDetails });
         toast.success(data.message);
+        window.location.reload();
       }
     } catch (Error) {
       toast.error(Error.message);
@@ -47,6 +48,7 @@ class CustomerPaymentDetails extends Component {
         paymentDetails.paidByCustomer = true;
         this.setState({ paymentDetails });
         toast.success(data.message);
+        window.location.reload();
       }
     } catch (Error) {
       toast.error(Error.message);
