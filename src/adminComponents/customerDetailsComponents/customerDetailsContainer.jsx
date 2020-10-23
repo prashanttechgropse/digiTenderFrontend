@@ -9,6 +9,7 @@ class CustomerDetailsContainer extends Component {
   state = {
     userCurrentStatus: null,
     customer: null,
+    totalAmountPaidByCustomer: "",
   };
 
   async componentDidMount() {
@@ -19,7 +20,10 @@ class CustomerDetailsContainer extends Component {
         `${process.env.REACT_APP_APIENDPOINT}/admin/customers/${this.props.match.params.customerId}`
       );
 
-      await this.setState({ customer: data.data.customer });
+      await this.setState({
+        customer: data.data.customer,
+        totalAmountPaidByCustomer: data.data.totalAmountPaidByCustomer,
+      });
       await this.setState({
         userCurrentStatus: data.data.customer.user.isApproved,
       });
@@ -68,7 +72,10 @@ class CustomerDetailsContainer extends Component {
             </div>
           </div>
         </div>
-        <CustomerDetailsCards customer={this.state.customer} />
+        <CustomerDetailsCards
+          customer={this.state.customer}
+          totalAmountPaidByCustomer={this.state.totalAmountPaidByCustomer}
+        />
         <div className="breadcrumb-header justify-content-between">
           <div className="my-auto">
             <div className="d-flex">

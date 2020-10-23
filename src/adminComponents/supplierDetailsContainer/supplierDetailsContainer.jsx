@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 class SupplierDetailsContainer extends Component {
   state = {
     userCurrentStatus: null,
+    amountEarnedBySupplier: "",
   };
 
   async componentDidMount() {
@@ -19,7 +20,10 @@ class SupplierDetailsContainer extends Component {
         `${process.env.REACT_APP_APIENDPOINT}/admin/suppliers/${this.props.match.params.supplierId}`
       );
 
-      await this.setState({ supplier: data.data.supplier });
+      await this.setState({
+        supplier: data.data.supplier,
+        amountEarnedBySupplier: data.data.amountEarnedBySupplier,
+      });
       await this.setState({
         userCurrentStatus: data.data.supplier.user.isApproved,
       });
@@ -66,7 +70,10 @@ class SupplierDetailsContainer extends Component {
             </div>
           </div>
         </div>
-        <SupplierDetailsCards supplier={this.state.supplier} />
+        <SupplierDetailsCards
+          supplier={this.state.supplier}
+          amountEarnedBySupplier={this.state.amountEarnedBySupplier}
+        />
         <div className="breadcrumb-header justify-content-between">
           <div className="my-auto">
             <div className="d-flex">
