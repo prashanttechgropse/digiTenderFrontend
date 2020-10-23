@@ -77,13 +77,6 @@ class AdminLogIn extends Form {
                               )}
                               {this.renderButton("Sign In", this.handleSubmit)}
                             </form>
-                            <div className="main-signin-footer mt-5">
-                              <p>
-                                <Link to="/forgotPassword">
-                                  Forgot password?
-                                </Link>
-                              </p>
-                            </div>
                           </div>
                         </div>
                       </div>
