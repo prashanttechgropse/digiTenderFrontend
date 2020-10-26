@@ -29,6 +29,7 @@ import DeliveryNoteDetails from "./customerComponents/customerDeliveryNotesCompo
 
 import AssignEmployee from "./supplierComponents/assignEmployee";
 import UserComplainDetails from "./macroComponents/userComplaindetails";
+import SupplierSearchContainer from "./supplierComponents/supplierSearchComponents/supplierSearchContainer";
 
 class SupplierApp extends Component {
   state = { supplier: "", displayTenderDetailsId: null };
@@ -58,7 +59,12 @@ class SupplierApp extends Component {
         <React.Fragment>
           <SupplierSideBar user={this.state.supplier} />
           <div className="main-content app-content">
-            <MainContentHeaderBar user={this.state.supplier} />
+            <MainContentHeaderBar user={this.state.supplier} {...this.props} />
+            <Route
+              exact
+              path="/supplier/search-result/:search?"
+              component={SupplierSearchContainer}
+            />
             <Route
               exact
               path="/supplier/deliveryNotes"

@@ -7,8 +7,8 @@ import { paginate } from "../../utilities/paginate";
 import pad from "../../services/padding";
 class SupplierEmployeeList extends Component {
   state = {
-    employeeList: null,
-    displayEmployeeList: null,
+    employeeList: [],
+    displayEmployeeList: [],
     currentPage: null,
     pageSize: null,
   };
@@ -18,13 +18,13 @@ class SupplierEmployeeList extends Component {
     this.state.currentPage = 1;
     this.state.pageSize = 4;
   }
-  async componentDidMount() {
+  componentDidMount = async () => {
     try {
       const { data } = await httpService.get(
         `${process.env.REACT_APP_APIENDPOINT}/supplier/employeeList`
       );
       const { employeeList } = data;
-      await this.setState({ employeeList });
+      this.setState({ employeeList });
 
       const displayEmployeeList = paginate(
         this.state.employeeList,
@@ -36,7 +36,7 @@ class SupplierEmployeeList extends Component {
       toast.error(error.message);
       return;
     }
-  }
+  };
 
   handlePageChange = async (pageNumber) => {
     this.setState({ currentPage: pageNumber });
@@ -48,7 +48,7 @@ class SupplierEmployeeList extends Component {
     await this.setState({ displayEmployeeList });
   };
 
-  toggleReceiverStatus = async (employeeId) => {
+  toggleEmployeeStatus = async (employeeId) => {
     let previousEmployeeList = [...this.state.employeeList];
     try {
       let employeeList = [...this.state.employeeList];
@@ -71,7 +71,7 @@ class SupplierEmployeeList extends Component {
     }
   };
 
-  renderReceiverTable = () => {
+  renderEmployeeTable = () => {
     let srNo = (this.state.currentPage - 1) * this.state.pageSize;
 
     let employeeList = this.state.displayEmployeeList;
@@ -91,7 +91,7 @@ class SupplierEmployeeList extends Component {
               }`}
             >
               <span
-                onClick={() => this.toggleReceiverStatus(employee._id)}
+                onClick={() => this.toggleEmployeeStatus(employee._id)}
               ></span>
             </div>
           </td>
@@ -101,7 +101,6 @@ class SupplierEmployeeList extends Component {
   };
 
   render() {
-    if (this.state.employeeList === null) return null;
     if (this.state.employeeList.length === 0) {
       return <h1 className="no-data-found">you dont have any employees yet</h1>;
     }
@@ -147,7 +146,7 @@ class SupplierEmployeeList extends Component {
                               <th>Action</th>
                             </tr>
                           </thead>
-                          <tbody>{this.renderReceiverTable()}</tbody>
+                          <tbody>{this.renderEmployeeTable()}</tbody>
                         </table>
                         <div className="row">
                           <div className="col-sm-12">

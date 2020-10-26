@@ -9,9 +9,14 @@ class SearchBar extends Component {
   };
 
   handleSearch = () => {
-    this.props.history.push(
-      `/customer/search-result/${this.state.searchString}`
-    );
+    if (this.props.match.path.includes("/customer"))
+      this.props.history.push(
+        `/customer/search-result/${this.state.searchString}`
+      );
+    if (this.props.match.path.includes("/supplier"))
+      this.props.history.push(
+        `/supplier/search-result/${this.state.searchString}`
+      );
     return;
   };
 

@@ -114,7 +114,7 @@ class TenderList extends Component {
               <div className="card-header pb-0">
                 <div className="d-flex justify-content-between">
                   <h4 className="card-title mg-b-0 datatable-link">
-                    Your Tender List
+                    Tender List
                   </h4>
                 </div>
                 <p className="tx-12 tx-gray-500 mb-2">
