@@ -27,6 +27,7 @@ import CreateDeliveryNote from "./customerComponents/createDeliveryNote";
 import DeliveryNoteMainContent from "./customerComponents/customerDeliveryNotesComponents/DeliveryNoteMainContent";
 import DeliveryNoteDetails from "./customerComponents/customerDeliveryNotesComponents/DeliveryNoteDetails";
 import UserComplainDetails from "./macroComponents/userComplaindetails";
+import CustomerSearchContainer from "./customerComponents/customerSearchComponents.jsx/customerSearchContainer";
 
 class CustomerApp extends Component {
   state = {
@@ -64,7 +65,12 @@ class CustomerApp extends Component {
           ></div>
           <CustomerSidebar user={this.state.customer} />
           <div className="main-content app-content">
-            <MainContentHeaderBar user={this.state.customer} />
+            <MainContentHeaderBar user={this.state.customer} {...this.props} />
+            <Route
+              exact
+              path="/customer/search-result/:search?"
+              component={CustomerSearchContainer}
+            />
             <Route
               exact
               path="/customer/createTender"

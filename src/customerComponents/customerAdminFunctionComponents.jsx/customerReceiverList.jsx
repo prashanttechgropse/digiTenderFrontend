@@ -145,7 +145,6 @@ class CustomerReceiverlist extends Component {
                               <th>Contact Person</th>
                               <th>Contact Number</th>
                               <th>Postal Address</th>
-                              <th>Action</th>
                             </tr>
                           </thead>
                           <tbody>{this.renderReceiverTable()}</tbody>

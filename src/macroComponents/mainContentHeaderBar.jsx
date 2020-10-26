@@ -12,7 +12,7 @@ class MainContentHeaderBar extends Component {
           <div className="main-header-left">
             <SideBarToggleButton />
             <div className="main-header-center ml-3 d-sm-none d-md-none d-lg-block">
-              <SearchBar />
+              <SearchBar {...this.props} />
             </div>
           </div>
           <div className="main-header-right">

@@ -42,7 +42,7 @@ class AssignReceiver extends Form {
         await this.setState({ receiversList });
       }
       const { data } = await httpService.get(
-        `${process.env.REACT_APP_APIENDPOINT}/customer/tenderList/awarded`
+        `${process.env.REACT_APP_APIENDPOINT}/customer/awardedTenderList`
       );
       const { tenderList } = data;
       await this.setState({ tenderList });

@@ -14,27 +14,40 @@ class TenderListDisplayCard extends Component {
     super(props);
     this.state.currentPage = 1;
     this.state.pageSize = 5;
-    this.state.displayTenderlist = paginate(
+    this.state.displayTenderList = paginate(
       this.props.tenderList,
       this.state.currentPage,
       this.state.pageSize
     );
   }
 
+  componentDidUpdate = async (prevProps) => {
+    if (this.props.tenderList !== prevProps.tenderList) {
+      const { tenderList } = this.props;
+      await this.setState({ tenderList });
+      const displayTenderList = paginate(
+        this.state.tenderList,
+        this.state.currentPage,
+        this.state.pageSize
+      );
+      this.setState({ displayTenderList });
+    }
+  };
+
   handlePageChange = (pageNumber) => {
     this.setState({ currentPage: pageNumber });
-    const displayTenderlist = paginate(
+    const displayTenderList = paginate(
       this.props.tenderList,
       pageNumber,
       this.state.pageSize
     );
-    this.setState({ displayTenderlist });
+    this.setState({ displayTenderList });
   };
 
   renderTenderTable = () => {
     let srNo = (this.state.currentPage - 1) * this.state.pageSize;
     let styleOfBadge;
-    let tenderList = this.state.displayTenderlist;
+    let tenderList = this.state.displayTenderList;
     return tenderList.map((tender) => {
       srNo++;
       if (tender.status === "completed") styleOfBadge = "success";

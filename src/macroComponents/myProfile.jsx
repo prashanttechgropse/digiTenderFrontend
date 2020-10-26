@@ -271,7 +271,7 @@ class MyProfile extends Component {
                             <Label
                               name="Document uploaded by user"
                               value={
-                                <Link onClick={this.downloadProfileDoc}>
+                                <Link to="#" onClick={this.downloadProfileDoc}>
                                   <i className="fa fa-file"></i>
                                   Download File
                                 </Link>
@@ -281,7 +281,7 @@ class MyProfile extends Component {
                               <Label
                                 name="VAT Document uploaded by Suplier"
                                 value={
-                                  <Link onClick={this.downloadVatDoc}>
+                                  <Link to="#" onClick={this.downloadVatDoc}>
                                     <i className="fa fa-file"></i> Download File
                                   </Link>
                                 }
@@ -326,7 +326,7 @@ class MyProfile extends Component {
                             <Label
                               name="Upload Document"
                               value={
-                                <Link onClick={this.downloadBankDoc}>
+                                <Link to="#" onClick={this.downloadBankDoc}>
                                   <i className="fa fa-file"></i> Download File
                                 </Link>
                               }

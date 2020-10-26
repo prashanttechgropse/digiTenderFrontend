@@ -183,7 +183,7 @@ class DeliveryNoteMainContent extends Component {
                               <th>Status</th>
                             </tr>
                           </thead>
-                          <tbody>{this.renderTenderTable()} </tbody>
+                          <tbody>{this.renderTenderTable()}</tbody>
                         </table>
                         <div className="row">
                           <div className="col-sm-12">
