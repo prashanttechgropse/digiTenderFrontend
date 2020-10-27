@@ -25,7 +25,7 @@ class AssignReceiver extends Form {
   constructor(props) {
     super(props);
     this.state.currentPage = 1;
-    this.state.pageSize = 4;
+    this.state.pageSize = 5;
   }
   schema = {
     receiverId: Joi.string().required(),

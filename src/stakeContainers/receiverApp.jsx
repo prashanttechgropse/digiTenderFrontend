@@ -22,6 +22,7 @@ import SecondaryUserTenderDetails from "../secondaryUserComponents/secondaryUser
 import SecondaryUserTenderList from "../secondaryUserComponents/secondaryUserTenderList";
 import SecondaryUserEditProfile from "../secondaryUserComponents/secondaryUserEditProfile";
 import UserComplainDetails from "../macroComponents/userComplaindetails";
+import SecondaryUserSearchContainer from "../secondaryUserComponents/secondaryUserSearchComponents.jsx/secondaryUserSearchContainer";
 
 class ReceiverApp extends Component {
   state = {
@@ -59,7 +60,12 @@ class ReceiverApp extends Component {
           ></div>
           <ReceiverSideBar user={this.state.receiver} />
           <div className="main-content app-content">
-            <MainContentHeaderBar user={this.state.receiver} />
+            <MainContentHeaderBar user={this.state.receiver} {...this.props} />
+            <Route
+              exact
+              path="/receiver/search-result/:search?"
+              component={SecondaryUserSearchContainer}
+            />
 
             <Route exact path="/receiver/myProfile">
               <SecondaryUserMyProfile

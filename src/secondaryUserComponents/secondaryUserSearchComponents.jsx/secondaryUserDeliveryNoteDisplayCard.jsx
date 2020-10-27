@@ -1,12 +1,13 @@
 import React, { Component } from "react";
+import { paginate } from "../../utilities/paginate";
 import Pagination from "../../microComponents/pagination";
 import { Link } from "react-router-dom";
 import pad from "../../services/padding";
-import { paginate } from "../../utilities/paginate";
-class SupplierTenderListDisplayCard extends Component {
+class SecondaryUserDeliveryNoteDisplayCard extends Component {
   state = {
+    profileType: "",
     tenderList: [],
-    displayTenderList: null,
+    displayTenderList: [],
     currentPage: null,
     pageSize: null,
   };
@@ -15,25 +16,14 @@ class SupplierTenderListDisplayCard extends Component {
     super(props);
     this.state.currentPage = 1;
     this.state.pageSize = 5;
+    this.state.profileType = this.props.profileType;
     this.state.tenderList = this.props.tenderList;
     this.state.displayTenderList = paginate(
-      this.props.tenderList,
+      this.state.tenderList,
       this.state.currentPage,
       this.state.pageSize
     );
   }
-  componentDidUpdate = async (prevProps) => {
-    if (this.props.tenderList !== prevProps.tenderList) {
-      const { tenderList } = this.props;
-      await this.setState({ tenderList });
-      const displayTenderList = paginate(
-        this.props.tenderList,
-        this.state.currentPage,
-        this.state.pageSize
-      );
-      this.setState({ displayTenderList });
-    }
-  };
   handlePageChange = async (pageNumber) => {
     this.setState({ currentPage: pageNumber });
     const displayTenderList = paginate(
@@ -44,41 +34,43 @@ class SupplierTenderListDisplayCard extends Component {
     await this.setState({ displayTenderList });
   };
 
-  renderTenderList = () => {
-    const tenderList = this.state.displayTenderList;
-    if (tenderList === null) return;
+  renderTenderTable = () => {
     let srNo = (this.state.currentPage - 1) * this.state.pageSize;
-    let styleOfBadge;
+
+    let tenderList = this.state.displayTenderList;
+    if (tenderList === null) return;
     return tenderList.map((tender) => {
       srNo++;
-      if (tender.status === "completed") styleOfBadge = "success";
-      else if (tender.status === "cancelled") styleOfBadge = "danger";
-      else if (tender.status === "awarded") styleOfBadge = "primary";
-      else {
-        styleOfBadge = "warning";
-      }
-
       return (
-        <tr role="row" key={srNo}>
-          <td>{pad(srNo, 3)}</td>
+        <tr key={srNo} role="row">
           <td>
             <Link
-              to={
-                tender.status === "inProcess"
-                  ? `/supplier/tenderDetails/${tender._id}`
-                  : `/supplier/myBidDetails/${tender._id}`
-              }
+              to={`/${this.state.profileType}/deliveryNoteDetails/${tender._id}`}
             >
+              {pad(srNo, 3)}
+            </Link>
+          </td>
+          <td>
+            <Link to={`/${this.state.profileType}/tenderDetails/${tender._id}`}>
               {tender._id.toString().substring(18, 24)}
             </Link>
           </td>
-          <td>{`${tender.budgetAmount} USD`}</td>
-          <td>{`${tender.creationDate.toString().substring(0, 10)}`}</td>
-          <td>{tender.deliveryDate.toString().substring(0, 10)}</td>
-          <td>{tender.closingDate.toString().substring(0, 10)}</td>
-
+          <td>{tender.suppliedBy.firstName}</td>
+          <td>{`DN${tender.tenderRefNo}`}</td>
+          <td>{tender.deliveryLocation}</td>
+          {this.state.profileType === "customer" ? (
+            <td>
+              {tender.receiver ? tender.receiver.name : "no receiver assigned"}
+            </td>
+          ) : (
+            ""
+          )}
           <td>
-            <span className={`badge badge-${styleOfBadge} f-14`}>
+            <span
+              className={`badge badge-${
+                tender.status === "completed" ? "success" : "danger"
+              } f-14`}
+            >
               {tender.status}
             </span>
           </td>
@@ -86,6 +78,7 @@ class SupplierTenderListDisplayCard extends Component {
       );
     });
   };
+
   render() {
     return (
       <div className="row row-sm">
@@ -94,7 +87,7 @@ class SupplierTenderListDisplayCard extends Component {
             <div className="card-header pb-0">
               <div className="d-flex justify-content-between">
                 <h4 className="card-title mg-b-0 datatable-link">
-                  Tender List
+                  Delivery Notes List
                 </h4>
               </div>
               <p className="tx-12 tx-gray-500 mb-2">
@@ -104,22 +97,32 @@ class SupplierTenderListDisplayCard extends Component {
             </div>
             <div className="card-body">
               <div className="table-responsive">
-                <div className="dataTables_wrapper dt-bootstrap4">
+                <div
+                  id="example1_wrapper"
+                  className="dataTables_wrapper dt-bootstrap4"
+                >
                   <div className="row">
                     <div className="col-sm-12">
-                      <table className="table text-md-nowrap dataTable ">
+                      <table
+                        className="table text-md-nowrap dataTable"
+                        id="example1"
+                      >
                         <thead>
                           <tr role="row">
-                            <th>Sr no</th>
-                            <th>Tender I'd</th>
-                            <th>Tender Amount</th>
-                            <th>Date of Creation</th>
-                            <th>Date of Delivery</th>
-                            <th>Tender Closing Date</th>
+                            <th>DN Number</th>
+                            <th>Tender Id</th>
+                            <th>Supplier Name</th>
+                            <th>Note Number</th>
+                            <th>Delivery Location</th>
+                            {this.state.profileType === "customer" ? (
+                              <th>Receiver Name</th>
+                            ) : (
+                              ""
+                            )}
                             <th>Status</th>
                           </tr>
                         </thead>
-                        <tbody>{this.renderTenderList()}</tbody>
+                        <tbody>{this.renderTenderTable()}</tbody>
                       </table>
                       <div className="row">
                         <div className="col-sm-12">
@@ -143,4 +146,4 @@ class SupplierTenderListDisplayCard extends Component {
   }
 }
 
-export default SupplierTenderListDisplayCard;
+export default SecondaryUserDeliveryNoteDisplayCard;

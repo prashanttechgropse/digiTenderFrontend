@@ -14,7 +14,7 @@ class CustomeSaveForLaterDisplayCard extends Component {
   constructor(props) {
     super(props);
     this.state.currentPage = 1;
-    this.state.pageSize = 4;
+    this.state.pageSize = 5;
     this.state.tenderList = this.props.tenderList;
     this.state.displayTenderList = paginate(
       this.state.tenderList,

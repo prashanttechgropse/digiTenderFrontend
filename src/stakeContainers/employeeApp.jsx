@@ -22,6 +22,7 @@ import DeliveryNoteMainContent from "../customerComponents/customerDeliveryNotes
 import DeliveryNoteDetails from "../customerComponents/customerDeliveryNotesComponents/DeliveryNoteDetails";
 import SecondaryUserEditProfile from "../secondaryUserComponents/secondaryUserEditProfile";
 import UserComplainDetails from "../macroComponents/userComplaindetails";
+import SecondaryUserSearchContainer from "../secondaryUserComponents/secondaryUserSearchComponents.jsx/secondaryUserSearchContainer";
 
 class EmployeeApp extends Component {
   state = {
@@ -59,7 +60,12 @@ class EmployeeApp extends Component {
           ></div>
           <EmployeeSideBar user={this.state.employee} />
           <div className="main-content app-content">
-            <MainContentHeaderBar user={this.state.employee} />
+            <MainContentHeaderBar user={this.state.employee} {...this.props} />
+            <Route
+              exact
+              path="/employee/search-result/:search?"
+              component={SecondaryUserSearchContainer}
+            />
 
             <Route exact path="/employee/myProfile">
               <SecondaryUserMyProfile

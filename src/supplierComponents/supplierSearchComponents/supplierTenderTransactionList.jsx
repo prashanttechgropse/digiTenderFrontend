@@ -1,9 +1,9 @@
 import React, { Component } from "react";
+import { paginate } from "../../utilities/paginate";
+import pad from "../../services/padding";
 import Pagination from "../../microComponents/pagination";
 import { Link } from "react-router-dom";
-import pad from "../../services/padding";
-import { paginate } from "../../utilities/paginate";
-class SupplierTenderListDisplayCard extends Component {
+class SupplierTransactionListDisplayCard extends Component {
   state = {
     tenderList: [],
     displayTenderList: null,
@@ -45,6 +45,9 @@ class SupplierTenderListDisplayCard extends Component {
   };
 
   renderTenderList = () => {
+    if (this.state.tenderList === null || this.state.tenderList.length === 0) {
+      return null;
+    }
     const tenderList = this.state.displayTenderList;
     if (tenderList === null) return;
     let srNo = (this.state.currentPage - 1) * this.state.pageSize;
@@ -52,40 +55,52 @@ class SupplierTenderListDisplayCard extends Component {
     return tenderList.map((tender) => {
       srNo++;
       if (tender.status === "completed") styleOfBadge = "success";
-      else if (tender.status === "cancelled") styleOfBadge = "danger";
+      else if (tender.status === "rejected") styleOfBadge = "danger";
       else if (tender.status === "awarded") styleOfBadge = "primary";
       else {
         styleOfBadge = "warning";
       }
-
       return (
-        <tr role="row" key={srNo}>
+        <tr key={srNo} role="row">
           <td>{pad(srNo, 3)}</td>
           <td>
-            <Link
-              to={
-                tender.status === "inProcess"
-                  ? `/supplier/tenderDetails/${tender._id}`
-                  : `/supplier/myBidDetails/${tender._id}`
-              }
-            >
-              {tender._id.toString().substring(18, 24)}
+            <Link to={`/supplier/tenderDetails/${tender._id}`}>
+              {tender.tenderRefNo}
             </Link>
           </td>
-          <td>{`${tender.budgetAmount} USD`}</td>
-          <td>{`${tender.creationDate.toString().substring(0, 10)}`}</td>
-          <td>{tender.deliveryDate.toString().substring(0, 10)}</td>
-          <td>{tender.closingDate.toString().substring(0, 10)}</td>
-
+          <td>
+            <span
+              className={`badge ${
+                tender.payment.paidByAdmin ? "badge-success" : "badge-danger"
+              } f-14`}
+            >
+              {tender.payment.paidByAdmin
+                ? tender.payment.paidByAdminDate.toString().substring(0, 10)
+                : "transaction not made yet"}
+            </span>
+          </td>
+          <td>{`${tender.createdBy.firstName}`}</td>
+          <td>{`${tender.deliveryLocation}`}</td>
+          <td>{`$${tender.payment.tenderAmount}`}</td>
           <td>
             <span className={`badge badge-${styleOfBadge} f-14`}>
               {tender.status}
+            </span>
+          </td>
+          <td>
+            <span
+              className={`badge ${
+                tender.payment.paidByAdmin ? "badge-success" : "badge-danger"
+              } f-14`}
+            >
+              {tender.payment.paidByAdmin ? "paid" : "Not Paid"}
             </span>
           </td>
         </tr>
       );
     });
   };
+
   render() {
     return (
       <div className="row row-sm">
@@ -94,7 +109,7 @@ class SupplierTenderListDisplayCard extends Component {
             <div className="card-header pb-0">
               <div className="d-flex justify-content-between">
                 <h4 className="card-title mg-b-0 datatable-link">
-                  Tender List
+                  Your Transaction List
                 </h4>
               </div>
               <p className="tx-12 tx-gray-500 mb-2">
@@ -104,22 +119,29 @@ class SupplierTenderListDisplayCard extends Component {
             </div>
             <div className="card-body">
               <div className="table-responsive">
-                <div className="dataTables_wrapper dt-bootstrap4">
+                <div
+                  id="example1_wrapper"
+                  className="dataTables_wrapper dt-bootstrap4"
+                >
                   <div className="row">
                     <div className="col-sm-12">
-                      <table className="table text-md-nowrap dataTable ">
+                      <table
+                        className="table text-md-nowrap dataTable"
+                        id="example1"
+                      >
                         <thead>
                           <tr role="row">
-                            <th>Sr no</th>
-                            <th>Tender I'd</th>
+                            <th>Sr No</th>
+                            <th>Tender Reference number</th>
+                            <th>Transaction Date</th>
+                            <th>Customer Name</th>
+                            <th>Location</th>
                             <th>Tender Amount</th>
-                            <th>Date of Creation</th>
-                            <th>Date of Delivery</th>
-                            <th>Tender Closing Date</th>
-                            <th>Status</th>
+                            <th>Tender Status</th>
+                            <th>Payment Status</th>
                           </tr>
                         </thead>
-                        <tbody>{this.renderTenderList()}</tbody>
+                        <tbody>{this.renderTenderList()} </tbody>
                       </table>
                       <div className="row">
                         <div className="col-sm-12">
@@ -143,4 +165,4 @@ class SupplierTenderListDisplayCard extends Component {
   }
 }
 
-export default SupplierTenderListDisplayCard;
+export default SupplierTransactionListDisplayCard;

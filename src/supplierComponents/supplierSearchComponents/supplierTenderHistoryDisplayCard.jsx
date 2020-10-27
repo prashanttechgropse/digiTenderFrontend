@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import Pagination from "../../microComponents/pagination";
-import { Link } from "react-router-dom";
-import pad from "../../services/padding";
 import { paginate } from "../../utilities/paginate";
-class SupplierTenderListDisplayCard extends Component {
+import Pagination from "../../microComponents/pagination";
+import pad from "../../services/padding";
+import { Link } from "react-router-dom";
+class SupplierTenderHistoryDisplayCard extends Component {
   state = {
     tenderList: [],
-    displayTenderList: null,
+    displayTenderList: [],
     currentPage: null,
     pageSize: null,
   };
@@ -22,6 +22,7 @@ class SupplierTenderListDisplayCard extends Component {
       this.state.pageSize
     );
   }
+
   componentDidUpdate = async (prevProps) => {
     if (this.props.tenderList !== prevProps.tenderList) {
       const { tenderList } = this.props;
@@ -48,15 +49,9 @@ class SupplierTenderListDisplayCard extends Component {
     const tenderList = this.state.displayTenderList;
     if (tenderList === null) return;
     let srNo = (this.state.currentPage - 1) * this.state.pageSize;
-    let styleOfBadge;
+
     return tenderList.map((tender) => {
       srNo++;
-      if (tender.status === "completed") styleOfBadge = "success";
-      else if (tender.status === "cancelled") styleOfBadge = "danger";
-      else if (tender.status === "awarded") styleOfBadge = "primary";
-      else {
-        styleOfBadge = "warning";
-      }
 
       return (
         <tr role="row" key={srNo}>
@@ -72,20 +67,19 @@ class SupplierTenderListDisplayCard extends Component {
               {tender._id.toString().substring(18, 24)}
             </Link>
           </td>
-          <td>{`${tender.budgetAmount} USD`}</td>
-          <td>{`${tender.creationDate.toString().substring(0, 10)}`}</td>
-          <td>{tender.deliveryDate.toString().substring(0, 10)}</td>
           <td>{tender.closingDate.toString().substring(0, 10)}</td>
+          <td>{`${tender.createdBy.firstName}`}</td>
+          <td>{tender.deliveryLocation}</td>
 
+          <td>{`${tender.acceptedBidAmount} USD`}</td>
           <td>
-            <span className={`badge badge-${styleOfBadge} f-14`}>
-              {tender.status}
-            </span>
+            <span className="badge badge-success f-14">{`${tender.status}`}</span>
           </td>
         </tr>
       );
     });
   };
+
   render() {
     return (
       <div className="row row-sm">
@@ -94,7 +88,7 @@ class SupplierTenderListDisplayCard extends Component {
             <div className="card-header pb-0">
               <div className="d-flex justify-content-between">
                 <h4 className="card-title mg-b-0 datatable-link">
-                  Tender List
+                  History of Tenders
                 </h4>
               </div>
               <p className="tx-12 tx-gray-500 mb-2">
@@ -104,18 +98,18 @@ class SupplierTenderListDisplayCard extends Component {
             </div>
             <div className="card-body">
               <div className="table-responsive">
-                <div className="dataTables_wrapper dt-bootstrap4">
+                <div>
                   <div className="row">
                     <div className="col-sm-12">
-                      <table className="table text-md-nowrap dataTable ">
+                      <table className="table text-md-nowrap">
                         <thead>
                           <tr role="row">
                             <th>Sr no</th>
                             <th>Tender I'd</th>
-                            <th>Tender Amount</th>
-                            <th>Date of Creation</th>
-                            <th>Date of Delivery</th>
-                            <th>Tender Closing Date</th>
+                            <th>Closing Date</th>
+                            <th>Customer Name</th>
+                            <th>Location</th>
+                            <th>Amount</th>
                             <th>Status</th>
                           </tr>
                         </thead>
@@ -143,4 +137,4 @@ class SupplierTenderListDisplayCard extends Component {
   }
 }
 
-export default SupplierTenderListDisplayCard;
+export default SupplierTenderHistoryDisplayCard;

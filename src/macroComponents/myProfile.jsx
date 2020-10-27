@@ -133,10 +133,16 @@ class MyProfile extends Component {
                       <div className="counter-icon bg-success-transparent">
                         <i className="fa fa-money text-success"></i>
                       </div>
-                      <div className="ml-auto">
-                        <h5 className="tx-13">Total Earning</h5>
-                        <h2 className="mb-0 tx-22 mb-1 mt-1">$1,890.00</h2>
-                      </div>
+                      {user.profileType === "supplier" ? (
+                        <div className="ml-auto">
+                          <h5 className="tx-13">Total Earning</h5>
+                          <h2 className="mb-0 tx-22 mb-1 mt-1">
+                            $ {this.props.increaseInEarnings}
+                          </h2>
+                        </div>
+                      ) : (
+                        ""
+                      )}
                     </div>
                   </div>
                 </div>

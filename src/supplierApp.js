@@ -32,7 +32,11 @@ import UserComplainDetails from "./macroComponents/userComplaindetails";
 import SupplierSearchContainer from "./supplierComponents/supplierSearchComponents/supplierSearchContainer";
 
 class SupplierApp extends Component {
-  state = { supplier: "", displayTenderDetailsId: null };
+  state = {
+    supplier: "",
+    displayTenderDetailsId: null,
+    increaseInEarnings: "",
+  };
 
   async componentDidMount() {
     try {
@@ -42,6 +46,9 @@ class SupplierApp extends Component {
       if (data.user.profileType.toLowerCase() === "supplier") {
         const supplier = data.user;
         this.setState({ supplier: supplier });
+        this.setState({
+          increaseInEarnings: data.increaseInEarnings,
+        });
       } else this.props.history.push(`/${data.user.profileType}`);
     } catch (error) {
       toast.error(error.message);
@@ -107,7 +114,11 @@ class SupplierApp extends Component {
               <TermsConditions />;
             </Route>
             <Route exact path="/supplier/myProfile">
-              <MyProfile user={this.state.supplier} {...this.props} />
+              <MyProfile
+                user={this.state.supplier}
+                increaseInEarnings={this.state.increaseInEarnings}
+                {...this.props}
+              />
             </Route>
             <Route exact path="/supplier/editProfile">
               <EditProfile user={this.state.supplier} />

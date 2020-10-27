@@ -17,6 +17,15 @@ class SearchBar extends Component {
       this.props.history.push(
         `/supplier/search-result/${this.state.searchString}`
       );
+    if (this.props.match.path.includes("/receiver"))
+      this.props.history.push(
+        `/receiver/search-result/${this.state.searchString}`
+      );
+    if (this.props.match.path.includes("/employee"))
+      this.props.history.push(
+        `/employee/search-result/${this.state.searchString}`
+      );
+    this.setState({ searchString: "" });
     return;
   };
 
