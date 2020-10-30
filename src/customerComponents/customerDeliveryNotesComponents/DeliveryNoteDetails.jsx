@@ -175,9 +175,7 @@ class DeliveryNoteDetails extends Component {
                         <div>
                           <label>Delivery Date</label>
                           <span class="tx-medium">
-                            {deliveryNote.deliveryDate
-                              .toString()
-                              .substring(0, 10)}
+                            {new Date(deliveryNote.deliveryDate).toDateString()}
                           </span>
                         </div>
                       </div>

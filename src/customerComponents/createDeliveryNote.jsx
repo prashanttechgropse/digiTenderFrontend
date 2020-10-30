@@ -27,7 +27,7 @@ class CreateDeliveryNote extends Form {
     supplierName: Joi.string().required(),
     tenderRefNo: Joi.string().required(),
     deliveryLocation: Joi.string().required(),
-    deliveryDate: Joi.date().min("now").required(),
+    deliveryDate: Joi.date().required(),
     message: Joi.string().required(),
     rating: Joi.number().required(),
     reason: Joi.string().required(),

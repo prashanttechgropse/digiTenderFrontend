@@ -75,7 +75,7 @@ class SupplierTransactionListDisplayCard extends Component {
               } f-14`}
             >
               {tender.payment.paidByAdmin
-                ? tender.payment.paidByAdminDate.toString().substring(0, 10)
+                ? new Date(tender.payment.paidByAdminDate).toDateString()
                 : "transaction not made yet"}
             </span>
           </td>

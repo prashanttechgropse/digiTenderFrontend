@@ -73,7 +73,7 @@ class CustomerTransactionListDisplayCard extends Component {
               } f-14`}
             >
               {tender.payment.paidByCustomer
-                ? tender.payment.paidByCustomerDate.toString().substring(0, 10)
+                ? new Date(tender.payment.paidByCustomerDate).toDateString()
                 : "transaction not made yet"}
             </span>
           </td>

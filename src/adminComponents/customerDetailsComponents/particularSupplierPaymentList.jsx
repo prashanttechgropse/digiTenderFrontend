@@ -45,7 +45,7 @@ class ParticularSupplierPaymentList extends Component {
               {listItem.tender.tenderRefNo}
             </Link>
           </td>
-          <td>{listItem.tender.deliveryDate.toString().substring(0, 10)}</td>
+          <td>{new Date(listItem.tender.deliveryDate).toDateString()}</td>
           <td>{listItem.tenderAmount}</td>
           <td>
             <span

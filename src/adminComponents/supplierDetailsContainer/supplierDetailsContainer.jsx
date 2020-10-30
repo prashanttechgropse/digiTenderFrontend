@@ -17,7 +17,7 @@ class SupplierDetailsContainer extends Component {
     let data;
     try {
       data = await httpService.get(
-        `${process.env.REACT_APP_APIENDPOINT}/admin/suppliers/${this.props.match.params.supplierId}`
+        `${process.env.REACT_APP_APIENDPOINT}/admin/supplier/${this.props.match.params.supplierId}`
       );
 
       await this.setState({

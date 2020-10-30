@@ -17,7 +17,7 @@ class CustomerDetailsContainer extends Component {
     let data;
     try {
       data = await httpService.get(
-        `${process.env.REACT_APP_APIENDPOINT}/admin/customers/${this.props.match.params.customerId}`
+        `${process.env.REACT_APP_APIENDPOINT}/admin/customer/${this.props.match.params.customerId}`
       );
 
       await this.setState({

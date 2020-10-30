@@ -76,7 +76,7 @@ class SupplierSaveForLater extends Component {
               {tender._id.toString().substring(18, 24)}
             </Link>
           </td>
-          <td>{`${tender.closingDate.toString().substring(0, 10)}`}</td>
+          <td>{`${new Date(tender.closingDate).toDateString()}`}</td>
           <td>{`${tender.createdBy.firstName}`}</td>
           <td>{tender.deliveryLocation}</td>
           <td>{`${tender.budgetAmount} USD`}</td>

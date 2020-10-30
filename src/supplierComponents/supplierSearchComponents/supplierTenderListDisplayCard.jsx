@@ -73,9 +73,9 @@ class SupplierTenderListDisplayCard extends Component {
             </Link>
           </td>
           <td>{`${tender.budgetAmount} USD`}</td>
-          <td>{`${tender.creationDate.toString().substring(0, 10)}`}</td>
-          <td>{tender.deliveryDate.toString().substring(0, 10)}</td>
-          <td>{tender.closingDate.toString().substring(0, 10)}</td>
+          <td>{`${new Date(tender.creationDate).toDateString()}`}</td>
+          <td>{new Date(tender.deliveryDate).toDateString()}</td>
+          <td>{new Date(tender.closingDate).toDateString()}</td>
 
           <td>
             <span className={`badge badge-${styleOfBadge} f-14`}>

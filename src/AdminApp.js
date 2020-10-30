@@ -26,6 +26,7 @@ import AdminComplaintDetails from "./adminComponents/adminAdminFunctionComponent
 import CustomerPaymentDetails from "./adminComponents/adminPaymentManagementComponents/adminCustomerPaymentDetails";
 import SupplierPaymentDetails from "./adminComponents/adminPaymentManagementComponents/adminSupplierPaymentDetails";
 import CommissionDetails from "./adminComponents/adminPaymentManagementComponents/adminCommissionDetails";
+import AdminSearchContainer from "./adminComponents/adminSearchComponents/adminSearchContainer";
 
 class AdminApp extends Component {
   state = {
@@ -88,7 +89,12 @@ class AdminApp extends Component {
           ></div>
           <AdminSideBar admin={this.state.admin} />
           <div className="main-content app-content">
-            <MainContentHeaderBar user={this.state.admin} />
+            <MainContentHeaderBar user={this.state.admin} {...this.props} />
+            <Route
+              exact
+              path="/admin/search-result/:search?"
+              component={AdminSearchContainer}
+            />
             <Route
               exact
               path="/admin/customerList"

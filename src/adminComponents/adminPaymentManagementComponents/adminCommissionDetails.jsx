@@ -142,9 +142,9 @@ class CommissionDetails extends Component {
                         <div>
                           <label> Delivery Date</label>
                           <span className="tx-medium">
-                            {paymentDetails.tender.deliveryDate
-                              .toString()
-                              .substring(0, 10)}
+                            {new Date(
+                              paymentDetails.tender.deliveryDate
+                            ).toDateString()}
                           </span>
                         </div>
                         <div>

@@ -83,7 +83,7 @@ class SupplierQuotationDetails extends Component {
                       <div className="mt-0 text-right">
                         <span className="text-white">Closing Date</span>
                         <h2 className="text-white mb-0 tx-20">
-                          {bid.tender.closingDate.toString().substring(0, 10)}
+                          {new Date(bid.tender.closingDate).toDateString()}
                         </h2>
                       </div>
                     </div>

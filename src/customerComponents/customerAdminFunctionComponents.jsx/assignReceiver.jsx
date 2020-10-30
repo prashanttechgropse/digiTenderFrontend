@@ -99,8 +99,8 @@ class AssignReceiver extends Form {
             </Link>
           </td>
           <td>{tender.budgetAmount}</td>
-          <td>{tender.creationDate.toString().substring(0, 10)}</td>
-          <td>{tender.deliveryDate.toString().substring(0, 10)}</td>
+          <td>{new Date(tender.creationDate).toDateString()}</td>
+          <td>{new Date(tender.deliveryDate).toDateString()}</td>
           <td>
             <span className="badge badge-primary f-14">
               {tender.receiver ? tender.receiver.name : "no receiver"}

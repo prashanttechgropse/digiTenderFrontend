@@ -101,7 +101,7 @@ class SupplierDetails extends Component {
           <td>{pad(srNo, 3)}</td>
           <td>{tender.createdBy.firstName}</td>
           <td>{tender._id.toString().substring(18, 24)}</td>
-          <td>{tender.deliveryDate.toString().substring(0, 10)}</td>
+          <td>{new Date(tender.deliveryDate).toDateString()}</td>
           <td>{tender.budgetAmount}</td>
 
           <td>

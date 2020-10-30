@@ -39,9 +39,9 @@ class HelpSupport extends Form {
         <tr key={srNo} role="row">
           <td>{pad(srNo, 3)}</td>
           <td>{complain.complainRefNo}</td>
-          <td>{`${complain.creationDate
-            .toString()
-            .substring(0, 10)} || ${complain.creationDate
+          <td>{`${new Date(
+            complain.creationDate
+          ).toDateString()} || ${complain.creationDate
             .toString()
             .substring(11, 16)}`}</td>
           <td>
