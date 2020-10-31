@@ -73433,3 +73433,43 @@ a.text-dark:focus {
   display: block;
   top: 58px;
 }
+@media (max-width: 767.98px) {
+  .sign-favicon {
+    width: 100px;
+    height: auto;
+  }
+  .table-responsive {
+    overflow-x: auto !important;
+  }
+  .main-footer .container-fluid {
+    font-size: 10px !important;
+  }
+  .main-signup-header,
+  .main-card-signin {
+    padding: 10px 10px;
+  }
+  .select2-container {
+    width: 100% !important;
+    margin-bottom: 20px;
+  }
+  .main-signup-header .offset-9 {
+    margin-left: 0%;
+  }
+  .main-signup-header button.btn-primary-gradient {
+    margin-bottom: 20px;
+  }
+  .dataTables_filter input.form-control.form-control-sm {
+    width: 100%;
+    margin-left: 0px;
+    height: 40px;
+  }
+  .main-content.app-content .btn-warning-gradient {
+    margin-bottom: 20px;
+  }
+  .main-signup-header .offset-3 {
+    margin-left: 0%;
+  }
+  .tab-content.border-left.border-bottom.border-right.p-4 {
+    padding: 10px !important;
+  }
+}

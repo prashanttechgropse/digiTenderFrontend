@@ -50,6 +50,9 @@ class CustomerDetailsContainer extends Component {
       );
       toast.success(data.message);
       if (!data.message) toast.success(data);
+      if (data) {
+        window.location.reload();
+      }
     } catch (error) {
       if (error.response) {
         toast.error(error.response.data);

@@ -63,7 +63,13 @@ class AdminSupplierList extends Component {
           <td>{supplier.contactNumber}</td>
           <td>{`${supplier.tendersAwarded.length} Tenders`}</td>
           <td>
-            <span className="badge badge-primary f-14">Active</span>
+            <span
+              className={`badge badge-${
+                supplier.user.isApproved ? "success" : "danger"
+              } f-14`}
+            >
+              {supplier.user.isApproved ? "active" : "block"}
+            </span>
           </td>
           <td>
             <Link
