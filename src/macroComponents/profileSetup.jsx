@@ -40,7 +40,7 @@ class ProfileSetup extends Form {
     lastName: Joi.string().required().min(2),
     idNumber: Joi.string().required().min(5),
     contactNumber: Joi.number().min(5).required(),
-    companyName: Joi.string().required().min(5),
+    companyName: Joi.string().required().min(2),
     entityRegistrationNo: Joi.string().required().min(5),
     vatRegistration: Joi.valid("yes", "no"),
     vatNumber: Joi.when("vatRegistration", {
