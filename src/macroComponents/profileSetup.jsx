@@ -111,9 +111,17 @@ class ProfileSetup extends Form {
     if (
       !result.error &&
       this.state.selectedFile1 !== null &&
+      this.state.selectedFile1.type === "application/pdf" &&
       this.state.acceptTermsConditions
-    )
-      return null;
+    ) {
+      if (this.state.formData.vatRegistration === "no") return null;
+      if (
+        this.state.formData.vatRegistration === "yes" &&
+        this.state.selectedFile2 &&
+        this.state.selectedFile2.type === "application/pdf"
+      )
+        return null;
+    }
     const errors = {};
     if (result.error) {
       for (let item of result.error.details) {

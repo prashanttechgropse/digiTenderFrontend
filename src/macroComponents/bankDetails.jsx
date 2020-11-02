@@ -27,7 +27,13 @@ class BankDetails extends Form {
     const result = Joi.validate(this.state.formData, this.schema, {
       abortEarly: false,
     });
-    if (!result.error && this.state.selectedFile !== null) return null;
+    if (
+      !result.error &&
+      this.state.selectedFile !== null &&
+      this.state.selectedFile.type === "application/pdf"
+    ) {
+      return null;
+    }
     const errors = {};
     if (result.error) {
       for (let item of result.error.details) {
