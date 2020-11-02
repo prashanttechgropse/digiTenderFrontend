@@ -309,6 +309,9 @@ class EditProfile extends Form {
                             className="dropify"
                             data-height="200"
                             onChange={this.onFileChange2}
+                            disabled={
+                              this.state.formData.vatRegistration !== "yes"
+                            }
                           />
                         </div>
                       </div>

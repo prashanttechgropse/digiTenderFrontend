@@ -27,7 +27,7 @@ class SecondaryUserEditProfile extends Form {
   }
 
   schema = {
-    name: Joi.string().required().min(5),
+    name: Joi.string().required().min(2),
     contactNumber: Joi.number().min(5).required(),
     physicalAddress: Joi.string().required().min(5),
     postalAddress: Joi.string().required().min(5),

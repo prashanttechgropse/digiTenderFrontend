@@ -126,13 +126,23 @@ class ProfileSetup extends Form {
       errors.selectedFile1 = "file is not yet uploaded";
       return errors;
     }
-    if (
-      this.state.formData.vatRegistration === "yes" &&
-      this.state.selectedFile2 === null
-    ) {
+    if (this.state.selectedFile1.type !== "application/pdf") {
       const errors = {};
-      errors.selectedFile2 = " VAT document is not yet uploaded";
+      errors.selectedFile1 = "type of file should be only pdf";
       return errors;
+    }
+
+    if (this.state.formData.vatRegistration === "yes") {
+      if (this.state.selectedFile2 === null) {
+        const errors = {};
+        errors.selectedFile2 = " VAT document is not yet uploaded";
+        return errors;
+      }
+      if (this.state.selectedFile2.type !== "application/pdf") {
+        const errors = {};
+        errors.selectedFile2 = "type of file should be only pdf";
+        return errors;
+      }
     }
 
     if (this.state.acceptTermsConditions === false) {
@@ -142,9 +152,17 @@ class ProfileSetup extends Form {
     }
   };
 
-  onFileChange1 = (event) => {
+  onFileChange1 = async (event) => {
     // Update the state
-    this.setState({ selectedFile1: event.target.files[0] });
+    await this.setState({ selectedFile1: event.target.files[0] });
+    if (this.state.selectedFile1) {
+      if (this.state.selectedFile1.type !== "application/pdf") {
+        const errors = { ...this.state.errors };
+        errors.selectedFile1 = "type of file should be only pdf";
+        this.setState({ errors });
+        return;
+      }
+    }
     const errors = { ...this.state.errors };
     if (errors.selectedFile1) {
       delete errors.selectedFile1;
@@ -152,9 +170,17 @@ class ProfileSetup extends Form {
     this.setState({ errors });
   };
 
-  onFileChange2 = (event) => {
+  onFileChange2 = async (event) => {
     // Update the state
-    this.setState({ selectedFile2: event.target.files[0] });
+    await this.setState({ selectedFile2: event.target.files[0] });
+    if (this.state.selectedFile2) {
+      if (this.state.selectedFile2.type !== "application/pdf") {
+        const errors = { ...this.state.errors };
+        errors.selectedFile2 = "type of file should be only pdf";
+        this.setState({ errors });
+        return;
+      }
+    }
     const errors = { ...this.state.errors };
     if (errors.selectedFile2) {
       delete errors.selectedFile2;
@@ -362,6 +388,10 @@ class ProfileSetup extends Form {
                                       className="dropify"
                                       data-height="200"
                                       onChange={this.onFileChange2}
+                                      disabled={
+                                        this.state.formData.vatRegistration !==
+                                        "yes"
+                                      }
                                     />
                                     {this.state.errors.selectedFile2 && (
                                       <div className="alert alert-danger">

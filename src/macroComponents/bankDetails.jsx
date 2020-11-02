@@ -40,11 +40,24 @@ class BankDetails extends Form {
       errors.selectedFile = "upload file";
       return errors;
     }
+    if (this.state.selectedFile.type !== "application/pdf") {
+      const errors = {};
+      errors.selectedFile = "type of file should be only pdf";
+      return errors;
+    }
   };
 
-  onFileChange = (event) => {
+  onFileChange = async (event) => {
     // Update the state
-    this.setState({ selectedFile: event.target.files[0] });
+    await this.setState({ selectedFile: event.target.files[0] });
+    if (this.state.selectedFile) {
+      if (this.state.selectedFile.type !== "application/pdf") {
+        const errors = { ...this.state.errors };
+        errors.selectedFile = "type of file should be only pdf";
+        this.setState({ errors });
+        return;
+      }
+    }
     const errors = { ...this.state.errors };
     if (errors.selectedFile) {
       delete errors.selectedFile;
