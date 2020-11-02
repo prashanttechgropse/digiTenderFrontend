@@ -50,7 +50,7 @@ class AdminCreateCategory extends Form {
         <tr role="row" key={srNo}>
           <td>{pad(srNo, 3)}</td>
           <td>{organistationType}</td>
-          <td>
+          {/*<td>
             <Link
               to="#"
               onClick={() => this.removeCategory(index)}
@@ -58,7 +58,7 @@ class AdminCreateCategory extends Form {
             >
               <i className="fa fa-trash"></i>
             </Link>
-          </td>
+          </td>*/}
         </tr>
       );
     });
@@ -243,7 +243,7 @@ class AdminCreateCategory extends Form {
         </div>
 
         <div className="row row-sm">
-          <div className="col-xl-6">
+          {/*<div className="col-xl-6">
             <div className="card">
               <div className="card-header pb-0">
                 <div className="d-flex justify-content-between">
@@ -282,7 +282,8 @@ class AdminCreateCategory extends Form {
               </div>
             </div>
           </div>
-          <div className="col-xl-6">
+                      */}
+          <div className="col-xl-12">
             <div className="card">
               <div className="card-header pb-0">
                 <div className="d-flex justify-content-between">
@@ -320,48 +321,49 @@ class AdminCreateCategory extends Form {
           </div>
         </div>
         <div className="row row-sm">
-          <div className="col-xl-6">
-            <div className="card">
-              <div className="card-header pb-0">
-                <div className="d-flex justify-content-between">
-                  <h4 className="card-title mg-b-0 datatable-link">
-                    Organization List
-                  </h4>
+          {/*
+            <div className="col-xl-6">
+              <div className="card">
+                <div className="card-header pb-0">
+                  <div className="d-flex justify-content-between">
+                    <h4 className="card-title mg-b-0 datatable-link">
+                      Organization List
+                    </h4>
+                  </div>
+                  <p className="tx-12 tx-gray-500 mb-2">
+                    Lorem Ipsum is simply dummy industry.
+                  </p>
                 </div>
-                <p className="tx-12 tx-gray-500 mb-2">
-                  Lorem Ipsum is simply dummy industry.
-                </p>
-              </div>
-              <div className="card-body">
-                <div className="table-responsive">
-                  <div
-                    id="example1_wrapper"
-                    className="dataTables_wrapper dt-bootstrap4"
-                  >
-                    <div className="row">
-                      <div className="col-sm-12">
-                        <table
-                          className="table text-md-nowrap dataTable"
-                          id="example2"
-                        >
-                          <thead>
-                            <tr role="row">
-                              <th>Sr.No</th>
-                              <th>Organization Name</th>
-                              <th>Action</th>
-                            </tr>
-                          </thead>
-                          <tbody>{this.renderOrganisationTypes()}</tbody>
-                        </table>
+                <div className="card-body">
+                  <div className="table-responsive">
+                    <div
+                      id="example1_wrapper"
+                      className="dataTables_wrapper dt-bootstrap4"
+                    >
+                      <div className="row">
+                        <div className="col-sm-12">
+                          <table
+                            className="table text-md-nowrap dataTable"
+                            id="example2"
+                          >
+                            <thead>
+                              <tr role="row">
+                                <th>Sr.No</th>
+                                <th>Organization Name</th>
+                                <th>Action</th>
+                              </tr>
+                            </thead>
+                            <tbody>{this.renderOrganisationTypes()}</tbody>
+                          </table>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-
-          <div className="col-xl-6">
+          */}
+          <div className="col-xl-12">
             <div className="card">
               <div className="card-header pb-0">
                 <div className="d-flex justify-content-between">

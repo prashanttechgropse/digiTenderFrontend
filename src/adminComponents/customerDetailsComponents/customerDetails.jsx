@@ -278,10 +278,6 @@ class CustomerDetails extends Component {
                                   {customer.contactNo}
                                 </span>
                               </div>
-                              <div>
-                                <label>Mo Of Receivers </label>
-                                <span className="tx-medium">5</span>
-                              </div>
                             </div>
                           </div>
                           <div className="media">

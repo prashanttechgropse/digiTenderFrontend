@@ -283,7 +283,9 @@ class SupplierDetails extends Component {
                               </div>
                               <div>
                                 <label>Average Ratting </label>
-                                <span className="tx-medium">5</span>
+                                <span className="tx-medium">
+                                  {supplier.rating}
+                                </span>
                               </div>
                             </div>
                           </div>
