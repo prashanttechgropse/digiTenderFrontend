@@ -59,7 +59,6 @@ class UploadTenderTermsAndConditions extends Form {
                     className="btn btn-primary-gradient btn-block"
                     name="publishTender"
                     onClick={this.props.published}
-                    disabled={this.props.disableButton}
                   >
                     Publish Tender
                   </button>
@@ -68,7 +67,6 @@ class UploadTenderTermsAndConditions extends Form {
                   <button
                     className="btn btn-warning-gradient btn-block"
                     onClick={this.props.saveForLater}
-                    disabled={this.props.disableButton}
                     name="saveForLater"
                   >
                     Save for Later

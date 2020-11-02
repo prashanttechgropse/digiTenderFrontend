@@ -194,7 +194,6 @@ class CustomerCreateTender extends Component {
               onUpload={(file) => this.uploadFile(file)}
               published={this.published}
               saveForLater={this.saveForLater}
-              disableButton={this.validateOnSubmit()}
               fileError={this.state.errors.file}
             />
           </div>
