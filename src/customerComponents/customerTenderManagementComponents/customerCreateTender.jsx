@@ -90,7 +90,8 @@ class CustomerCreateTender extends Component {
     if (
       !result.error &&
       this.state.file !== null &&
-      this.state.file !== undefined
+      this.state.file !== undefined &&
+      this.state.file.type === "application/pdf"
     )
       return null;
     const errors = {};
@@ -103,6 +104,11 @@ class CustomerCreateTender extends Component {
     if (this.state.file === null || this.state.file === undefined) {
       const errors = {};
       errors.file = "upload file";
+      return errors;
+    }
+    if (this.state.file.type !== "application/pdf") {
+      const errors = {};
+      errors.file = "type of file should be only pdf";
       return errors;
     }
   };
@@ -189,6 +195,7 @@ class CustomerCreateTender extends Component {
               published={this.published}
               saveForLater={this.saveForLater}
               disableButton={this.validateOnSubmit()}
+              fileError={this.state.errors.file}
             />
           </div>
         </div>

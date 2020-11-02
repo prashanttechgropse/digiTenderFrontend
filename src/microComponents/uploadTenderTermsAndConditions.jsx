@@ -43,6 +43,11 @@ class UploadTenderTermsAndConditions extends Form {
                       data-height="200"
                       onChange={this.onFileChange}
                     />
+                    {this.props.fileError && (
+                      <div className="alert alert-danger">
+                        {this.props.fileError}
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
