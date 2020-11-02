@@ -224,7 +224,6 @@ class CustomerCreateTender extends Component {
                   data-dismiss="modal"
                   type="button"
                   onClick={this.handleSubmit}
-                  disabled={this.validateOnSubmit()}
                 >
                   Continue
                 </button>
