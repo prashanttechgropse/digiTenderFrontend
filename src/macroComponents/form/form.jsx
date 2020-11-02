@@ -52,7 +52,7 @@ class Form extends Component {
     await this.setState({ formData, errors });
   };
 
-  renderInput = (name, label, type = "text") => {
+  renderInput = (name, label, type = "text", disabled = false) => {
     const { formData, errors } = this.state;
     return (
       <Input
@@ -62,6 +62,7 @@ class Form extends Component {
         name={name}
         error={errors[name]}
         type={type}
+        disabled={disabled}
       />
     );
   };

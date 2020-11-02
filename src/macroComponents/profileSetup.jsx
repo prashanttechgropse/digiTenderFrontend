@@ -36,19 +36,23 @@ class ProfileSetup extends Form {
   schema = {
     profileType: Joi.string().required(),
     organisationType: Joi.string().required(),
-    firstName: Joi.string().required().min(5),
-    lastName: Joi.string().required().min(5),
+    firstName: Joi.string().required().min(2),
+    lastName: Joi.string().required().min(2),
     idNumber: Joi.string().required().min(5),
     contactNumber: Joi.number().min(5).required(),
     companyName: Joi.string().required().min(5),
     entityRegistrationNo: Joi.string().required().min(5),
-    vatRegistration: Joi.string().required(),
-    vatNumber: Joi.string().required().min(5),
-    tradingAs: Joi.string().required().min(5),
-    website: Joi.string().required().min(5),
+    vatRegistration: Joi.valid("yes", "no"),
+    vatNumber: Joi.when("vatRegistration", {
+      is: "yes",
+      then: Joi.string().required().min(5),
+      otherwise: Joi.string().allow("").optional(),
+    }),
+    tradingAs: Joi.string().required().min(2),
+    website: Joi.string().allow("").optional(),
     physicalAddress: Joi.string().required().min(5),
     postalAddress: Joi.string().required().min(5),
-    contactPerson: Joi.string().required().min(5),
+    contactPerson: Joi.string().required().min(2),
     contactNo: Joi.number().required().min(5),
   };
 
@@ -79,6 +83,27 @@ class ProfileSetup extends Form {
     this.setState({ errors });
   };
 
+  validateOnChange = (input) => {
+    let obj = { [input.name]: input.value.trim() };
+    let subSchema;
+    if (
+      `${[input.name]}` === "vatNumber" &&
+      this.state.formData.vatRegistration === "no"
+    ) {
+      obj = {
+        [input.name]: input.value,
+      };
+      subSchema = {
+        [input.name]: Joi.string().allow("").optional(),
+      };
+    } else {
+      subSchema = { [input.name]: this.schema[input.name] };
+    }
+    const { error } = Joi.validate(obj, subSchema);
+    if (!error) return null;
+    return error.details[0].message;
+  };
+
   validateOnSubmit = () => {
     const result = Joi.validate(this.state.formData, this.schema, {
       abortEarly: false,
@@ -101,6 +126,15 @@ class ProfileSetup extends Form {
       errors.selectedFile1 = "file is not yet uploaded";
       return errors;
     }
+    if (
+      this.state.formData.vatRegistration === "yes" &&
+      this.state.selectedFile2 === null
+    ) {
+      const errors = {};
+      errors.selectedFile2 = " VAT document is not yet uploaded";
+      return errors;
+    }
+
     if (this.state.acceptTermsConditions === false) {
       const errors = {};
       errors.acceptTermsConditions = "terms and conditions not accepted";
@@ -121,6 +155,11 @@ class ProfileSetup extends Form {
   onFileChange2 = (event) => {
     // Update the state
     this.setState({ selectedFile2: event.target.files[0] });
+    const errors = { ...this.state.errors };
+    if (errors.selectedFile2) {
+      delete errors.selectedFile2;
+    }
+    this.setState({ errors });
   };
 
   doSubmit = async () => {
@@ -244,13 +283,19 @@ class ProfileSetup extends Form {
                                     "vatRegistration",
                                     "Vat Registration",
                                     [
-                                      { _id: 1, name: "option 1" },
-                                      { _id: 2, name: "option 2" },
+                                      { _id: "yes", name: "yes" },
+                                      { _id: "no", name: "no" },
                                     ]
                                   )}
                                 </div>
                                 <div className="col-md-6">
-                                  {this.renderInput("vatNumber", "Vat Number")}
+                                  {this.renderInput(
+                                    "vatNumber",
+                                    "Vat Number",
+                                    "text",
+                                    this.state.formData.vatRegistration !==
+                                      "yes"
+                                  )}
                                 </div>
                               </div>
                               <div className="row">
@@ -318,6 +363,11 @@ class ProfileSetup extends Form {
                                       data-height="200"
                                       onChange={this.onFileChange2}
                                     />
+                                    {this.state.errors.selectedFile2 && (
+                                      <div className="alert alert-danger">
+                                        {this.state.errors.selectedFile2}
+                                      </div>
+                                    )}
                                   </div>
                                 </div>
                               </div>

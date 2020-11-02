@@ -1,5 +1,5 @@
 import React from "react";
-const Input = ({ name, value, error, label, ...rest }) => {
+const Input = ({ name, value, error, label, disabled, ...rest }) => {
   return (
     <div className="form-group">
       <label htmlFor={name}>{label}</label>
@@ -10,6 +10,7 @@ const Input = ({ name, value, error, label, ...rest }) => {
         name={name}
         className="form-control"
         placeholder={`Enter your ${label}`}
+        disabled={disabled}
       />
       {error && <div className="alert alert-danger">{error}</div>}
     </div>

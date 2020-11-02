@@ -225,9 +225,9 @@ class MyProfile extends Component {
                             <Label
                               name="VAT Registration"
                               value={
-                                user.details.vatRegistration === 1
-                                  ? "option1"
-                                  : "option2"
+                                user.details.vatRegistration === "yes"
+                                  ? "yes"
+                                  : "no"
                               }
                             />
                             <Label

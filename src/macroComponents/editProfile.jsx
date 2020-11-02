@@ -55,23 +55,48 @@ class EditProfile extends Form {
   }
 
   schema = {
-    firstName: Joi.string().required().min(5),
-    lastName: Joi.string().required().min(5),
+    firstName: Joi.string().required().min(2),
+    lastName: Joi.string().required().min(2),
     contactNumber: Joi.number().min(5).required(),
     companyName: Joi.string().required().min(5),
     entityRegistrationNo: Joi.string().required().min(5),
-    vatRegistration: Joi.number().required(),
-    vatNumber: Joi.string().required().min(5),
-    tradingAs: Joi.string().required().min(5),
-    website: Joi.string().required().min(5),
+    vatRegistration: Joi.valid("yes", "no"),
+    vatNumber: Joi.when("vatRegistration", {
+      is: "yes",
+      then: Joi.string().required().min(5),
+      otherwise: Joi.string().allow("").optional(),
+    }),
+    tradingAs: Joi.string().required().min(2),
+    website: Joi.string().allow("").optional(),
     physicalAddress: Joi.string().required().min(5),
     postalAddress: Joi.string().required().min(5),
-    contactPerson: Joi.string().required().min(5),
+    contactPerson: Joi.string().required().min(2),
     contactNo: Joi.number().min(5).required(),
     bankName: Joi.string().required(),
     accountNo: Joi.string().required(),
     accountType: Joi.string().required(),
     branchCode: Joi.string().required(),
+  };
+
+  validateOnChange = (input) => {
+    let obj = { [input.name]: input.value.trim() };
+    let subSchema;
+    if (
+      `${[input.name]}` === "vatNumber" &&
+      this.state.formData.vatRegistration === "no"
+    ) {
+      obj = {
+        [input.name]: input.value,
+      };
+      subSchema = {
+        [input.name]: Joi.string().allow("").optional(),
+      };
+    } else {
+      subSchema = { [input.name]: this.schema[input.name] };
+    }
+    const { error } = Joi.validate(obj, subSchema);
+    if (!error) return null;
+    return error.details[0].message;
   };
 
   onFileChange1 = (event) => {
@@ -87,6 +112,11 @@ class EditProfile extends Form {
   onFileChange2 = (event) => {
     // Update the state
     this.setState({ selectedFile2: event.target.files[0] });
+    const errors = { ...this.state.errors };
+    if (errors.selectedFile2) {
+      delete errors.selectedFile2;
+    }
+    this.setState({ errors });
   };
   onFileChange3 = (event) => {
     // Update the state
@@ -215,14 +245,19 @@ class EditProfile extends Form {
                           "vatRegistration",
                           "Vat Registration",
                           [
-                            { _id: 1, name: "option 1" },
-                            { _id: 2, name: "option 2" },
+                            { _id: "yes", name: "yes" },
+                            { _id: "no", name: "no" },
                           ],
                           user.vatRegistration
                         )}
                       </div>
                       <div className="col-md-6">
-                        {this.renderInput("vatNumber", "VAT Number")}
+                        {this.renderInput(
+                          "vatNumber",
+                          "Vat Number",
+                          "text",
+                          this.state.formData.vatRegistration !== "yes"
+                        )}
                       </div>
                     </div>
                     <div className="row">
