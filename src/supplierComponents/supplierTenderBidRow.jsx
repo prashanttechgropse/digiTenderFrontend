@@ -5,7 +5,7 @@ import pad from "../services/padding";
 class SupplierTenderBidRow extends Form {
   state = {
     formData: {
-      price: null,
+      price: "",
     },
     errors: {},
   };
@@ -61,7 +61,7 @@ class SupplierTenderBidRow extends Form {
         <td>
           {this.state.formData.price === null
             ? ""
-            : parseInt(this.state.formData.price) * parseInt(item.quantity)}
+            : parseFloat(this.state.formData.price) * parseFloat(item.quantity)}
         </td>
       </tr>
     );
