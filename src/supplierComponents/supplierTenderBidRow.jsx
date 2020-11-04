@@ -61,7 +61,10 @@ class SupplierTenderBidRow extends Form {
         <td>
           {this.state.formData.price === null
             ? ""
-            : parseFloat(this.state.formData.price) * parseFloat(item.quantity)}
+            : (
+                parseFloat(this.state.formData.price) *
+                parseFloat(item.quantity)
+              ).toFixed(2)}
         </td>
       </tr>
     );
