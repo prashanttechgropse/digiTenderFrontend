@@ -23,7 +23,7 @@ class SupplierHistory extends Component {
   async componentDidMount() {
     try {
       const { data } = await httpService.get(
-        `${process.env.REACT_APP_APIENDPOINT}/supplier/myTenderList`
+        `${process.env.REACT_APP_APIENDPOINT}/supplier/myTenderLists`
       );
       const { tenderList } = data;
       await this.setState({ tenderList });
