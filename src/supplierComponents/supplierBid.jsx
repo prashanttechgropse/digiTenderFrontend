@@ -47,6 +47,18 @@ class SupllierBid extends Component {
       return;
     }
   }
+  calculateDaysLeftToClosingDate = () => {
+    var date1 = new Date(this.state.tender.closingDate);
+    var date2 = new Date();
+
+    // To calculate the time difference of two dates
+    var Difference_In_Time = date1.getTime() - date2.getTime();
+
+    // To calculate the no. of days between two dates
+    var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+
+    return Math.ceil(Difference_In_Days);
+  };
 
   schema = {};
 
@@ -164,6 +176,8 @@ class SupllierBid extends Component {
 
   render() {
     if (this.state.tender === null) return null;
+    if (this.calculateDaysLeftToClosingDate < 0)
+      return <h1 className="no-data-found">tender closed</h1>;
     return (
       <div className="container-fluid">
         <div className="breadcrumb-header justify-content-between">

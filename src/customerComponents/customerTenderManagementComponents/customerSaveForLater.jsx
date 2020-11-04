@@ -69,7 +69,9 @@ class CustomerSaveForLater extends Component {
           <td>{new Date(tender.deliveryDate).toDateString()}</td>
           <td>{new Date(tender.closingDate).toDateString()}</td>
           <td>
-            <span className={`badge badge-primary f-14`}>{tender.status}</span>
+            <span className={`badge badge-primary f-14`}>
+              {tender.status.toUpperCase()}
+            </span>
           </td>
         </tr>
       );

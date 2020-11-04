@@ -15,8 +15,8 @@ class AdminLogIn extends Form {
 
   schema = {
     email: Joi.string()
-      .required()
-      .email({ tlds: { allow: false } }),
+      .email({ tlds: { allow: ["com", "net"] } })
+      .required(),
     password: Joi.string().required().min(8),
   };
 

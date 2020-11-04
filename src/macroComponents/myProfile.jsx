@@ -140,6 +140,13 @@ class MyProfile extends Component {
                             $ {this.props.increaseInEarnings}
                           </h2>
                         </div>
+                      ) : user.profileType === "customer" ? (
+                        <div className="ml-auto">
+                          <h5 className="tx-13">Total Payments</h5>
+                          <h2 className="mb-0 tx-22 mb-1 mt-1">
+                            $ {this.props.totalPayments}
+                          </h2>
+                        </div>
                       ) : (
                         ""
                       )}
@@ -197,7 +204,7 @@ class MyProfile extends Component {
                           <div className="media-body">
                             <Label name="Email Id" value={user.email} />
                             <Label
-                              name="Contanct No"
+                              name="Contact No"
                               value={user.details.contactNo}
                             />
                           </div>

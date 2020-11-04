@@ -64,8 +64,6 @@ export async function editProfileService(formData) {
       `${process.env.REACT_APP_APIENDPOINT}/editProfile`,
       formData
     );
-    toast.success(data.message);
-    if (!data.message) toast.success(data);
     return { data };
   } catch (error) {
     if (error.response) toast.error(error.response.data);

@@ -39,7 +39,7 @@ class ProfileSetup extends Form {
     firstName: Joi.string().required().min(2),
     lastName: Joi.string().required().min(2),
     idNumber: Joi.string().required().min(5),
-    contactNumber: Joi.number().min(5).required(),
+    contactNumber: Joi.number().min(100000).required(),
     companyName: Joi.string().required().min(2),
     entityRegistrationNo: Joi.string().required().min(5),
     vatRegistration: Joi.valid("yes", "no"),
@@ -53,7 +53,7 @@ class ProfileSetup extends Form {
     physicalAddress: Joi.string().required().min(5),
     postalAddress: Joi.string().required().min(5),
     contactPerson: Joi.string().required().min(2),
-    contactNo: Joi.number().required().min(5),
+    contactNo: Joi.number().min(100000).required(),
   };
 
   componentDidMount = async () => {
@@ -422,20 +422,16 @@ class ProfileSetup extends Form {
                                         onClick={this.toggleTermsConditions}
                                       />
                                       <span>
-                                        I Accept
+                                        {`I Accept `}
                                         <Link to="#">Terms and Condition</Link>
                                       </span>
                                     </label>
-                                    {this.state.errors
-                                      .acceptTermsConditions && (
-                                      <div className="alert alert-danger">
-                                        {
-                                          this.state.errors
-                                            .acceptTermsConditions
-                                        }
-                                      </div>
-                                    )}
                                   </div>
+                                  {this.state.errors.acceptTermsConditions && (
+                                    <div className="alert alert-danger">
+                                      {this.state.errors.acceptTermsConditions}
+                                    </div>
+                                  )}
                                 </div>
                               </div>
                               <div className="row">

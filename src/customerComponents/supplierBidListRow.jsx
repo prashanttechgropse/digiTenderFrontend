@@ -28,7 +28,7 @@ class SupplierBidListRow extends Component {
       <tr role="row">
         <td>{`#000${index + 1}`}</td>
         <td>{bid.createdBy._id.toString().substring(18, 24)}</td>
-        <td>{bid.createdBy.firstName}</td>
+        <td>{`${bid.createdBy.firstName} ${bid.createdBy.lastName}`}</td>
         <td>{`${bid.totalAmount}.00 USD`}</td>
         <td>
           <span className="badge badge-primary f-14">

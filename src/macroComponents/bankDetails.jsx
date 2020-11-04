@@ -43,7 +43,7 @@ class BankDetails extends Form {
     }
     if (this.state.selectedFile === null) {
       const errors = {};
-      errors.selectedFile = "upload file";
+      errors.selectedFile = "Upload Document";
       return errors;
     }
     if (this.state.selectedFile.type !== "application/pdf") {
@@ -154,7 +154,7 @@ class BankDetails extends Form {
                                 <div className="row">
                                   <div className="col-md-12">
                                     <div className="form-group">
-                                      <label>Upload Document</label>
+                                      <label>{`Upload Document `}</label>
                                       <input
                                         type="file"
                                         className="dropify"

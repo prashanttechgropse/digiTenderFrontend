@@ -208,7 +208,7 @@ class AssignReceiver extends Form {
                 <div className="main-section">
                   <div className="card-body">
                     <div className="main-content-label mg-b-5">
-                      Assign Driver For Tender
+                      Assign Receiver For Tender
                     </div>
                     <p className="mg-b-20">
                       Lorem Ipsum is simply dummy text of the printing .

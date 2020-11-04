@@ -224,7 +224,7 @@ class CreateDeliveryNote extends Form {
                     <div className="row">
                       <div className="col-md-12">
                         <div className="form-group">
-                          {this.renderTextArea("message", "Write Your Messege")}
+                          {this.renderTextArea("message", "Write Your Message")}
                         </div>
                       </div>
                     </div>

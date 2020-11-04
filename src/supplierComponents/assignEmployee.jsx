@@ -42,7 +42,7 @@ class AssignEmployee extends Form {
         await this.setState({ employeeList });
       }
       const { data } = await httpService.get(
-        `${process.env.REACT_APP_APIENDPOINT}/supplier/myTenderList`
+        `${process.env.REACT_APP_APIENDPOINT}/supplier/myTenderList/awarded`
       );
       const { tenderList } = data;
       await this.setState({ tenderList });
@@ -208,7 +208,7 @@ class AssignEmployee extends Form {
                 <div className="main-section">
                   <div className="card-body">
                     <div className="main-content-label mg-b-5">
-                      Assign Driver For Tender
+                      Assign Employee For Tender
                     </div>
                     <p className="mg-b-20">
                       Lorem Ipsum is simply dummy text of the printing .

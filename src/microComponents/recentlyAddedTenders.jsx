@@ -30,7 +30,8 @@ class RecentlyAddedTenders extends Component {
     return tenderList.map((tender) => {
       srNo++;
       if (tender.status === "completed") styleOfBadge = "success";
-      else if (tender.status === "cancelled") styleOfBadge = "danger";
+      else if (tender.status === "cancelled" || tender.status === "rejected")
+        styleOfBadge = "danger";
       else if (tender.status === "awarded") styleOfBadge = "primary";
       else {
         styleOfBadge = "warning";
@@ -49,13 +50,13 @@ class RecentlyAddedTenders extends Component {
               {tender._id.toString().substring(18, 24)}
             </Link>
           </td>
-          <td>{`${new Date(tender.creationDate).toDateString()}`}</td>
+          <td>{`${new Date(tender.closingDate).toDateString()}`}</td>
           <td>{tender.createdBy.firstName}</td>
           <td>{tender.deliveryLocation}</td>
           <td>{`${tender.budgetAmount} USD`}</td>
           <td>
             <span className={`badge badge-${styleOfBadge} f-14`}>
-              {tender.status}
+              {tender.status.toUpperCase()}
             </span>
           </td>
         </tr>

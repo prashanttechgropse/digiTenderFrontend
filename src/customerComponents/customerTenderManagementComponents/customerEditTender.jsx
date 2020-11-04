@@ -14,6 +14,7 @@ import EditTenderDetailsCard from "../../microComponents/editTenderDetailsCard";
 
 class CustomerEditTender extends Component {
   state = {
+    itemTypes: [],
     tender: null,
     formData: {
       closingDate: "",
@@ -46,6 +47,19 @@ class CustomerEditTender extends Component {
   };
 
   async componentDidMount() {
+    {
+      try {
+        const { data } = await httpService.get(
+          `${process.env.REACT_APP_APIENDPOINT}/itemTypes`
+        );
+        let itemTypes = await data.itemType.map((itemType) => {
+          return { _id: itemType, name: itemType };
+        });
+        await this.setState({ itemTypes });
+      } catch (error) {
+        toast.error(error.message);
+      }
+    }
     if (!this.props.match.params.tenderId) return null;
     let data;
     try {
@@ -176,7 +190,10 @@ class CustomerEditTender extends Component {
               }
               formData={this.state.formData}
             />
-            <AddItemCard addItem={(item) => this.addItem(item)} />
+            <AddItemCard
+              addItem={(item) => this.addItem(item)}
+              itemTypes={this.state.itemTypes}
+            />
             {formData.itemList.length === 0 ? (
               <h2>"no items added yet"</h2>
             ) : (

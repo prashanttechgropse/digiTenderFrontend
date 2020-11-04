@@ -84,7 +84,7 @@ class TenderList extends Component {
 
           <td>
             <span className={`badge badge-${styleOfBadge} f-14`}>
-              {tender.status}
+              {tender.status.toUpperCase()}
             </span>
           </td>
         </tr>

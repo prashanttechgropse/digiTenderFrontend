@@ -36,7 +36,7 @@ class SupplierSearchContainer extends Component {
   fetchHistoryList = async () => {
     try {
       const { data } = await httpService.get(
-        `${process.env.REACT_APP_APIENDPOINT}/supplier/myTenderList/${this.props.match.params.search}`
+        `${process.env.REACT_APP_APIENDPOINT}/supplier/myTenderLists/${this.props.match.params.search}`
       );
       const { tenderList: tenderHistoryList } = data;
       this.setState({ tenderHistoryList });

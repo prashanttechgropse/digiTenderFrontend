@@ -121,7 +121,7 @@ class SupplierApp extends Component {
               />
             </Route>
             <Route exact path="/supplier/editProfile">
-              <EditProfile user={this.state.supplier} />
+              <EditProfile user={this.state.supplier} {...this.props} />
             </Route>
             <Route exact path="/supplier/changePassword">
               <ChangePassword {...this.props} />

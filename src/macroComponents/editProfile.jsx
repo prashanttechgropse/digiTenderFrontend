@@ -57,7 +57,7 @@ class EditProfile extends Form {
   schema = {
     firstName: Joi.string().required().min(2),
     lastName: Joi.string().required().min(2),
-    contactNumber: Joi.number().min(5).required(),
+    contactNumber: Joi.number().min(100000).required(),
     companyName: Joi.string().required().min(2),
     entityRegistrationNo: Joi.string().required().min(5),
     vatRegistration: Joi.valid("yes", "no"),
@@ -71,7 +71,7 @@ class EditProfile extends Form {
     physicalAddress: Joi.string().required().min(5),
     postalAddress: Joi.string().required().min(5),
     contactPerson: Joi.string().required().min(2),
-    contactNo: Joi.number().min(5).required(),
+    contactNo: Joi.number().min(100000).required(),
     bankName: Joi.string().required(),
     accountNo: Joi.string().required(),
     accountType: Joi.string().required(),
@@ -154,6 +154,7 @@ class EditProfile extends Form {
     }
     const { data, error } = await registerService.editProfileService(formData);
     if (data) {
+      this.props.history.push("myProfile");
       window.location.reload();
     }
     if (error) {
@@ -182,7 +183,7 @@ class EditProfile extends Form {
               <div className="card-header pb-0">
                 <div className="d-flex justify-content-between">
                   <h4 className="card-title mg-b-0 datatable-link">
-                    Personal Deatil
+                    Personal Details
                   </h4>
                 </div>
               </div>
@@ -221,7 +222,7 @@ class EditProfile extends Form {
               <div className="card-header pb-0">
                 <div className="d-flex justify-content-between">
                   <h4 className="card-title mg-b-0 datatable-link">
-                    Professional Deatil
+                    Professional Details
                   </h4>
                 </div>
               </div>
@@ -290,7 +291,7 @@ class EditProfile extends Form {
                     <div className="row">
                       <div className="col-md-12">
                         <div className="form-group">
-                          <label> Uploaded File</label>
+                          <label>{` Uploaded File `}</label>
                           <input
                             type="file"
                             className="dropify"
@@ -303,7 +304,7 @@ class EditProfile extends Form {
                     <div className="row">
                       <div className="col-md-12">
                         <div className="form-group">
-                          <label>VAT Document </label>
+                          <label>{` VAT Document `}</label>
                           <input
                             type="file"
                             className="dropify"
@@ -324,7 +325,7 @@ class EditProfile extends Form {
               <div className="card-header pb-0">
                 <div className="d-flex justify-content-between">
                   <h4 className="card-title mg-b-0 datatable-link">
-                    Bank Deatil
+                    Bank Details
                   </h4>
                 </div>
               </div>
@@ -350,7 +351,7 @@ class EditProfile extends Form {
                     <div className="row">
                       <div className="col-md-12">
                         <div className="form-group">
-                          <label>Bank Document</label>
+                          <label>{` Bank Document `}</label>
                           <input
                             type="file"
                             className="dropify"

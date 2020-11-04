@@ -83,6 +83,13 @@ class ResetPassword extends Form {
                           </div>
                         </div>
                       </div>
+                      <div className="main-signup-footer mg-t-20">
+                        <p>
+                          Forget it,
+                          <Link to="/login">Send me back</Link>
+                          to the sign in screen.
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>

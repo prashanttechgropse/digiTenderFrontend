@@ -115,7 +115,7 @@ class DeliveryNoteMainContent extends Component {
                 tender.status === "completed" ? "success" : "danger"
               } f-14`}
             >
-              {tender.status}
+              {tender.status.toUpperCase()}
             </span>
           </td>
         </tr>

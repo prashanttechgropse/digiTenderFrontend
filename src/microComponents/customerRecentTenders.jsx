@@ -7,9 +7,7 @@ class RecentlyAddedTenders extends Component {
   renderTenderTable = () => {
     let srNo = 0;
     let styleOfBadge;
-    let tenderList = this.props.tenderList.filter(
-      (tender) => tender.isPublished === true
-    );
+    let tenderList = this.props.tenderList;
     return tenderList.map((tender) => {
       srNo++;
       if (srNo > 5) return null;
@@ -34,7 +32,7 @@ class RecentlyAddedTenders extends Component {
           <td>{new Date(tender.closingDate).toDateString()}</td>
           <td>
             <span className={`badge badge-${styleOfBadge} f-14`}>
-              {tender.status}
+              {tender.status.toUpperCase()}
             </span>
           </td>
         </tr>

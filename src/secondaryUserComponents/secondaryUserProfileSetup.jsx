@@ -120,7 +120,7 @@ class SecondaryUserProfileSetup extends Form {
                                 <div class="row">
                                   <div class="col-md-12">
                                     {this.renderButton(
-                                      "submit",
+                                      "Submit",
                                       this.handleSubmit
                                     )}
                                   </div>

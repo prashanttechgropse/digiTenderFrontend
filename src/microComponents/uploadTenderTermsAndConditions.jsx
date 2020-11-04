@@ -12,7 +12,7 @@ class UploadTenderTermsAndConditions extends Form {
     if (this.state.selectedFile !== null) return null;
     if (this.state.selectedFile === null) {
       const errors = {};
-      errors.selectedFile = "upload file";
+      errors.selectedFile = "Upload Document";
       return errors;
     }
   };

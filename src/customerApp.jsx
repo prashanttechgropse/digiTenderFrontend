@@ -32,6 +32,7 @@ import CustomerSearchContainer from "./customerComponents/customerSearchComponen
 class CustomerApp extends Component {
   state = {
     customer: null,
+    totalPayments: "",
   };
 
   async componentDidMount() {
@@ -43,6 +44,9 @@ class CustomerApp extends Component {
         if (data.user.profileType.toLowerCase() === "customer") {
           const customer = data.user;
           this.setState({ customer: customer });
+          this.setState({
+            totalPayments: data.totalPayments,
+          });
           return;
         } else {
           this.props.history.push(`/${data.user.profileType}`);
@@ -77,7 +81,11 @@ class CustomerApp extends Component {
               component={CustomerCreateTender}
             />
             <Route exact path="/customer/myProfile">
-              <MyProfile user={this.state.customer} {...this.props} />
+              <MyProfile
+                user={this.state.customer}
+                totalPayments={this.state.totalPayments}
+                {...this.props}
+              />
             </Route>
             <Route
               exact

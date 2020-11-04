@@ -9,7 +9,7 @@ const Input = ({ name, value, error, label, disabled, ...rest }) => {
         id={name}
         name={name}
         className="form-control"
-        placeholder={`Enter your ${label}`}
+        placeholder={`Enter Your ${label}`}
         disabled={disabled}
       />
       {error && <div className="alert alert-danger">{error}</div>}

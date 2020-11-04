@@ -12,8 +12,8 @@ class ForgotPassword extends Form {
 
   schema = {
     email: Joi.string()
-      .required()
-      .email({ tlds: { allow: false } }),
+      .email({ tlds: { allow: ["com", "net"] } })
+      .required(),
   };
 
   doSubmit = async () => {

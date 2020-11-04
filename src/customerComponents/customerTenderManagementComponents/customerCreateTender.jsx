@@ -103,7 +103,7 @@ class CustomerCreateTender extends Component {
     }
     if (this.state.file === null || this.state.file === undefined) {
       const errors = {};
-      errors.file = "upload file";
+      errors.file = "Upload Document";
       return errors;
     }
     if (this.state.file.type !== "application/pdf") {

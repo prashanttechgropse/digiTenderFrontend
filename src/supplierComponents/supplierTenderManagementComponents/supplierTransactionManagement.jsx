@@ -90,7 +90,7 @@ class SupplierTransactionManagement extends Component {
           <td>{`$${tender.payment.tenderAmount}`}</td>
           <td>
             <span className={`badge badge-${styleOfBadge} f-14`}>
-              {tender.status}
+              {tender.status.toUpperCase()}
             </span>
           </td>
           <td>
@@ -109,7 +109,9 @@ class SupplierTransactionManagement extends Component {
 
   render() {
     if (this.state.tenderList === null || this.state.tenderList.length === 0)
-      return null;
+      return (
+        <h1 className="no-data-found">You dont have any Transactions yet</h1>
+      );
     return (
       <div className="container-fluid">
         <div className="breadcrumb-header justify-content-between">

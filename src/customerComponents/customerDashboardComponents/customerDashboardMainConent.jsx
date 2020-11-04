@@ -11,9 +11,21 @@ class CustomerDashboardMainContent extends Component {
     increaseInCompletedTenders: "",
     paymentsThisMonth: "",
     increaseInPayments: "",
+    tenderList: [],
   };
 
   async componentDidMount() {
+    try {
+      const { data } = await httpService.get(
+        `${process.env.REACT_APP_APIENDPOINT}/customer/recentTenders`
+      );
+      if (data) {
+        this.setState({ tenderList: data.tenderList });
+      }
+    } catch (error) {
+      toast.error(error.message);
+      return;
+    }
     try {
       const { data } = await httpService.get(
         `${process.env.REACT_APP_APIENDPOINT}/customer/myData`
@@ -231,7 +243,7 @@ class CustomerDashboardMainContent extends Component {
           </div>
         </div>
         <RecentlyAddedTenders
-          tenderList={this.state.customer.details.tenders}
+          tenderList={this.state.tenderList}
           profileType="customer"
         />
       </div>
