@@ -43,7 +43,11 @@ class LoginForm extends Form {
         return await this.props.history.push("/verify");
       }
       if (!data.isRegistered) {
-        return await this.props.history.push("/register/profileSetup");
+        if (data.profileType === "secondaryUser")
+          return await this.props.history.push(
+            "/register/secondaryUserProfileSetup"
+          );
+        else return await this.props.history.push("/register/profileSetup");
       }
       if (!data.bankDetailsStatus) {
         return await this.props.history.push(

@@ -3,6 +3,7 @@ import Form from "../../macroComponents/form/form";
 import Joi from "joi-browser";
 import httpService from "../../services/httpService";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 class AdminTermsConditions extends Form {
   state = {
     formData: {
@@ -156,7 +157,9 @@ class AdminTermsConditions extends Form {
         <div className="breadcrumb-header justify-content-between">
           <div className="my-auto">
             <div className="d-flex">
-              <h4 className="content-title mb-0 my-auto">Page</h4>
+              <Link to="/admin">
+                <h4 className="content-title mb-0 my-auto">Dashboard</h4>
+              </Link>
               <span className="text-muted mt-1 tx-13 ml-2 mb-0">
                 / Terms & Conditions
               </span>

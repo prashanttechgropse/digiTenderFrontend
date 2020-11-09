@@ -9,11 +9,13 @@ class EmployeeSideBar extends Component {
     let temp = this.state.toggleEmployeeSetting;
     temp === 0 ? (temp = 1) : (temp = 0);
     this.setState({ toggleEmployeeSetting: temp });
+    this.setState({ toggleTenderManagement: 0 });
   };
   toggleTenderManagement = () => {
     let temp = this.state.toggleTenderManagement;
     temp === 0 ? (temp = 1) : (temp = 0);
     this.setState({ toggleTenderManagement: temp });
+    this.setState({ toggleEmployeeSetting: 0 });
   };
   renderEmployeeSetting = () => {
     if (this.state.toggleEmployeeSetting === 1) {
@@ -108,7 +110,7 @@ class EmployeeSideBar extends Component {
                   </div>
                   <div className="user-info">
                     <h4 className="font-weight-semibold mt-3 mb-0">
-                      {this.props.user.details.firstName}
+                      {this.props.user.details.name}
                     </h4>
                     <span className="mb-0 text-muted">Employee</span>
                   </div>

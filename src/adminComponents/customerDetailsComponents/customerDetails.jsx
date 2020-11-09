@@ -193,6 +193,16 @@ class CustomerDetails extends Component {
                           <div className="media">
                             <div className="media-body">
                               <div>
+                                <label>Email Id</label>
+                                <span className="tx-medium">
+                                  {customer.user.email}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="media">
+                            <div className="media-body">
+                              <div>
                                 <label> First Name</label>
                                 <span className="tx-medium">
                                   {customer.firstName}
@@ -341,12 +351,6 @@ class CustomerDetails extends Component {
                           <div className="media">
                             <div className="media-body">
                               <div>
-                                <label>Email Id</label>
-                                <span className="tx-medium">
-                                  {customer.user.email}
-                                </span>
-                              </div>
-                              <div>
                                 <label>Bank Name</label>
                                 <span className="tx-medium">
                                   {customer.bankDetails.bankName}
@@ -379,7 +383,7 @@ class CustomerDetails extends Component {
                                 </span>
                               </div>
                               <div>
-                                <label>Attach Documnet</label>
+                                <label>Attach Document</label>
                                 <span className="tx-medium">
                                   <Link to="#" onClick={this.downloadBankDoc}>
                                     <i className="fa fa-file"></i> Download
@@ -472,7 +476,7 @@ class CustomerDetails extends Component {
                                   <tbody>{this.renderReceiverList()}</tbody>
                                 </table>
                               ) : (
-                                <h1>no Receiver</h1>
+                                <h1>"No Receiver Yet"</h1>
                               )}
                             </div>
                           </div>

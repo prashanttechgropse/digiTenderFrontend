@@ -23,7 +23,7 @@ class AdminRecentlyAddedSupplierList extends Component {
                   supplier.user.isApproved ? "success" : "danger"
                 } f-14`}
               >
-                {supplier.user.isApproved ? "active" : "block"}
+                {supplier.user.isApproved ? "Active" : "Blocked"}
               </span>
             </td>
             <td>

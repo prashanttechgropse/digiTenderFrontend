@@ -205,7 +205,7 @@ class CustomerPaymentDetails extends Component {
                           </span>
                         </div>
                         <div>
-                          <label>Tender Reference Numbeer</label>
+                          <label>Tender Reference Number</label>
                           <span className="tx-medium">
                             {paymentDetails.tender.tenderRefNo}
                           </span>
@@ -233,7 +233,7 @@ class CustomerPaymentDetails extends Component {
                     <div className="media">
                       <div className="media-body">
                         <div>
-                          <label> Commision</label>
+                          <label> Commission</label>
                           <span className="tx-medium">
                             {paymentDetails.commission}
                           </span>

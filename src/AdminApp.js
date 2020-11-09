@@ -33,6 +33,8 @@ class AdminApp extends Component {
     admin: "",
     customerList: "",
     supplierList: "",
+    recentCustomerList: "",
+    recentSupplierList: "",
     tenderList: "",
     totalCommissionEarned: "",
     totalAmountPaidToSupplier: "",
@@ -58,6 +60,8 @@ class AdminApp extends Component {
             totalAmountPaidByCustomer,
             totalReceivers,
             totalDeliveryNotes,
+            recentCustomerList,
+            recentSupplierList,
           } = data;
           this.setState({
             admin,
@@ -69,6 +73,8 @@ class AdminApp extends Component {
             totalAmountPaidByCustomer,
             totalReceivers,
             totalDeliveryNotes,
+            recentCustomerList,
+            recentSupplierList,
           });
         } else {
           return await this.props.history.push(`/${data.user.profileType}`);
@@ -197,6 +203,8 @@ class AdminApp extends Component {
                 tenderList={this.state.tenderList}
                 customerList={this.state.customerList}
                 supplierList={this.state.supplierList}
+                recentSupplierList={this.state.recentSupplierList}
+                recentCustomerList={this.state.recentCustomerList}
                 totalCommissionEarned={this.state.totalCommissionEarned}
                 totalAmountPaidToSupplier={this.state.totalAmountPaidToSupplier}
                 totalAmountPaidByCustomer={this.state.totalAmountPaidByCustomer}

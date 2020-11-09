@@ -51,7 +51,8 @@ class TenderListDisplayCard extends Component {
     return tenderList.map((tender) => {
       srNo++;
       if (tender.status === "completed") styleOfBadge = "success";
-      else if (tender.status === "cancelled") styleOfBadge = "danger";
+      else if (tender.status === "cancelled" || "rejected")
+        styleOfBadge = "danger";
       else if (tender.status === "awarded") styleOfBadge = "primary";
       else {
         styleOfBadge = "warning";

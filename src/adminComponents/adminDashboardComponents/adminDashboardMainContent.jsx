@@ -28,10 +28,10 @@ class AdminDashboardMainContent extends Component {
           totalDeliveryNotes={this.props.totalDeliveryNotes}
         />
         <AdminDashBoardRecentlyAddedCustomers
-          customerList={this.props.customerList}
+          customerList={this.props.recentCustomerList}
         />
         <AdminRecentlyAddedSupplierList
-          supplierList={this.props.supplierList}
+          supplierList={this.props.recentSupplierList}
         />
       </div>
     );

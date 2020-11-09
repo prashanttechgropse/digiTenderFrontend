@@ -133,18 +133,23 @@ class AdminComplaintDetails extends Form {
                     </div>
                   </div>
                   <div className="row">
-                    <div className="col-md-12">
-                      {this.renderButton(
-                        "Reply",
-                        this.handleSubmit,
-                        "btn btn-primary-gradient btn-block",
-                        () => {
-                          return (
-                            this.validateOnSubmit() || this.state.complainStatus
-                          );
-                        }
-                      )}
-                    </div>
+                    {this.state.complainStatus ? (
+                      ""
+                    ) : (
+                      <div className="col-md-12">
+                        {this.renderButton(
+                          "Reply",
+                          this.handleSubmit,
+                          "btn btn-primary-gradient btn-block",
+                          () => {
+                            return (
+                              this.validateOnSubmit() ||
+                              this.state.complainStatus
+                            );
+                          }
+                        )}
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>

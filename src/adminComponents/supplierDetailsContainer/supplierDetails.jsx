@@ -196,6 +196,17 @@ class SupplierDetails extends Component {
                           <div className="media">
                             <div className="media-body">
                               <div>
+                                <label>Email Id</label>
+                                <span className="tx-medium">
+                                  {supplier.user.email}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="media">
+                            <div className="media-body">
+                              <div>
                                 <label> Name</label>
                                 <span className="tx-medium">
                                   {supplier.firstName}
@@ -282,7 +293,7 @@ class SupplierDetails extends Component {
                                 </span>
                               </div>
                               <div>
-                                <label>Average Ratting </label>
+                                <label>Average Rating </label>
                                 <span className="tx-medium">
                                   {supplier.rating}
                                 </span>
@@ -292,7 +303,7 @@ class SupplierDetails extends Component {
                           <div className="media">
                             <div className="media-body">
                               <div>
-                                <label>Supplier profile Documnet</label>
+                                <label>Supplier profile Document</label>
                                 <span className="tx-medium">
                                   <Link
                                     to="#"
@@ -306,7 +317,7 @@ class SupplierDetails extends Component {
                             {this.props.supplier.vatDoc ? (
                               <div className="media-body">
                                 <div>
-                                  <label>Supplier Vat Documnet</label>
+                                  <label>Supplier Vat Document</label>
                                   <span className="tx-medium">
                                     <Link to="#" onClick={this.downloadVatDoc}>
                                       <i className="fa fa-file"></i> Download
@@ -319,7 +330,7 @@ class SupplierDetails extends Component {
                             )}
                             <div className="media-body">
                               <div>
-                                <label>Supplier Vat Documnet</label>
+                                <label>Supplier Vat Document</label>
                                 <span className="tx-medium">
                                   <Link to="#" onClick={this.downloadVatDoc}>
                                     <i className="fa fa-file"></i> Download
@@ -349,12 +360,6 @@ class SupplierDetails extends Component {
                         <div className="media-list pb-0">
                           <div className="media">
                             <div className="media-body">
-                              <div>
-                                <label>Email Id</label>
-                                <span className="tx-medium">
-                                  {supplier.user.email}
-                                </span>
-                              </div>
                               <div>
                                 <label>Bank Name</label>
                                 <span className="tx-medium">
@@ -388,7 +393,7 @@ class SupplierDetails extends Component {
                                 </span>
                               </div>
                               <div>
-                                <label>Attach Documnet</label>
+                                <label>Attach Document</label>
                                 <span className="tx-medium">
                                   <Link to="#" onClick={this.downloadBankDoc}>
                                     <i className="fa fa-file"></i> Download
@@ -481,7 +486,7 @@ class SupplierDetails extends Component {
                                   <tbody>{this.renderEmployeeList()} </tbody>
                                 </table>
                               ) : (
-                                <h1>no Employee</h1>
+                                <h1>No Employee Yet</h1>
                               )}
                             </div>
                           </div>

@@ -4,6 +4,7 @@ import CustomerDetails from "./customerDetails";
 import httpService from "../../services/httpService";
 
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 class CustomerDetailsContainer extends Component {
   state = {
@@ -50,15 +51,15 @@ class CustomerDetailsContainer extends Component {
       );
       toast.success(data.message);
       if (!data.message) toast.success(data);
-      if (data) {
-        window.location.reload();
-      }
     } catch (error) {
       if (error.response) {
         toast.error(error.response.data);
         this.setState({ userCurrentStatus: previousState });
       }
     }
+  };
+  componentWillUnmount = () => {
+    window.location.reload();
   };
 
   render() {
@@ -68,7 +69,9 @@ class CustomerDetailsContainer extends Component {
         <div className="breadcrumb-header justify-content-between">
           <div className="my-auto">
             <div className="d-flex">
-              <h4 className="content-title mb-0 my-auto">Page</h4>
+              <Link to="/admin/customerList">
+                <h4 className="content-title mb-0 my-auto">Customer List</h4>
+              </Link>
               <span className="text-muted mt-1 tx-13 ml-2 mb-0">
                 / Customer Detail
               </span>
@@ -101,7 +104,7 @@ class CustomerDetailsContainer extends Component {
                 name="block"
                 disabled={!this.state.userCurrentStatus}
               >
-                <i className="fa fa-times"></i> block
+                <i className="fa fa-times"></i> Block
               </button>
             </div>
           </div>

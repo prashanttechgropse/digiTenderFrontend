@@ -67,7 +67,7 @@ class AdminCustomerList extends Component {
                 customer.user.isApproved ? "success" : "danger"
               } f-14`}
             >
-              {customer.user.isApproved ? "active" : "block"}
+              {customer.user.isApproved ? "Active" : "Blocked"}
             </span>
           </td>
           <td>
@@ -84,13 +84,19 @@ class AdminCustomerList extends Component {
   };
 
   render() {
-    if (this.state.customerList === null) return null;
+    if (
+      this.state.customerList === null ||
+      this.state.customerList.length === 0
+    )
+      return <h1 className="no-data-found">No Customer Registered Yet</h1>;
     return (
       <div className="container-fluid">
         <div className="breadcrumb-header justify-content-between">
           <div className="my-auto">
             <div className="d-flex">
-              <h4 className="content-title mb-0 my-auto">Page</h4>
+              <Link to="/admin">
+                <h4 className="content-title mb-0 my-auto">Dashboard</h4>
+              </Link>
               <span className="text-muted mt-1 tx-13 ml-2 mb-0">
                 / Customer List
               </span>

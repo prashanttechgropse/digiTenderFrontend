@@ -23,7 +23,7 @@ class AdminDashBoardRecentlyAddedCustomers extends Component {
                   customer.user.isApproved ? "success" : "danger"
                 } f-14`}
               >
-                {customer.user.isApproved ? "active" : "block"}
+                {customer.user.isApproved ? "Active" : "Blocked"}
               </span>
             </td>
             <td>

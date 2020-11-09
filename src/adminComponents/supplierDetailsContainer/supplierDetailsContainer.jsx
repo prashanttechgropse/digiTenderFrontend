@@ -5,6 +5,7 @@ import SupplierDetails from "./supplierDetails";
 import httpService from "../../services/httpService";
 
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 class SupplierDetailsContainer extends Component {
   state = {
@@ -19,7 +20,6 @@ class SupplierDetailsContainer extends Component {
       data = await httpService.get(
         `${process.env.REACT_APP_APIENDPOINT}/admin/supplier/${this.props.match.params.supplierId}`
       );
-
       await this.setState({
         supplier: data.data.supplier,
         amountEarnedBySupplier: data.data.amountEarnedBySupplier,
@@ -50,9 +50,6 @@ class SupplierDetailsContainer extends Component {
       );
       toast.success(data.message);
       if (!data.message) toast.success(data);
-      if (data) {
-        window.location.reload();
-      }
     } catch (error) {
       if (error.response) {
         toast.error(error.response.data);
@@ -60,13 +57,18 @@ class SupplierDetailsContainer extends Component {
       }
     }
   };
+  componentWillUnmount = () => {
+    window.location.reload();
+  };
   render() {
     return (
       <div className="container-fluid">
         <div className="breadcrumb-header justify-content-between">
           <div className="my-auto">
             <div className="d-flex">
-              <h4 className="content-title mb-0 my-auto">Page</h4>
+              <Link to="/admin/supplierList">
+                <h4 className="content-title mb-0 my-auto">Supplier List</h4>
+              </Link>
               <span className="text-muted mt-1 tx-13 ml-2 mb-0">
                 / Supplier Detail
               </span>
@@ -99,7 +101,7 @@ class SupplierDetailsContainer extends Component {
                 name="block"
                 disabled={!this.state.userCurrentStatus}
               >
-                <i className="fa fa-times"></i> block
+                <i className="fa fa-times"></i> Block
               </button>
             </div>
           </div>

@@ -69,7 +69,7 @@ class SecondaryUserEditProfile extends Form {
               <div className="card-header pb-0">
                 <div className="d-flex justify-content-between">
                   <h4 className="card-title mg-b-0 datatable-link">
-                    Personal Deatil
+                    Personal Detail
                   </h4>
                 </div>
               </div>

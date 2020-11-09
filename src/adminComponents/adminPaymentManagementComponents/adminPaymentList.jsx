@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import CustomerPaymentList from "./customerPaymentList";
 import SupplierPaymentList from "./supplierPaymentList";
 import CommissionList from "./commissionList";
+import { Link } from "react-router-dom";
 class AdminPaymentList extends Component {
   state = {};
   render() {
@@ -10,7 +11,9 @@ class AdminPaymentList extends Component {
         <div className="breadcrumb-header justify-content-between">
           <div className="my-auto">
             <div className="d-flex">
-              <h4 className="content-title mb-0 my-auto">Page</h4>
+              <Link to="/admin">
+                <h4 className="content-title mb-0 my-auto">Dashboard</h4>
+              </Link>
               <span className="text-muted mt-1 tx-13 ml-2 mb-0">
                 / Payment List
               </span>

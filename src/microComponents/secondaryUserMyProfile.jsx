@@ -75,7 +75,7 @@ class SecondaryUserMyProfile extends Component {
                           <div className="media-body">
                             <Label name="Email Id" value={user.email} />
                             <Label
-                              name="Contanct No"
+                              name="Contact No"
                               value={user.details.contactNumber}
                             />
                           </div>
