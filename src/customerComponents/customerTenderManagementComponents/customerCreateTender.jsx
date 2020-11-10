@@ -11,6 +11,8 @@ import { createTender } from "../../services/tenderService";
 import httpService from "../../services/httpService";
 import { toast } from "react-toastify";
 
+const JoiLatest = require("joi");
+
 class CustomerCreateTender extends Component {
   state = {
     itemTypes: [],
@@ -43,6 +45,47 @@ class CustomerCreateTender extends Component {
       )
       .min(1),
   };
+
+  schemaForValidate = JoiLatest.object({
+    closingDate: JoiLatest.when("isPublished", {
+      is: true,
+      then: JoiLatest.date().min("now").required(),
+      otherwise: JoiLatest.date().min("now").optional().allow(""),
+    }),
+    deliveryDate: JoiLatest.when("isPublished", {
+      is: true,
+      then: JoiLatest.date().greater(JoiLatest.ref("closingDate")).required(),
+      otherwise: JoiLatest.date()
+        .greater(JoiLatest.ref("closingDate"))
+        .optional()
+        .allow(""),
+    }),
+    budgetAmount: JoiLatest.when("isPublished", {
+      is: true,
+      then: JoiLatest.number().required(),
+      otherwise: JoiLatest.number().optional().allow(""),
+    }),
+    deliveryLocation: JoiLatest.when("isPublished", {
+      is: true,
+      then: JoiLatest.string().required(),
+      otherwise: JoiLatest.string().optional().allow(""),
+    }),
+    isPublished: JoiLatest.boolean().required(),
+    itemList: JoiLatest.when("isPublished", {
+      is: true,
+      then: JoiLatest.array()
+        .items(
+          JoiLatest.object({
+            category: JoiLatest.string().required(),
+            name: JoiLatest.string().required(),
+            quantity: JoiLatest.number().required(),
+            unitOfMeasure: JoiLatest.string().required(),
+          })
+        )
+        .min(1),
+      otherwise: JoiLatest.optional(),
+    }),
+  });
 
   componentDidMount = async () => {
     try {
@@ -84,16 +127,19 @@ class CustomerCreateTender extends Component {
   };
 
   validateOnSubmit = () => {
-    const result = Joi.validate(this.state.formData, this.schema, {
+    const result = this.schemaForValidate.validate(this.state.formData, {
       abortEarly: false,
     });
+
     if (
       !result.error &&
+      this.state.isPublished === true &&
       this.state.file !== null &&
       this.state.file !== undefined &&
       this.state.file.type === "application/pdf"
     )
       return null;
+    if (!result.error && this.state.formData.isPublished === false) return null;
     const errors = {};
     if (result.error) {
       for (let item of result.error.details) {
@@ -145,9 +191,9 @@ class CustomerCreateTender extends Component {
         formData.append(item, JSON.stringify(this.state.formData[item]));
       } else formData.append(item, this.state.formData[item]);
     }
-
-    formData.append("myFile1", this.state.file, this.state.file.name);
-
+    if (this.state.file !== null) {
+      formData.append("myFile1", this.state.file, this.state.file.name);
+    }
     const { data, error } = await createTender(formData);
     if (data) {
       this.props.history.push("/customer");
@@ -176,13 +222,14 @@ class CustomerCreateTender extends Component {
               updateTenderDetails={(formData, errors) =>
                 this.updateTenderDetails(formData, errors)
               }
+              errors={this.state.errors}
             />
             <AddItemCard
               addItem={(item) => this.addItem(item)}
               itemTypes={this.state.itemTypes}
             />
             {formData.itemList.length === 0 ? (
-              <h2>"no items added yet"</h2>
+              <h2 style={{ color: "red" }}>"no items added yet"</h2>
             ) : (
               <DisplayTenderItemList
                 itemList={formData.itemList}

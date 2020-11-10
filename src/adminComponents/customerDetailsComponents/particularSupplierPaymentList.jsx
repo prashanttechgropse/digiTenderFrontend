@@ -46,7 +46,7 @@ class ParticularSupplierPaymentList extends Component {
             </Link>
           </td>
           <td>{new Date(listItem.tender.deliveryDate).toDateString()}</td>
-          <td>{listItem.tenderAmount}</td>
+          <td>{listItem.tenderAmount} Rand</td>
           <td>
             <span
               className={`badge ${

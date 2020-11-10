@@ -78,10 +78,10 @@ class TenderDetails extends Component {
     return;
   };
 
-  handlePublishTender = async () => {
+  /* handlePublishTender = async () => {
     await tenderService.publishSavedTender(this.state.tender._id);
     return await this.props.history.push("/customer");
-  };
+  };*/
 
   handleIgnoreTender = async () => {
     await tenderService.ignoreSavedTender(this.state.tender._id);
@@ -392,6 +392,7 @@ class TenderDetails extends Component {
         ) : null}
         {tender.status === "pending" ? (
           <React.Fragment>
+            {/*
             <div className="row">
               <div className="col-md-12">
                 <button
@@ -403,7 +404,7 @@ class TenderDetails extends Component {
                   Publish Tender
                 </button>
               </div>
-            </div>
+            </div>*/}
             <div className="modal" id="publishmodal2">
               <div
                 className="modal-dialog modal-dialog-centered"
@@ -459,7 +460,7 @@ class TenderDetails extends Component {
                   className="btn btn-danger-gradient btn-block m-2"
                   name="ignoreTender"
                 >
-                  Ignore Tender
+                  Delete Tender
                 </button>
               </div>
             </div>

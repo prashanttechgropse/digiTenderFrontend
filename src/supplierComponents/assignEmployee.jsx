@@ -98,7 +98,7 @@ class AssignEmployee extends Form {
               {tender._id.toString().substring(18, 24)}
             </Link>
           </td>
-          <td>{tender.budgetAmount}</td>
+          <td>{tender.budgetAmount} Rand</td>
           <td>{new Date(tender.creationDate).toDateString()}</td>
           <td>{new Date(tender.deliveryDate).toDateString()}</td>
           <td>

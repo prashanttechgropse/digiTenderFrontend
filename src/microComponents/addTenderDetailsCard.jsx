@@ -18,6 +18,13 @@ class AddTenderDetailsCard extends Form {
     deliveryLocation: Joi.string().required(),
   };
 
+  componentDidUpdate = async (prevProps) => {
+    if (this.props.errors !== prevProps.errors) {
+      const { errors } = this.props;
+      await this.setState({ errors });
+    }
+  };
+
   validateOnChange = (input) => {
     let obj = { [input.name]: input.value };
     let subSchema;
@@ -87,7 +94,10 @@ class AddTenderDetailsCard extends Form {
                   )}
                 </div>
                 <div className="col-md-4">
-                  {this.renderInput("budgetAmount", "Tender Budget Amount")}
+                  {this.renderInput(
+                    "budgetAmount",
+                    "Tender Budget Amount(in Rand)"
+                  )}
                 </div>
               </div>
               <div className="row">

@@ -87,7 +87,7 @@ class SupplierTransactionManagement extends Component {
           </td>
           <td>{`${tender.createdBy.firstName}`}</td>
           <td>{`${tender.deliveryLocation}`}</td>
-          <td>{`$${tender.payment.tenderAmount}`}</td>
+          <td>{`$${tender.payment.tenderAmount} Rand`}</td>
           <td>
             <span className={`badge badge-${styleOfBadge} f-14`}>
               {tender.status.toUpperCase()}

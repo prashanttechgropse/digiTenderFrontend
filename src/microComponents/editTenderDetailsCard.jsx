@@ -11,20 +11,27 @@ class EditTenderDetailsCards extends Form {
     },
     errors: {},
   };
-  constructor(props) {
-    super(props);
-    for (let item in this.state.formData) {
-      this.state.formData[item] = props.formData[item];
+
+  componentDidUpdate = async (prevProps) => {
+    if (this.props.formData !== prevProps.formData) {
+      const formData = { ...this.state.formData };
+      for (let item in formData) {
+        formData[item] = this.props.formData[item];
+      }
+
+      if (formData.closingDate) {
+        formData.closingDate = formData.closingDate.substring(0, 10);
+      }
+      if (formData.deliveryDate) {
+        formData.deliveryDate = formData.deliveryDate.substring(0, 10);
+      }
+      await this.setState({ formData });
     }
-    this.state.formData.closingDate = this.state.formData.closingDate.substring(
-      0,
-      10
-    );
-    this.state.formData.deliveryDate = this.state.formData.deliveryDate.substring(
-      0,
-      10
-    );
-  }
+    if (this.props.errors !== prevProps.errors) {
+      const { errors } = this.props;
+      await this.setState({ errors });
+    }
+  };
   schema = {
     closingDate: Joi.date().min("now").required(),
     deliveryDate: Joi.date().greater(Joi.ref("closingDate")).required(),
@@ -101,7 +108,10 @@ class EditTenderDetailsCards extends Form {
                   )}
                 </div>
                 <div className="col-md-4">
-                  {this.renderInput("budgetAmount", "Tender Budget Amount")}
+                  {this.renderInput(
+                    "budgetAmount",
+                    "Tender Budget Amount(in Rand)"
+                  )}
                 </div>
               </div>
               <div className="row">

@@ -11,6 +11,7 @@ import httpService from "../../services/httpService";
 import { toast } from "react-toastify";
 
 import EditTenderDetailsCard from "../../microComponents/editTenderDetailsCard";
+const JoiLatest = require("joi");
 
 class CustomerEditTender extends Component {
   state = {
@@ -45,6 +46,46 @@ class CustomerEditTender extends Component {
       )
       .min(1),
   };
+  schemaForValidate = JoiLatest.object({
+    closingDate: JoiLatest.when("isPublished", {
+      is: true,
+      then: JoiLatest.date().min("now").required(),
+      otherwise: JoiLatest.date().min("now").optional().allow(""),
+    }),
+    deliveryDate: JoiLatest.when("isPublished", {
+      is: true,
+      then: JoiLatest.date().greater(JoiLatest.ref("closingDate")).required(),
+      otherwise: JoiLatest.date()
+        .greater(JoiLatest.ref("closingDate"))
+        .optional()
+        .allow(""),
+    }),
+    budgetAmount: JoiLatest.when("isPublished", {
+      is: true,
+      then: JoiLatest.number().required(),
+      otherwise: JoiLatest.number().optional().allow(""),
+    }),
+    deliveryLocation: JoiLatest.when("isPublished", {
+      is: true,
+      then: JoiLatest.string().required(),
+      otherwise: JoiLatest.string().optional().allow(""),
+    }),
+    isPublished: JoiLatest.boolean().required(),
+    itemList: JoiLatest.when("isPublished", {
+      is: true,
+      then: JoiLatest.array()
+        .items(
+          JoiLatest.object({
+            category: JoiLatest.string().required(),
+            name: JoiLatest.string().required(),
+            quantity: JoiLatest.number().required(),
+            unitOfMeasure: JoiLatest.string().required(),
+          })
+        )
+        .min(1),
+      otherwise: JoiLatest.optional(),
+    }),
+  });
 
   async componentDidMount() {
     {
@@ -70,6 +111,12 @@ class CustomerEditTender extends Component {
       let formData = { ...this.state.formData };
       for (let item in formData) {
         formData[item] = this.state.tender[item];
+      }
+      if (formData.closingDate === null) {
+        formData.closingDate = "";
+      }
+      if (formData.deliveryDate === null) {
+        formData.deliveryDate = "";
       }
       formData.itemList.map((itemObject) => {
         return delete itemObject._id;
@@ -107,16 +154,34 @@ class CustomerEditTender extends Component {
   };
 
   validateOnSubmit = () => {
-    const result = Joi.validate(this.state.formData, this.schema, {
+    const result = this.schemaForValidate.validate(this.state.formData, {
       abortEarly: false,
     });
-
-    if (!result.error) return null;
+    console.log(result.error);
+    if (
+      !result.error &&
+      this.state.isPublished === true &&
+      this.state.file !== null &&
+      this.state.file !== undefined &&
+      this.state.file.type === "application/pdf"
+    )
+      return null;
+    if (!result.error && this.state.formData.isPublished === false) return null;
     const errors = {};
     if (result.error) {
       for (let item of result.error.details) {
         errors[item.path[0]] = item.message;
       }
+      return errors;
+    }
+    if (this.state.file === null || this.state.file === undefined) {
+      const errors = {};
+      errors.file = "Upload Document";
+      return errors;
+    }
+    if (this.state.file.type !== "application/pdf") {
+      const errors = {};
+      errors.file = "type of file should be only pdf";
       return errors;
     }
   };
@@ -166,7 +231,7 @@ class CustomerEditTender extends Component {
 
   render() {
     const { formData } = this.state;
-    if (formData.closingDate === "") {
+    if (this.state.tender === null) {
       return null;
     }
     return (
@@ -189,13 +254,14 @@ class CustomerEditTender extends Component {
                 this.updateTenderDetails(formData, errors)
               }
               formData={this.state.formData}
+              errors={this.state.errors}
             />
             <AddItemCard
               addItem={(item) => this.addItem(item)}
               itemTypes={this.state.itemTypes}
             />
             {formData.itemList.length === 0 ? (
-              <h2>"no items added yet"</h2>
+              <h2 style={{ color: "red" }}>"no items added yet"</h2>
             ) : (
               <DisplayTenderItemList
                 itemList={formData.itemList}
@@ -208,6 +274,7 @@ class CustomerEditTender extends Component {
               published={this.published}
               saveForLater={this.saveForLater}
               disableButton={this.validateOnSubmit()}
+              fileError={this.state.errors.file}
             />
           </div>
         </div>
@@ -237,7 +304,6 @@ class CustomerEditTender extends Component {
                   data-dismiss="modal"
                   type="button"
                   onClick={this.handleSubmit}
-                  disabled={this.validateOnSubmit()}
                 >
                   Continue
                 </button>

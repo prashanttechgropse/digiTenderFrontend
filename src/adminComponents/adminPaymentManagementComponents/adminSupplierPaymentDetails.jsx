@@ -147,7 +147,7 @@ class SupplierPaymentDetails extends Component {
                         <div>
                           <label>Total Tender Amount</label>
                           <span className="tx-medium">
-                            {paymentDetails.tenderAmount}
+                            {paymentDetails.tenderAmount} Rand
                           </span>
                         </div>
                       </div>

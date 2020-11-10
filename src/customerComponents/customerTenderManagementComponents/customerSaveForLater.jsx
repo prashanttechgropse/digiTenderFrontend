@@ -64,10 +64,18 @@ class CustomerSaveForLater extends Component {
               {tender._id.toString().substring(18, 24)}
             </Link>
           </td>
-          <td>{tender.budgetAmount}</td>
+          <td>{tender.budgetAmount} Rand</td>
           <td>{new Date(tender.creationDate).toDateString()}</td>
-          <td>{new Date(tender.deliveryDate).toDateString()}</td>
-          <td>{new Date(tender.closingDate).toDateString()}</td>
+          <td>
+            {tender.deliveryDate
+              ? new Date(tender.deliveryDate).toDateString()
+              : ""}
+          </td>
+          <td>
+            {tender.closingDate
+              ? new Date(tender.closingDate).toDateString()
+              : ""}
+          </td>
           <td>
             <span className={`badge badge-primary f-14`}>
               {tender.status.toUpperCase()}
