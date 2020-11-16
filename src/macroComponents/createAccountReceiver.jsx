@@ -3,7 +3,6 @@ import Form from "./form/form";
 import Joi from "joi-browser";
 import { Link } from "react-router-dom";
 import * as registerService from "../services/registerServices";
-import LoginFacebook from "../microComponents/LoginFacebook";
 
 class CreateAccountReceiver extends Form {
   state = {
@@ -132,7 +131,10 @@ class CreateAccountReceiver extends Form {
 
                                 <div className="row row-xs">
                                   <div className="col-sm-6">
-                                    <LoginFacebook />
+                                    <button className="btn btn-block">
+                                      <i className="fa fa-facebook"></i> Signup
+                                      with Facebook
+                                    </button>
                                   </div>
                                   <div className="col-sm-6 mg-t-10 mg-sm-t-0">
                                     <button className="btn btn-danger btn-block">
@@ -144,7 +146,7 @@ class CreateAccountReceiver extends Form {
                               </form>
                               <div className="main-signin-footer mt-5">
                                 <p>
-                                  Already have an account?{" "}
+                                  Already have an account?
                                   <Link to="/login">Sign In</Link>
                                 </p>
                               </div>
