@@ -3,6 +3,7 @@ import Form from "./macroComponents/form/form";
 import { Link } from "react-router-dom";
 import * as registerService from "./services/registerServices";
 import { toast } from "react-toastify";
+import LoginFacebook from "./microComponents/LoginFacebook";
 
 const Joi = require("joi-browser");
 
@@ -107,13 +108,7 @@ class LoginForm extends Form {
                               {this.renderButton("Sign In", this.handleSubmit)}
                               <div className="row row-xs">
                                 <div className="col-sm-6">
-                                  <button
-                                    className="btn btn-block"
-                                    onClick={this.handleFacebookLogin}
-                                  >
-                                    <i className="fa fa-facebook"></i> Signin
-                                    with Facebook
-                                  </button>
+                                  <LoginFacebook />
                                 </div>
                                 <div className="col-sm-6 mg-t-10 mg-sm-t-0">
                                   <button
