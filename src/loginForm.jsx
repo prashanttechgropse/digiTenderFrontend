@@ -58,6 +58,10 @@ class LoginForm extends Form {
     }
   };
 
+  handleFacebookLogin = () => {
+    return <LoginFacebook />;
+  };
+
   render() {
     return (
       <div className="page">
@@ -108,7 +112,13 @@ class LoginForm extends Form {
                               {this.renderButton("Sign In", this.handleSubmit)}
                               <div className="row row-xs">
                                 <div className="col-sm-6">
-                                  <LoginFacebook />
+                                  <button
+                                    className="btn btn-block"
+                                    onClick={this.handleFacebookLogin}
+                                  >
+                                    <i className="fa fa-facebook"></i> Signin
+                                    with Facebook
+                                  </button>
                                 </div>
                                 <div className="col-sm-6 mg-t-10 mg-sm-t-0">
                                   <button
