@@ -157,6 +157,7 @@ class BankDetails extends Form {
                                       <label>{`Upload Document `}</label>
                                       <input
                                         type="file"
+                                        accept=".pdf"
                                         className="dropify"
                                         data-height="200"
                                         onChange={this.onFileChange}

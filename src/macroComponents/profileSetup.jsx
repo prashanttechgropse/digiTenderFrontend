@@ -373,6 +373,7 @@ class ProfileSetup extends Form {
                                     </label>
                                     <input
                                       type="file"
+                                      accept=".pdf"
                                       className="dropify"
                                       data-height="200"
                                       onChange={this.onFileChange1}
@@ -393,6 +394,7 @@ class ProfileSetup extends Form {
                                     </label>
                                     <input
                                       type="file"
+                                      accept=".pdf"
                                       className="dropify"
                                       data-height="200"
                                       onChange={this.onFileChange2}

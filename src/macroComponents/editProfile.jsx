@@ -294,6 +294,7 @@ class EditProfile extends Form {
                           <label>{` Uploaded File `}</label>
                           <input
                             type="file"
+                            accept=".pdf"
                             className="dropify"
                             data-height="200"
                             onChange={this.onFileChange1}
@@ -307,6 +308,7 @@ class EditProfile extends Form {
                           <label>{` VAT Document `}</label>
                           <input
                             type="file"
+                            accept=".pdf"
                             className="dropify"
                             data-height="200"
                             onChange={this.onFileChange2}
@@ -354,6 +356,7 @@ class EditProfile extends Form {
                           <label>{` Bank Document `}</label>
                           <input
                             type="file"
+                            accept=".pdf"
                             className="dropify"
                             data-height="200"
                             onChange={this.onFileChange3}
