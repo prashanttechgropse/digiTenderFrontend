@@ -6,6 +6,7 @@ import httpService from "../services/httpService";
 
 import * as registerService from "../services/registerServices";
 import { toast } from "react-toastify";
+const JoiLatest = require("joi");
 
 class ProfileSetup extends Form {
   state = {
@@ -56,6 +57,53 @@ class ProfileSetup extends Form {
     contactNo: Joi.number().min(100000).required(),
   };
 
+  schemaForValidate = JoiLatest.object({
+    profileType: JoiLatest.string().required(),
+    organisationType: JoiLatest.string().required(),
+    firstName: JoiLatest.when("organisationType", {
+      is: "Sole Trader",
+      then: JoiLatest.string().required().min(2),
+      otherwise: JoiLatest.string().optional().allow(""),
+    }),
+    lastName: JoiLatest.when("organisationType", {
+      is: "Sole Trader",
+      then: JoiLatest.string().required().min(2),
+      otherwise: JoiLatest.string().optional().allow(""),
+    }),
+    idNumber: JoiLatest.when("organisationType", {
+      is: "Sole Trader",
+      then: JoiLatest.string().required().min(5),
+      otherwise: JoiLatest.string().optional().allow(""),
+    }),
+    contactNumber: JoiLatest.number().min(100000).required(),
+    companyName: JoiLatest.when("organisationType", {
+      is: "Sole Trader",
+      then: JoiLatest.string().optional().allow(""),
+      otherwise: JoiLatest.string().required().min(2),
+    }),
+    entityRegistrationNo: JoiLatest.when("organisationType", {
+      is: "Sole Trader",
+      then: JoiLatest.string().optional().allow(""),
+      otherwise: JoiLatest.string().required().min(5),
+    }),
+    vatRegistration: JoiLatest.valid("yes", "no"),
+    vatNumber: JoiLatest.when("vatRegistration", {
+      is: "yes",
+      then: JoiLatest.string().required().min(5),
+      otherwise: JoiLatest.string().allow("").optional(),
+    }),
+    tradingAs: JoiLatest.when("organisationType", {
+      is: "Sole Trader",
+      then: JoiLatest.string().optional().allow("").min(5),
+      otherwise: JoiLatest.string().required().min(5),
+    }),
+    website: JoiLatest.string().allow("").optional(),
+    physicalAddress: JoiLatest.string().required().min(5),
+    postalAddress: JoiLatest.string().required().min(5),
+    contactPerson: JoiLatest.string().required().min(2),
+    contactNo: JoiLatest.number().min(100000).required(),
+  });
+
   componentDidMount = async () => {
     try {
       const { data } = await httpService.get(
@@ -105,7 +153,7 @@ class ProfileSetup extends Form {
   };
 
   validateOnSubmit = () => {
-    const result = Joi.validate(this.state.formData, this.schema, {
+    const result = this.schemaForValidate.validate(this.state.formData, {
       abortEarly: false,
     });
     if (
@@ -198,8 +246,26 @@ class ProfileSetup extends Form {
 
   doSubmit = async () => {
     const formData = new FormData();
-    for (const item in this.state.formData) {
-      formData.append(item, this.state.formData[item]);
+    {
+      let data = { ...this.state.formData };
+      if (data.vatRegistration === "no") {
+        data.vatNumber = "";
+      }
+      if (data.organisationType === "Sole Trader") {
+        data.companyName = "";
+        data.entityRegistrationNo = "";
+      }
+      if (data.organisationType !== "Sole Trader") {
+        data.firstName = "";
+        data.lastName = "";
+        data.idNumber = "";
+      }
+      for (const item in data) {
+        if (data[item] === "") {
+          data[item] = "N/A";
+        }
+        formData.append(item, data[item]);
+      }
     }
 
     formData.append(
@@ -280,15 +346,33 @@ class ProfileSetup extends Form {
                               </div>
                               <div className="row">
                                 <div className="col-md-6">
-                                  {this.renderInput("firstName", "First Name")}
+                                  {this.renderInput(
+                                    "firstName",
+                                    "First Name",
+                                    "text",
+                                    this.state.formData.organisationType !==
+                                      "Sole Trader"
+                                  )}
                                 </div>
                                 <div className="col-md-6">
-                                  {this.renderInput("lastName", "Last Name")}
+                                  {this.renderInput(
+                                    "lastName",
+                                    "Last Name",
+                                    "text",
+                                    this.state.formData.organisationType !==
+                                      "Sole Trader"
+                                  )}
                                 </div>
                               </div>
                               <div className="row">
                                 <div className="col-md-6">
-                                  {this.renderInput("idNumber", "Id Number")}
+                                  {this.renderInput(
+                                    "idNumber",
+                                    "Id Number",
+                                    "text",
+                                    this.state.formData.organisationType !==
+                                      "Sole Trader"
+                                  )}
                                 </div>
                                 <div className="col-md-6">
                                   {this.renderInput(
@@ -301,13 +385,19 @@ class ProfileSetup extends Form {
                                 <div className="col-md-6">
                                   {this.renderInput(
                                     "companyName",
-                                    "Company Name"
+                                    "Company Name",
+                                    "text",
+                                    this.state.formData.organisationType ===
+                                      "Sole Trader"
                                   )}
                                 </div>
                                 <div className="col-md-6">
                                   {this.renderInput(
                                     "entityRegistrationNo",
-                                    "Entity Registration No"
+                                    "Entity Registration No",
+                                    "text",
+                                    this.state.formData.organisationType ===
+                                      "Sole Trader"
                                   )}
                                 </div>
                               </div>

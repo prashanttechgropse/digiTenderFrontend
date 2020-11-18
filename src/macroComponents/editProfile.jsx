@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 class EditProfile extends Form {
   state = {
     email: "",
+    organisationType: "",
     formData: {
       firstName: "",
       lastName: "",
@@ -36,6 +37,7 @@ class EditProfile extends Form {
     let { formData } = this.state;
     const { user } = this.props;
     this.state.email = user.email;
+    this.state.organisationType = user.details.organisationType;
     formData.firstName = user.details.firstName;
     formData.lastName = user.details.lastName;
     formData.contactNumber = parseInt(user.details.contactNumber);
@@ -198,10 +200,20 @@ class EditProfile extends Form {
                   <div className="main-signup-header">
                     <div className="row">
                       <div className="col-md-6">
-                        {this.renderInput("firstName", "First Name")}
+                        {this.renderInput(
+                          "firstName",
+                          "First Name",
+                          "text",
+                          this.state.organisationType !== "Sole Trader"
+                        )}
                       </div>
                       <div className="col-md-6">
-                        {this.renderInput("lastName", "Last Name")}
+                        {this.renderInput(
+                          "lastName",
+                          "Last Name",
+                          "text",
+                          this.state.organisationType !== "Sole Trader"
+                        )}
                       </div>
                     </div>
                     <div className="row">
@@ -237,12 +249,19 @@ class EditProfile extends Form {
                   <div className="main-signup-header">
                     <div className="row">
                       <div className="col-md-6">
-                        {this.renderInput("companyName", "Company Name")}
+                        {this.renderInput(
+                          "companyName",
+                          "Company Name",
+                          "text",
+                          this.state.organisationType === "Sole Trader"
+                        )}
                       </div>
                       <div className="col-md-6">
                         {this.renderInput(
                           "entityRegistrationNo",
-                          "Registration No"
+                          "Entity Registration No",
+                          "text",
+                          this.state.organisationType === "Sole Trader"
                         )}
                       </div>
                     </div>

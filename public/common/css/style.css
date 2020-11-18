@@ -8864,7 +8864,7 @@ textarea.custom-file-input.parsley-error:focus ~ .custom-file-label {
   text-transform: uppercase;
   border-bottom-width: 1px;
   border-top-width: 0;
-  padding: 0 15px 5px;
+  padding: 0 10px 5px;
 }
 .table tbody tr {
   background-color: rgba(255, 255, 255, 0.5);
@@ -34448,14 +34448,13 @@ textarea.parsley-success:focus {
 }
 
 .main-signup-header label {
-  color: #a5a0b1;
+    color: #1f1f1f;
+    font-weight: 500;
 }
-
 .main-signup-header .form-control {
-  color: #b3b3b3;
-  font-weight: 500;
-  border-width: 2px;
-  border-color: #e3e3e3;
+    color: #9a9a9a;
+    border-width: 2px;
+    border-color: #e3e3e3;
 }
 .main-signup-header .form-control:focus {
   border-color: #b9c2d8;
@@ -73397,6 +73396,7 @@ a.text-dark:focus {
   margin-right: 19px;
   font-size: 18px;
   color: #f26522;
+  width: 20px;
 }
 .side-menu .side-menu__item .fa.angle {
   margin-right: 0;
@@ -73472,4 +73472,104 @@ a.text-dark:focus {
   .tab-content.border-left.border-bottom.border-right.p-4 {
     padding: 10px !important;
   }
+}
+
+
+.kep-login-facebook.metro{
+    font-size: 14px!important;
+    text-transform: initial!important;
+    width: 100%;
+    font-weight: 400!important;
+    letter-spacing: .5px;
+    padding: 7px 5px;
+    border-radius: 4px;
+}
+.card.text-white .mt-0.text-right h2.text-white.mb-0{
+    font-size: 20px;
+    margin-top: 10px;
+}
+@media (min-width: 768px){
+.app.sidenav-toggled .app-sidebar:hover {
+    left: 0;
+    width: 240px;
+    overflow: hidden;
+}
+.app.sidenav-toggled .app-sidebar:hover  .main-sidebar-header {
+    width: 240px;
+}
+.app.sidenav-toggled .app-sidebar:hover .main-sidebar-header .logo-icon {
+        display: none!important;
+}
+.app.sidenav-toggled .app-sidebar:hover  .desktop-logo {
+    display: block;
+}
+.app.sidenav-toggled .app-sidebar:hover  .avatar-xl {
+    width: 72px !important;
+    height: 72px !important;
+    font-size: 36px !important;
+}
+.app.sidenav-toggled .app-sidebar:hover .profile-status {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 103px;
+    width: 12px;
+    height: 12px;
+    background-color: #22c03c;
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.95);
+    border-radius: 100%;
+    top: 73px;
+    animation: pulse 2s infinite;
+    animation-duration: 0.9s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-out;
+    border: 2px solid #fff;
+}
+.app.sidenav-toggled .app-sidebar:hover  .app-sidebar__user .user-info {
+    margin: 0 auto;
+    text-align: center;
+    display: block;
+}
+.app.sidenav-toggled .app-sidebar:hover .side-menu .slide .side-menu__item {
+    padding: 0 20px 0 22px;
+    margin: 0;
+    border-radius: 0;
+     display: inline-block;
+}
+.app.sidenav-toggled .app-sidebar:hover  .side-menu__label {
+    display: block!important;
+    position: absolute;
+    top: 0;
+    left: 50px;
+    padding: 12px 5px 12px 20px;
+    margin-left: -3px;
+    line-height: 1;
+    opacity: 1;
+    background: #fff;
+    color: #5c6287!important;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    -webkit-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.2);
+    font-size: 13px;
+    font-weight: 600;
+}
+.app.sidenav-toggled .app-sidebar:hover .side-menu__item {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex!important;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: 0;
+    font-size: 14px;
+    font-weight: 500;
+    -webkit-transition: border-left-color 0.3s ease, background-color 0.3s ease;
+    transition: border-left-color 0.3s ease, background-color 0.3s ease;
+
+}
+.app.sidenav-toggled .app-sidebar:hover .fa.angle {
+        display: inline-block!important;
+}
 }

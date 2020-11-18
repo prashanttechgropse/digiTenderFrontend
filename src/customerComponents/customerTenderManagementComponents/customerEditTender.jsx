@@ -157,7 +157,7 @@ class CustomerEditTender extends Component {
     const result = this.schemaForValidate.validate(this.state.formData, {
       abortEarly: false,
     });
-    console.log(result.error);
+
     if (
       !result.error &&
       this.state.isPublished === true &&

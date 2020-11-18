@@ -18,7 +18,8 @@ class ProfileDropDown extends Component {
                 <h6>
                   {this.props.user.profileType === "admin"
                     ? this.props.user.name
-                    : this.props.user.profileType === "customer" || "supplier"
+                    : this.props.user.profileType === "customer" ||
+                      this.props.user.profileType === "supplier"
                     ? this.props.user.details.firstName
                     : this.props.user.details.name}
                 </h6>
