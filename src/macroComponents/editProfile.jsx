@@ -2,6 +2,7 @@ import React from "react";
 import Joi from "joi-browser";
 import Form from "./form/form";
 import * as registerService from "../services/registerServices";
+import { toast } from "react-toastify";
 class EditProfile extends Form {
   state = {
     email: "",
@@ -154,8 +155,13 @@ class EditProfile extends Form {
     }
     const { data, error } = await registerService.editProfileService(formData);
     if (data) {
-      this.props.history.push("myProfile");
-      window.location.reload();
+      await setTimeout(async () => {
+        await this.props.history.push("myProfile");
+      }, 1000);
+      toast.success(data.message);
+      await setTimeout(async () => {
+        await window.location.reload();
+      }, 1500);
     }
     if (error) {
       return;

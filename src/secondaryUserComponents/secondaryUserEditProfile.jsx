@@ -38,9 +38,14 @@ class SecondaryUserEditProfile extends Form {
       `${process.env.REACT_APP_APIENDPOINT}/secondaryUser/editProfile`,
       this.state.formData
     );
-    toast.success(data.message);
     if (data) {
-      window.location.reload();
+      await setTimeout(async () => {
+        await this.props.history.push("myProfile");
+      }, 1000);
+      toast.success(data.message);
+      await setTimeout(async () => {
+        await window.location.reload();
+      }, 1500);
     }
     if (error) {
       toast.error(error);
