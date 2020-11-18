@@ -39,6 +39,7 @@ class UploadTenderTermsAndConditions extends Form {
                     <label>Upload terms & conditions for the tender</label>
                     <input
                       type="file"
+                      accept=".pdf"
                       className="dropify"
                       data-height="200"
                       onChange={this.onFileChange}

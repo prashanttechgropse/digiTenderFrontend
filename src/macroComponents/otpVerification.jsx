@@ -13,7 +13,7 @@ class OtpVerificationForm extends Form {
   };
 
   schema = {
-    otp: Joi.string().required(),
+    otp: Joi.number().required(),
   };
 
   componentDidMount = () => {
