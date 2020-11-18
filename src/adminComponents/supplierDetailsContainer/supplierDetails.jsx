@@ -102,7 +102,7 @@ class SupplierDetails extends Component {
           <td>{tender.createdBy.firstName}</td>
           <td>{tender._id.toString().substring(18, 24)}</td>
           <td>{new Date(tender.deliveryDate).toDateString()}</td>
-          <td>{tender.budgetAmount}</td>
+          <td>{tender.budgetAmount} Rand</td>
 
           <td>
             <Link
@@ -328,16 +328,6 @@ class SupplierDetails extends Component {
                             ) : (
                               ""
                             )}
-                            <div className="media-body">
-                              <div>
-                                <label>Supplier Vat Document</label>
-                                <span className="tx-medium">
-                                  <Link to="#" onClick={this.downloadVatDoc}>
-                                    <i className="fa fa-file"></i> Download
-                                  </Link>
-                                </span>
-                              </div>
-                            </div>
                           </div>
                         </div>
                       </div>

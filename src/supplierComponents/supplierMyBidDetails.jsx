@@ -4,6 +4,7 @@ import httpService from "../services/httpService";
 import { toast } from "react-toastify";
 import SupplierBidCards from "./supplierBidCards";
 import pad from "../services/padding";
+
 class SupplierBidDetails extends Component {
   state = { bid: null, bidNotFound: false };
 
@@ -26,7 +27,7 @@ class SupplierBidDetails extends Component {
 
   renderBidItemDetails = () => {
     if (this.state.bid === null) return null;
-    let srNo;
+    let srNo = 0;
     return this.state.bid.itemList.map((item) => {
       srNo++;
       return (

@@ -13,8 +13,8 @@ class BidItemListRow extends Component {
             {`${item.quantity} ${item.unitOfMeasure}`}
           </span>
         </td>
-        <td>{`${item.price}.00 USD`}</td>
-        <td>{`${item.price * item.quantity}.00 USD`}</td>
+        <td>{`${item.price}.00 Rand`}</td>
+        <td>{`${item.price * item.quantity}.00 Rand`}</td>
       </tr>
     );
   }

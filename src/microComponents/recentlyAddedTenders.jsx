@@ -53,7 +53,7 @@ class RecentlyAddedTenders extends Component {
           <td>{`${new Date(tender.closingDate).toDateString()}`}</td>
           <td>{tender.createdBy.firstName}</td>
           <td>{tender.deliveryLocation}</td>
-          <td>{`${tender.budgetAmount} USD`}</td>
+          <td>{`${tender.budgetAmount} Rand`}</td>
           <td>
             <span className={`badge badge-${styleOfBadge} f-14`}>
               {tender.status.toUpperCase()}

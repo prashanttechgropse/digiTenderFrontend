@@ -88,7 +88,7 @@ class SupplierBidCards extends Component {
                   <div className="col-8">
                     <div className="mt-0 text-right">
                       <span className="text-white">Total Amount</span>
-                      <h2 className="text-white mb-0 tx-20">{`${tender.budgetAmount} USD`}</h2>
+                      <h2 className="text-white mb-0 tx-20">{`${tender.budgetAmount} Rand`}</h2>
                     </div>
                   </div>
                 </div>

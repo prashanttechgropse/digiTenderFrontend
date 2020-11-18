@@ -318,16 +318,6 @@ class CustomerDetails extends Component {
                             ) : (
                               ""
                             )}
-                            <div className="media-body">
-                              <div>
-                                <label>Customer Vat Document</label>
-                                <span className="tx-medium">
-                                  <Link to="#" onClick={this.downloadVatDoc}>
-                                    <i className="fa fa-file"></i> Download
-                                  </Link>
-                                </span>
-                              </div>
-                            </div>
                           </div>
                         </div>
                       </div>
