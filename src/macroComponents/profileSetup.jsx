@@ -131,6 +131,39 @@ class ProfileSetup extends Form {
     this.setState({ errors });
   };
 
+  handleChange = async (e) => {
+    //validation on change of input
+    const errors = { ...this.state.errors };
+    const errorMessage = this.validateOnChange(e.currentTarget);
+    if (errorMessage) errors[e.currentTarget.name] = errorMessage;
+    else delete errors[e.currentTarget.name];
+    //setting state according to input
+    const formData = { ...this.state.formData };
+    formData[e.currentTarget.name] = e.currentTarget.value;
+    if (
+      e.currentTarget.name === "vatRegistration" &&
+      formData[e.currentTarget.name] === "no"
+    ) {
+      formData.vatNumber = "";
+    }
+    if (
+      e.currentTarget.name === "organisationType" &&
+      formData[e.currentTarget.name] === "Sole Trader"
+    ) {
+      formData.companyName = "";
+      formData.entityRegistrationNo = "";
+    }
+    if (
+      e.currentTarget.name === "organisationType" &&
+      formData[e.currentTarget.name] !== "Sole Trader"
+    ) {
+      formData.firstName = "";
+      formData.lastName = "";
+      formData.idNumber = "";
+    }
+    await this.setState({ formData, errors });
+  };
+
   validateOnChange = (input) => {
     let obj = { [input.name]: input.value.trim() };
     let subSchema;
@@ -248,18 +281,6 @@ class ProfileSetup extends Form {
     const formData = new FormData();
     {
       let data = { ...this.state.formData };
-      if (data.vatRegistration === "no") {
-        data.vatNumber = "";
-      }
-      if (data.organisationType === "Sole Trader") {
-        data.companyName = "";
-        data.entityRegistrationNo = "";
-      }
-      if (data.organisationType !== "Sole Trader") {
-        data.firstName = "";
-        data.lastName = "";
-        data.idNumber = "";
-      }
       for (const item in data) {
         if (data[item] === "") {
           data[item] = "N/A";
