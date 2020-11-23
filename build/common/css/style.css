@@ -9214,7 +9214,6 @@ textarea.custom-file-input.parsley-error:focus ~ .custom-file-label {
   width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  overflow-x: hidden;
 }
 .table-responsive > .table-bordered {
   border: 0;
@@ -23479,7 +23478,7 @@ p {
     max-width: inherit !important;
   }
   .breadcrumb-header {
-    margin-top: 24px;
+    margin-top: 70px;
     margin-bottom: 10px !important;
   }
 }
@@ -73571,5 +73570,100 @@ a.text-dark:focus {
 }
 .app.sidenav-toggled .app-sidebar:hover .fa.angle {
         display: inline-block!important;
+}
+}
+
+@media screen and (max-width: 578px) {
+.main-header-center {
+    display: flex!important;
+        margin: 0 0px;
+}
+.main-header-left .form-control, .main-header-center .btn {
+    display: block;
+}
+.main-header-left .form-control {
+    height: 40px;
+    border-radius: 20px;
+    background: #ecf0fa;
+    border: 1px solid #ecf0fa;
+    width: 100%;
+}
+.main-header-left .btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: transparent;
+    height: 40px;
+    color: #b4bdce;
+    transition: none;
+    font-size: 16px;
+    padding-right: 13px;
+}
+.main-header-left .btn .d-none {
+    display: block!important;
+}
+.main-header-left {
+    display: flex;
+    align-items: center;
+    width: 70%;
+}
+.main-header-right {
+    display: flex;
+    align-items: center;
+    width: 32%;
+}
+}
+
+@media screen and (max-width: 991px) {
+.main-header-center {
+    display: flex!important;
+        margin: 0 0px;
+}
+.main-header-left .form-control, .main-header-center .btn {
+    display: block;
+}
+.main-header-left .form-control {
+    height: 40px;
+    border-radius: 20px;
+    background: #ecf0fa;
+    border: 1px solid #ecf0fa;
+    width: 100%;
+}
+.main-header-left .btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: transparent;
+    height: 40px;
+    color: #b4bdce;
+    transition: none;
+    font-size: 16px;
+    padding-right: 13px;
+}
+.main-header-left .btn .d-none {
+    display: block!important;
+}
+.main-header-left {
+    display: flex;
+    align-items: center;
+    width: 70%;
+}
+.main-header-right {
+    display: flex;
+    align-items: center;
+    width: 32%;
+}
+.header-icon-svgs {
+    width: 19px;
+    height: 19px;
+    color: #5b6e88;
+    display: none;
+}
+.card.text-white .mt-0.text-right h2.text-white.mb-0 {
+    font-size: 14px;
+    margin-top: 10px;
+}
+.col-md-3.offset-9 .btn.btn-warning-gradient.btn-block{
+    font-size: 10px;
 }
 }
