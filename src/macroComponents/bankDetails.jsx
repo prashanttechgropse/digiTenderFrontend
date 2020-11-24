@@ -167,14 +167,14 @@ class BankDetails extends Form {
                                 </div>
                                 <div className="row">
                                   <div className="col-md-12">
-                                    <a
+                                    <button
                                       href="#setupprofile"
                                       className="btn btn-main-primary btn-block"
                                       data-toggle="modal"
                                       disabled={this.validateOnSubmit()}
                                     >
                                       Submit Profile
-                                    </a>
+                                    </button>
                                   </div>
                                 </div>
                               </form>
