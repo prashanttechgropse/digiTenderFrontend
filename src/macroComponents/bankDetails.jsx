@@ -166,7 +166,7 @@ class BankDetails extends Form {
                                 <div className="row">
                                   <div className="col-md-12">
                                     <button
-                                      target="#setupprofile"
+                                      data-target="#setupprofile"
                                       className="btn btn-main-primary btn-block"
                                       data-toggle="modal"
                                       onClick={(e) => {
