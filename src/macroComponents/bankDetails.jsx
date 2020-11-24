@@ -169,6 +169,9 @@ class BankDetails extends Form {
                                       target="#setupprofile"
                                       className="btn btn-main-primary btn-block"
                                       data-toggle="modal"
+                                      onClick={(e) => {
+                                        e.preventDefault();
+                                      }}
                                       disabled={this.validateOnSubmit()}
                                     >
                                       Submit Profile
