@@ -2,21 +2,38 @@ import React, { Component } from "react";
 import pad from "../../services/padding";
 import httpService from "../../services/httpService";
 import { Link } from "react-router-dom";
+import { paginate } from "../../utilities/paginate";
+import Pagination from "../../microComponents/pagination";
 
 class CustomerPaymentList extends Component {
   state = {
     customerPaymentList: [],
+    displayPaymentList: [],
+    currentPage: null,
+    pageSize: null,
   };
+  constructor(props) {
+    super(props);
+    this.state.currentPage = 1;
+    this.state.pageSize = 5;
+  }
   componentDidMount = async () => {
     const { data } = await httpService.get(
       `${process.env.REACT_APP_APIENDPOINT}/admin/customerPaymentList`
     );
     this.setState({ customerPaymentList: data.customerPaymentList });
+    const displayPaymentList = paginate(
+      this.state.customerPaymentList,
+      this.state.currentPage,
+      this.state.pageSize
+    );
+    this.setState({ displayPaymentList });
   };
 
   renderCustomerPaymentList() {
-    let srNo = 0;
-    return this.state.customerPaymentList.map((listItem) => {
+    let srNo = (this.state.currentPage - 1) * this.state.pageSize;
+    const customerPaymentList = this.state.displayPaymentList;
+    return customerPaymentList.map((listItem) => {
       srNo++;
       return (
         <tr key={srNo} role="row">
@@ -50,6 +67,15 @@ class CustomerPaymentList extends Component {
       );
     });
   }
+  handlePageChange = async (pageNumber) => {
+    this.setState({ currentPage: pageNumber });
+    const displayPaymentList = paginate(
+      this.state.customerPaymentList,
+      pageNumber,
+      this.state.pageSize
+    );
+    await this.setState({ displayPaymentList });
+  };
 
   render() {
     return (
@@ -84,6 +110,16 @@ class CustomerPaymentList extends Component {
                     </thead>
                     <tbody>{this.renderCustomerPaymentList()}</tbody>
                   </table>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-sm-12">
+                  <Pagination
+                    currentPage={this.state.currentPage}
+                    totalItemsCount={this.state.customerPaymentList.length}
+                    pageSize={this.state.pageSize}
+                    onPageChange={this.handlePageChange}
+                  />
                 </div>
               </div>
             </div>
