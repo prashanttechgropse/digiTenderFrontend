@@ -64,7 +64,7 @@ class CustomerSaveForLater extends Component {
               {tender._id.toString().substring(18, 24)}
             </Link>
           </td>
-          <td>{tender.budgetAmount} Rand</td>
+          <td>R {tender.budgetAmount} </td>
           <td>{new Date(tender.creationDate).toDateString()}</td>
           <td>
             {tender.deliveryDate

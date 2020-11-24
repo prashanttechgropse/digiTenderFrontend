@@ -45,7 +45,7 @@ class AdminCreateCategory extends Form {
     if (organisationTypes === "") return null;
     return organisationTypes.map((organistationType) => {
       srNo++;
-      const index = srNo - 1;
+      // const index = srNo - 1;
       return (
         <tr role="row" key={srNo}>
           <td>{pad(srNo, 3)}</td>

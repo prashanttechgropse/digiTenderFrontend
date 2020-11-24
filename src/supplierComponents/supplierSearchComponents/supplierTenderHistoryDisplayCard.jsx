@@ -71,7 +71,7 @@ class SupplierTenderHistoryDisplayCard extends Component {
           <td>{`${tender.createdBy.firstName}`}</td>
           <td>{tender.deliveryLocation}</td>
 
-          <td>{`${tender.acceptedBidAmount} Rand`}</td>
+          <td>{`R ${tender.acceptedBidAmount}`}</td>
           <td>
             <span className="badge badge-success f-14">{`${tender.status.toUpperCase()}`}</span>
           </td>

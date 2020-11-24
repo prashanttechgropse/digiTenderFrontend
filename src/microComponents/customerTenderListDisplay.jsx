@@ -65,7 +65,7 @@ class TenderListDisplayCard extends Component {
               {tender._id.toString().substring(18, 24)}
             </Link>
           </td>
-          <td>{tender.budgetAmount} Rand</td>
+          <td>R {tender.budgetAmount} </td>
           <td>{new Date(tender.creationDate).toDateString()}</td>
           <td>{new Date(tender.deliveryDate).toDateString()}</td>
           <td>{new Date(tender.closingDate).toDateString()}</td>

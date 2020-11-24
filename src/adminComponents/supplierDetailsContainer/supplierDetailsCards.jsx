@@ -90,7 +90,7 @@ class SupplierDetailsCards extends Component {
                 <div className="d-flex">
                   <div className="">
                     <h4 className="tx-20 font-weight-bold mb-1 text-white">
-                      {this.props.amountEarnedBySupplier} Rand
+                      R {this.props.amountEarnedBySupplier}
                     </h4>
                   </div>
                   <span className="float-right my-auto ml-auto">

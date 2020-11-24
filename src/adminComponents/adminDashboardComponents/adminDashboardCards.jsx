@@ -143,7 +143,7 @@ class AdminDashBoardCards extends Component {
                 <div className="d-flex">
                   <div className="">
                     <h4 className="tx-20 font-weight-bold mb-1 text-white">
-                      {this.props.totalCommissionEarned} Rand
+                      R {this.props.totalCommissionEarned}
                     </h4>
                   </div>
                   <span className="float-right my-auto ml-auto">
@@ -171,7 +171,7 @@ class AdminDashBoardCards extends Component {
                 <div className="d-flex">
                   <div className="">
                     <h4 className="tx-20 font-weight-bold mb-1 text-white">
-                      {this.props.totalAmountPaidToSupplier} Rand
+                      R {this.props.totalAmountPaidToSupplier}
                     </h4>
                   </div>
                   <span className="float-right my-auto ml-auto">
@@ -199,7 +199,7 @@ class AdminDashBoardCards extends Component {
                 <div className="d-flex">
                   <div className="">
                     <h4 className="tx-20 font-weight-bold mb-1 text-white">
-                      {this.props.totalAmountPaidByCustomer} Rand
+                      R {this.props.totalAmountPaidByCustomer}
                     </h4>
                   </div>
                   <span className="float-right my-auto ml-auto">

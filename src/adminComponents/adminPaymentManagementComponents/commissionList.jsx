@@ -46,7 +46,7 @@ class CommissionList extends Component {
             </Link>
           </td>
           <td>{new Date(listItem.tender.deliveryDate).toDateString()}</td>
-          <td>{listItem.commission} Rand</td>
+          <td>R {listItem.commission} </td>
           <td>
             <span
               className={`badge ${

@@ -197,7 +197,7 @@ class SupplierDashboardMainContent extends Component {
                   <div className="d-flex">
                     <div className="">
                       <h4 className="tx-20 font-weight-bold mb-1 text-white">
-                        {this.state.earningsThisMonth} Rand
+                        R {this.state.earningsThisMonth}
                       </h4>
                       <p className="mb-0 tx-12 text-white op-7">
                         Compared to last month
