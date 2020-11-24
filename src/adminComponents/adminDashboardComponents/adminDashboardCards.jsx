@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 class AdminDashBoardCards extends Component {
   state = {};
   render() {
@@ -42,7 +43,9 @@ class AdminDashBoardCards extends Component {
                     </h4>
                   </div>
                   <span className="float-right my-auto ml-auto">
-                    <i className="fa fa-users text-white f-24"></i>{" "}
+                    <Link to={"/admin/customerList"}>
+                      <i className="fa fa-users text-white f-24"></i>
+                    </Link>
                   </span>
                 </div>
               </div>
@@ -66,7 +69,9 @@ class AdminDashBoardCards extends Component {
                     </h4>
                   </div>
                   <span className="float-right my-auto ml-auto">
-                    <i className="fa fa-user text-white f-24"></i>
+                    <Link to={"/admin/supplierList"}>
+                      <i className="fa fa-user text-white f-24"></i>
+                    </Link>
                   </span>
                 </div>
               </div>
@@ -90,7 +95,9 @@ class AdminDashBoardCards extends Component {
                     </h4>
                   </div>
                   <span className="float-right my-auto ml-auto">
-                    <i className="fa fa-file text-white f-24"></i>{" "}
+                    <Link to={"admin/deliveryNoteList"}>
+                      <i className="fa fa-file text-white f-24"></i>
+                    </Link>
                   </span>
                 </div>
               </div>
@@ -140,7 +147,9 @@ class AdminDashBoardCards extends Component {
                     </h4>
                   </div>
                   <span className="float-right my-auto ml-auto">
-                    <i className="fa fa-money text-white f-24"></i>{" "}
+                    <Link to={"/admin/paymentList"}>
+                      <i className="fa fa-money text-white f-24"></i>
+                    </Link>
                   </span>
                 </div>
               </div>
@@ -166,7 +175,9 @@ class AdminDashBoardCards extends Component {
                     </h4>
                   </div>
                   <span className="float-right my-auto ml-auto">
-                    <i className="fa fa-money text-white f-24"></i>{" "}
+                    <Link to={"/admin/paymentList"}>
+                      <i className="fa fa-money text-white f-24"></i>
+                    </Link>
                   </span>
                 </div>
               </div>
@@ -192,7 +203,9 @@ class AdminDashBoardCards extends Component {
                     </h4>
                   </div>
                   <span className="float-right my-auto ml-auto">
-                    <i className="fa fa-money text-white f-24"></i>{" "}
+                    <Link to={"/admin/paymentList"}>
+                      <i className="fa fa-money text-white f-24"></i>
+                    </Link>
                   </span>
                 </div>
               </div>
