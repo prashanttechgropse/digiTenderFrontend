@@ -169,7 +169,7 @@ class AdminSideBar extends Component {
                 <li className="slide active">
                   <Link to={"/admin"} className="side-menu__item active">
                     <i className="fa fa-home"></i>
-                    <span className="side-menu__label">Dashborad</span>
+                    <span className="side-menu__label">Dashboard</span>
                   </Link>
                 </li>
                 <li className="slide">

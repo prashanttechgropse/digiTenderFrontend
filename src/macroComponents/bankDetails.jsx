@@ -85,14 +85,16 @@ class BankDetails extends Form {
 
     const { data, error } = await registerServices.uploadBankDetails(formData);
     if (data) {
-      await this.props.history.push(`/login`);
-      window.location.reload();
-      return;
+      return await this.props.history.push(`/login`);
     }
     if (error) {
       return;
     }
   };
+
+  componentWillUnmount() {
+    window.location.reload();
+  }
 
   render() {
     return (
@@ -166,7 +168,7 @@ class BankDetails extends Form {
                                 <div className="row">
                                   <div className="col-md-12">
                                     <button
-                                      href="#setupprofile"
+                                      target="#setupprofile"
                                       className="btn btn-main-primary btn-block"
                                       data-toggle="modal"
                                       disabled={this.validateOnSubmit()}

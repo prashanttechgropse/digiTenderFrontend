@@ -130,7 +130,7 @@ class SupplierSideBar extends Component {
                 <li className="slide active">
                   <Link className="side-menu__item active" to="/supplier">
                     <i className="fa fa-home"></i>
-                    <span className="side-menu__label">Dashborad</span>
+                    <span className="side-menu__label">Dashboard</span>
                   </Link>
                 </li>
                 <li className="slide">
