@@ -85,16 +85,14 @@ class BankDetails extends Form {
 
     const { data, error } = await registerServices.uploadBankDetails(formData);
     if (data) {
-      return await this.props.history.push(`/login`);
+      await this.props.history.push(`/login`);
+      window.location.reload();
+      return;
     }
     if (error) {
       return;
     }
   };
-
-  componentWillUnmount() {
-    window.location.reload();
-  }
 
   render() {
     return (
