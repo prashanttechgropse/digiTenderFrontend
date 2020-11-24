@@ -120,11 +120,6 @@ class BankDetails extends Form {
                           <div className="card-sigin">
                             <div className="main-signup-header">
                               <h2>Submit Your Bank Detail</h2>
-                              <h5 className="font-weight-semibold mb-4">
-                                Lorem Ipsum is simply dummy text of the printing
-                                and typesetting industry. Lorem Ipsum has been
-                                the industry's standard dummy text
-                              </h5>
                               <form>
                                 <div className="row">
                                   <div className="col-md-6">
@@ -176,6 +171,7 @@ class BankDetails extends Form {
                                       href="#setupprofile"
                                       className="btn btn-main-primary btn-block"
                                       data-toggle="modal"
+                                      disabled={this.validateOnSubmit()}
                                     >
                                       Submit Profile
                                     </a>

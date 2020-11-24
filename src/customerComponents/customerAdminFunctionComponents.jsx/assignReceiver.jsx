@@ -152,8 +152,7 @@ class AssignReceiver extends Form {
                   </h4>
                 </div>
                 <p className="tx-12 tx-gray-500 mb-2">
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry.
+                  {/*Lorem Ipsum is simply dummy typesetting industry.*/}
                 </p>
               </div>
               <div className="card-body">
@@ -211,7 +210,7 @@ class AssignReceiver extends Form {
                       Assign Receiver For Tender
                     </div>
                     <p className="mg-b-20">
-                      Lorem Ipsum is simply dummy text of the printing .
+                      {/*Lorem Ipsum is simply dummy typesetting industry.*/}
                     </p>
                     <form
                       action=""

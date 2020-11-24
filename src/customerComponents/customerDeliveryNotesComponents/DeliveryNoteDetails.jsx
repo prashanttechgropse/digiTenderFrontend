@@ -113,7 +113,7 @@ class DeliveryNoteDetails extends Component {
                   </h4>
                 </div>
                 <p class="tx-12 tx-gray-500 mb-2">
-                  Lorem Ipsum is simply dummy text industry.
+                  {/*Lorem Ipsum is simply dummy typesetting industry.*/}
                 </p>
               </div>
               <div class="card-body">
@@ -222,7 +222,7 @@ class DeliveryNoteDetails extends Component {
               <h4 class="card-title mg-b-0 datatable-link">Item details</h4>
             </div>
             <p class="tx-12 tx-gray-500 mb-2">
-              Lorem Ipsum is simply dummy text industry.
+              {/*Lorem Ipsum is simply dummy typesetting industry.*/}
             </p>
           </div>
 

@@ -67,13 +67,10 @@ class AddTenderDetailsCard extends Form {
         <div className="card-header pb-0">
           <div className="d-flex justify-content-between">
             <h4 className="card-title mg-b-0 datatable-link">
-              if You want to Create New Tender. Fill the Forms !
+              Complete below required information to create a tender
             </h4>
           </div>
-          <p className="tx-12 tx-gray-500 mb-2">
-            Lorem Ipsum is simply dummy text of the printing and simply dummy
-            text of the printing and typesetting industry.
-          </p>
+          <p className="tx-12 tx-gray-500 mb-2">{/*for dummy text*/}</p>
         </div>
         <div className="card-body">
           <div className="card-sigin">

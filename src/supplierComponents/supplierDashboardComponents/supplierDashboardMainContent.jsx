@@ -197,7 +197,7 @@ class SupplierDashboardMainContent extends Component {
                   <div className="d-flex">
                     <div className="">
                       <h4 className="tx-20 font-weight-bold mb-1 text-white">
-                         {this.state.earningsThisMonth} Rand
+                        {this.state.earningsThisMonth} Rand
                       </h4>
                       <p className="mb-0 tx-12 text-white op-7">
                         Compared to last month
@@ -232,8 +232,7 @@ class SupplierDashboardMainContent extends Component {
                   </h4>
                 </div>
                 <p className="tx-12 tx-gray-500 mb-2">
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry.
+                  {/*Lorem Ipsum is simply dummy typesetting industry.*/}
                 </p>
               </div>
               <RecentlyAddedTenders />

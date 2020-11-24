@@ -341,9 +341,9 @@ class ProfileSetup extends Form {
                           <div className="main-signup-header">
                             <h2>Profile Setup</h2>
                             <h5 className="font-weight-semibold mb-4">
-                              Lorem Ipsum is simply dummy text of the printing
-                              and typesetting industry. Lorem Ipsum has been the
-                              industry's standard dummy text
+                              Please provide as much as information as possible
+                              to speed up the Registration process. All fields
+                              marked with * are mandatory
                             </h5>
                             <form>
                               <div className="row">
@@ -426,7 +426,7 @@ class ProfileSetup extends Form {
                                 <div className="col-md-6">
                                   {this.renderSelect(
                                     "vatRegistration",
-                                    "Vat Registration",
+                                    "VAT Registered",
                                     [
                                       { _id: "yes", name: "yes" },
                                       { _id: "no", name: "no" },

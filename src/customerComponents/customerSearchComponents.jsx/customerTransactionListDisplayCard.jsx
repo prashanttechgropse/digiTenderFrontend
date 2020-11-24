@@ -110,8 +110,7 @@ class CustomerTransactionListDisplayCard extends Component {
                 </h4>
               </div>
               <p className="tx-12 tx-gray-500 mb-2">
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry.
+                {/*Lorem Ipsum is simply dummy typesetting industry.*/}
               </p>
             </div>
             <div className="card-body">

@@ -293,9 +293,7 @@ class AdminCreateCategory extends Form {
                     Create Item List
                   </h4>
                 </div>
-                <p className="tx-12 tx-gray-500 mb-2">
-                  Lorem Ipsum is simply dummy texttypesetting industry.
-                </p>
+                <p className="tx-12 tx-gray-500 mb-2">{/*Lorem Ipsum */}</p>
               </div>
               <div className="card-body">
                 <div className="card-sigin">

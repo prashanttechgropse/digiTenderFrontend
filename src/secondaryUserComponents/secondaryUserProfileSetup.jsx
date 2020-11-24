@@ -66,9 +66,7 @@ class SecondaryUserProfileSetup extends Form {
                             <div class="main-signup-header">
                               <h2>Profile Setup</h2>
                               <h5 class="font-weight-semibold mb-4">
-                                Lorem Ipsum is simply dummy text of the printing
-                                and typesetting industry. Lorem Ipsum has been
-                                the industry's standard dummy text
+                                {/*Lorem Ipsum is simply dummy typesetting industry.*/}
                               </h5>
                               <form action="<?php echo site_url('bank-information');?>">
                                 <div class="row">

@@ -189,9 +189,7 @@ class CustomerPaymentDetails extends Component {
                     Customer Payment Detail
                   </h4>
                 </div>
-                <p className="tx-12 tx-gray-500 mb-2">
-                  Lorem Ipsum is simply dummy text industry.
-                </p>
+                <p className="tx-12 tx-gray-500 mb-2">{/* Lorem Ipsum .*/}</p>
               </div>
               <div className="card-body">
                 <div className="main-contact-info-body p-4 ps">

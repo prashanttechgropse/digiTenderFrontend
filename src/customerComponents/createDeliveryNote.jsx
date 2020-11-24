@@ -100,8 +100,7 @@ class CreateDeliveryNote extends Form {
                   </h4>
                 </div>
                 <p className="tx-12 tx-gray-500 mb-2">
-                  Lorem Ipsum is simply dummy text of the printing and simply
-                  dummy text of the printing and typesetting industry.
+                  {/*Lorem Ipsum is simply dummy typesetting industry.*/}
                 </p>
               </div>
               <div className="card-body">
@@ -192,8 +191,7 @@ class CreateDeliveryNote extends Form {
                   </h4>
                 </div>
                 <p className="tx-12 tx-gray-500 mb-2">
-                  Lorem Ipsum is simply dummy text of the printing and simply
-                  dummy text of the printing and typesetting industry.
+                  {/*Lorem Ipsum is simply dummy typesetting industry.*/}
                 </p>
               </div>
               <div className="card-body">
@@ -271,8 +269,7 @@ class CreateDeliveryNote extends Form {
                   Are you sure u want to publish?
                 </h4>
                 <p className="mg-b-20 mg-x-20">
-                  There are many variations of passages of Lorem Ipsum
-                  available, but the majority have suffered alteration.
+                  {/*Lorem Ipsum is simply dummy typesetting industry.*/}
                 </p>
                 <button
                   aria-label="Close"

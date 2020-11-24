@@ -74,10 +74,7 @@ class AdminHelpSupport extends Component {
                     Complain List
                   </h4>
                 </div>
-                <p className="tx-12 tx-gray-500 mb-2">
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry.
-                </p>
+                <p className="tx-12 tx-gray-500 mb-2">{/*Lorem Ipsum */}</p>
               </div>
               <div className="card-body">
                 <div className="table-responsive">
