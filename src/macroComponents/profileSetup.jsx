@@ -476,7 +476,8 @@ class ProfileSetup extends Form {
                                   {this.renderInput("contactNo", "Contact No")}
                                 </div>
                               </div>
-                              <div className="row">
+
+                              <div className="row ducumentshow">
                                 <div className="col-md-12">
                                   <div className="form-group">
                                     <label className="m-2">
@@ -489,6 +490,13 @@ class ProfileSetup extends Form {
                                       data-height="200"
                                       onChange={this.onFileChange1}
                                     />
+                                    <div class="ducument">
+                                      <i class="fa fa-info"></i>
+                                      <img
+                                        src="/common/img/document.png"
+                                        alt="Document"
+                                      />
+                                    </div>
                                     {this.state.errors.selectedFile1 && (
                                       <div className="alert alert-danger">
                                         {this.state.errors.selectedFile1}

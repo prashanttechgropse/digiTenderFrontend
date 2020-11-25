@@ -73667,3 +73667,30 @@ a.text-dark:focus {
     font-size: 10px;
 }
 }
+.ducumentshow .form-group {
+  display: inline-block;
+}
+.ducumentshow  .ducument{
+  float: right;
+  position: absolute;
+  width: 100%;
+  top: 0px;
+  left: 25%;
+}
+.ducumentshow  .ducument .fa {
+  background: #DEDEDE;
+  padding: 8px 12px;
+  border-radius: 20px;
+  margin-top: 3px;
+  cursor: pointer;
+}
+.ducumentshow .ducument img{
+  z-index: 9999;
+  position: absolute;
+  top: -30px;
+  left: 5%;
+  visibility: hidden;
+}
+.ducumentshow .ducument:hover img{
+  visibility: visible;
+}

@@ -17,7 +17,7 @@ class Form extends Component {
     if (!result.error) return null;
     const errors = {};
     for (let item of result.error.details) {
-      errors[item.path[0]] = item.message;
+      errors[item.path[0]] = item.message.toUpperCase();
     }
     return errors;
   };
@@ -44,7 +44,7 @@ class Form extends Component {
     //validation on change of input
     const errors = { ...this.state.errors };
     const errorMessage = this.validateOnChange(e.currentTarget);
-    if (errorMessage) errors[e.currentTarget.name] = errorMessage;
+    if (errorMessage) errors[e.currentTarget.name] = errorMessage.toUpperCase();
     else delete errors[e.currentTarget.name];
     //setting state according to input
     const formData = { ...this.state.formData };
