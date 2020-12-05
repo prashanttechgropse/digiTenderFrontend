@@ -77,7 +77,11 @@ class SupplierSaveForLater extends Component {
             </Link>
           </td>
           <td>{`${new Date(tender.closingDate).toDateString()}`}</td>
-          <td>{`${tender.createdBy.firstName}`}</td>
+          <td>
+            {tender.createdBy.organisationType === "Sole Trader"
+              ? tender.createdBy.firstName
+              : tender.createdBy.companyName}
+          </td>
           <td>{tender.deliveryLocation}</td>
           <td>{`R ${tender.budgetAmount} `}</td>
           <td>

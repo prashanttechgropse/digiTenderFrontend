@@ -211,7 +211,8 @@ class SupplierQuotationDetails extends Component {
               </div>
             </div>
 
-            {bid.tender.status === "inProcess" ? (
+            {this.props.match.path.includes("/customer") &&
+            bid.tender.status === "inProcess" ? (
               <div className="col-lg-12 col-md-12">
                 <div className="card" id="button33">
                   <div className="card-body">
