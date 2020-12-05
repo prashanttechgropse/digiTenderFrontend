@@ -18,6 +18,7 @@ class SupllierBid extends Component {
     bid: null,
     tender: null,
     errors: {},
+    totalBidAmount: 0,
     acceptTermsConditions: false,
   };
 
@@ -168,16 +169,30 @@ class SupllierBid extends Component {
           key={item._id}
           item={item}
           srNo={srNo}
-          pushPrice={this.addPrice}
+          pushPrice={(price, srNo) => this.addPrice(price, srNo)}
         />
       );
     });
+  };
+
+  totalBidAmount = async () => {
+    let bid = {};
+    bid.itemList = this.state.tender.itemList;
+    bid.totalAmount =
+      bid.totalAmount +
+      parseInt(
+        await bid.itemList.map((item) => {
+          return parseInt(item.price) * parseInt(item.quantity);
+        })
+      );
+    this.setState({ totalBidAmount: bid.totalAmount });
   };
 
   render() {
     if (this.state.tender === null) return null;
     if (this.calculateDaysLeftToClosingDate < 0)
       return <h1 className="no-data-found">tender closed</h1>;
+    this.calculateTotalBidAmount();
     return (
       <div className="container-fluid">
         <div className="breadcrumb-header justify-content-between">
@@ -190,7 +205,10 @@ class SupllierBid extends Component {
             </div>
           </div>
         </div>
-        <SupplierBidCards tender={this.state.tender} />
+        <SupplierBidCards
+          tender={this.state.tender}
+          totalBidAmount={this.state.totalBidAmount}
+        />
         <div className="row row-sm">
           <div className="col-xl-12">
             <div className="card">

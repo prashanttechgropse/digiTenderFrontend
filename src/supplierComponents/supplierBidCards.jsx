@@ -87,7 +87,7 @@ class SupplierBidCards extends Component {
                   </div>
                   <div className="col-8">
                     <div className="mt-0 text-right">
-                      <span className="text-white">Total Amount</span>
+                      <span className="text-white">Tender Budget</span>
                       <h2 className="text-white mb-0 tx-20">{`R ${tender.budgetAmount}`}</h2>
                     </div>
                   </div>
@@ -229,6 +229,27 @@ class SupplierBidCards extends Component {
                       <span className="text-white">Status</span>
                       <h2 className="text-white mb-0 tx-20">
                         {tender.status.toUpperCase()}
+                      </h2>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col-lg-6 col-xl-4 col-md-6 col-12">
+            <div className="card bg-primary-gradient text-white">
+              <div className="card-body">
+                <div className="row">
+                  <div className="col-4">
+                    <div className="icon1 mt-2 text-center">
+                      <i className="fa fa-user tx-30"></i>
+                    </div>
+                  </div>
+                  <div className="col-8">
+                    <div className="mt-0 text-right">
+                      <span className="text-white">Total bid Amount</span>
+                      <h2 className="text-white mb-0 tx-20">
+                        {this.props.totalBidAmount}
                       </h2>
                     </div>
                   </div>

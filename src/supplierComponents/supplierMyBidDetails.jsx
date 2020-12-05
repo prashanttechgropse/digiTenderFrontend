@@ -71,7 +71,10 @@ class SupplierBidDetails extends Component {
             </div>
           </div>
         </div>
-        <SupplierBidCards tender={this.state.bid.tender} />
+        <SupplierBidCards
+          tender={this.state.bid.tender}
+          totalBidAmount={this.state.bid.totalAmount}
+        />
         <div className="row row-sm">
           <div className="col-xl-12">
             <div className="card">
