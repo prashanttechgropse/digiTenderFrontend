@@ -115,7 +115,9 @@ class CustomerSidebar extends Component {
                   </div>
                   <div className="user-info">
                     <h4 className="font-weight-semibold mt-3 mb-0">
-                      {this.props.user.details.firstName}
+                      {this.props.user.details.oganisationType === "Sole Trader"
+                        ? this.props.user.details.firstName
+                        : this.props.user.details.companyName}
                     </h4>
                     <span className="mb-0 text-muted">Customer</span>
                   </div>

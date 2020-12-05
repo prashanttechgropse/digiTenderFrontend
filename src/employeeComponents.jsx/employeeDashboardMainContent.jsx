@@ -55,7 +55,7 @@ class EmployeeDashBoardMainContent extends Component {
           <div className="left-content">
             <div>
               <h2 className="main-content-title tx-24 mg-b-1 mg-b-lg-1">
-                {user.details.firstName}
+                {user.details.name}
               </h2>
               <p className="mg-b-0">Welcome Back to Digibids Platform.</p>
             </div>

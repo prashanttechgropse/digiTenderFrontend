@@ -20,7 +20,9 @@ class ProfileDropDown extends Component {
                     ? this.props.user.name
                     : this.props.user.profileType === "customer" ||
                       this.props.user.profileType === "supplier"
-                    ? this.props.user.details.firstName
+                    ? this.props.user.details.oganisationType === "Sole Trader"
+                      ? this.props.user.details.firstName
+                      : this.props.user.details.companyName
                     : this.props.user.details.name}
                 </h6>
                 <span>{this.props.user.profileType.toUpperCase()}</span>

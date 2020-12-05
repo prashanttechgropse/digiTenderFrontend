@@ -29,7 +29,10 @@ class AdminComplaintDetails extends Form {
       );
       this.setState({
         complain: data.complain,
-        userName: data.complain.user.details.firstName,
+        userName:
+          data.complain.user.details.oganisationType === "Sole Trader"
+            ? data.complain.user.details.firstName
+            : data.complain.user.details.companyName,
         userEmail: data.complain.user.email,
         complainStatus: data.complain.status,
       });

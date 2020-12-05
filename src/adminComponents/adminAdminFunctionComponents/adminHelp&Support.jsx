@@ -25,7 +25,11 @@ class AdminHelpSupport extends Component {
       return (
         <tr key={srNo} role="row">
           <td>{pad(srNo, 3)}</td>
-          <td>{complain.user.details.firstName}</td>
+          <td>
+            {complain.user.details.oganisationType === "Sole Trader"
+              ? complain.user.details.firstName
+              : complain.user.details.companyName}
+          </td>
           <td>{complain.user.email}</td>
           <td>{complain.subject}</td>
           <td>

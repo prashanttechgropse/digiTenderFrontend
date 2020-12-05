@@ -66,7 +66,9 @@ class SupplierDashboardMainContent extends Component {
           <div className="left-content">
             <div>
               <h2 className="main-content-title tx-24 mg-b-1 mg-b-lg-1">
-                {`${user.details.firstName} `}
+                {user.details.oganisationType === "Sole Trader"
+                  ? user.details.firstName
+                  : user.details.companyName}
               </h2>
               <p className="mg-b-0">Welcome Back to DigiBids Platform.</p>
             </div>
