@@ -67,7 +67,10 @@ class SupplierSavedTenderDetailsRow extends Form {
         <td>
           {this.state.formData.price === null
             ? ""
-            : parseInt(this.state.formData.price) * parseInt(item.quantity)}
+            : (
+                parseFloat(this.state.formData.price) *
+                parseFloat(item.quantity)
+              ).toFixed(2)}
         </td>
       </tr>
     );
