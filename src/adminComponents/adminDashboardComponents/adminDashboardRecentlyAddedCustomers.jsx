@@ -13,7 +13,11 @@ class AdminDashBoardRecentlyAddedCustomers extends Component {
         return (
           <tr role="row" key={srNo}>
             <td>{pad(srNo, 3)}</td>
-            <td>{customer.firstName}</td>
+            <td>
+              {customer.organisationType === "Sole Trader"
+                ? customer.firstName
+                : customer.companyName}
+            </td>
             <td>{customer.entityRegistrationNo}</td>
             <td>{customer.contactNumber}</td>
             <td>{`${customer.tenders.length} Tenders`}</td>

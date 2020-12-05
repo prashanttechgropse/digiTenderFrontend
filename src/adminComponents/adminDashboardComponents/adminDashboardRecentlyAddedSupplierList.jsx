@@ -13,7 +13,13 @@ class AdminRecentlyAddedSupplierList extends Component {
         return (
           <tr role="row" key={srNo}>
             <td>{pad(srNo, 3)}</td>
-            <td>{supplier.firstName}</td>
+            <td>
+              {
+                (supplier.organisationType = "Sole Trader"
+                  ? supplier.firstName
+                  : supplier.companyName)
+              }
+            </td>
             <td>{supplier.entityRegistrationNo}</td>
             <td>{supplier.contactNumber}</td>
             <td>{`${supplier.tendersAwarded.length} Tenders`}</td>

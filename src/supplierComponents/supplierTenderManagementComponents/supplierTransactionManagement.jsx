@@ -85,7 +85,11 @@ class SupplierTransactionManagement extends Component {
                 : "transaction not made yet"}
             </span>
           </td>
-          <td>{`${tender.createdBy.firstName}`}</td>
+          <td>
+            {tender.createdBy.organisationType === "Sole Trader"
+              ? tender.createdBy.firstName
+              : tender.createdBy.companyName}
+          </td>
           <td>{`${tender.deliveryLocation}`}</td>
           <td>{`R ${tender.payment.tenderAmount} `}</td>
           <td>
