@@ -18,8 +18,8 @@ class SupllierBid extends Component {
     bid: null,
     tender: null,
     errors: {},
-    totalBidAmount: 0,
     acceptTermsConditions: false,
+    totalBidAmount: 0,
   };
 
   async componentDidMount() {
@@ -127,17 +127,31 @@ class SupllierBid extends Component {
     } else bid.isPublished = false;
 
     bid.totalAmount = 0;
-    bid.totalAmount =
-      bid.totalAmount +
-      parseInt(
-        bid.itemList.map((item) => {
-          return parseInt(item.price) * parseInt(item.quantity);
-        })
-      );
+    await parseFloat(
+      bid.itemList.map((item) => {
+        bid.totalAmount =
+          bid.totalAmount + parseFloat(item.price) * parseFloat(item.quantity);
+      })
+    );
 
     await this.setState({ bid });
 
     await this.doSubmit();
+  };
+
+  calculateTotalBidAmount = async () => {
+    let totalAmount = 0;
+    await this.state.tender.itemList.map((item) => {
+      let tempItem = item;
+      if (!tempItem.price && Number.isNaN(tempItem.price)) {
+        console.log(Number.isNaN(tempItem.price));
+        tempItem.price = 0;
+      }
+      totalAmount =
+        parseFloat(totalAmount) +
+        parseFloat(tempItem.price) * parseFloat(tempItem.quantity);
+    });
+    this.setState({ totalBidAmount: totalAmount });
   };
 
   doSubmit = async () => {
@@ -157,6 +171,7 @@ class SupllierBid extends Component {
     const tender = { ...this.state.tender };
     tender.itemList[srNo - 1].price = price;
     await this.setState({ tender });
+    this.calculateTotalBidAmount();
   };
 
   renderItemList = () => {
@@ -175,24 +190,10 @@ class SupllierBid extends Component {
     });
   };
 
-  totalBidAmount = async () => {
-    let bid = {};
-    bid.itemList = this.state.tender.itemList;
-    bid.totalAmount =
-      bid.totalAmount +
-      parseInt(
-        await bid.itemList.map((item) => {
-          return parseInt(item.price) * parseInt(item.quantity);
-        })
-      );
-    this.setState({ totalBidAmount: bid.totalAmount });
-  };
-
   render() {
     if (this.state.tender === null) return null;
     if (this.calculateDaysLeftToClosingDate < 0)
       return <h1 className="no-data-found">tender closed</h1>;
-    this.calculateTotalBidAmount();
     return (
       <div className="container-fluid">
         <div className="breadcrumb-header justify-content-between">

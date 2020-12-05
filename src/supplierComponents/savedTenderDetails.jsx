@@ -17,8 +17,8 @@ class SavedTenderDetails extends Component {
     bid: null,
     tender: null,
     errors: {},
-    totalBidAmount: 0,
     acceptTermsConditions: false,
+    totalBidAmount: 0,
   };
 
   async componentDidMount() {
@@ -101,13 +101,11 @@ class SavedTenderDetails extends Component {
     } else bid.isPublished = false;
 
     bid.totalAmount = 0;
-    bid.totalAmount =
-      bid.totalAmount +
-      parseInt(
-        bid.itemList.map((item) => {
-          return parseInt(item.price) * parseInt(item.quantity);
-        })
-      );
+
+    bid.itemList.map((item) => {
+      bid.totalAmount =
+        bid.totaAmount + parseInt(item.price) * parseInt(item.quantity);
+    });
 
     await this.setState({ bid });
 
@@ -146,6 +144,7 @@ class SavedTenderDetails extends Component {
     const bid = { ...this.state.bid };
     bid.itemList[srNo - 1].price = price;
     await this.setState({ bid });
+    this.calculateTotalBidAmount();
   };
 
   renderItemList = () => {
@@ -159,26 +158,29 @@ class SavedTenderDetails extends Component {
           key={item._id}
           item={item}
           srNo={srNo}
-          pushPrice={this.addPrice}
+          pushPrice={(price, srNo) => this.addPrice(price, srNo)}
         />
       );
     });
   };
-  totalBidAmount = async () => {
-    let bid = {};
-    bid.itemList = this.state.tender.itemList;
-    bid.totalAmount =
-      bid.totalAmount +
-      parseInt(
-        await bid.itemList.map((item) => {
-          return parseInt(item.price) * parseInt(item.quantity);
-        })
-      );
-    this.setState({ totalBidAmount: bid.totalAmount });
+
+  calculateTotalBidAmount = async () => {
+    let totalAmount = 0;
+    await this.state.tender.itemList.map((item) => {
+      let tempItem = item;
+      if (!tempItem.price && Number.isNaN(tempItem.price)) {
+        console.log(Number.isNaN(tempItem.price));
+        tempItem.price = 0;
+      }
+      totalAmount =
+        parseFloat(totalAmount) +
+        parseFloat(tempItem.price) * parseFloat(tempItem.quantity);
+    });
+    this.setState({ totalBidAmount: totalAmount });
   };
+
   render() {
     if (this.state.tender === null) return null;
-    this.calculateTotalBidAmount();
     return (
       <div className="container-fluid">
         <div className="breadcrumb-header justify-content-between">
